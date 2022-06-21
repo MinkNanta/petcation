@@ -3,22 +3,30 @@ import React from "react";
 export default function Modal() {
   return (
     <>
-      <a href="#my-modal-2" class="btn">
-        open modal
-      </a>
-      <div class="modal" id="my-modal-2">
-        <div class="modal-box">
-          <h3 class="font-bold text-lg">
+      <label htmlFor="my-modal" className="btn btn-primary">
+        Open modal
+      </label>
+
+      <input type="checkbox" id="my-modal" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">
             Congratulations random Interner user!
           </h3>
-          <p class="py-4">
+          <input />
+          <input
+            type="text"
+            placeholder="Type here"
+            class="input w-full max-w-xs"
+          />
+          <p className="py-4">
             You've been selected for a chance to get one year of subscription to
             use Wikipedia for free!
           </p>
-          <div class="modal-action">
-            <a href="#" class="btn">
+          <div className="modal-action">
+            <label htmlFor="my-modal" className="btn">
               Yay!
-            </a>
+            </label>
           </div>
         </div>
       </div>
