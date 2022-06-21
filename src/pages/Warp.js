@@ -8,7 +8,7 @@ export default function Warp() {
       <Link to="/house/:id">details/:id</Link>
       <Link to="/house/:id">Details/:id</Link>
       <Link to="/booking/create">CreateBooking</Link>
-      <Link to="/profile">Profiler</Link>
+      <Link to="/profile">Profile</Link>
       <Link to="/house/detail">House(user view)</Link>
       <Link to="/house/reserve">HouseReserve</Link>
       <Link to="/booking/:id">BookingDetail/:id</Link>
