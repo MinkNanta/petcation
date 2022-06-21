@@ -11,6 +11,7 @@ import Search from "../pages/Search";
 import HouseMain from "../pages/HouseMain";
 import Main from "../pages/Main";
 import Profile from "../pages/Profile";
+import BookingList from "../pages/BookingList";
 
 export default function Router() {
   const user = true;
@@ -27,6 +28,7 @@ export default function Router() {
             <Route path="/house/detail" element={<House />} />
             <Route path="/house/reserve" element={<HouseReserve />} />
             <Route path="/booking/:id" element={<BookingDetail />} />
+            <Route path="/booking/list" element={<BookingList />} />
           </>
         )}
         <Route path="/house/main" element={<HouseMain />} />
