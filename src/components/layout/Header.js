@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import profile from "../../assets/img/defaultProtoPic.png";
 import { MenuIcon } from "@heroicons/react/solid";
+import { useState } from "react";
 
 function Header() {
+  const location = useLocation();
   return (
     <>
-      <div className="w-full fixed">
-        <div className="h-24 flex mx-auto justify-between items-center mx-12">
-          <div>
+      <div
+        className={`w-full  ${location.pathname === "/" ? "fixed" : "sticky"} `}
+      >
+        <div className="h-24 flex  justify-between items-center mx-12">
+          <div className="">
             <Link to="/">
               <img src={logo} alt="logo" to="/" />
             </Link>
