@@ -1,5 +1,10 @@
 import React from "react";
+import Modal from "../common/Modal";
 
 export default function Main() {
-  return <div>Main</div>;
+  return (
+    <div>
+      <Modal />
+    </div>
+  );
 }
