@@ -15,6 +15,7 @@ export default function Warp() {
       <Link to="/house/main">HouseMain</Link>
       <Link to="/creteHost">CreateHouse</Link>
       <Link to="/search">Search</Link>
+      <Link to="/booking/list">booking</Link>
     </div>
   );
 }
