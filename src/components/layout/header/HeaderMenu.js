@@ -10,7 +10,7 @@ export default function HeaderMenu() {
     <div className="flex gap-4  items-center text-gray-600">
       <Link to="/house/main">Become a Host</Link>
       <Login />
-      <LoginForm />
+      {/* <LoginForm /> */}
 
       <div className="dropdown dropdown-end">
         <label tabIndex="0">
