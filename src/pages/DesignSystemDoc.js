@@ -8,6 +8,7 @@ import Textarea from "../common/Textarea";
 import InputDropdown from "../common/InputDropdown";
 import Checkbox from "../common/Checkbox";
 import Modal from "../common/Modal";
+import InputWithSuffix from "../common/InputWithSuffix";
 
 export default function DesignSystemDoc() {
   const [valueCheck, setValueCheck] = useState(false);
@@ -59,6 +60,16 @@ export default function DesignSystemDoc() {
           <option value="option4">Planet of the Apes</option>
           <option value="option5">Star Trek</option>
         </InputDropdown>
+
+        {/* input with suffix */}
+        <InputWithSuffix
+          label="test"
+          onChange={() => {}}
+          placeholder="Enter your input"
+          errMsg="Error Massage"
+          error={true}
+          suffix="Years"
+        />
 
         {/* Textarea */}
         <Textarea
