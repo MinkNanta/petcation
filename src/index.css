@@ -44,7 +44,7 @@
   }
 
   .btn {
-    @apply text-gray-50 text-[16px] normal-case font-normal bg-orange-500 border-0 hover:bg-orange-600 rounded-2xl p-4;
+    @apply w-full text-gray-50 text-[16px] normal-case font-normal bg-orange-500 border-0 hover:bg-orange-600 rounded-2xl p-4;
   }
   .btn-outline {
     @apply text-gray-700 text-[16px] normal-case font-normal bg-orange-500/0 hover:bg-gray-50 hover:text-gray-800 border rounded-2xl p-4 border-gray-700;
