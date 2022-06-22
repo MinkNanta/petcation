@@ -8,7 +8,7 @@ export default function DesignSystemDoc() {
     <div className="space-y-6 mx-auto ">
       <>
         {/* input */}
-        <div className="form-control w-full max-w-xs">
+        <div className="form-control w-full">
           <label className="label">
             <span className="label-text">Email</span>
           </label>
