@@ -62,6 +62,7 @@ export default function DesignSystemDoc() {
 
         {/* Textarea */}
         <Textarea
+          value="test"
           label="test"
           onChange={() => {}}
           placeholder="Enter your input"
