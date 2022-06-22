@@ -5,7 +5,7 @@ module.exports = {
       {
         mytheme: {
           primary: "#E5E7EB",
-          // secondary: "#F97316",
+          secondary: "#FED7AA",
           // accent: "#F97316",
           // neutral: "#F97316",
           "base-100": "#FFFFFF",
@@ -20,7 +20,7 @@ module.exports = {
       "7xl": ["72px", { lineHeight: "72px" }],
       "6xl": ["60px", { lineHeight: "60px" }],
       "5xl": ["48px", { lineHeight: "58px", letterSpacing: "-0.04em" }],
-      "4xl": ["36px", { lineHeight: "46px" }],
+      "4xl": ["30px", { lineHeight: "36px" }],
       "3xl": ["30px", { lineHeight: "36px" }],
       "2xl": ["24px", { lineHeight: "32px" }],
       lg: ["20px", { lineHeight: "28px" }],

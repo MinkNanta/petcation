@@ -34,7 +34,7 @@ export default function Router() {
           </>
         )}
         <Route path="/house/main" element={<HouseMain />} />
-        <Route path="/creteHost" element={<CreateHouse />} />
+        <Route path="/creteHouse" element={<CreateHouse />} />
       </Route>
       <Route path="/search" element={<Search />} />
       <Route path="*" element={<Navigate to="/" />} />

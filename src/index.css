@@ -15,11 +15,11 @@
   }
 
   h2 {
-    @apply text-4xl;
+    @apply text-4xl font-semibold;
   }
 
   h3 {
-    @apply text-3xl;
+    @apply text-3xl font-semibold;
   }
 
   h4 {
@@ -59,6 +59,9 @@
   .inputLabel {
     @apply block pb-2;
   }
+  /* .checkbox {
+    @apply active:bg-orange-200 focus:bg-orange-200 before:bg-orange-200;
+  } */
 }
 
 body {
