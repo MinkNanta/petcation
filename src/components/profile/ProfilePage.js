@@ -55,30 +55,30 @@ export default function ProfilePage() {
                 <button className="text btn btn-sm btn-primary">Save</button>
               </div>
             </div>
-            <Input
+            {/* <Input
               label="First name"
               onChange={() => {}}
               placeholder="Enter your input"
               errMsg="Error Massage"
               error={true}
-            />
+            /> */}
             <div className="flex gap-3">
               <Input
                 label="First name"
                 onChange={() => {}}
-                placeholder="Enter your input"
+                placeholder="Enter your first name"
                 errMsg="Error Massage"
                 error={true}
               />
               <Input
                 label="First name"
                 onChange={() => {}}
-                placeholder="Enter your input"
+                placeholder="Enter your last name"
                 errMsg="Error Massage"
                 error={true}
               />
             </div>
-
+            {/* 
             <div className="grid grid-cols-2 pt-8 gap-4">
               <div className="col-span-1 w-f ">
                 <p className="label-text">First name</p>
@@ -96,9 +96,9 @@ export default function ProfilePage() {
                   className="input input-bordered w-full"
                 />
               </div>
-            </div>
+            </div> */}
 
-            <div className="grid grid-row ">
+            {/* <div className="grid grid-row ">
               <div className="col-span ">
                 <p className="label-text pt-6">Phone Number</p>
                 <input
@@ -114,12 +114,28 @@ export default function ProfilePage() {
                   className="input input-bordered w-full"
                 />
               </div>
+            </div> */}
+            <div className=" ">
+              <Input
+                label="Phone Number"
+                onChange={() => {}}
+                placeholder="Enter your phone number"
+                errMsg="Error Massage"
+                error={true}
+              />
+              <Input
+                label="Email"
+                onChange={() => {}}
+                placeholder="Enter your email"
+                errMsg="Error Massage"
+                error={true}
+              />
             </div>
 
             {/* Province */}
             <div>
               <InputDropdown
-                label="test"
+                label="Province"
                 onChange={(e) => {
                   setValueDropDown(e.target.value);
                 }}
@@ -133,7 +149,37 @@ export default function ProfilePage() {
                 <option value="option5">Star Trek</option>
               </InputDropdown>
 
-              <div className="col-span ">
+              <InputDropdown
+                label="District"
+                onChange={(e) => {
+                  setValueDropDown(e.target.value);
+                }}
+                errMsg="Error Massage"
+                error={true}
+              >
+                <option value="option1">Star Wars</option>
+                <option value="option2">Harry Potter</option>
+                <option value="option3">Lord of the Rings</option>
+                <option value="option4">Planet of the Apes</option>
+                <option value="option5">Star Trek</option>
+              </InputDropdown>
+
+              <InputDropdown
+                label="Subdistrict"
+                onChange={(e) => {
+                  setValueDropDown(e.target.value);
+                }}
+                errMsg="Error Massage"
+                error={true}
+              >
+                <option value="option1">Star Wars</option>
+                <option value="option2">Harry Potter</option>
+                <option value="option3">Lord of the Rings</option>
+                <option value="option4">Planet of the Apes</option>
+                <option value="option5">Star Trek</option>
+              </InputDropdown>
+
+              {/* <div className="col-span ">
                 <p className="label-text pt-6">Province</p>
                 <select className="select select-secondary w-full max-w-xs">
                   <option disabled selected>
@@ -168,7 +214,22 @@ export default function ProfilePage() {
                   placeholder="Type here"
                   className="input input-bordered w-full"
                 />
-              </div>
+              </div> */}
+
+              <Input
+                label="Postal/Zip Code (Optional)"
+                onChange={() => {}}
+                placeholder="Enter your phone number"
+                errMsg="Error Massage"
+                error={true}
+              />
+              <Input
+                label="Address"
+                onChange={() => {}}
+                placeholder="Enter your email"
+                errMsg="Error Massage"
+                error={true}
+              />
             </div>
           </div>
         </div>
