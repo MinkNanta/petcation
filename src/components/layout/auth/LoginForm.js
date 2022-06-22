@@ -10,7 +10,7 @@ function LoginForm() {
       <label htmlFor="my-modal" className="modal cursor-pointer">
         <label class="modal-box relative" htmlFor="">
           <label
-            for="my-modal"
+            htmlFor="my-modal"
             className="btn btn-sm btn-circle absolute right-2 top-2"
           >
             ✕
