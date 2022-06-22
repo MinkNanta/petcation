@@ -50,9 +50,9 @@ export default function ProfilePage() {
           <div className=" col-span-8 ">
             <div className="flex justify-between items-center ">
               <h4 className="text-2xl">Information</h4>
-              <div className="">
-                <button className="text btn btn-sm btn-ghost ">Cancel</button>
-                <button className="text btn btn-sm btn-primary">Save</button>
+              <div className="flex gap-4">
+                <button className="btn-text">Cancel</button>
+                <button className="btn-small ">Save</button>
               </div>
             </div>
             {/* <Input

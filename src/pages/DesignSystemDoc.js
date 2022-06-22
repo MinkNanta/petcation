@@ -73,6 +73,7 @@ export default function DesignSystemDoc() {
 
         {/* Textarea */}
         <Textarea
+          value="test"
           label="test"
           onChange={() => {}}
           placeholder="Enter your input"
@@ -95,7 +96,9 @@ export default function DesignSystemDoc() {
         {/* button */}
         <button className="btn">Create</button>
         {/* button outline */}
-        <button className="btn btn-outline">Create</button>
+        <button className="btn btn-outline">btn btn-outline</button>
+        {/* button gray color */}
+        <button className="btn-small">btn-small</button>
         {/*icon small*/}
         <BtnIcon icon={<XIcon />} htmlFor="" />
         <div className=" w-56 bg-gray-200">
