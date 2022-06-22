@@ -26,7 +26,7 @@ module.exports = {
       lg: ["20px", { lineHeight: "28px" }],
       x: ["18px", { lineHeight: "28px" }],
       base: ["16px", { lineHeight: "24px" }],
-      xs: ["12px", { lineHeight: "16px" }],
+      xs: ["14px", { lineHeight: "16px" }],
     },
 
     extend: {},

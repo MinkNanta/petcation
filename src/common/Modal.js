@@ -17,7 +17,7 @@ export default function Modal() {
           <input
             type="text"
             placeholder="Type here"
-            class="input w-full max-w-xs"
+            className="input w-full max-w-xs"
           />
           <p className="py-4">
             You've been selected for a chance to get one year of subscription to

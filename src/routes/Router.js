@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import { MainHeader } from "../components/layout/MainHeader";
+import { MainHeaderOutlet } from "../components/layout/MainHeaderOutlet";
 import CreateBooking from "../pages/CreateBooking";
 import CreateHouse from "../pages/CreateHouse";
 import Warp from "../pages/Warp";
@@ -12,13 +12,15 @@ import HouseMain from "../pages/HouseMain";
 import Main from "../pages/Main";
 import Profile from "../pages/Profile";
 import BookingList from "../pages/BookingList";
+import DesignSystemDoc from "../pages/DesignSystemDoc";
 
 export default function Router() {
   const user = true;
   return (
     <Routes>
       <Route path="/warp" element={<Warp />} />
-      <Route path="/" element={<MainHeader />}>
+      <Route path="/ui" element={<DesignSystemDoc />} />
+      <Route path="/" element={<MainHeaderOutlet />}>
         <Route path="" element={<Main />} />
         <Route path="/house/:id" element={<Details />} />
         <Route path="/booking/create" element={<CreateBooking />} />
