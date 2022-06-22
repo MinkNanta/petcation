@@ -139,7 +139,8 @@ export default function CreateBooking() {
                 <option value="option1"></option>
               </InputDropdown>
               <Input
-                label="Postal/Zip Code (Optional)"
+                label="Postal/Zip Code"
+                option='(Optional)'
                 onChange={() => {}}
                 placeholder=""
                 errMsg="Error Massage"
