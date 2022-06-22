@@ -17,6 +17,9 @@ export default function DesignSystemDoc() {
       <>
         {/* input */}
         <Input
+          value="test"
+          type="text"
+          option="option"
           label="test"
           onChange={() => {}}
           placeholder="Enter your input"
