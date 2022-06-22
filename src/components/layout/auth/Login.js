@@ -14,19 +14,57 @@ function Login() {
   return (
     <div>
       <Modal onOpen={<p className="btn btn-outline">login</p>}>
-        <div>
-          {/* modal body */}
-          <h2>Register</h2>
+        {step === 2 ? (
+          <div>
+            {/* modal body */}
+            <h2>Register</h2>
 
-          <Input
-            label="Email"
-            onChange={() => {}}
-            placeholder="Email"
-            errMsg="Error Massage"
-            error={true}
-          />
-          <button className="btn">Create Account</button>
-        </div>
+            <Input
+              label="Email"
+              placeholder="Email"
+              errMsg="Error Massage"
+              error={true}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <button className="btn" onClick={() => setStep("2")}>
+              Create Account
+            </button>
+          </div>
+        ) : (
+          <div>
+            <h2> Create your password </h2>
+            <div className="mx-4">
+              <ul className="list-disc">
+                <li>8-20 Characters</li>
+                <li>At least One Capital Letter</li>
+                <li>At least One Number</li>
+                <li>No space</li>
+              </ul>
+            </div>
+            <Input
+              label="password"
+              placeholder="password"
+              type="password"
+              errMsg="Error Massage"
+              error={true}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              label="Confirm password"
+              placeholder="Confirm password"
+              type="password"
+              errMsg="Error Massage"
+              error={true}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <button className="btn" onClick={() => setStep("3")}>
+              Next
+            </button>
+          </div>
+        )}
 
         <div className="divider">Or</div>
 
