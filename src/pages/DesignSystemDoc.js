@@ -8,6 +8,7 @@ import Textarea from "../common/Textarea";
 import InputDropdown from "../common/InputDropdown";
 import Checkbox from "../common/Checkbox";
 import Modal from "../common/Modal";
+import InputWithSuffix from "../common/InputWithSuffix";
 
 export default function DesignSystemDoc() {
   const [valueCheck, setValueCheck] = useState(false);
@@ -60,6 +61,16 @@ export default function DesignSystemDoc() {
           <option value="option5">Star Trek</option>
         </InputDropdown>
 
+        {/* input with suffix */}
+        <InputWithSuffix
+          label="test"
+          onChange={() => {}}
+          placeholder="Enter your input"
+          errMsg="Error Massage"
+          error={true}
+          suffix="Years"
+        />
+
         {/* Textarea */}
         <Textarea
           value="test"
@@ -85,7 +96,9 @@ export default function DesignSystemDoc() {
         {/* button */}
         <button className="btn">Create</button>
         {/* button outline */}
-        <button className="btn btn-outline">Create</button>
+        <button className="btn btn-outline">btn btn-outline</button>
+        {/* button gray color */}
+        <button className="btn-small">btn-small</button>
         {/*icon small*/}
         <BtnIcon icon={<XIcon />} htmlFor="" />
         <div className=" w-56 bg-gray-200">
