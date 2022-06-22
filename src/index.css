@@ -8,14 +8,36 @@
   --background-color: #ffffff;
 }
 
-/* .btn {
-  color: #ffffff;
-  text-transform: none;
-  font-size: 16px;
-  font-weight: 400;
-  border: none;
-} */
+/* -------- container ------ */
+@layer base {
+  h1 {
+    @apply font-semibold text-5xl;
+  }
 
+  h2 {
+    @apply text-4xl font-semibold;
+  }
+
+  h3 {
+    @apply text-3xl font-semibold;
+  }
+
+  h4 {
+    @apply text-2xl font-medium;
+  }
+
+  h5 {
+    @apply text-lg font-medium;
+  }
+
+  h6 {
+    @apply text-x;
+  }
+
+  p {
+    @apply text-base;
+  }
+}
 @layer components {
   .mainContainer {
     @apply max-w-7xl px-8 pb-20 mx-auto;
@@ -32,11 +54,14 @@
   }
 
   .input {
-    @apply w-full max-w-xs bg-gray-100 text-gray-500 rounded-2xl block;
+    @apply w-full bg-gray-100 text-gray-500 rounded-2xl block;
   }
   .inputLabel {
     @apply block pb-2;
   }
+  /* .checkbox {
+    @apply active:bg-orange-200 focus:bg-orange-200 before:bg-orange-200;
+  } */
 }
 
 body {
