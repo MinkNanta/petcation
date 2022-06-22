@@ -3,19 +3,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import BtnIcon from "../../../common/BtnIcon";
 
-function LoginForm() {
+function Login() {
   return (
     <div>
-      <label htmlFor="my-modal-2" className="btn modal-button ">
-        LoginForm
+      <label htmlFor="my-modal" className="btn modal-button ">
+        Login
       </label>
-      <input type="checkbox" id="my-modal-2" className="modal-toggle" />
-      <label htmlFor="my-modal-2" className="modal cursor-pointer">
+      <input type="checkbox" id="my-modal" className="modal-toggle" />
+      <label htmlFor="my-modal" className="modal cursor-pointer">
         <label className="modal-box relative" htmlFor="">
-          <label htmlFor="my-modal-2" className=" flex justify-end">
-            <BtnIcon icon={<XIcon />} htmlFor="my-modal-2" />
+          <label htmlFor="my-modal" className=" flex justify-end">
+            <BtnIcon icon={<XIcon />} htmlFor="my-modal" />
           </label>
-          <h1 className="font-bold text-lg">Login</h1>
+          <h1 className="font-bold text-lg">Register</h1>
           <div className="card-body">
             <div className="form-control">
               <label className="label">
@@ -27,19 +27,9 @@ function LoginForm() {
                 className="input input-bordered"
               />
             </div>
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">Password</span>
-              </label>
-              <input
-                type="text"
-                placeholder="password"
-                class="input input-bordered"
-              />
-            </div>
             <div className="form-control mt-6 ">
-              <label className="btn" htmlFor="my-modal-2">
-                Login
+              <label className="btn" htmlFor="my-modal">
+                login
               </label>
             </div>
           </div>
@@ -63,4 +53,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default Login;

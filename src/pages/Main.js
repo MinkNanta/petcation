@@ -4,7 +4,6 @@ import Modal from "../common/Modal";
 import CardContainer from "../components/home/cardlist/CardContainer";
 import Hero from "../components/home/Hero";
 import TapFilter from "../components/home/TapFilter";
-import LoginForm from "../components/layout/auth/LoginForm";
 
 export default function Main() {
   return (
@@ -13,7 +12,6 @@ export default function Main() {
       <div className="mainContainer">
         <TapFilter />
         <CardContainer />
-        {/* <LoginForm /> */}
       </div>
     </div>
   );
