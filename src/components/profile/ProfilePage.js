@@ -2,8 +2,13 @@ import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/solid";
 import MenuList from "../../common/MenuList";
 import defaultProtoPic from "../../assets/img/defaultProtoPic.png";
+import InputDropdown from "../../common/InputDropdown";
+import { useState } from "react";
+import Input from "../../common/Input";
 
 export default function ProfilePage() {
+  const [valueDropDown, setValueDropDown] = useState("");
+
   return (
     <>
       <div className="">
@@ -20,15 +25,17 @@ export default function ProfilePage() {
         <h1>John Doe</h1>
       </div>
       <div className="py-10">
-        <div className="grid grid-cols-5 gap-8 ">
-          <div className="bg-gray-100 px-6 py-6 rounded-3xl ">
+        <div className="grid grid-cols-12 gap-8 ">
+          <div className="bg-gray-100 px-6 py-6 rounded-3xl  col-span-4">
             <div className="text-center ">
               <div className="mt-1 items-center ">
-                <img
-                  src={defaultProtoPic}
-                  alt=""
-                  className="rounded-full text-gray-700 border-2"
-                />
+                <div className="w-[212px] mx-auto">
+                  <img
+                    src={defaultProtoPic}
+                    alt=""
+                    className="rounded-full text-gray-700 w-full h-full object-cover "
+                  />
+                </div>
                 <p>Edit profile</p>
               </div>
             </div>
@@ -40,7 +47,7 @@ export default function ProfilePage() {
               <MenuList title="option 1" to="/" />
             </div>
           </div>
-          <div className="bg-orange-300 col-span-4  ">
+          <div className=" col-span-8 ">
             <div className="flex justify-between items-center ">
               <h4 className="text-2xl">Information</h4>
               <div className="">
@@ -48,8 +55,31 @@ export default function ProfilePage() {
                 <button className="text btn btn-sm btn-primary">Save</button>
               </div>
             </div>
+            <Input
+              label="First name"
+              onChange={() => {}}
+              placeholder="Enter your input"
+              errMsg="Error Massage"
+              error={true}
+            />
+            <div className="flex gap-3">
+              <Input
+                label="First name"
+                onChange={() => {}}
+                placeholder="Enter your input"
+                errMsg="Error Massage"
+                error={true}
+              />
+              <Input
+                label="First name"
+                onChange={() => {}}
+                placeholder="Enter your input"
+                errMsg="Error Massage"
+                error={true}
+              />
+            </div>
 
-            <div className="grid grid-cols-2 pt-8 ">
+            <div className="grid grid-cols-2 pt-8 gap-4">
               <div className="col-span-1 w-f ">
                 <p className="label-text">First name</p>
                 <input
@@ -87,7 +117,22 @@ export default function ProfilePage() {
             </div>
 
             {/* Province */}
-            <div className="grid grid-row ">
+            <div>
+              <InputDropdown
+                label="test"
+                onChange={(e) => {
+                  setValueDropDown(e.target.value);
+                }}
+                errMsg="Error Massage"
+                error={true}
+              >
+                <option value="option1">Star Wars</option>
+                <option value="option2">Harry Potter</option>
+                <option value="option3">Lord of the Rings</option>
+                <option value="option4">Planet of the Apes</option>
+                <option value="option5">Star Trek</option>
+              </InputDropdown>
+
               <div className="col-span ">
                 <p className="label-text pt-6">Province</p>
                 <select className="select select-secondary w-full max-w-xs">
