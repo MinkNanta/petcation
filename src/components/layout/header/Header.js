@@ -17,7 +17,7 @@ function Header() {
   return (
     <>
       {offset > 80 || location.pathname !== "/" ? (
-        <div className="w-full sticky top-6 ">
+        <div className="w-full sticky top-6 z-50 ">
           <div className="rounded-full flex justify-between items-center mx-12 bg-gray-100 mt-6 py-3 px-8">
             <Link to="/">
               <img src={logoColor} alt="logo" to="/" />

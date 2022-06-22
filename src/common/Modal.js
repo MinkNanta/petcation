@@ -1,35 +1,28 @@
+import { XIcon } from "@heroicons/react/solid";
 import React from "react";
+import BtnIcon from "./BtnIcon";
 
-export default function Modal() {
+export default function Modal({ children, onOpen }) {
   return (
     <>
-      <label htmlFor="my-modal" className="btn btn-primary">
-        Open modal
-      </label>
+      {/* <!-- The button to open modal --> */}
+      <label htmlFor="my-modal-4">{onOpen}</label>
 
-      <input type="checkbox" id="my-modal" className="modal-toggle" />
-      <div className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">
-            Congratulations random Interner user!
-          </h3>
-          <input />
-          <input
-            type="text"
-            placeholder="Type here"
-            className="input w-full max-w-xs"
-          />
-          <p className="py-4">
-            You've been selected for a chance to get one year of subscription to
-            use Wikipedia for free!
-          </p>
-          <div className="modal-action">
-            <label htmlFor="my-modal" className="btn">
-              Yay!
-            </label>
+      {/* <!-- Put this part before </body> tag --> */}
+      <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+      <label htmlFor="my-modal-4" className="modal cursor-pointer">
+        <label className="modal-box relative" htmlFor="">
+          <div className="w-full">
+            <div className="float-right">
+              <label htmlFor="my-modal-4">
+                <BtnIcon icon={<XIcon />} htmlFor="my-modal-4" />
+              </label>
+            </div>
           </div>
-        </div>
-      </div>
+
+          {children}
+        </label>
+      </label>
     </>
   );
 }
