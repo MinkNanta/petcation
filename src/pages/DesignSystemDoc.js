@@ -2,20 +2,36 @@ import React from "react";
 
 import BtnIcon from "../common/BtnIcon";
 import { XIcon } from "@heroicons/react/solid";
+import Input from "../common/Input";
 
 export default function DesignSystemDoc() {
   return (
     <div className="space-y-6 mx-auto ">
       <>
         {/* input */}
-        <div className="form-control w-full">
-          <label className="label">
-            <span className="label-text">Email</span>
-          </label>
-          <input type="text" placeholder="Type here" className="input" />
-          <label className="label">
-            <span className="label-text-alt text-red-400">Error message</span>
-          </label>
+        <Input
+          label="test"
+          onChange={() => {}}
+          placeholder="Enter your input"
+          errMsg="Error Massage"
+          error={true}
+        />
+
+        <div className="flex gap-3">
+          <Input
+            label="test"
+            onChange={() => {}}
+            placeholder="Enter your input"
+            errMsg="Error Massage"
+            error={true}
+          />
+          <Input
+            label="test"
+            onChange={() => {}}
+            placeholder="Enter your input"
+            errMsg="Error Massage"
+            error={true}
+          />
         </div>
 
         {/* button */}
