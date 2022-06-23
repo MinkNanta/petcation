@@ -25,7 +25,7 @@ export default function HeaderMenu() {
           <Link to="/profile">Profile</Link>
           <Link to="/booking/list">Booking list</Link>
           <div className="divider"></div>
-          <Link to="/house/detail">My house</Link>
+          <Link to="/house">My house</Link>
           <Link to="/house/reserve">House reserve</Link>
         </ul>
       </div>
