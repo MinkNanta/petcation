@@ -1,21 +1,40 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-
 import Input from "../../../common/Input";
 import Modal from "../../../common/Modal";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { ErrorContext } from "../../../contexts/ErrorContext";
 
 function Register() {
-  const [email, setEmail] = useState(" ");
+  const [uId, setUId] = useState(" ");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [step, setStep] = useState("STEP1");
+  const { signUp } = useContext(AuthContext);
+  const { setError } = useContext(ErrorContext);
 
-  console.log(email);
+  const handleSubmitSignUp = async (e) => {
+    try {
+      e.preventDefault();
+      await signUp({
+        uId,
+        password,
+        confirmPassword,
+      });
+    } catch (err) {
+      setError(err.response.data.message);
+    }
+  };
+
+  console.log(uId);
+  console.log(password);
+  console.log(confirmPassword);
   console.log(step);
   return (
     <div>
       <Modal onOpen={<p className="btn btn-outline">login</p>}>
         {step === "STEP1" ? (
           <>
-            {" "}
             <div>
               {/* modal body */}
               <h2>Register</h2>
@@ -25,8 +44,8 @@ function Register() {
                 placeholder="Email"
                 errMsg="Error Massage"
                 error={true}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={uId}
+                onChange={(e) => setUId(e.target.value)}
               />
               <button
                 className="btn"
@@ -68,8 +87,8 @@ function Register() {
                 type="password"
                 errMsg="Error Massage"
                 error={true}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <Input
                 label="Confirm password"
@@ -77,8 +96,8 @@ function Register() {
                 type="password"
                 errMsg="Error Massage"
                 error={true}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
               <button className="btn" onClick={() => setStep("STEP3")}>
                 Next
@@ -95,7 +114,11 @@ function Register() {
                   account setting.
                 </h6>
               </div>
-              <button className="btn" onClick={() => setStep("STEP4")}>
+              <button
+                className="btn"
+                onClick={() => setStep("STEP4")}
+                onSubmit={handleSubmitSignUp}
+              >
                 See my profile
               </button>
             </div>
