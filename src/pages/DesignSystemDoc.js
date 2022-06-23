@@ -9,6 +9,8 @@ import InputDropdown from "../common/InputDropdown";
 import Checkbox from "../common/Checkbox";
 import Modal from "../common/Modal";
 import InputWithSuffix from "../common/InputWithSuffix";
+import Breadcrumb from "../common/Breadcrumb";
+import { Link } from "react-router-dom";
 
 export default function DesignSystemDoc() {
   const [valueCheck, setValueCheck] = useState(false);
@@ -127,6 +129,17 @@ export default function DesignSystemDoc() {
             />
           </div>
         </Modal>
+
+        <Breadcrumb>
+          <ul>
+            <li>
+              <Link to={"#"}>Home</Link>
+            </li>
+            <li>
+              <Link to={"#"}>my count</Link>
+            </li>
+          </ul>
+        </Breadcrumb>
       </>
     </div>
   );
