@@ -13,6 +13,7 @@ import Main from "../pages/Main";
 import Profile from "../pages/Profile";
 import BookingList from "../pages/BookingList";
 import DesignSystemDoc from "../pages/DesignSystemDoc";
+import ProfilePet from "../components/profile/ProfilePet";
 
 export default function Router() {
   const user = true;
@@ -26,7 +27,9 @@ export default function Router() {
         <Route path="/booking/create" element={<CreateBooking />} />
         {user && (
           <>
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile />}>
+              <Route path="profilepet" element={<ProfilePet />} />
+            </Route>
             <Route path="/house/detail" element={<House />} />
             <Route path="/house/reserve" element={<HouseReserve />} />
             <Route path="/booking/:id" element={<BookingDetail />} />
