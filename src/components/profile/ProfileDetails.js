@@ -13,7 +13,6 @@ export default function ProfileDetails({
 }) {
   return (
     <div>
-
       <div className="form-control flex mt-5">
         <div className="flex gap-x-5">
           <Input
