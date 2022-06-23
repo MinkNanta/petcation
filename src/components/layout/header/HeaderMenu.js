@@ -2,11 +2,17 @@ import { MenuIcon } from "@heroicons/react/solid";
 import React from "react";
 import { Link } from "react-router-dom";
 import profile from "../../../assets/img/defaultProtoPic.png";
+import LoginForm from "../auth/LoginForm";
+import Logout from "../auth/Logout";
+import Register from "../auth/Register";
 
 export default function HeaderMenu() {
   return (
     <div className="flex gap-4  items-center text-gray-600">
       <Link to="/house/main">Become a Host</Link>
+      <Register />
+      <LoginForm />
+      <Logout />
 
       <div className="dropdown dropdown-end">
         <label tabIndex="0">
