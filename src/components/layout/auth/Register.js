@@ -21,6 +21,7 @@ function Register() {
         password,
         confirmPassword,
       });
+      setStep("STEP3");
     } catch (err) {
       setError(err.response.data.message);
     }
@@ -32,7 +33,10 @@ function Register() {
   console.log(step);
   return (
     <div>
-      <Modal onOpen={<p className="btn btn-outline">login</p>}>
+      <Modal
+        name="registerForm"
+        onOpen={<p className="btn btn-outline">Register</p>}
+      >
         {step === "STEP1" ? (
           <>
             <div>
@@ -99,7 +103,7 @@ function Register() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              <button className="btn" onClick={() => setStep("STEP3")}>
+              <button className="btn" onClick={handleSubmitSignUp}>
                 Next
               </button>
             </div>
@@ -114,11 +118,7 @@ function Register() {
                   account setting.
                 </h6>
               </div>
-              <button
-                className="btn"
-                onClick={() => setStep("STEP4")}
-                onSubmit={handleSubmitSignUp}
-              >
+              <button className="btn" onClick={() => setStep("STEP4")}>
                 See my profile
               </button>
             </div>

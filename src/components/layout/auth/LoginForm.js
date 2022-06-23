@@ -1,64 +1,63 @@
-import { XIcon } from "@heroicons/react/solid";
-import React from "react";
-import { Link } from "react-router-dom";
-import BtnIcon from "../../../common/BtnIcon";
-
+import React, { useContext, useState } from "react";
+import Input from "../../../common/Input";
+import Modal from "../../../common/Modal";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { ErrorContext } from "../../../contexts/ErrorContext";
 function LoginForm() {
+  const [uId, setUId] = useState(" ");
+  const [password, setPassword] = useState("");
+  const { login } = useContext(AuthContext);
+  const { setError } = useContext(ErrorContext);
+
+  const handleSubmitLogin = async (e) => {
+    try {
+      e.preventDefault();
+      await login(uId, password);
+    } catch (err) {
+      setError(err.response.data.message);
+    }
+  };
+  console.log(uId);
+  console.log(password);
   return (
     <div>
-      <label htmlFor="my-modal-2" className="btn modal-button ">
-        LoginForm
-      </label>
-      <input type="checkbox" id="my-modal-2" className="modal-toggle" />
-      <label htmlFor="my-modal-2" className="modal cursor-pointer">
-        <label className="modal-box relative" htmlFor="">
-          <label htmlFor="my-modal-2" className=" flex justify-end">
-            <BtnIcon icon={<XIcon />} htmlFor="my-modal-2" />
-          </label>
-          <h1 className="font-bold text-lg">Login</h1>
-          <div className="card-body">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="text"
-                placeholder="email"
-                className="input input-bordered"
-              />
-            </div>
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">Password</span>
-              </label>
-              <input
-                type="text"
-                placeholder="password"
-                class="input input-bordered"
-              />
-            </div>
-            <div className="form-control mt-6 ">
-              <label className="btn" htmlFor="my-modal-2">
-                Login
-              </label>
-            </div>
-          </div>
-          <div className="divider">Or</div>
+      <Modal
+        name="loginForm"
+        onOpen={<p className="btn btn-outline">Sign in</p>}
+      >
+        <div>
+          {/* modal body */}
+          <h2>Sign in</h2>
 
-          <div className="flex justify-center mt-4">
-            <button className="btn btn-outline">Signup with Google</button>
-          </div>
-          <div className="flex justify-center mt-4">
-            <button className="btn btn-outline">Signup with Facebook</button>
-          </div>
-          <div className="flex justify-center mt-4">
-            <p className="text-gray-500">Already have an account? </p>
-            <Link to="/" className="text-orange-500">
-              sign in
-            </Link>
-          </div>
-        </label>
-      </label>
+          <Input
+            label="Email"
+            placeholder="Enter your input"
+            errMsg="Error Massage"
+            error={true}
+            value={uId}
+            onChange={(e) => setUId(e.target.value)}
+          />
+          <Input
+            label="Password"
+            placeholder="Enter Your Password"
+            type="password"
+            errMsg="Error Massage"
+            error={true}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="btn" type="button" onClick={handleSubmitLogin}>
+            Sign in
+          </button>
+        </div>
+        <div className="divider">Or</div>
+        <div className="flex justify-center mt-4">
+          <button className="btn btn-outline">Signup with Google</button>
+        </div>
+        <div className="flex justify-center mt-4">
+          <button className="btn btn-outline">Signup with Facebook</button>
+        </div>
+      </Modal>
     </div>
   );
 }
