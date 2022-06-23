@@ -1,22 +1,34 @@
 import Input from "../../common/Input";
 import InputDropdown from "../../common/InputDropdown";
 
-export default function PetOwnerDetails() {
+export default function ProfileDetails({
+  setFirstName,
+  setLastName,
+  setPhoneNumber,
+  setProvince,
+  setDistrict,
+  setSubdistrict,
+  setZipCode,
+  setAddress,
+}) {
   return (
     <div>
-      <p className="text-2xl font-medium">Pet Owner</p>
       <div className="form-control flex mt-5">
         <div className="flex gap-x-5">
           <Input
             label="First name"
-            onChange={() => {}}
+            onChange={(e) => {
+              setFirstName(e.target.value);
+            }}
             placeholder=""
             errMsg="Error Massage"
             error={false}
           />
           <Input
             label="Last name"
-            onChange={() => {}}
+            onChange={(e) => {
+              setLastName(e.target.value);
+            }}
             placeholder=""
             errMsg="Error Massage"
             error={false}
@@ -24,7 +36,9 @@ export default function PetOwnerDetails() {
         </div>
         <Input
           label="Phone Number"
-          onChange={() => {}}
+          onChange={(e) => {
+            setPhoneNumber(e.target.value);
+          }}
           placeholder=""
           errMsg="Error Massage"
           error={false}
@@ -32,7 +46,7 @@ export default function PetOwnerDetails() {
         <InputDropdown
           label="Province"
           onChange={(e) => {
-            // setValueDropDown(e.target.value);
+            setProvince(e.target.value);
           }}
           errMsg="Error Massage"
           error={false}
@@ -42,7 +56,7 @@ export default function PetOwnerDetails() {
         <InputDropdown
           label="District"
           onChange={(e) => {
-            // setValueDropDown(e.target.value);
+            setDistrict(e.target.value);
           }}
           errMsg="Error Massage"
           error={false}
@@ -52,24 +66,29 @@ export default function PetOwnerDetails() {
         <InputDropdown
           label="Subdistrict"
           onChange={(e) => {
-            // setValueDropDown(e.target.value);
+            setSubdistrict(e.target.value);
           }}
           errMsg="Error Massage"
           error={false}
         >
-          <option value="option1"></option>
+          <option value="option1">option1</option>
+          <option value="option2">option2</option>
         </InputDropdown>
         <Input
           label="Postal/Zip Code"
           option="(Optional)"
-          onChange={() => {}}
+          onChange={(e) => {
+            setZipCode(e.target.value);
+          }}
           placeholder=""
           errMsg="Error Massage"
           error={false}
         />
         <Input
           label="Address"
-          onChange={() => {}}
+          onChange={(e) => {
+            setAddress(e.target.value);
+          }}
           placeholder=""
           errMsg="Error Massage"
           error={false}

@@ -13,6 +13,10 @@ import Main from "../pages/Main";
 import Profile from "../pages/Profile";
 import BookingList from "../pages/BookingList";
 import DesignSystemDoc from "../pages/DesignSystemDoc";
+import HouseSetting from "../pages/HouseSetting";
+import HouseDetail from "../pages/HouseDetail";
+import HouseMainContainer from "../components/myhouse/HouseMainContainer";
+import HouseOutlet from "../components/myhouse/HouseOutlet";
 
 export default function Router() {
   const user = true;
@@ -27,14 +31,19 @@ export default function Router() {
         {user && (
           <>
             <Route path="/profile" element={<Profile />} />
-            <Route path="/house/detail" element={<House />} />
-            <Route path="/house/reserve" element={<HouseReserve />} />
+            <Route path="/" element={<HouseOutlet />}>
+              <Route path="/house" element={<House />} />
+              <Route path="/house/reserve" element={<HouseReserve />} />
+              <Route path="/house/detail" element={<HouseDetail />} />
+              <Route path="/house/setting" element={<HouseSetting />} />
+            </Route>
+
             <Route path="/booking/:id" element={<BookingDetail />} />
             <Route path="/booking/list" element={<BookingList />} />
           </>
         )}
         <Route path="/house/main" element={<HouseMain />} />
-        <Route path="/creteHouse" element={<CreateHouse />} />
+        <Route path="/createHouse" element={<CreateHouse />} />
       </Route>
       <Route path="/search" element={<Search />} />
       <Route path="*" element={<Navigate to="/" />} />
