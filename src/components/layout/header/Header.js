@@ -26,8 +26,8 @@ function Header() {
           </div>
         </div>
       ) : (
-        <div className="w-full top-6 z-50 ">
-          <div className="rounded-full flex justify-between items-center mx-4 bg-gray-100 mt-6 py-3 px-8">
+        <div className="w-full z-50 my-6">
+          <div className="rounded-full flex justify-between items-center mx-4 bg-gray-100  py-3 px-8">
             <Link to="/">
               <img src={logoColor} alt="logo" to="/" />
             </Link>

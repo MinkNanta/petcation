@@ -15,15 +15,6 @@ export default function CreateBooking() {
   const [zipCode, setZipCode] = useState(null);
   const [address, setAddress] = useState(null);
 
-  // console.log(firstName);
-  // console.log(lastName);
-  // console.log(phoneNumber);
-  // console.log(province);
-  // console.log(district);
-  // console.log(subdistrict);
-  // console.log(zipCode);
-  // console.log(address);
-
   // const [inputFile, setInputFile] = useState("");
 
   // const uploadClick = (e) => {
@@ -42,6 +33,7 @@ export default function CreateBooking() {
         <div className="ml-10 w-full">
           <BookingSummary />
           <div class="w-full border-t-2 border-gray-200 my-10"></div>
+          <p className="text-2xl font-medium">Pet Owner</p>
           <ProfileDetails
             setFirstName={setFirstName}
             setLastName={setLastName}

@@ -5,10 +5,8 @@ import ProfilePet from "../components/profile/ProfilePet";
 
 export default function Profile() {
   return (
-    <div className="mainContainer">
-      <ProfilePage>
-        <Outlet />
-      </ProfilePage>
+    <div>
+      <ProfilePage />
     </div>
   );
 }
