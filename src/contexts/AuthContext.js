@@ -31,3 +31,9 @@ function AuthContextProvider({ children }) {
 
 export default AuthContextProvider;
 export { AuthContext };
+
+function useAuth() {
+  const ctx = useContext(AuthContext);
+  return ctx;
+}
+export { useAuth };

@@ -5,7 +5,6 @@ import hostFooter from "../assets/img/hostFooter.png";
 import ReviewCard from "../components/host/ReviewCard";
 
 export default function HouseMain() {
-<<<<<<< HEAD
   const navigate = useNavigate();
 
   return (
@@ -59,7 +58,4 @@ export default function HouseMain() {
       </div>
     </>
   );
-=======
-  return <></>;
->>>>>>> common_ui
 }
