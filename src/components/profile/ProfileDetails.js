@@ -13,7 +13,7 @@ export default function ProfileDetails({
 }) {
   return (
     <div>
-      <p className="text-2xl font-medium">Pet Owner</p>
+
       <div className="form-control flex mt-5">
         <div className="flex gap-x-5">
           <Input
@@ -72,7 +72,8 @@ export default function ProfileDetails({
           errMsg="Error Massage"
           error={false}
         >
-          <option value="option1">option</option>
+          <option value="option1">option1</option>
+          <option value="option2">option2</option>
         </InputDropdown>
         <Input
           label="Postal/Zip Code"
