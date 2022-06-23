@@ -15,7 +15,7 @@ export default function ProfilePage() {
   const [zipCode, setZipCode] = useState("");
   const [address, setAddress] = useState("");
 
-  const { dropdownAddress, setDropdownAddresss } = useContext(AddressContext);
+  // const { dropdownAddress, setDropdownAddresss } = useContext(AddressContext);
 
   console.log(firstName);
   console.log(lastName);
