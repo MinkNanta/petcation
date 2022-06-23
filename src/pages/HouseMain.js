@@ -1,9 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import hostCover from "../assets/img/hostCover.png";
 import hostFooter from "../assets/img/hostFooter.png";
 import ReviewCard from "../components/host/ReviewCard";
 
 export default function HouseMain() {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="my-10 mx-20">
@@ -14,7 +17,12 @@ export default function HouseMain() {
             <br />
             doing what you love.
           </h1>
-          <button className="btn-outline w-44">Set up new host</button>
+          <button
+            className="btn-outline w-44"
+            onClick={() => navigate("/createHouse")}
+          >
+            Set up new host
+          </button>
         </div>
       </div>
       <img src={hostCover}></img>
@@ -39,7 +47,12 @@ export default function HouseMain() {
               <br />
               Join us. We’ll help you every step of the way.
             </p>
-            <button className="btn-outline w-44">Set up new host</button>
+            <button
+              className="btn-outline w-44"
+              onClick={() => navigate("/createHouse")}
+            >
+              Set up new host
+            </button>
           </div>
         </div>
       </div>
