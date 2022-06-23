@@ -6,16 +6,36 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import { ErrorContext } from "../../../contexts/ErrorContext";
 
 function Register() {
-  const [uId, setUId] = useState(" ");
+  const [uId, setUId] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [apiError, setApiError] = useState("");
+  const [validate, setValidate] = useState({});
   const [step, setStep] = useState("STEP1");
   const { signUp } = useContext(AuthContext);
   const { setError } = useContext(ErrorContext);
 
+  const validateInput = () => {
+    const newValidate = {};
+    if (!uId) newValidate.uId = "email is required";
+    if (!password) newValidate.password = "password is required";
+    if (!confirmPassword) newValidate.password = "confirmPassword is required";
+    setValidate(newValidate);
+    console.log(newValidate);
+  };
+
+  const SubmitCreate = () => {
+    if (uId === "") {
+      validateInput();
+      return;
+    }
+    setStep("STEP2");
+  };
   const handleSubmitSignUp = async (e) => {
     try {
       e.preventDefault();
+      setApiError("");
+      validateInput();
       await signUp({
         uId,
         password,
@@ -24,6 +44,7 @@ function Register() {
       setStep("STEP3");
     } catch (err) {
       setError(err.response.data.message);
+      setApiError(err.response.data.message);
     }
   };
 
@@ -45,17 +66,16 @@ function Register() {
 
               <Input
                 label="Email"
-                placeholder="Email"
-                errMsg="Error Massage"
-                error={true}
+                placeholder="Your email"
+                errMsg={validate.uId}
+                error={validate.uId}
                 value={uId}
                 onChange={(e) => setUId(e.target.value)}
               />
-              <button
-                className="btn"
-                type="button"
-                onClick={() => setStep("STEP2")}
-              >
+              {apiError && (
+                <span className="label-text-alt text-red-400">{apiError}</span>
+              )}
+              <button className="btn" type="button" onClick={SubmitCreate}>
                 Create Account
               </button>
             </div>
@@ -89,8 +109,8 @@ function Register() {
                 label="password"
                 placeholder="password"
                 type="password"
-                errMsg="Error Massage"
-                error={true}
+                errMsg={validate.password}
+                error={validate.password}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -98,11 +118,14 @@ function Register() {
                 label="Confirm password"
                 placeholder="Confirm password"
                 type="password"
-                errMsg="Error Massage"
-                error={true}
+                errMsg={validate.confirmPassword}
+                error={validate.confirmPassword}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
+              {apiError && (
+                <span className="label-text-alt text-red-400">{apiError}</span>
+              )}
               <button className="btn" onClick={handleSubmitSignUp}>
                 Next
               </button>
