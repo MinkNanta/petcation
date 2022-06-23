@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import profile from "../../../assets/img/defaultProtoPic.png";
 import LoginForm from "../auth/LoginForm";
+import Logout from "../auth/Logout";
 import Register from "../auth/Register";
 
 export default function HeaderMenu() {
@@ -11,6 +12,7 @@ export default function HeaderMenu() {
       <Link to="/house/main">Become a Host</Link>
       <Register />
       <LoginForm />
+      <Logout />
 
       <div className="dropdown dropdown-end">
         <label tabIndex="0">
