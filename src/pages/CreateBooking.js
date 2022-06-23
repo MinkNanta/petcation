@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import HouseCard from "../components/booking/HouseCard";
+import HouseCard from "../components/home/HouseCard";
 import BackNavigation from "../components/booking/BackNavigation";
 import BookingSummary from "../components/booking/BookingSummary";
 import ProfileDetails from "../components/profile/ProfileDetails";
@@ -28,7 +28,15 @@ export default function CreateBooking() {
       <BackNavigation title="Booking & Payment" />
       <div className="mt-10 flex">
         <div>
-          <HouseCard />
+          <HouseCard
+            houseName="Room name Cat Capsule by Minkminks"
+            img="https://api.lorem.space/image/shoes?w=400&h=225"
+            reviews="4"
+            price={10000}
+            nights={2}
+            foodPrice={20000}
+            serviceFee={20000}
+          />
         </div>
         <div className="ml-10 w-full">
           <BookingSummary />
