@@ -2,8 +2,8 @@ import React from "react";
 import HouseCard from "../components/booking/HouseCard";
 import BackNavigation from "../components/booking/BackNavigation";
 import BookingSummary from "../components/booking/BookingSummary";
-import PetOwnerDetails from "../components/booking/PetOwnerDetails";
-import PetInformation from "../components/booking/PetInformation";
+import PetOwnerDetails from "../components/profile/PetOwnerDetails";
+import PetInformation from "../components/profile/PetInformation";
 
 export default function CreateBooking() {
   // const [inputFile, setInputFile] = useState("");
