@@ -29,7 +29,7 @@ export default function HouseCard({
         <div className="w-full flex justify-between items-end">
           <p className="text-start text-base text-gray-500">Food Service</p>
           <p className="text-end text-base text-gray-500">
-            {foodPrice.toLocaleString("en-US")}
+            {(foodPrice * nights).toLocaleString("en-US")}
           </p>
         </div>
         <div className="w-full flex justify-between items-end">
