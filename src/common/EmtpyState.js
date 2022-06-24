@@ -1,0 +1,10 @@
+import React from "react";
+
+export default function EmtpyState({ title, description }) {
+  return (
+    <div className="bg-gray-50 w-full text-center px-10 rounded-3xl py-14">
+      <h4 className="text-gray-600">{title}</h4>
+      <p className="text-gray-400">{description}</p>
+    </div>
+  );
+}
