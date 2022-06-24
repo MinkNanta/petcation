@@ -1,11 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "../config/axios";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from '../config/axios';
 import {
   getAccessToken,
   removeAccessToken,
   setAccessToken,
-} from "../services/localStorage.js";
+} from '../services/localStorage.js';
 
 const AuthContext = createContext();
 
@@ -17,23 +17,23 @@ function AuthContextProvider({ children }) {
       try {
         const token = getAccessToken();
         if (token) {
-          const res = await axios.get("/user/");
+          const res = await axios.get('/user/');
           setUser(res.data.user);
         }
       } catch (err) {
         removeAccessToken();
-        navigate("/");
+        navigate('/');
       }
     };
     fetchMe();
   }, []);
 
   const signUp = async (input) => {
-    const res = await axios.post("/auth/register", input);
+    const res = await axios.post('/auth/register', input);
     setAccessToken(res.data.token);
   };
   const login = async (uId, password) => {
-    const res = await axios.post("/auth/login", { uId, password });
+    const res = await axios.post('/auth/login', { uId, password });
     setAccessToken(res.data.token);
   };
   const logout = () => {
