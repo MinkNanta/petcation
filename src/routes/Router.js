@@ -1,18 +1,18 @@
-import { Route, Routes, Navigate } from "react-router-dom";
-import { MainHeaderOutlet } from "../components/layout/MainHeaderOutlet";
-import CreateBooking from "../pages/CreateBooking";
-import CreateHouse from "../pages/CreateHouse";
-import Warp from "../pages/Warp";
-import Details from "../pages/Details";
-import BookingDetail from "../pages/BookingDetail";
-import HouseReserve from "../pages/HouseReserve";
-import House from "../pages/House";
-import Search from "../pages/Search";
-import HouseMain from "../pages/HouseMain";
-import Main from "../pages/Main";
-import Profile from "../pages/Profile";
-import BookingList from "../pages/BookingList";
-import DesignSystemDoc from "../pages/DesignSystemDoc";
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { MainHeaderOutlet } from '../components/layout/MainHeaderOutlet';
+import CreateBooking from '../pages/CreateBooking';
+import CreateHouse from '../pages/CreateHouse';
+import Warp from '../pages/Warp';
+import Details from '../pages/Details';
+import BookingDetail from '../pages/BookingDetail';
+import HouseReserve from '../pages/HouseReserve';
+import House from '../pages/House';
+import Search from '../pages/Search';
+import HouseMain from '../pages/HouseMain';
+import Main from '../pages/Main';
+import Profile from '../pages/Profile';
+import BookingList from '../pages/BookingList';
+import DesignSystemDoc from '../pages/DesignSystemDoc';
 
 export default function Router() {
   const user = true;
@@ -34,7 +34,7 @@ export default function Router() {
           </>
         )}
         <Route path="/house/main" element={<HouseMain />} />
-        <Route path="/creteHouse" element={<CreateHouse />} />
+        <Route path="/createHouse" element={<CreateHouse />} />
       </Route>
       <Route path="/search" element={<Search />} />
       <Route path="*" element={<Navigate to="/" />} />
