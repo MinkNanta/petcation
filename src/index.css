@@ -7,6 +7,10 @@
 :root {
   --background-color: #ffffff;
 }
+#tabItem {
+  color: #ea580c;
+  border-color: #ea580c;
+}
 
 /* -------- container ------ */
 @layer base {

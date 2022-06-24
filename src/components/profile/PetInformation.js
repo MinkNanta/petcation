@@ -6,7 +6,6 @@ import InputWithSuffix from "../../common/InputWithSuffix";
 export default function PetInformation() {
   return (
     <div>
-      <p className="text-2xl font-medium">Pet Information</p>
       <div className="form-control w-full mt-5">
         <input
           type="file"

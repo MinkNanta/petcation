@@ -11,6 +11,7 @@ import Modal from "../common/Modal";
 import InputWithSuffix from "../common/InputWithSuffix";
 import Breadcrumb from "../common/Breadcrumb";
 import { Link } from "react-router-dom";
+import CardList from "../common/CardList";
 
 export default function DesignSystemDoc() {
   const [valueCheck, setValueCheck] = useState(false);
@@ -140,6 +141,14 @@ export default function DesignSystemDoc() {
             </li>
           </ul>
         </Breadcrumb>
+
+        {/* Card list item */}
+        <CardList
+          src="https://images.unsplash.com/photo-1655915382353-8f89f9bbdb03?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&q=60"
+          title="Random name"
+          date="Date 6/24/2022 - 6/26/2022"
+          detail="2 Cat   |   Ower food"
+        />
       </>
     </div>
   );
