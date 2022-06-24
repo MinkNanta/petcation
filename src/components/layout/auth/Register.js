@@ -4,6 +4,7 @@ import Input from "../../../common/Input";
 import Modal from "../../../common/Modal";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { ErrorContext } from "../../../contexts/ErrorContext";
+import validator from "validator";
 
 function Register() {
   const [uId, setUId] = useState("");
@@ -17,19 +18,26 @@ function Register() {
 
   const validateInput = () => {
     const newValidate = {};
-    if (!uId) newValidate.uId = "email is required";
+    // if (!validator.isEmpty(uId)) newValidate.uId = "email is required";
     if (!password) newValidate.password = "password is required";
-    if (!confirmPassword) newValidate.password = "confirmPassword is required";
+    if (!validator.isStrongPassword(password))
+      newValidate.password =
+        "our password must be more than 8 characters long. should contain at-least 1 Upper case, 1 Lowercase, 1 Number and 1 spacial character. ";
+
+    if (password !== confirmPassword)
+      newValidate.password = "password is not math";
     setValidate(newValidate);
-    console.log(newValidate);
   };
 
   const SubmitCreate = () => {
-    if (uId === "") {
-      validateInput();
+    const newValidate = {};
+    if (!validator.isEmail(uId)) {
+      newValidate.uId = "email format is invalid ";
+      setValidate(newValidate);
       return;
     }
     setStep("STEP2");
+    // setValidate("");
   };
   const handleSubmitSignUp = async (e) => {
     try {
@@ -55,6 +63,11 @@ function Register() {
   return (
     <div>
       <Modal
+        onClick={() => {
+          setUId("");
+          setPassword("");
+          setConfirmPassword("");
+        }}
         name="registerForm"
         onOpen={<p className="btn btn-outline">Register</p>}
       >
@@ -102,6 +115,7 @@ function Register() {
                   <li className="text-gray-400">8-20 Characters</li>
                   <li className="text-gray-400">At least One Capital Letter</li>
                   <li className="text-gray-400">At least One Number</li>
+                  <li className="text-gray-400">At least One Symbols</li>
                   <li className="text-gray-400">No space</li>
                 </ul>
               </div>

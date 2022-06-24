@@ -3,6 +3,7 @@ import Input from "../../../common/Input";
 import Modal from "../../../common/Modal";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { ErrorContext } from "../../../contexts/ErrorContext";
+import validator from "validator";
 function LoginForm() {
   const [uId, setUId] = useState("");
   const [apiError, setApiError] = useState("");
@@ -13,9 +14,12 @@ function LoginForm() {
 
   const validateInput = () => {
     const newValidate = {};
-    if (!uId) newValidate.uId = "email is required";
+    // if (!validator.isEmpty(uId)) newValidate.uId = "email is required";
     if (!password) newValidate.password = "password is required";
-
+    // if (!validator.isStrongPassword(password))
+    //   newValidate.password =
+    //     "our password must be more than 8 characters long. should contain at-least 1 Upper case, 1 Lowercase, 1 Number and 1 spacial character. ";
+    if (!validator.isEmail(uId)) newValidate.email = "email format is invalid ";
     setValidate(newValidate);
     console.log(newValidate);
   };
@@ -27,11 +31,12 @@ function LoginForm() {
       validateInput();
       await login(uId, password);
     } catch (err) {
+      console.log(err);
       setError(err.response.data.message);
       setApiError(err.response.data.message);
     }
   };
-  console.log(validate.uId);
+
   return (
     <div>
       <Modal
@@ -45,8 +50,8 @@ function LoginForm() {
           <Input
             label="Email"
             placeholder="Enter Your Password"
-            errMsg={validate.uId}
-            error={validate.uId}
+            errMsg={validate.email}
+            error={validate.email}
             value={uId}
             onChange={(e) => setUId(e.target.value)}
           />
