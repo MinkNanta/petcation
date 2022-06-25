@@ -8,7 +8,7 @@ function AddressContextProvider({ children }) {
     provinces: [],
     districts: [],
     subDistricts: [],
-    postalCodes: "",
+    zipCodes: "",
   });
 
   useEffect(() => {
