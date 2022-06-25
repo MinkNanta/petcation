@@ -2,11 +2,13 @@ import { XIcon } from "@heroicons/react/solid";
 import React from "react";
 import BtnIcon from "./BtnIcon";
 
-export default function Modal({ children, onOpen, name }) {
+export default function Modal({ children, onOpen, name, onClick }) {
   return (
     <>
       {/* <!-- The button to open modal --> */}
-      <label htmlFor={name}>{onOpen}</label>
+      <label htmlFor={name} onClick={onClick}>
+        {onOpen}
+      </label>
 
       {/* <!-- Put this part before </body> tag --> */}
       <input type="checkbox" id={name} className="modal-toggle" />

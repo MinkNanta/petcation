@@ -1,64 +1,41 @@
-import InputDropdown from "../../common/InputDropdown";
-import { useContext, useState } from "react";
-import Input from "../../common/Input";
-import { AddressContext } from "../../contexts/AddressContext";
-import { useAuth } from "../../contexts/AuthContext";
-import axios from "../../config/axios";
+import InputDropdown from '../../common/InputDropdown';
+import { useContext, useState } from 'react';
+import Input from '../../common/Input';
+import { AddressContext } from '../../contexts/AddressContext';
+import { useAuth } from '../../contexts/AuthContext';
+import axios from '../../config/axios';
 
 export default function ProfilePage() {
-  const [valueDropDown, setValueDropDown] = useState("");
-  const [firstName, setFirstNamne] = useState("");
-  const [lastName, setLastNamne] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [province, setProvince] = useState("");
-  const [district, setDistrict] = useState("");
-  const [subDistrict, setSubDistrict] = useState("");
-  const [zipCode, setZipCode] = useState("");
-  const [address, setAddress] = useState("");
+  const [province, setProvince] = useState('');
+  const [district, setDistrict] = useState('');
+  const [subdistrict, setSubDistrict] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [firstName, setFirstNamne] = useState('');
+  const [lastName, setLastNamne] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
 
-  const { signUp } = useContext(AddressContext);
-  const { dropdownAddress, setDropdownAddresss } = useContext(AddressContext);
+  const [address, setAddress] = useState('');
 
-  console.log(firstName);
-  console.log(lastName);
-  console.log(phoneNumber);
-  console.log(email);
+  const { dropdownAddress, getDstricts, getSubDstricts } =
+    useContext(AddressContext);
+
+  // console.log(firstName);
+  // console.log(lastName);
+  // console.log(phoneNumber);
+  // console.log(email);
+  // console.log(zipCode);
+  // console.log(address);
+
+  console.log(province);
+  console.log(district);
+  console.log(subdistrict);
+  // console.log(dropdownAddress?.subDistricts);
+  // console.log(dropdownAddress.map((el) => el.subDistricts));
+  console.log(dropdownAddress.subdistrict);
   console.log(zipCode);
-  console.log(address);
 
-  const handleChangeAddress = async (e) => {
-    let updatedValue = {};
-    updatedValue = { [e.target.id]: e.target.value };
-    setSignUpInputs((signUpInputs) => ({
-      ...signUpInputs,
-      ...updatedValue,
-    }));
-    let res;
-    if (e.target.id === "provinceId") {
-      res = await axios.get("/address/amphoes/" + e.target.value);
-      setAddress((address) => ({
-        ...address,
-        amphures: res.data.amphoes,
-      }));
-    }
-    if (e.target.id === "amphureId") {
-      res = await axios.get("/address/districts/" + e.target.value);
-      setAddress((address) => ({
-        ...address,
-        districts: res.data.districts,
-      }));
-    }
-    if (e.target.id === "districtId") {
-      res = await axios.get("/address/district/" + e.target.value);
-      setSignUpInputs((address) => ({
-        ...address,
-        postalCode: res.data.district.zipCode + "",
-      }));
-    }
-    console.log(signUpInputs);
-  };
-
+  // console.log(dropdownAddress);
   return (
     <>
       <div className="flex justify-between items-center ">
@@ -112,7 +89,8 @@ export default function ProfilePage() {
         <InputDropdown
           label="Province"
           onChange={(e) => {
-            setValueDropDown(e.target.value);
+            setProvince(e.target.value);
+            getDstricts(e.target.value);
           }}
           errMsg="Error Massage"
           error={true}
@@ -125,39 +103,43 @@ export default function ProfilePage() {
         <InputDropdown
           label="District"
           onChange={(e) => {
-            setValueDropDown(e.target.value);
+            setDistrict(e.target.value);
+            getSubDstricts(e.target.value);
           }}
           errMsg="Error Massage"
           error={true}
         >
-          {/* {dropdownAddress.district.map((district) => (
+          {dropdownAddress.districts?.map((district) => (
             <option value={district.id}>{district.nameEn}</option>
-          ))} */}
+          ))}
         </InputDropdown>
 
         <InputDropdown
           label="Subdistrict"
           onChange={(e) => {
-            setValueDropDown(e.target.value);
+            setSubDistrict(e.target.value);
           }}
           errMsg="Error Massage"
           error={true}
         >
-          <option value="option1">Star Wars</option>
-          <option value="option2">Harry Potter</option>
-          <option value="option3">Lord of the Rings</option>
-          <option value="option4">Planet of the Apes</option>
-          <option value="option5">Star Trek</option>
+          {dropdownAddress.subDistricts?.map((subdistrict) => (
+            <option value={subdistrict.zipCode}>{subdistrict.nameEn}</option>
+          ))}
         </InputDropdown>
 
         <Input
-          value={zipCode}
+          value={subdistrict}
           label="Postal/Zip Code (Optional)"
           onChange={(e) => setZipCode(e.target.value)}
           placeholder="Enter your zipcode"
           errMsg="Error Massage"
           error={true}
-        />
+        >
+          {/* {dropdownAddress.subDistricts?.map((subdistrict) => (
+            <option value={subdistrict.zipCodes}>{subdistrict.zipCodes}</option>
+          ))} */}
+        </Input>
+
         <Input
           value={address}
           label="Address"

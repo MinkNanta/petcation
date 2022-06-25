@@ -1,29 +1,76 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import Input from "../../../common/Input";
-import Modal from "../../../common/Modal";
-import { AuthContext } from "../../../contexts/AuthContext";
-import { ErrorContext } from "../../../contexts/ErrorContext";
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Input from '../../../common/Input';
+import Modal from '../../../common/Modal';
+import { AuthContext } from '../../../contexts/AuthContext';
+import { ErrorContext } from '../../../contexts/ErrorContext';
+import validator from 'validator';
 
 function Register() {
-  const [uId, setUId] = useState(" ");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [step, setStep] = useState("STEP1");
+  const [uId, setUId] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [apiError, setApiError] = useState('');
+  const [validate, setValidate] = useState({});
+  const [step, setStep] = useState('STEP1');
   const { signUp } = useContext(AuthContext);
   const { setError } = useContext(ErrorContext);
 
+  const validateInput = () => {
+    const newValidate = {};
+    // if (!validator.isEmpty(uId)) newValidate.uId = "email is required";
+    if (!password) newValidate.password = 'password is required';
+    if (!validator.isStrongPassword(password))
+      newValidate.password =
+        'our password must be more than 8 characters long. should contain at-least 1 Upper case, 1 Lowercase, 1 Number and 1 spacial character. ';
+
+    if (password !== confirmPassword)
+      newValidate.password = 'password is not math';
+    setValidate(newValidate);
+    return;
+  };
+
+  const SubmitCreate = () => {
+    const newValidate = {};
+    if (!validator.isEmail(uId)) {
+      newValidate.uId = 'email format is invalid ';
+      setValidate(newValidate);
+      return;
+    }
+    setStep('STEP2');
+    // setValidate("");
+  };
   const handleSubmitSignUp = async (e) => {
     try {
       e.preventDefault();
+
+      const newValidate = {};
+      if (!validator.isStrongPassword(password)) {
+        newValidate.password =
+          'our password must be more than 8 characters long. should contain at-least 1 Upper case, 1 Lowercase, 1 Number and 1 spacial character. ';
+        setValidate(newValidate);
+
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        newValidate.password = 'password is not math';
+        setValidate(newValidate);
+
+        return;
+      }
+
+      setApiError('');
+
       await signUp({
         uId,
         password,
         confirmPassword,
       });
-      setStep("STEP3");
+      setStep('STEP3');
     } catch (err) {
       setError(err.response.data.message);
+      setApiError(err.response.data.message);
     }
   };
 
@@ -34,10 +81,16 @@ function Register() {
   return (
     <div>
       <Modal
+        onClick={() => {
+          setUId('');
+          setPassword('');
+          setConfirmPassword('');
+          setStep('STEP1');
+        }}
         name="registerForm"
         onOpen={<p className="btn btn-outline">Register</p>}
       >
-        {step === "STEP1" ? (
+        {step === 'STEP1' ? (
           <>
             <div>
               {/* modal body */}
@@ -45,17 +98,16 @@ function Register() {
 
               <Input
                 label="Email"
-                placeholder="Email"
-                errMsg="Error Massage"
-                error={true}
+                placeholder="Your email"
+                errMsg={validate.uId}
+                error={validate.uId}
                 value={uId}
                 onChange={(e) => setUId(e.target.value)}
               />
-              <button
-                className="btn"
-                type="button"
-                onClick={() => setStep("STEP2")}
-              >
+              {apiError && (
+                <span className="label-text-alt text-red-400">{apiError}</span>
+              )}
+              <button className="btn" type="button" onClick={SubmitCreate}>
                 Create Account
               </button>
             </div>
@@ -73,7 +125,7 @@ function Register() {
               </Link>
             </div>
           </>
-        ) : step === "STEP2" ? (
+        ) : step === 'STEP2' ? (
           <>
             <div>
               <h2> Create your password </h2>
@@ -82,6 +134,7 @@ function Register() {
                   <li className="text-gray-400">8-20 Characters</li>
                   <li className="text-gray-400">At least One Capital Letter</li>
                   <li className="text-gray-400">At least One Number</li>
+                  <li className="text-gray-400">At least One Symbols</li>
                   <li className="text-gray-400">No space</li>
                 </ul>
               </div>
@@ -89,8 +142,8 @@ function Register() {
                 label="password"
                 placeholder="password"
                 type="password"
-                errMsg="Error Massage"
-                error={true}
+                errMsg={validate.password}
+                error={validate.password}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -98,11 +151,14 @@ function Register() {
                 label="Confirm password"
                 placeholder="Confirm password"
                 type="password"
-                errMsg="Error Massage"
-                error={true}
+                errMsg={validate.confirmPassword}
+                error={validate.confirmPassword}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
+              {apiError && (
+                <span className="label-text-alt text-red-400">{apiError}</span>
+              )}
               <button className="btn" onClick={handleSubmitSignUp}>
                 Next
               </button>
@@ -118,7 +174,7 @@ function Register() {
                   account setting.
                 </h6>
               </div>
-              <button className="btn" onClick={() => setStep("STEP4")}>
+              <button className="btn" onClick={() => setStep('STEP4')}>
                 See my profile
               </button>
             </div>
