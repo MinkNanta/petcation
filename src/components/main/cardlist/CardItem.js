@@ -1,9 +1,12 @@
-import React from "react";
-import card from "../../../assets/img/card.png";
+import React from 'react';
+import card from '../../../assets/img/card.png';
 
-export default function CardItem({ value: { name, description, price } }) {
+export default function CardItem({
+  value: { name, description, price },
+  onClick,
+}) {
   return (
-    <div className="space-y-1">
+    <div className="space-y-1 cursor-pointer" onClick={onClick}>
       <div className="h-[238px]">
         <img src={card} alt="card" className="w-full h-full" />
       </div>

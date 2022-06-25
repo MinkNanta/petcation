@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import HouseCard from "../components/home/HouseCard";
-import BackNavigation from "../components/booking/BackNavigation";
-import BookingSummary from "../components/booking/BookingSummary";
-import ProfileDetails from "../components/profile/ProfileDetails";
-import PetInformation from "../components/profile/PetInformation";
+import React, { useState } from 'react';
+import HouseCard from '../common/HouseCard';
+import BackNavigation from '../components/booking/BackNavigation';
+import BookingSummary from '../components/booking/BookingSummary';
+import ProfileDetails from '../components/profile/ProfileDetails';
+import PetInformation from '../components/profile/PetInformation';
 
 export default function CreateBooking() {
   const [firstName, setFirstName] = useState(null);

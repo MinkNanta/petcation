@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   MapIcon,
   CheckIcon,
   XIcon,
   ShieldCheckIcon,
   ShieldExclamationIcon,
-} from "@heroicons/react/outline";
+} from '@heroicons/react/outline';
 
 export default function BookingDetail() {
-  const [activePic, setActivePic] = useState("pic1");
+  const [activePic, setActivePic] = useState('pic1');
 
   return (
     <div className="my-10 mx-20">
@@ -40,7 +40,7 @@ export default function BookingDetail() {
       </div>
       <div class="flex justify-center w-full py-2 gap-2 relative">
         <div className="absolute bottom-8 flex flex-row">
-          <a
+          {/* <a
             href="#pic1"
             className={`w-3 h-3 rounded-full ${
               activePic === "pic1" ? "bg-orange-500" : "bg-white"
@@ -70,7 +70,7 @@ export default function BookingDetail() {
               activePic === "pic4" ? "bg-orange-500" : "bg-white"
             }`}
             onClick={() => setActivePic("pic4")}
-          ></a>
+          ></a> */}
         </div>
       </div>
       <div className="mt-10 mb-20 flex">

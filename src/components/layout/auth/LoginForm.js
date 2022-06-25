@@ -1,13 +1,13 @@
-import React, { useContext, useState } from "react";
-import Input from "../../../common/Input";
-import Modal from "../../../common/Modal";
-import { AuthContext } from "../../../contexts/AuthContext";
-import { ErrorContext } from "../../../contexts/ErrorContext";
-import validator from "validator";
+import React, { useContext, useState } from 'react';
+import Input from '../../../common/Input';
+import Modal from '../../../common/Modal';
+import { AuthContext } from '../../../contexts/AuthContext';
+import { ErrorContext } from '../../../contexts/ErrorContext';
+import validator from 'validator';
 function LoginForm() {
-  const [uId, setUId] = useState("");
-  const [apiError, setApiError] = useState("");
-  const [password, setPassword] = useState("");
+  const [uId, setUId] = useState('');
+  const [apiError, setApiError] = useState('');
+  const [password, setPassword] = useState('');
   const [validate, setValidate] = useState({});
   const { login } = useContext(AuthContext);
   const { setError } = useContext(ErrorContext);
@@ -15,11 +15,11 @@ function LoginForm() {
   const validateInput = () => {
     const newValidate = {};
     // if (!validator.isEmpty(uId)) newValidate.uId = "email is required";
-    if (!password) newValidate.password = "password is required";
+    if (!password) newValidate.password = 'password is required';
     // if (!validator.isStrongPassword(password))
     //   newValidate.password =
     //     "our password must be more than 8 characters long. should contain at-least 1 Upper case, 1 Lowercase, 1 Number and 1 spacial character. ";
-    if (!validator.isEmail(uId)) newValidate.email = "email format is invalid ";
+    if (!validator.isEmail(uId)) newValidate.email = 'email format is invalid ';
     setValidate(newValidate);
     console.log(newValidate);
   };
@@ -27,7 +27,7 @@ function LoginForm() {
   const handleSubmitLogin = async (e) => {
     try {
       e.preventDefault();
-      setApiError("");
+      setApiError('');
       validateInput();
       await login(uId, password);
     } catch (err) {
@@ -41,7 +41,9 @@ function LoginForm() {
     <div>
       <Modal
         name="loginForm"
-        onOpen={<p className="btn btn-outline">Sign in</p>}
+        onOpen={
+          <p className="btn btn-small bg-orange-100 text-orange-500">Sign in</p>
+        }
       >
         <div>
           {/* modal body */}

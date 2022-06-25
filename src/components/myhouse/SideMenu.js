@@ -1,6 +1,12 @@
-import React from "react";
-import { useLocation, useParams } from "react-router-dom";
-import MenuIcon from "../../common/MenuIcon";
+import {
+  CalculatorIcon,
+  ChartBarIcon,
+  CogIcon,
+  HomeIcon,
+} from '@heroicons/react/outline';
+import React from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+import MenuIcon from '../../common/MenuIcon';
 
 export default function SideMenu() {
   const location = useLocation();
@@ -10,22 +16,26 @@ export default function SideMenu() {
       <MenuIcon
         to="/house"
         title="Dashboard"
-        active={location.pathname === "/house"}
+        active={location.pathname === '/house'}
+        icon={<ChartBarIcon />}
       />
       <MenuIcon
         to="/house/reserve"
         title="Reservations"
-        active={location.pathname === "/house/reserve"}
+        active={location.pathname === '/house/reserve'}
+        icon={<CalculatorIcon />}
       />
       <MenuIcon
         to="/house/detail"
         title="My House"
-        active={location.pathname === "/house/detail"}
+        active={location.pathname === '/house/detail'}
+        icon={<HomeIcon />}
       />
       <MenuIcon
         to="/house/setting"
         title="Setting"
-        active={location.pathname === "/house/setting"}
+        active={location.pathname === '/house/setting'}
+        icon={<CogIcon />}
       />
     </div>
   );

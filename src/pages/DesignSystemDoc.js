@@ -12,6 +12,7 @@ import InputWithSuffix from "../common/InputWithSuffix";
 import Breadcrumb from "../common/Breadcrumb";
 import { Link } from "react-router-dom";
 import CardList from "../common/CardList";
+import TitleHeder from "../common/TitleHeder";
 
 export default function DesignSystemDoc() {
   const [valueCheck, setValueCheck] = useState(false);
@@ -33,6 +34,9 @@ export default function DesignSystemDoc() {
         {/* input group */}
         <div className="flex gap-3">
           <Input
+            value="test"
+            type="text"
+            option="option"
             label="test"
             onChange={() => {}}
             placeholder="Enter your input"
@@ -40,6 +44,9 @@ export default function DesignSystemDoc() {
             error={true}
           />
           <Input
+            value="test"
+            type="text"
+            option="option"
             label="test"
             onChange={() => {}}
             placeholder="Enter your input"
@@ -102,6 +109,13 @@ export default function DesignSystemDoc() {
         <button className="btn btn-outline">btn btn-outline</button>
         {/* button gray color */}
         <button className="btn-small">btn-small</button>
+
+        {/* button group */}
+        <div className="flex gap-4">
+          <button className="btn-text">Cancel</button>
+          <button className="btn-small">Save</button>
+        </div>
+
         {/*icon small*/}
         <BtnIcon icon={<XIcon />} htmlFor="" />
         <div className=" w-56 bg-gray-200">
@@ -149,6 +163,17 @@ export default function DesignSystemDoc() {
           date="Date 6/24/2022 - 6/26/2022"
           detail="2 Cat   |   Ower food"
         />
+
+        {/* title heder */}
+
+        <TitleHeder title="House address">
+          <button className="btn-text">Cancel</button>
+          <button className="btn-small">Save</button>
+        </TitleHeder>
+
+        {/* divider */}
+
+        <div className="divider"></div>
       </>
     </div>
   );

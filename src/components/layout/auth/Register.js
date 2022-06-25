@@ -88,7 +88,9 @@ function Register() {
           setStep('STEP1');
         }}
         name="registerForm"
-        onOpen={<p className="btn btn-outline">Register</p>}
+        onOpen={
+          <p className="btn btn-small bg-white text-orange-500">Register</p>
+        }
       >
         {step === 'STEP1' ? (
           <>

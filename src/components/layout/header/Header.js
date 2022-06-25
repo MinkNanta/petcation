@@ -1,12 +1,13 @@
-import { Link, useParams, useLocation } from "react-router-dom";
-import logo from "../../../assets/logo.svg";
-import logoColor from "../../../assets/logoColor.svg";
-import { useEffect, useState } from "react";
-import HeaderMenu from "./HeaderMenu";
+import { Link, useParams, useLocation } from 'react-router-dom';
+import logo from '../../../assets/logo.svg';
+import logoColor from '../../../assets/logoColor.svg';
+import { useEffect, useState } from 'react';
+import HeaderMenu from './HeaderMenu';
 
 function Header() {
   const location = useLocation();
   const [offset, setOffset] = useState(0);
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
     window.onscroll = () => {
@@ -14,10 +15,14 @@ function Header() {
     };
   }, []);
 
+  if (offset > 80) {
+    setActive(!active);
+  }
+
   return (
     <>
-      {location.pathname === "/" && offset < 80 ? (
-        <div className="w-full fixed ">
+      {location.pathname === '/' ? (
+        <div className={`w-full ${active ? 'sticky' : 'fixed'} top-0`}>
           <div className="h-24 flex justify-between items-center mx-4 ">
             <Link to="/">
               <img src={logo} alt="logo" to="/" />
