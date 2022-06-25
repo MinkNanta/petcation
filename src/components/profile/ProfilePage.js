@@ -2,6 +2,8 @@ import InputDropdown from "../../common/InputDropdown";
 import { useContext, useState } from "react";
 import Input from "../../common/Input";
 import { AddressContext } from "../../contexts/AddressContext";
+import { useAuth } from "../../contexts/AuthContext";
+import axios from "../../config/axios";
 
 export default function ProfilePage() {
   const [valueDropDown, setValueDropDown] = useState("");
@@ -15,7 +17,8 @@ export default function ProfilePage() {
   const [zipCode, setZipCode] = useState("");
   const [address, setAddress] = useState("");
 
-  // const { dropdownAddress, setDropdownAddresss } = useContext(AddressContext);
+  const { signUp } = useContext(AddressContext);
+  const { dropdownAddress, setDropdownAddresss } = useContext(AddressContext);
 
   console.log(firstName);
   console.log(lastName);
@@ -23,6 +26,38 @@ export default function ProfilePage() {
   console.log(email);
   console.log(zipCode);
   console.log(address);
+
+  const handleChangeAddress = async (e) => {
+    let updatedValue = {};
+    updatedValue = { [e.target.id]: e.target.value };
+    setSignUpInputs((signUpInputs) => ({
+      ...signUpInputs,
+      ...updatedValue,
+    }));
+    let res;
+    if (e.target.id === "provinceId") {
+      res = await axios.get("/address/amphoes/" + e.target.value);
+      setAddress((address) => ({
+        ...address,
+        amphures: res.data.amphoes,
+      }));
+    }
+    if (e.target.id === "amphureId") {
+      res = await axios.get("/address/districts/" + e.target.value);
+      setAddress((address) => ({
+        ...address,
+        districts: res.data.districts,
+      }));
+    }
+    if (e.target.id === "districtId") {
+      res = await axios.get("/address/district/" + e.target.value);
+      setSignUpInputs((address) => ({
+        ...address,
+        postalCode: res.data.district.zipCode + "",
+      }));
+    }
+    console.log(signUpInputs);
+  };
 
   return (
     <>
@@ -82,11 +117,9 @@ export default function ProfilePage() {
           errMsg="Error Massage"
           error={true}
         >
-          <option value="option1">Star Wars</option>
-          <option value="option2">Harry Potter</option>
-          <option value="option3">Lord of the Rings</option>
-          <option value="option4">Planet of the Apes</option>
-          <option value="option5">Star Trek</option>
+          {dropdownAddress.provinces.map((province) => (
+            <option value={province.id}>{province.nameEn}</option>
+          ))}
         </InputDropdown>
 
         <InputDropdown
@@ -97,11 +130,9 @@ export default function ProfilePage() {
           errMsg="Error Massage"
           error={true}
         >
-          <option value="option1">Star Wars</option>
-          <option value="option2">Harry Potter</option>
-          <option value="option3">Lord of the Rings</option>
-          <option value="option4">Planet of the Apes</option>
-          <option value="option5">Star Trek</option>
+          {/* {dropdownAddress.district.map((district) => (
+            <option value={district.id}>{district.nameEn}</option>
+          ))} */}
         </InputDropdown>
 
         <InputDropdown
