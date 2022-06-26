@@ -1,12 +1,15 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import Header from "./header/Header";
-import Footer from "./Footer";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import Header from './header/Header';
+import Footer from './Footer';
+import CreateHouseContextProvider from '../../contexts/CreateHouseContext';
 function MainHeaderOutlet() {
   return (
     <>
       <Header />
-      <Outlet />
+      <CreateHouseContextProvider>
+        <Outlet />
+      </CreateHouseContextProvider>
       <Footer />
     </>
   );
