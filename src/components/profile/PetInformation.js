@@ -1,11 +1,29 @@
-import { PlusIcon } from "@heroicons/react/outline";
-import Input from "../../common/Input";
-import InputDropdown from "../../common/InputDropdown";
-import InputWithSuffix from "../../common/InputWithSuffix";
+import { PlusIcon } from '@heroicons/react/outline';
+import { useState } from 'react';
+import Input from '../../common/Input';
+import InputDropdown from '../../common/InputDropdown';
+import InputWithSuffix from '../../common/InputWithSuffix';
 
 export default function PetInformation() {
+  const [year, setYear] = useState(1);
+  const [month, setMonth] = useState(0);
+
+  // need to validate years and month
+  const handleChange = (e, yearOrMonth) => {
+    if (yearOrMonth === 'year') {
+      if (e.target.value.length <= 2) {
+        setYear(e.target.value);
+      }
+    } else if (yearOrMonth === 'month') {
+      if (e.target.value.length <= 2) {
+        setMonth(e.target.value);
+      }
+    }
+  };
+
   return (
     <div>
+      <p className="text-2xl font-medium">Pet Information</p>
       <div className="form-control w-full mt-5">
         <input
           type="file"
@@ -57,19 +75,25 @@ export default function PetInformation() {
           <div className="flex gap-x-5 items-end">
             <InputWithSuffix
               label="Name"
-              onChange={() => {}}
+              onChange={(e) => {
+                handleChange(e, 'year');
+              }}
               placeholder=""
               errMsg="Error Massage"
               error={false}
               suffix="Year"
+              value={year}
             />
             <InputWithSuffix
               label=""
-              onChange={() => {}}
+              onChange={(e) => {
+                handleChange(e, 'month');
+              }}
               placeholder=""
               errMsg="Error Massage"
               error={false}
               suffix="Month"
+              value={month}
             />
           </div>
           <Input

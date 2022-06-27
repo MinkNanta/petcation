@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import HouseCard from "../components/home/HouseCard";
-import BackNavigation from "../components/booking/BackNavigation";
-import BookingSummary from "../components/booking/BookingSummary";
-import ProfileDetails from "../components/profile/ProfileDetails";
-import PetInformation from "../components/profile/PetInformation";
+import React, { useState } from 'react';
+import HouseCard from '../components/home/HouseCard';
+import BackNavigation from '../components/booking/BackNavigation';
+import BookingSummary from '../components/booking/BookingSummary';
+import ProfileDetails from '../components/profile/ProfileDetails';
+import PetInformation from '../components/profile/PetInformation';
+import PaymentModal from '../components/payment/PaymentModal';
 
 export default function CreateBooking() {
   const [firstName, setFirstName] = useState(null);
@@ -55,7 +56,8 @@ export default function CreateBooking() {
           <div class="w-full border-t-2 border-gray-200 my-10"></div>
           <PetInformation />
           <div class="w-full border-t-2 border-gray-200 my-10"></div>
-          <button className="btn w-32">Booking</button>
+
+          <PaymentModal />
         </div>
       </div>
     </div>
