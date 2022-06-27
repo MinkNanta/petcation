@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 export default function Input({
   label,
@@ -11,7 +11,7 @@ export default function Input({
   option,
 }) {
   return (
-    <div className="form-control w-full">
+    <div className="form-control w-full mb-3">
       <label className="space-x-1">
         <span className="label-text">{label}</span>
         <span className="label-text text-gray-500">{option}</span>

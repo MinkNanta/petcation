@@ -1,23 +1,23 @@
-import React from "react";
+import React from 'react';
 import {
   MapIcon,
   CheckIcon,
   XIcon,
   ShieldCheckIcon,
   ShieldExclamationIcon,
-} from "@heroicons/react/outline";
-import Carousel from "../components/home/Carousel";
-import HouseTitle from "../components/home/HouseTitle";
-import HouseDetailsWithIcon from "../components/home/HouseDetailsWithIcon";
-import HouseHighlight from "../components/home/HouseHighlight";
-import BookingCard from "../components/booking/BookingCard";
+} from '@heroicons/react/outline';
+import Carousel from '../components/home/Carousel';
+import HouseTitle from '../components/home/HouseTitle';
+import HouseDetailsWithIcon from '../components/home/HouseDetailsWithIcon';
+import HouseHighlight from '../components/home/HouseHighlight';
+import BookingCard from '../components/booking/BookingCard';
 
 export default function BookingDetail() {
   const images = [
-    "https://api.lorem.space/image/car?w=800&h=300&hash=8B7BCDC2",
-    "https://api.lorem.space/image/car?w=800&h=300&hash=500B67FB",
-    "https://api.lorem.space/image/car?w=800&h=300&hash=A89D0DE6",
-    "https://api.lorem.space/image/car?w=800&h=300&hash=225E6693",
+    'https://api.lorem.space/image/car?w=800&h=300&hash=8B7BCDC2',
+    'https://api.lorem.space/image/car?w=800&h=300&hash=500B67FB',
+    'https://api.lorem.space/image/car?w=800&h=300&hash=A89D0DE6',
+    'https://api.lorem.space/image/car?w=800&h=300&hash=225E6693',
   ];
 
   return (
@@ -132,7 +132,13 @@ export default function BookingDetail() {
           </div>
         </div>
         <div>
-          <BookingCard price={350} petType="Cats" limit={3} foodPrice={350} serviceFee={200} />
+          <BookingCard
+            price={350}
+            petType="Cats"
+            limit={3}
+            foodPrice={350}
+            serviceFee={200}
+          />
         </div>
       </div>
     </div>

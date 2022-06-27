@@ -12,12 +12,16 @@ const AuthContext = createContext();
 function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const [fetch, setFetch] = useState(false);
+
+  console.log('user', user);
+
   useEffect(() => {
     const fetchMe = async () => {
       try {
         const token = getAccessToken();
         if (token) {
-          const res = await axios.get('/user/');
+          const res = await axios.get('/users');
           setUser(res.data.user);
         }
       } catch (err) {
@@ -26,18 +30,22 @@ function AuthContextProvider({ children }) {
       }
     };
     fetchMe();
-  }, []);
+  }, [fetch]);
 
   const signUp = async (input) => {
     const res = await axios.post('/auth/register', input);
     setAccessToken(res.data.token);
+    setFetch(!fetch);
   };
   const login = async (uId, password) => {
     const res = await axios.post('/auth/login', { uId, password });
     setAccessToken(res.data.token);
+    setFetch(!fetch);
   };
   const logout = () => {
+    setUser(null);
     removeAccessToken();
+    // setFetch(!fetch);
   };
   return (
     <AuthContext.Provider value={{ signUp, login, logout, user }}>

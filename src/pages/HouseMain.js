@@ -1,8 +1,8 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import hostCover from "../assets/img/hostCover.png";
-import hostFooter from "../assets/img/hostFooter.png";
-import ReviewCard from "../components/host/ReviewCard";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import hostCover from '../assets/img/hostCover.png';
+import hostFooter from '../assets/img/hostFooter.png';
+import ReviewCard from '../components/host/ReviewCard';
 
 export default function HouseMain() {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function HouseMain() {
           </h1>
           <button
             className="btn-outline w-44"
-            onClick={() => navigate("/createHouse")}
+            onClick={() => navigate('/createHouse')}
           >
             Set up new host
           </button>
@@ -49,7 +49,7 @@ export default function HouseMain() {
             </p>
             <button
               className="btn-outline w-44"
-              onClick={() => navigate("/createHouse")}
+              onClick={() => navigate('/createHouse')}
             >
               Set up new host
             </button>

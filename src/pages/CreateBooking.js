@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import HouseCard from '../components/home/HouseCard';
+=======
+import HouseCard from '../common/HouseCard';
+>>>>>>> dev
 import BackNavigation from '../components/booking/BackNavigation';
 import BookingSummary from '../components/booking/BookingSummary';
 import ProfileDetails from '../components/profile/ProfileDetails';
 import PetInformation from '../components/profile/PetInformation';
+<<<<<<< HEAD
 import PaymentModal from '../components/payment/PaymentModal';
+=======
+>>>>>>> dev
 
 export default function CreateBooking() {
   const [firstName, setFirstName] = useState(null);
