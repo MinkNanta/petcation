@@ -1,7 +1,8 @@
 import axios from '../config/axios';
 
 export const getAllHouse = () => axios.get('/allHouses');
-export const getHouseById = (id) => axios.get('/allHouses' + { id });
+export const getHouseById = (id) => axios.get(`/allHouses/${id}`);
+export const getHouseByUserId = () => axios.get(`/houses/user`);
 
 // export const getAllPost = () => axios.get("/users/posts");
 

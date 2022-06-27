@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   MapIcon,
   CheckIcon,
@@ -11,8 +11,30 @@ import HouseTitle from '../components/home/HouseTitle';
 import HouseDetailsWithIcon from '../components/home/HouseDetailsWithIcon';
 import HouseHighlight from '../components/home/HouseHighlight';
 import BookingCard from '../components/booking/BookingCard';
+import { useHouse } from '../contexts/HouseContext';
+import { useParams } from 'react-router-dom';
+import { useError } from '../contexts/ErrorContext';
 
 export default function BookingDetail() {
+  const { id } = useParams();
+  const { houseById, getHouse } = useHouse();
+  const { error, setError } = useError();
+
+  useEffect(() => {
+    const fetchHouse = async () => {
+      try {
+        await getHouse(id);
+      } catch (err) {
+        setError(err.massage);
+        console.log(err);
+      }
+    };
+    fetchHouse();
+  }, []);
+
+  console.log(id);
+  console.log(houseById);
+
   const images = [
     'https://api.lorem.space/image/car?w=800&h=300&hash=8B7BCDC2',
     'https://api.lorem.space/image/car?w=800&h=300&hash=500B67FB',

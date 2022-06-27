@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 export default function InputWithSuffix({
   label,
@@ -10,6 +10,7 @@ export default function InputWithSuffix({
   type,
   option,
   suffix,
+  name,
 }) {
   return (
     <div className="form-control w-full ">
@@ -19,7 +20,8 @@ export default function InputWithSuffix({
       </label>
       <div className="relative">
         <input
-          value={value}
+          name={name}
+          defaultValue={value}
           type={type}
           placeholder={placeholder}
           className="input"
