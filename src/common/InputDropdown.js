@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 export default function InputDropdown({
   label,
@@ -7,6 +7,8 @@ export default function InputDropdown({
   error,
   option,
   children,
+  value,
+  name,
 }) {
   return (
     <div className="form-control w-full">
@@ -14,6 +16,8 @@ export default function InputDropdown({
         <span className="label-text">{label}</span>
       </label>
       <select
+        name={name}
+        value={value}
         className="select select-bordered w-full bg-gray-100 text-gray-500 rounded-2xl border-0 focus:border-0 text-xs font-normal"
         onChange={onChange}
       >

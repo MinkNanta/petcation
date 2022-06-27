@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-export default function Input({ label, onChange, placeholder, errMsg, error }) {
+export default function Input({
+  label,
+  onChange,
+  placeholder,
+  errMsg,
+  error,
+  name,
+  value,
+}) {
   return (
     <div className="form-control w-full">
       <label className="label">
         <span className="label-text">{label}</span>
       </label>
       <textarea
+        name={name}
+        defaultValue={value}
         className="textarea bg-gray-100 text-gray-500 rounded-2xl "
         placeholder={placeholder}
         onChange={onChange}

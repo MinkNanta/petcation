@@ -6,7 +6,7 @@ import {
   useState,
 } from 'react';
 import { useParams } from 'react-router-dom';
-import { getAllHouse, getHouseById } from '../api/house';
+import { getAllHouse, getHouseById, getHouseByUserId } from '../api/house';
 import { ErrorContext, useError } from './ErrorContext';
 
 const HouseContext = createContext();
@@ -15,6 +15,7 @@ function HouseContextProvider({ children }) {
   const { error, setError } = useError();
   const [house, setHouse] = useState([]);
   const [houseById, setHouseById] = useState([]);
+  const [houseByUserID, setHouseByUserID] = useState([]);
 
   // const { id } = useParams();
 
@@ -32,14 +33,27 @@ function HouseContextProvider({ children }) {
   }, []);
 
   const getHouse = async (id) => {
-    const houseById = await getHouseById(id);
-    setHouseById(houseById.data);
+    try {
+      const houseById = await getHouseById(id);
+      setHouseById(houseById.data);
+    } catch (error) {
+      setError(error.massage);
+    }
   };
 
-  console.log(houseById);
+  const getHouseByUser = async () => {
+    try {
+      const houseById = await getHouseByUserId();
+      setHouseByUserID(houseById.data);
+    } catch (error) {
+      setError(error.massage);
+    }
+  };
 
   return (
-    <HouseContext.Provider value={{ house, houseById, getHouse }}>
+    <HouseContext.Provider
+      value={{ house, houseById, getHouse, houseByUserID, getHouseByUser }}
+    >
       {children}
     </HouseContext.Provider>
   );
