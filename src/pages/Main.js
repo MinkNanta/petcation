@@ -1,5 +1,5 @@
 import { MenuIcon } from '@heroicons/react/solid';
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from '../common/Modal';
 import CardContainer from '../components/main/cardlist/CardContainer';
 import Hero from '../components/main/Hero';

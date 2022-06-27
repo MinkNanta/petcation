@@ -5,9 +5,7 @@ function Logout() {
   const { logout } = useContext(AuthContext);
   return (
     <div>
-      <button onClick={logout}>
-        <p>Sign Out</p>
-      </button>
+      <button onClick={logout}>Sign Out</button>
     </div>
   );
 }

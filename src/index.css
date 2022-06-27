@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,6 +10,24 @@
 #tabItem {
   color: #ea580c;
   border-color: #ea580c;
+}
+
+#fade-in-top {
+  -webkit-animation: fade-in-top 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: fade-in-top 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+@keyframes fade-in-top {
+  0% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* -------- container ------ */
@@ -71,11 +89,9 @@
   }
 
   .input {
-    @apply w-full bg-gray-100 text-gray-500 rounded-2xl block;
+    @apply w-full bg-gray-100 text-gray-500 rounded-2xl block focus:outline-1 focus:outline-offset-0 mt-1;
   }
-  .inputLabel {
-    @apply block pb-2;
-  }
+
   /* .checkbox {
     @apply active:bg-orange-200 focus:bg-orange-200 before:bg-orange-200;
   } */

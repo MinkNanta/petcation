@@ -5,35 +5,24 @@ import Modal from '../../../common/Modal';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { ErrorContext } from '../../../contexts/ErrorContext';
 import validator from 'validator';
+import { UserIcon } from '@heroicons/react/outline';
+import Alert from '../../../common/Alert';
+
+// const [newValidate ,setNewValidate] = useState({})
 
 function Register() {
   const [uId, setUId] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [apiError, setApiError] = useState('');
   const [validate, setValidate] = useState({});
   const [step, setStep] = useState('STEP1');
   const { signUp } = useContext(AuthContext);
-  const { setError } = useContext(ErrorContext);
-
-  const validateInput = () => {
-    const newValidate = {};
-    // if (!validator.isEmpty(uId)) newValidate.uId = "email is required";
-    if (!password) newValidate.password = 'password is required';
-    if (!validator.isStrongPassword(password))
-      newValidate.password =
-        'our password must be more than 8 characters long. should contain at-least 1 Upper case, 1 Lowercase, 1 Number and 1 spacial character. ';
-
-    if (password !== confirmPassword)
-      newValidate.password = 'password is not math';
-    setValidate(newValidate);
-    return;
-  };
+  const { error, setError } = useContext(ErrorContext);
 
   const SubmitCreate = () => {
     const newValidate = {};
     if (!validator.isEmail(uId)) {
-      newValidate.uId = 'email format is invalid ';
+      newValidate.uId = 'Email format is invalid ';
       setValidate(newValidate);
       return;
     }
@@ -47,20 +36,16 @@ function Register() {
       const newValidate = {};
       if (!validator.isStrongPassword(password)) {
         newValidate.password =
-          'our password must be more than 8 characters long. should contain at-least 1 Upper case, 1 Lowercase, 1 Number and 1 spacial character. ';
+          'Your password must be more than 8 characters long. should contain at-least 1 Upper case, 1 Lowercase, 1 Number and 1 spacial character. ';
         setValidate(newValidate);
-
         return;
       }
 
       if (password !== confirmPassword) {
-        newValidate.password = 'password is not math';
+        newValidate.confirmPassword = 'Password is not math';
         setValidate(newValidate);
-
         return;
       }
-
-      setApiError('');
 
       await signUp({
         uId,
@@ -69,34 +54,28 @@ function Register() {
       });
       setStep('STEP3');
     } catch (err) {
+      setValidate({});
       setError(err.response.data.message);
-      setApiError(err.response.data.message);
     }
   };
 
-  console.log(uId);
-  console.log(password);
-  console.log(confirmPassword);
-  console.log(step);
   return (
     <div>
       <Modal
+        title="Register"
         onClick={() => {
+          setStep('STEP1');
           setUId('');
           setPassword('');
           setConfirmPassword('');
-          setStep('STEP1');
         }}
-        name="registerForm"
-        onOpen={
-          <p className="btn btn-small bg-white text-orange-500">Register</p>
-        }
       >
         {step === 'STEP1' ? (
           <>
-            <div>
+            <div className="space-y-2">
               {/* modal body */}
-              <h2>Register</h2>
+              <h2 className="mb-8">Register</h2>
+              {error && <Alert />}
 
               <Input
                 label="Email"
@@ -106,8 +85,8 @@ function Register() {
                 value={uId}
                 onChange={(e) => setUId(e.target.value)}
               />
-              {apiError && (
-                <span className="label-text-alt text-red-400">{apiError}</span>
+              {error && (
+                <span className="label-text-alt text-red-400">{error}</span>
               )}
               <button className="btn" type="button" onClick={SubmitCreate}>
                 Create Account
@@ -130,7 +109,8 @@ function Register() {
         ) : step === 'STEP2' ? (
           <>
             <div>
-              <h2> Create your password </h2>
+              <h2 className=""> Create your password </h2>
+
               <div className="mx-4 my-5">
                 <ul className="list-disc">
                   <li className="text-gray-400">8-20 Characters</li>
@@ -140,6 +120,7 @@ function Register() {
                   <li className="text-gray-400">No space</li>
                 </ul>
               </div>
+              {error && <Alert />}
               <Input
                 label="password"
                 placeholder="password"
@@ -158,9 +139,7 @@ function Register() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              {apiError && (
-                <span className="label-text-alt text-red-400">{apiError}</span>
-              )}
+
               <button className="btn" onClick={handleSubmitSignUp}>
                 Next
               </button>

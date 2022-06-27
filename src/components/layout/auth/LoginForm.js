@@ -4,6 +4,13 @@ import Modal from '../../../common/Modal';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { ErrorContext } from '../../../contexts/ErrorContext';
 import validator from 'validator';
+import {
+  ArrowCircleRightIcon,
+  BanIcon,
+  LoginIcon,
+  QuestionMarkCircleIcon,
+} from '@heroicons/react/outline';
+import Alert from '../../../common/Alert';
 function LoginForm() {
   const [uId, setUId] = useState('');
   const [apiError, setApiError] = useState('');
@@ -14,14 +21,9 @@ function LoginForm() {
 
   const validateInput = () => {
     const newValidate = {};
-    // if (!validator.isEmpty(uId)) newValidate.uId = "email is required";
     if (!password) newValidate.password = 'password is required';
-    // if (!validator.isStrongPassword(password))
-    //   newValidate.password =
-    //     "our password must be more than 8 characters long. should contain at-least 1 Upper case, 1 Lowercase, 1 Number and 1 spacial character. ";
     if (!validator.isEmail(uId)) newValidate.email = 'email format is invalid ';
     setValidate(newValidate);
-    console.log(newValidate);
   };
 
   const handleSubmitLogin = async (e) => {
@@ -32,6 +34,7 @@ function LoginForm() {
       await login(uId, password);
     } catch (err) {
       console.log(err);
+
       setError(err.response.data.message);
       setApiError(err.response.data.message);
     }
@@ -40,14 +43,19 @@ function LoginForm() {
   return (
     <div>
       <Modal
-        name="loginForm"
-        onOpen={
-          <p className="btn btn-small bg-orange-100 text-orange-500">Sign in</p>
-        }
+        title="Sign in"
+        icon={<ArrowCircleRightIcon className="w-5 h-5" />}
+        onClick={() => {
+          setUId('');
+          setPassword('');
+          setValidate('');
+          setApiError('');
+        }}
       >
         <div>
           {/* modal body */}
-          <h2>Sign in</h2>
+          <h2 className="mb-8">Sign in</h2>
+          {apiError && <Alert />}
 
           <Input
             label="Email"
@@ -67,9 +75,6 @@ function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {apiError && (
-            <span className="label-text-alt text-red-400">{apiError}</span>
-          )}
 
           <button className="btn" type="button" onClick={handleSubmitLogin}>
             Sign in
