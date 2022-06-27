@@ -53,17 +53,17 @@ function AddressContextProvider({ children }) {
       }));
     } catch (error) {}
   };
-  const getZip = async (districtId) => {
-    console.log(districtId);
-    try {
-      const res = await axios.get(`/address/subdistricts/${districtId}`);
-      console.log(res);
-      setDropdownAddress((dropdownAddress) => ({
-        ...dropdownAddress,
-        subDistricts: res.data.subDistricts,
-      }));
-    } catch (error) {}
-  };
+  // const getZip = async (districtId) => {
+  //   console.log(districtId);
+  //   try {
+  //     const res = await axios.get(`/address/subdistricts/${districtId}`);
+  //     console.log(res);
+  //     setDropdownAddress((dropdownAddress) => ({
+  //       ...dropdownAddress,
+  //       subDistricts: res.data.subDistricts,
+  //     }));
+  //   } catch (error) {}
+  // };
 
   return (
     <AddressContext.Provider
