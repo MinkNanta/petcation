@@ -16,15 +16,13 @@ function HouseContextProvider({ children }) {
   const [house, setHouse] = useState([]);
   const [houseById, setHouseById] = useState([]);
 
-  const { id } = useParams();
+  // const { id } = useParams();
 
   useEffect(() => {
     const fetchAllHouse = async () => {
       try {
         const res = await getAllHouse();
         setHouse(res.data);
-        const houseById = await getHouseById(id);
-        setHouseById(houseById.data);
       } catch (err) {
         setError(err.massage);
         console.log(err);
@@ -33,8 +31,15 @@ function HouseContextProvider({ children }) {
     fetchAllHouse();
   }, []);
 
+  const getHouse = async (id) => {
+    const houseById = await getHouseById(id);
+    setHouseById(houseById.data);
+  };
+
+  console.log(houseById);
+
   return (
-    <HouseContext.Provider value={{ house, houseById }}>
+    <HouseContext.Provider value={{ house, houseById, getHouse }}>
       {children}
     </HouseContext.Provider>
   );
