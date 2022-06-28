@@ -14,7 +14,8 @@ const HouseContext = createContext();
 function HouseContextProvider({ children }) {
   const { error, setError } = useError();
   const [house, setHouse] = useState([]);
-  const [houseById, setHouseById] = useState([]);
+  const [houseById, setHouseById] = useState({});
+  const [paramsId, setParamsId] = useState(null);
   const [houseByUserID, setHouseByUserID] = useState([]);
 
   const [houseDetail, setHouseDetail] = useState({});
@@ -26,13 +27,18 @@ function HouseContextProvider({ children }) {
       try {
         const res = await getAllHouse();
         setHouse(res.data);
+        if (paramsId) {
+          const houseById = await getHouseById(paramsId);
+          setHouseById(houseById.data);
+          console.log(houseById.data);
+        }
       } catch (err) {
         setError(err.massage);
         console.log(err);
       }
     };
     fetchAllHouse();
-  }, []);
+  }, [paramsId]);
 
   const getHouse = async (id) => {
     try {

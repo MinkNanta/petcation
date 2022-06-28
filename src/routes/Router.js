@@ -10,7 +10,7 @@ import House from '../pages/House';
 import Search from '../pages/Search';
 import HouseMain from '../pages/HouseMain';
 import Main from '../pages/Main';
-import Profile from '../pages/Profile';
+
 import BookingList from '../pages/BookingList';
 import DesignSystemDoc from '../pages/DesignSystemDoc';
 import HouseSetting from '../pages/HouseSetting';
@@ -34,8 +34,7 @@ export default function Router() {
         {user && (
           <>
             <Route path="/" element={<ProfileOutlet />}>
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/profile/information" element={<ProfilePage />} />
+              <Route path="/profile" element={<ProfilePage />} />
               <Route path="/profile/profilepet" element={<ProfilePet />} />
               <Route path="/booking/list" element={<BookingList />} />
             </Route>

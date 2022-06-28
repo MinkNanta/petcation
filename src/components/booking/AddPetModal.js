@@ -3,8 +3,9 @@ import { useState } from 'react';
 import Input from '../../common/Input';
 import InputDropdown from '../../common/InputDropdown';
 import InputWithSuffix from '../../common/InputWithSuffix';
+import Modal from '../../common/Modal';
 
-export default function PetInformation() {
+export default function AddPetModal() {
   const [year, setYear] = useState(1);
   const [month, setMonth] = useState(0);
 
@@ -21,9 +22,16 @@ export default function PetInformation() {
     }
   };
 
+  // const [inputFile, setInputFile] = useState("");
+
+  // const uploadClick = (e) => {
+  //   e.preventDefault();
+  //   inputFile.click();
+  //   return false;
+  // };
+
   return (
-    <div>
-      
+    <Modal title="+">
       <div className="form-control w-full mt-5">
         <input
           type="file"
@@ -111,7 +119,11 @@ export default function PetInformation() {
           errMsg="Error Massage"
           error={false}
         />
+        <button className="btn w-1/4">Add</button>
+        <p className="mt-4 text-gray-500 font-light text-xs">
+          Note: this will also save the new pet to your profile
+        </p>
       </div>
-    </div>
+    </Modal>
   );
 }

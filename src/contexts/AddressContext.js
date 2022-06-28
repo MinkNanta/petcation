@@ -31,6 +31,7 @@ function AddressContextProvider({ children }) {
     };
     fetchProvinces();
   }, []);
+  console.log(dropdownAddress);
 
   const getDstricts = async (provinceId) => {
     try {
