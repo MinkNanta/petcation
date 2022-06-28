@@ -7,6 +7,7 @@ import { ErrorContext } from '../../../contexts/ErrorContext';
 import validator from 'validator';
 import { UserIcon } from '@heroicons/react/outline';
 import Alert from '../../../common/Alert';
+import Logingoogle from './Logingoogle';
 
 // const [newValidate ,setNewValidate] = useState({})
 
@@ -89,13 +90,13 @@ function Register() {
               {/* modal body */}
               <h2 className="mb-8">Register</h2>
               {error && <Alert />}
-x
+
               <Input
               name ="email"
                 label="Email"
                 placeholder="Your email"
                 errMsg={validate.uId}
-                error={validate.uId}x
+                error={validate.uId}
                 value={uId}
                 onChange={(e) => handleChangEmail(e)}
               />
@@ -108,7 +109,8 @@ x
             </div>
             <div className="divider">Or</div>
             <div className="flex justify-center mt-4">
-              <button className="btn btn-outline">Sign in with Google</button>
+              {/* <button className="btn btn-outline">Sign in with Google</button> */}
+              <Logingoogle />
             </div>
             <div className="flex justify-center mt-4">
               <button className="btn btn-outline">Sign in with Facebook</button>

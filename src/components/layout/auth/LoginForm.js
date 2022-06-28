@@ -11,6 +11,7 @@ import {
   QuestionMarkCircleIcon,
 } from '@heroicons/react/outline';
 import Alert from '../../../common/Alert';
+import Logingoogle from './Logingoogle';
 function LoginForm() {
   const [uId, setUId] = useState('');
   const [apiError, setApiError] = useState('');
@@ -82,7 +83,7 @@ function LoginForm() {
         </div>
         <div className="divider">Or</div>
         <div className="flex justify-center mt-4">
-          <button className="btn btn-outline">Sign in with Google</button>
+          <Logingoogle />
         </div>
         <div className="flex justify-center mt-4">
           <button className="btn btn-outline">Sign in with Facebook</button>

@@ -47,8 +47,9 @@ function AuthContextProvider({ children }) {
     removeAccessToken();
     // setFetch(!fetch);
   };
+  
   return (
-    <AuthContext.Provider value={{ signUp, login, logout, user }}>
+    <AuthContext.Provider value={{ signUp, login, logout, user ,setFetch}}>
       {children}
     </AuthContext.Provider>
   );
