@@ -2,7 +2,7 @@ import InputDropdown from '../../common/InputDropdown';
 import { useContext, useState } from 'react';
 import Input from '../../common/Input';
 import { AddressContext } from '../../contexts/AddressContext';
-import { useAuth } from '../../contexts/AuthContext';
+import { AuthContext, useAuth } from '../../contexts/AuthContext';
 import axios from '../../config/axios';
 
 export default function ProfilePage() {
@@ -20,6 +20,7 @@ export default function ProfilePage() {
   const { dropdownAddress, getDstricts, getSubDstricts } =
     useContext(AddressContext);
 
+  const { User } = useContext(AuthContext);
   // console.log(firstName);
   // console.log(lastName);
   // console.log(phoneNumber);
