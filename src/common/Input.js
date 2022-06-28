@@ -10,17 +10,23 @@ export default function Input({
   type,
   option,
   name,
-  // defaultValue,
+  disabled,
 }) {
   return (
     <div className="form-control w-full mb-3">
       <label className="space-x-1">
-        <span className="label-text">{label}</span>
-        <span className="label-text text-gray-500">{option}</span>
+        <span className={`label-text ${disabled && 'text-gray-400'}`}>
+          {label}
+        </span>
+        <span
+          className={`label-text ${disabled && 'text-gray-400'}text-gray-500`}
+        >
+          {option}
+        </span>
       </label>
       <input
         name={name}
-        // defaultValue={defaultValue}
+        disabled={disabled}
         defaultValue={value}
         type={type}
         placeholder={

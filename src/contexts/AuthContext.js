@@ -13,8 +13,7 @@ function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const [fetch, setFetch] = useState(false);
-
-  console.log('user', user);
+  const [userOldAddress, setUserOldAddress] = useState({});
 
   useEffect(() => {
     const fetchMe = async () => {
@@ -23,6 +22,14 @@ function AuthContextProvider({ children }) {
         if (token) {
           const res = await axios.get('/users');
           setUser(res.data.user);
+
+          setUserOldAddress({
+            address: res.data.user?.address ?? '',
+            provinces: res.data.user?.province ?? '',
+            districts: res.data.user?.districts ?? '',
+            subDistricts: res.data.user?.subDistricts ?? '',
+            zipCodes: res.data.user?.zipCodes ?? '',
+          });
         }
       } catch (err) {
         removeAccessToken();
@@ -48,7 +55,9 @@ function AuthContextProvider({ children }) {
     // setFetch(!fetch);
   };
   return (
-    <AuthContext.Provider value={{ signUp, login, logout, user }}>
+    <AuthContext.Provider
+      value={{ signUp, login, logout, user, userOldAddress }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -17,6 +17,8 @@ function HouseContextProvider({ children }) {
   const [houseById, setHouseById] = useState([]);
   const [houseByUserID, setHouseByUserID] = useState([]);
 
+  const [houseDetail, setHouseDetail] = useState({});
+
   // const { id } = useParams();
 
   useEffect(() => {
@@ -50,9 +52,37 @@ function HouseContextProvider({ children }) {
     }
   };
 
+  console.log('houseByUserID', houseByUserID);
+
+  const setDefaultValue = () => {
+    setHouseDetail(houseByUserID);
+  };
+  const handleChangeInput = (event) => {
+    const values = { ...houseDetail };
+    values[event.target.name] = event.target.value;
+    setHouseDetail(values);
+  };
+
+  const handleCheckBox = (event) => {
+    const values = { ...houseDetail };
+    values[event.target.name] = event.target.checked;
+    setHouseDetail(values);
+  };
+
   return (
     <HouseContext.Provider
-      value={{ house, houseById, getHouse, houseByUserID, getHouseByUser }}
+      value={{
+        house,
+        houseById,
+        getHouse,
+        houseByUserID,
+        getHouseByUser,
+        houseDetail,
+        setDefaultValue,
+        setHouseDetail,
+        handleChangeInput,
+        handleCheckBox,
+      }}
     >
       {children}
     </HouseContext.Provider>
