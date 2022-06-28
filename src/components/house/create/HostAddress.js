@@ -17,7 +17,7 @@ function HostAddress() {
   };
   return (
     <div className="w-[508px] h-[640px] relative">
-      <div className="text-2xl">Host Information</div>
+      <div className="text-2xl">Host Address</div>
       <div className="mt-6 ">
         <Input
           //   value="Address"
@@ -75,10 +75,10 @@ function HostAddress() {
       </InputDropdown>
 
       <div className="absolute bottom-0 left-0" onClick={handleClickBack}>
-        <div className="btn  w-[91px]">Back</div>
+        <div className="btn-small  w-[91px]">Back</div>
       </div>
       <div className="absolute bottom-0 right-0" onClick={handleClickNext}>
-        <div className="btn  w-[91px]">Next</div>
+        <div className="btn-small  w-[91px]">Next</div>
       </div>
     </div>
   );

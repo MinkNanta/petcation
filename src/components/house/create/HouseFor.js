@@ -19,7 +19,7 @@ function HouseFor() {
     <div className="w-[508px] h-[640px] relative">
       <div className="text-2xl">House for</div>
 
-      <div className="form-control bg-[#F3F4F6] h-[80px] flex justify-center rounded-3xl mt-6">
+      <label className="form-control cursor-pointer bg-[#F3F4F6] h-[80px] flex justify-center rounded-3xl mt-6">
         <label className="label cursor-pointer mx-6 ">
           <span className="label-text flex items-center gap-3">
             <img src={dogIcon} />
@@ -27,14 +27,13 @@ function HouseFor() {
           </span>
           <input
             type="radio"
-            name="radio-6"
+            name="radio-7"
             className="radio checked:bg-orange-500"
-            checked
           />
         </label>
-      </div>
+      </label>
 
-      <div className="form-control bg-[#F3F4F6] h-[80px] flex justify-center rounded-3xl mt-6">
+      <label className="form-control cursor-pointer bg-[#F3F4F6] h-[80px] flex justify-center rounded-3xl mt-6">
         <label className="label cursor-pointer mx-6 ">
           <span className="label-text flex items-center gap-3">
             <img src={catIcon} />
@@ -42,17 +41,17 @@ function HouseFor() {
           </span>
           <input
             type="radio"
-            name="radio-6"
+            name="radio-7"
             className="radio checked:bg-orange-500"
           />
         </label>
-      </div>
+      </label>
 
       <div className="absolute bottom-0 left-0" onClick={handleClickBack}>
-        <div className="btn  w-[91px]">Back</div>
+        <div className="btn-small  w-[91px]">Back</div>
       </div>
       <div className="absolute bottom-0 right-0" onClick={handleClickNext}>
-        <div className="btn  w-[91px]">Next</div>
+        <div className="btn-small  w-[91px]">Next</div>
       </div>
     </div>
   );
