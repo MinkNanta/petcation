@@ -82,10 +82,10 @@ function LoginForm() {
         </div>
         <div className="divider">Or</div>
         <div className="flex justify-center mt-4">
-          <button className="btn btn-outline">Signup with Google</button>
+          <button className="btn btn-outline">Sign in with Google</button>
         </div>
         <div className="flex justify-center mt-4">
-          <button className="btn btn-outline">Signup with Facebook</button>
+          <button className="btn btn-outline">Sign in with Facebook</button>
         </div>
       </Modal>
     </div>

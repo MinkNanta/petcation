@@ -12,6 +12,7 @@ import Alert from '../../../common/Alert';
 
 function Register() {
   const [uId, setUId] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [validate, setValidate] = useState({});
@@ -29,6 +30,17 @@ function Register() {
     setStep('STEP2');
     // setValidate("");
   };
+
+  const handleChangEmail = (e) => {
+    if(e.target.name === "email"){
+      setUId(e.target.value);
+      setEmail(e.target.value)
+    }
+  }
+
+  console.log(uId)
+  console.log(email)
+
   const handleSubmitSignUp = async (e) => {
     try {
       e.preventDefault();
@@ -49,6 +61,7 @@ function Register() {
 
       await signUp({
         uId,
+        email,
         password,
         confirmPassword,
       });
@@ -76,14 +89,15 @@ function Register() {
               {/* modal body */}
               <h2 className="mb-8">Register</h2>
               {error && <Alert />}
-
+x
               <Input
+              name ="email"
                 label="Email"
                 placeholder="Your email"
                 errMsg={validate.uId}
-                error={validate.uId}
+                error={validate.uId}x
                 value={uId}
-                onChange={(e) => setUId(e.target.value)}
+                onChange={(e) => handleChangEmail(e)}
               />
               {error && (
                 <span className="label-text-alt text-red-400">{error}</span>
@@ -94,10 +108,10 @@ function Register() {
             </div>
             <div className="divider">Or</div>
             <div className="flex justify-center mt-4">
-              <button className="btn btn-outline">Signup with Google</button>
+              <button className="btn btn-outline">Sign in with Google</button>
             </div>
             <div className="flex justify-center mt-4">
-              <button className="btn btn-outline">Signup with Facebook</button>
+              <button className="btn btn-outline">Sign in with Facebook</button>
             </div>
             <div className="flex justify-center mt-4">
               <p className="text-gray-500">Already have an account? </p>
