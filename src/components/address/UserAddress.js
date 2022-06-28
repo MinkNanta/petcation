@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import Input from '../../common/Input';
 import InputDropdown from '../../common/InputDropdown';
-import TitleHeder from '../../common/TitleHeder';
 import { useAddress } from '../../contexts/AddressContext';
 
-export default function UserAddress({ onClick }) {
+export default function UserAddress() {
   const { dropdownAddress, userAddress, handleChangeAddress } = useAddress();
-  console.log('userAddress', userAddress);
+
   return (
     <div className="gap-y-5">
       <InputDropdown

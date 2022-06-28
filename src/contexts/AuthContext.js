@@ -10,8 +10,8 @@ import {
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
   const [fetch, setFetch] = useState(false);
   const [userOldAddress, setUserOldAddress] = useState({});
 
