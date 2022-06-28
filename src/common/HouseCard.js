@@ -8,12 +8,12 @@ export default function HouseCard({
   serviceFee,
 }) {
   return (
-    <div class="card w-96 bg-gray-100 p-5 inline-block">
+    <div className="card w-96 bg-gray-100 p-5 inline-block">
       <p className="text-2xl font-medium">{houseName}</p>
       <figure className="mt-5">
-        <img src={img} alt="Shoes" class="rounded-xl" />
+        <img src={img} alt="Shoes" className="rounded-xl" />
       </figure>
-      <div class="card-body items-center text-center p-0 py-5">
+      <div className="card-body items-center text-center p-0 py-5">
         <div className="w-full flex justify-between items-end">
           <p className="text-start text-x font-medium">Price Details</p>
           <p className="text-end text-base text-gray-500">{reviews} reviews</p>

@@ -5,14 +5,14 @@ export default function Carousel({ images }) {
 
   return (
     <>
-      <div class="carousel w-full h-96 rounded-2xl">
+      <div className="carousel w-full h-96 rounded-2xl">
         {images.map((el, idx) => (
-          <div id={`${idx}`} class="carousel-item w-full">
+          <div id={`${idx}`} className="carousel-item w-full">
             <img src={el} className="w-full object-cover" />
           </div>
         ))}
       </div>
-      <div class="flex justify-center w-full py-2 gap-2 relative">
+      <div className="flex justify-center w-full py-2 gap-2 relative">
         <div className="absolute bottom-8 flex flex-row">
           {images.map((el, idx) => (
             <>
