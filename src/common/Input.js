@@ -9,6 +9,8 @@ export default function Input({
   value,
   type,
   option,
+  name,
+  // defaultValue,
 }) {
   return (
     <div className="form-control w-full mb-3">
@@ -17,9 +19,15 @@ export default function Input({
         <span className="label-text text-gray-500">{option}</span>
       </label>
       <input
-        value={value}
+        name={name}
+        // defaultValue={defaultValue}
+        defaultValue={value}
         type={type}
-        placeholder={placeholder}
+        placeholder={
+          placeholder
+            ? placeholder
+            : `Please Enter Your ${name ? name : 'This Input'}`
+        }
         className="input"
         onChange={onChange}
       />
