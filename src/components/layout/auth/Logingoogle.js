@@ -11,7 +11,7 @@ function Logingoogle() {
           const obj = { googleData: res.credential }
         //   const token=jwtDecode(res.credential)
         //   console.log(token)
-          const login = await axios.post('http://localhost:8006/auth/googleLogin', obj)
+          const login = await axios.post('/auth/googleLogin', obj)
           console.log(login.data)
           const token = login.data.token
           setAccessToken(token)
