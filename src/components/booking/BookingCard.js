@@ -1,101 +1,201 @@
-import { useState } from "react";
-import Counter from "../../common/Counter";
-import cat from "../../assets/img/cat.png";
-import dog from "../../assets/img/dog.png";
+import { useState } from 'react';
+import Counter from '../../common/Counter';
+import cat from '../../assets/img/cat.png';
+import dog from '../../assets/img/dog.png';
+import { Link } from 'react-router-dom';
 
 export default function BookingCard({
   price,
   petType,
   limit,
   foodPrice,
-  serviceFee,
+  setBookingInputs,
+  bookingInputs,
+  setNumberOfPets,
+  numberOfPets,
+  houseId,
 }) {
   const [checked, setChecked] = useState(false);
+  const [thisLimit, setThisLimit] = useState(1000);
+  const [err, setErr] = useState(null);
+  limit && setThisLimit(limit);
 
   // need to calculate nights from date inputs
-  const [nights, setNights] = useState(2);
+  const [nights, setNights] = useState(0);
+
+  const onDateChange = (e) => {
+    const curDate = new Date();
+    const selectedDate = new Date(e.target.value);
+
+    if (e.target.id === 'checkInDate') {
+      if (selectedDate - curDate > 0) {
+        const newValue = { [e.target.id]: e.target.value };
+        setBookingInputs((bookingInputs) => {
+          return {
+            ...bookingInputs,
+            ...newValue,
+          };
+        });
+      } else {
+        setErr('Please select a day after today');
+      }
+    }
+
+    if (e.target.id === 'checkOutDate') {
+      const checkIn = new Date(bookingInputs.checkInDate);
+      if (selectedDate - checkIn > 0) {
+        const newValue = { [e.target.id]: e.target.value };
+        setBookingInputs((bookingInputs) => {
+          return {
+            ...bookingInputs,
+            ...newValue,
+          };
+        });
+        const diff = Math.floor(
+          (selectedDate - checkIn) / (1000 * 60 * 60 * 24),
+        );
+        setNights(diff);
+        setErr(null);
+      } else {
+        setErr('Please select a day after your check in date');
+      }
+    }
+  };
+
+  const handleCheck = () => {
+    setChecked((checked) => !checked);
+    setBookingInputs((bookingInputs) => {
+      return {
+        ...bookingInputs,
+        isIncludeFood: !bookingInputs.isIncludeFood,
+      };
+    });
+  };
 
   return (
-    <div class="card w-96 bg-gray-100 p-5 inline-block">
+    <div className="card w-96 bg-gray-100 p-5 inline-block">
       <div className="flex justify-between items-end">
-        {petType === "Cats" ? (
+        {petType === 'Cats' ? (
           <img src={cat}></img>
-        ) : petType === "Dogs" ? (
+        ) : petType === 'Dogs' ? (
           <img src={dog}></img>
         ) : (
           <></>
         )}
         <h4>
-          {price.toLocaleString("en-US")}
+          {price.toLocaleString('en-US')}
           <span className="text-x"> /night</span>
         </h4>
       </div>
       <div className="bg-white p-5 mt-5 rounded-2xl grid grid-cols-2">
         <div>
           <p>Check in</p>
-          <input type="date" className="text-gray-500 w-11/12" />
+          <input
+            type="date"
+            id="checkInDate"
+            className="text-gray-500 w-11/12"
+            value={bookingInputs.checkInDate}
+            onChange={(e) => onDateChange(e)}
+          />
         </div>
         <div className=" border-l-2 border-gray-300 pl-4">
           <p>Check out</p>
-          <input type="date" className="text-gray-500 w-full" />
+          <input
+            type="date"
+            id="checkOutDate"
+            className={`text-gray-500 w-full ${
+              bookingInputs.checkInDate === '' ? 'bg-gray-200 rounded-md' : null
+            }`}
+            onChange={(e) => onDateChange(e)}
+            disabled={bookingInputs.checkInDate === '' ? true : false}
+            value={bookingInputs.checkOutDate}
+          />
         </div>
+        {err && (
+          <span className="label-text-alt text-red-400 col-span-2 mt-2">
+            {err}
+          </span>
+        )}
       </div>
       <div className="flex justify-between items-end text-gray-500 mt-5">
         <p>Place for</p>
         <p>{petType}</p>
       </div>
       <div className="bg-white p-5 mt-5 rounded-2xl">
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <p>
             Number
-            <br />
-            <span className="text-gray-500">Limit {limit} pets</span>
+            {limit ? (
+              <>
+                <br />
+                <span className="text-gray-500">Limit {limit} pets</span>
+              </>
+            ) : (
+              <></>
+            )}
           </p>
-          <Counter />
-        </div>
-        <div class="w-full border-t-2 border-gray-200 my-5"></div>
-        <div className="flex gap-2">
-          <input
-            type="radio"
-            name="radio-1"
-            class="radio"
-            onClick={() => setChecked((checked) => !checked)}
-            checked={checked ? true : false}
+          <Counter
+            setNumber={setNumberOfPets}
+            number={numberOfPets}
+            limit={thisLimit}
           />
-          <p className="text-gray-500">
-            Include pet food {foodPrice.toLocaleString("en-US")} per night
-          </p>
         </div>
+        {foodPrice ? (
+          <>
+            <div className="w-full border-t-2 border-gray-200 my-5"></div>
+            <div className="flex gap-2">
+              <input
+                type="radio"
+                name="radio-1"
+                className="radio"
+                onClick={handleCheck}
+                checked={bookingInputs.isIncludeFood ? true : false}
+              />
+              <p className="text-gray-500">
+                Include pet food {foodPrice.toLocaleString('en-US')} per night
+              </p>
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
-      <button className="btn mt-5">Continue</button>
-      <div class="card-body items-center text-center p-0 py-5">
+      <Link
+        to="/booking/create"
+        state={{ bookingInputs, numberOfPets, houseId }}
+      >
+        <button className="btn mt-5">Continue</button>
+      </Link>
+      <div className="card-body items-center text-center p-0 py-5">
         <div className="w-full flex justify-between items-end">
           <p className="text-start text-base text-gray-500">
-            {price.toLocaleString("en-US")} x {nights} nights
+            {price.toLocaleString('en-US')} x {nights} nights
           </p>
           <p className="text-end text-base text-gray-500">
-            {(price * nights).toLocaleString("en-US")}
+            {(price * nights).toFixed(2).toLocaleString('en-US')}
           </p>
         </div>
         <div className="w-full flex justify-between items-end">
           <p className="text-start text-base text-gray-500">Food Service</p>
           <p className="text-end text-base text-gray-500">
-            {(foodPrice * nights).toLocaleString("en-US")}
+            {(foodPrice * nights).toFixed(2).toLocaleString('en-US')}
           </p>
         </div>
         <div className="w-full flex justify-between items-end">
-          <p className="text-start text-base text-gray-500">Service Fee</p>
+          <p className="text-start text-base text-gray-500">Service Fee (5%)</p>
           <p className="text-end text-base text-gray-500">
-            {serviceFee.toLocaleString("en-US")}
+            {((price * nights + foodPrice * nights) * 0.05)
+              .toFixed(2)
+              .toLocaleString('en-US')}
           </p>
         </div>
-        <div class="w-full border-t-2 border-gray-200 my-5"></div>
+        <div className="w-full border-t-2 border-gray-200 my-5"></div>
         <div className="w-full flex justify-between items-end">
           <p className="text-start text-base text-gray-900">Total</p>
           <p className="text-end text-base text-gray-900">
-            {(price * nights + foodPrice * nights + serviceFee).toLocaleString(
-              "en-US"
-            )}
+            {((price * nights + foodPrice * nights) * 1.05)
+              .toFixed(2)
+              .toLocaleString('en-US')}
           </p>
         </div>
       </div>

@@ -34,7 +34,7 @@ export default function PaymentModal() {
   };
 
   return (
-    <Modal name="payment" onOpen={<p className="btn w-32">Booking</p>}>
+    <Modal title='Booking' name="payment" onOpen={<p className="btn w-32">Booking</p>}>
       <div className="flex flex-col">
         <h2 className="my-4">Credit Card Information</h2>
         <form

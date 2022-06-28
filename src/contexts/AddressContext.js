@@ -11,13 +11,12 @@ function AddressContextProvider({ children }) {
     zipCodes: '',
   });
 
-  console.log(dropdownAddress);
-
+  
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
         const res = await axios.get('/address/provinces');
-
+        
         console.log(res);
         setDropdownAddress((dropdownAddress) => ({
           ...dropdownAddress,
@@ -29,6 +28,7 @@ function AddressContextProvider({ children }) {
     };
     fetchProvinces();
   }, []);
+  console.log(dropdownAddress);
 
   const getDstricts = async (provinceId) => {
     console.log(provinceId);

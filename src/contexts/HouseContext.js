@@ -14,27 +14,29 @@ const HouseContext = createContext();
 function HouseContextProvider({ children }) {
   const { error, setError } = useError();
   const [house, setHouse] = useState([]);
-  const [houseById, setHouseById] = useState([]);
-
-  const { id } = useParams();
+  const [houseById, setHouseById] = useState({});
+  const [paramsId, setParamsId] = useState(null);
 
   useEffect(() => {
     const fetchAllHouse = async () => {
       try {
         const res = await getAllHouse();
         setHouse(res.data);
-        const houseById = await getHouseById(id);
-        setHouseById(houseById.data);
+        if (paramsId) {
+          const houseById = await getHouseById(paramsId);
+          setHouseById(houseById.data);
+          console.log(houseById.data);
+        }
       } catch (err) {
         setError(err.massage);
         console.log(err);
       }
     };
     fetchAllHouse();
-  }, []);
+  }, [paramsId]);
 
   return (
-    <HouseContext.Provider value={{ house, houseById }}>
+    <HouseContext.Provider value={{ house, houseById, setParamsId }}>
       {children}
     </HouseContext.Provider>
   );
