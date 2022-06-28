@@ -5,10 +5,13 @@ import {
 import { useCreateHouse } from '../../../contexts/CreateHouseContext';
 import dogIcon from '../../../assets/img/dogIcon.png';
 import cageIcon from '../../../assets/img/cageIcon.png';
+import { useState } from 'react';
 
 function HouseType() {
   const { dispatch } = useCreateHouse();
+  const [houseType, setHouseType] = useState(null);
 
+  console.log(houseType);
   const handleClickNext = () => {
     dispatch(nextStagePage());
   };
@@ -19,7 +22,7 @@ function HouseType() {
     <div className="w-[508px] h-[640px] relative">
       <div className="text-2xl">House type</div>
 
-      <div className="form-control bg-[#F3F4F6] h-[80px] flex justify-center rounded-3xl mt-6">
+      <label className="form-control cursor-pointer bg-[#F3F4F6] h-[80px] flex justify-center rounded-3xl mt-6">
         <label className="label cursor-pointer mx-6 ">
           <span className="label-text flex items-center gap-3">
             <img src={dogIcon} />
@@ -27,14 +30,14 @@ function HouseType() {
           </span>
           <input
             type="radio"
-            name="radio-6"
+            name="radio-3"
             className="radio checked:bg-orange-500"
-            checked
+            onChange={() => setHouseType('SINGLE_ROOM')}
           />
         </label>
-      </div>
+      </label>
 
-      <div className="form-control bg-[#F3F4F6] h-[80px] flex justify-center rounded-3xl mt-6">
+      <label className="form-control cursor-pointer bg-[#F3F4F6] h-[80px] flex justify-center rounded-3xl mt-6">
         <label className="label cursor-pointer mx-6 ">
           <span className="label-text flex items-center gap-3">
             <img src={dogIcon} />
@@ -42,13 +45,13 @@ function HouseType() {
           </span>
           <input
             type="radio"
-            name="radio-6"
+            name="radio-3"
             className="radio checked:bg-orange-500"
           />
         </label>
-      </div>
+      </label>
 
-      <div className="form-control bg-[#F3F4F6] h-[80px] flex justify-center rounded-3xl mt-6">
+      <label className="form-control cursor-pointer bg-[#F3F4F6] h-[80px] flex justify-center rounded-3xl mt-6">
         <label className="label cursor-pointer mx-6 ">
           <span className="label-text flex items-center gap-3">
             <img src={cageIcon} />
@@ -56,17 +59,17 @@ function HouseType() {
           </span>
           <input
             type="radio"
-            name="radio-6"
+            name="radio-3"
             className="radio checked:bg-orange-500"
           />
         </label>
-      </div>
+      </label>
 
       <div className="absolute bottom-0 left-0" onClick={handleClickBack}>
-        <div className="btn  w-[91px]">Back</div>
+        <div className="btn-small  w-[91px]">Back</div>
       </div>
       <div className="absolute bottom-0 right-0" onClick={handleClickNext}>
-        <div className="btn  w-[91px]">Next</div>
+        <div className="btn-small  w-[91px]">Next</div>
       </div>
     </div>
   );
