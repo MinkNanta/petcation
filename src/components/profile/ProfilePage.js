@@ -1,5 +1,5 @@
 import InputDropdown from '../../common/InputDropdown';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Input from '../../common/Input';
 import { AddressContext } from '../../contexts/AddressContext';
 import { AuthContext, useAuth } from '../../contexts/AuthContext';
@@ -9,7 +9,7 @@ import { updateUser } from '../../api/user';
 export default function ProfilePage() {
   const [province, setProvince] = useState('');
   const [district, setDistrict] = useState('');
-  const [subdistrict, setSubDistrict] = useState('');
+  const [subDistrict, setSubDistrict] = useState('');
   const [zipCode, setZipCode] = useState('');
   const [firstName, setFirstNamne] = useState('');
   const [lastName, setLastNamne] = useState('');
@@ -21,20 +21,22 @@ export default function ProfilePage() {
   const { dropdownAddress, getDstricts, getSubDstricts } =
     useContext(AddressContext);
 
-  const { User } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
-  console.log(province);
-  console.log(district);
-  console.log(subdistrict);
-  // console.log(dropdownAddress?.subDistricts);
-  // console.log(dropdownAddress.map((el) => el.subDistricts));
-  console.log(dropdownAddress.subdistrict);
-  console.log(zipCode);
+  console.log(user);
 
-  // console.log(dropdownAddress);
-
-  const handleSubmit = async () => {
-    // await updateUser({ firstName: 'not' });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await updateUser({
+      firstName,
+      lastName,
+      phoneNumber,
+      province,
+      district,
+      subDistrict,
+      zipCode,
+      address,
+    });
   };
   return (
     <>
@@ -118,28 +120,28 @@ export default function ProfilePage() {
           </InputDropdown>
 
           <InputDropdown
-            label="Subdistrict"
+            label="subDistrict"
             onChange={(e) => {
               setSubDistrict(e.target.value);
             }}
             errMsg="Error Massage"
             error={true}
           >
-            {dropdownAddress.subDistricts?.map((subdistrict) => (
-              <option value={subdistrict.zipCode}>{subdistrict.nameEn}</option>
+            {dropdownAddress.subDistricts?.map((subDistrict) => (
+              <option value={subDistrict.zipCode}>{subDistrict.nameEn}</option>
             ))}
           </InputDropdown>
 
           <Input
-            value={subdistrict}
+            value={subDistrict}
             label="Postal/Zip Code (Optional)"
             onChange={(e) => setZipCode(e.target.value)}
             placeholder="Enter your zipcode"
             errMsg="Error Massage"
             error={true}
           >
-            {/* {dropdownAddress.subDistricts?.map((subdistrict) => (
-            <option value={subdistrict.zipCodes}>{subdistrict.zipCodes}</option>
+            {/* {dropdownAddress.subDistricts?.map((subDistrict) => (
+            <option value={subDistrict.zipCodes}>{subDistrict.zipCodes}</option>
           ))} */}
           </Input>
 

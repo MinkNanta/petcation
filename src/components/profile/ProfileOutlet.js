@@ -5,7 +5,6 @@ import SidebarProfile from './SidebarProfile';
 import TitleProfile from './TitleProfile';
 
 function ProfileOutlet() {
-  const [userPic, setUserPic] = useState(null);
   return (
     <div className="max-w-7xl px-8 pb-20">
       <TitleProfile />
