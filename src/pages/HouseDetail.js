@@ -24,7 +24,12 @@ export default function HouseDetail() {
   const [editHouseDetail, SetEditHouseDetail] = useState(false);
   const { userOldAddress } = useAuth();
 
-  const { changedAddress, setUserAddress, setChangeAddress } = useAddress();
+  const {
+    changedAddress,
+    setUserAddress,
+    setChangeAddress,
+    handleUpdateAddress,
+  } = useAddress();
 
   useEffect(() => {
     getHouseByUser();
@@ -60,7 +65,12 @@ export default function HouseDetail() {
         <TitleHeder title="House address">
           {changedAddress && (
             <>
-              <button className="btn-small">Save</button>
+              <button
+                className="btn-small"
+                onClick={() => handleUpdateAddress()}
+              >
+                Save
+              </button>
               <button
                 className="btn-text"
                 onClick={() => {

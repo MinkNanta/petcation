@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { updateUser } from '../api/user';
 import axios from '../config/axios';
 import { useAuth } from './AuthContext';
 
@@ -40,7 +41,9 @@ function AddressContextProvider({ children }) {
         ...dropdownAddress,
         districts: res.data.districts,
       }));
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const getSubDstricts = async (districtId) => {
@@ -50,7 +53,9 @@ function AddressContextProvider({ children }) {
         ...dropdownAddress,
         subDistricts: res.data.subDistricts,
       }));
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   const getZip = async (districtId) => {
     try {
@@ -59,7 +64,9 @@ function AddressContextProvider({ children }) {
         ...dropdownAddress,
         subDistricts: res.data.subDistricts,
       }));
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChangeAddress = (event) => {
@@ -90,6 +97,14 @@ function AddressContextProvider({ children }) {
     }
   };
 
+  const handleUpdateAddress = async () => {
+    try {
+      const res = await updateUser(userAddress);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <AddressContext.Provider
       value={{
@@ -102,6 +117,7 @@ function AddressContextProvider({ children }) {
         userAddress,
         changedAddress,
         setChangeAddress,
+        handleUpdateAddress,
       }}
     >
       {children}
