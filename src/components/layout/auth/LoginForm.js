@@ -11,7 +11,8 @@ import {
   QuestionMarkCircleIcon,
 } from '@heroicons/react/outline';
 import Alert from '../../../common/Alert';
-function LoginForm({className, title}) {
+import Logingoogle from './Logingoogle';
+function LoginForm() {
   const [uId, setUId] = useState('');
   const [apiError, setApiError] = useState('');
   const [password, setPassword] = useState('');
@@ -83,10 +84,10 @@ function LoginForm({className, title}) {
         </div>
         <div className="divider">Or</div>
         <div className="flex justify-center mt-4">
-          <button className="btn btn-outline">Signup with Google</button>
+          <Logingoogle />
         </div>
         <div className="flex justify-center mt-4">
-          <button className="btn btn-outline">Signup with Facebook</button>
+          <button className="btn btn-outline">Sign in with Facebook</button>
         </div>
       </Modal>
     </div>

@@ -58,6 +58,7 @@ function AuthContextProvider({ children }) {
     removeAccessToken();
     // setFetch(!fetch);
   };
+  
   return (
     <AuthContext.Provider
       value={{
@@ -68,6 +69,7 @@ function AuthContextProvider({ children }) {
         userPic,
         setUserPic,
         userOldAddress,
+        setFetch
       }}
     >
       {children}
