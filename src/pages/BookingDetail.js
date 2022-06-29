@@ -29,19 +29,19 @@ export default function BookingDetail() {
     setParamsId(id);
   }, []);
 
-  const images = [
-    'https://api.lorem.space/image/car?w=800&h=300&hash=8B7BCDC2',
-    'https://api.lorem.space/image/car?w=800&h=300&hash=500B67FB',
-    'https://api.lorem.space/image/car?w=800&h=300&hash=A89D0DE6',
-    'https://api.lorem.space/image/car?w=800&h=300&hash=225E6693',
-  ];
+  // const images = [
+  //   'https://api.lorem.space/image/car?w=800&h=300&hash=8B7BCDC2',
+  //   'https://api.lorem.space/image/car?w=800&h=300&hash=500B67FB',
+  //   'https://api.lorem.space/image/car?w=800&h=300&hash=A89D0DE6',
+  //   'https://api.lorem.space/image/car?w=800&h=300&hash=225E6693',
+  // ];
 
   return (
     <div className="my-10 mx-20">
       {Object.keys(houseById).length !== 0 ? (
         <>
           {/* need to map images */}
-          <Carousel images={images} />
+          {houseById.image && <Carousel images={JSON.parse(houseById.image)} />}
           <div className="mt-10 mb-20 flex">
             <div className="mr-10 w-full">
               <HouseTitle

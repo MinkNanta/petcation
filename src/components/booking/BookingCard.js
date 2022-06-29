@@ -161,7 +161,12 @@ export default function BookingCard({
         )}
       </div>
       <Link
-        to="/booking/create"
+        to={
+          bookingInputs.checkInDate !== '' &&
+          bookingInputs.checkOutDate !== '' &&
+          err === null &&
+          '/booking/create'
+        }
         state={{ bookingInputs, numberOfPets, houseId }}
       >
         <button className="btn mt-5">Continue</button>
