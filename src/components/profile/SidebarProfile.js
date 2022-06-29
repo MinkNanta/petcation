@@ -14,11 +14,11 @@ function SidebarProfile() {
   return (
     <div className="">
       <div className="text-center ">
-        <div className="mt-1 items-center ">
-          <div className="w-[212px] mx-auto">
+        <div className="my-4 space-y-2 items-center ">
+          <div className="w-[212px] h-[212px] mx-auto rounded-full overflow-hidden">
             <img
               onClick={() => profileRef.current.click()}
-              className="rounded-full text-gray-700 w-full h-full object-cover "
+              className="w-full h-full object-cover"
               src={
                 userPic
                   ? URL.createObjectURL(userPic)
@@ -29,7 +29,7 @@ function SidebarProfile() {
             />
             <input
               ref={profileRef}
-              className="hidden"
+              // className="hidden"
               onChange={(e) => setUserPic(e.target.files[0])}
               type="file"
             />
@@ -39,10 +39,11 @@ function SidebarProfile() {
           </button>
         </div>
       </div>
-      <h4 className="text-2xl py-6 border-t-2">John Doe</h4>
-      <div className="space-y-4">
-        <MenuList title="Booking list" to="/" />
-        <MenuList title="History" to="/" />
+      <div className="divider"></div>
+
+      <div className="">
+        <MenuList title="Booking list" to="/booking/list" />
+        {/* <MenuList title="History" to="/" /> */}
         <MenuList title="Information" to="/profile" />
         <MenuList title="Pet Information" to="/profile/profilepet" />
       </div>
