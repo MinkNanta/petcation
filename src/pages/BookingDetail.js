@@ -14,9 +14,12 @@ import defaultProtoPic from '../assets/img/defaultProtoPic.png';
 import { HouseContext } from '../contexts/HouseContext';
 import { useParams } from 'react-router-dom';
 import { getMonthAndYear, getDate7DaysFromNow } from '../utils/convertDate';
+import { getHouseById } from '../api/house';
+import { useError } from '../contexts/ErrorContext';
 
 export default function BookingDetail() {
-  const { houseById, setParamsId } = useContext(HouseContext);
+  // const { houseById, setParamsId } = useContext(HouseContext);
+  const [houseById, setHouseById] = useState({});
   const [bookingInputs, setBookingInputs] = useState({
     checkInDate: '',
     checkOutDate: '',
@@ -24,11 +27,27 @@ export default function BookingDetail() {
   });
   const [numberOfPets, setNumberOfPets] = useState(1);
   const { id } = useParams();
+  const { setError } = useError();
 
   console.log(houseById);
 
+  // useEffect(() => {
+  //   setParamsId(id);
+  // }, []);
+
   useEffect(() => {
-    setParamsId(id);
+    const fetchHouseId = async () => {
+      try {
+        console.log(id);
+        const res = await getHouseById(id);
+        console.log(res.data);
+        setHouseById(res.data);
+      } catch (err) {
+        setError(err.message);
+        console.log(err);
+      }
+    };
+    fetchHouseId();
   }, []);
 
   // const images = [
