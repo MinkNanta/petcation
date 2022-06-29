@@ -1,8 +1,8 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import TitleHeader from "../myhouse/TitleHeader";
-import SidebarProfile from "./SidebarProfile";
-import TitleProfile from "./TitleProfile";
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import TitleHeader from '../myhouse/TitleHeader';
+import SidebarProfile from './SidebarProfile';
+import TitleProfile from './TitleProfile';
 
 function ProfileOutlet() {
   return (
