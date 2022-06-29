@@ -10,7 +10,7 @@ export default function Input({
   type,
   option,
   name,
-  // defaultValue,
+  ...prop
 }) {
   return (
     <div className="form-control w-full mb-3">
@@ -20,7 +20,6 @@ export default function Input({
       </label>
       <input
         name={name}
-        // defaultValue={defaultValue}
         defaultValue={value}
         type={type}
         placeholder={
@@ -30,6 +29,7 @@ export default function Input({
         }
         className="input"
         onChange={onChange}
+        {...prop}
       />
       <label className="label">
         {error && <span className="label-text-alt text-red-400">{errMsg}</span>}

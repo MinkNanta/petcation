@@ -13,6 +13,7 @@ function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const [fetch, setFetch] = useState(false);
+  const [userPic, setUserPic] = useState(false);
 
   console.log('user', user);
 
@@ -40,6 +41,7 @@ function AuthContextProvider({ children }) {
   const login = async (uId, password) => {
     const res = await axios.post('/auth/login', { uId, password });
     setAccessToken(res.data.token);
+    console.log(res.data);
     setFetch(!fetch);
   };
   const logout = () => {
@@ -48,7 +50,9 @@ function AuthContextProvider({ children }) {
     // setFetch(!fetch);
   };
   return (
-    <AuthContext.Provider value={{ signUp, login, logout, user }}>
+    <AuthContext.Provider
+      value={{ signUp, login, logout, user, userPic, setUserPic }}
+    >
       {children}
     </AuthContext.Provider>
   );

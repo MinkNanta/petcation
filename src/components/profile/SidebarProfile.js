@@ -1,29 +1,42 @@
-import React, { useState } from 'react';
-import defaultProtoPic from '../../assets/img/defaultProtoPic.png';
+import React, { useRef, useState } from 'react';
+import defaultPhotoPic from '../../assets/img/defaultProtoPic.png';
 
 import MenuList from '../../common/MenuList';
 import { useParams } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 
 function SidebarProfile() {
   const { userId } = useParams();
-  const [userPic, setUserPic] = useState(null);
+
+  const profileRef = useRef(null);
+  const { user, userPic, setUserPic } = useAuth();
+
   return (
     <div className="">
       <div className="text-center ">
         <div className="mt-1 items-center ">
           <div className="w-[212px] mx-auto">
             <img
+              onClick={() => profileRef.current.click()}
               className="rounded-full text-gray-700 w-full h-full object-cover "
-              src={defaultProtoPic}
+              src={
+                userPic
+                  ? URL.createObjectURL(userPic)
+                  : user?.userPic || defaultPhotoPic
+              }
+              // src={user?.userPic || defaultPhotoPic}
               alt=""
             />
             <input
-              className=""
+              ref={profileRef}
+              className="hidden"
               onChange={(e) => setUserPic(e.target.files[0])}
               type="file"
             />
           </div>
-          <button className="pt-4">Edit profile</button>
+          <button className="pt-4" onClick={() => profileRef.current.click()}>
+            Edit profile
+          </button>
         </div>
       </div>
       <h4 className="text-2xl py-6 border-t-2">John Doe</h4>
