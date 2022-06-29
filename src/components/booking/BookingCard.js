@@ -18,7 +18,7 @@ export default function BookingCard({
   const [checked, setChecked] = useState(false);
   const [thisLimit, setThisLimit] = useState(1000);
   const [err, setErr] = useState(null);
-
+  
   useEffect(() => {
     limit && setThisLimit(limit);
   }, []);
