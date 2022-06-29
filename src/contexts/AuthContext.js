@@ -11,7 +11,7 @@ const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState('');
   const [fetch, setFetch] = useState(false);
   const [userPic, setUserPic] = useState(false);
 
