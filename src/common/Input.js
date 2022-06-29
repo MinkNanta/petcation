@@ -37,7 +37,6 @@ export default function Input({
         }
         className="input"
         onChange={onChange}
-        {...prop}
       />
       <label className="label">
         {error && <span className="label-text-alt text-red-400">{errMsg}</span>}
