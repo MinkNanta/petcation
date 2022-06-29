@@ -3,21 +3,19 @@ import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 import { Fragment, useState } from 'react';
 
-export default function Modal({ children, title, icon, setClose, onClick }) {
+export default function Modal({ children, title, icon, setClose, onClick,className ,...props }) {
   let [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <div onClick={onClick}>
         <span
-          className="text-orange-500 flex gap-1 justify-center items-center"
+          className={`${className} ?${className} : "text-orange-500 flex gap-1 justify-center items-center"`}
           onClick={() => {
             setIsOpen(!isOpen);
           }}
         >
-          {icon}
-
-          <p className=" text-orange-500">{title}</p>
+          <p>{title}</p>
         </span>
       </div>
 

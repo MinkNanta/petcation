@@ -11,7 +11,7 @@ import {
   QuestionMarkCircleIcon,
 } from '@heroicons/react/outline';
 import Alert from '../../../common/Alert';
-function LoginForm() {
+function LoginForm({className, title}) {
   const [uId, setUId] = useState('');
   const [apiError, setApiError] = useState('');
   const [password, setPassword] = useState('');
@@ -43,7 +43,7 @@ function LoginForm() {
   return (
     <div>
       <Modal
-        title="Sign in"
+        title={title ? title : 'Sign in'}
         icon={<ArrowCircleRightIcon className="w-5 h-5" />}
         onClick={() => {
           setUId('');
@@ -51,6 +51,7 @@ function LoginForm() {
           setValidate('');
           setApiError('');
         }}
+        className={className}
       >
         <div>
           {/* modal body */}

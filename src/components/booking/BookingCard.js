@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Counter from '../../common/Counter';
 import cat from '../../assets/img/cat.png';
 import dog from '../../assets/img/dog.png';
 import { Link } from 'react-router-dom';
+import LoginForm from '../layout/auth/LoginForm';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export default function BookingCard({
   price,
@@ -18,7 +20,9 @@ export default function BookingCard({
   const [checked, setChecked] = useState(false);
   const [thisLimit, setThisLimit] = useState(1000);
   const [err, setErr] = useState(null);
-  
+
+  const { user } = useContext(AuthContext);
+
   useEffect(() => {
     limit && setThisLimit(limit);
   }, []);
@@ -75,6 +79,8 @@ export default function BookingCard({
     });
   };
 
+  const handelContinue = () => {};
+
   return (
     <div className="card w-96 bg-gray-100 p-5 inline-block">
       <div className="flex justify-between items-end">
@@ -124,7 +130,7 @@ export default function BookingCard({
         <p>Place for</p>
         <p>{petType}</p>
       </div>
-      <div className="bg-white p-5 mt-5 rounded-2xl">
+      <div className="bg-white p-5 my-5 rounded-2xl">
         <div className="flex justify-between items-center">
           <p>
             Number
@@ -163,21 +169,29 @@ export default function BookingCard({
           <></>
         )}
       </div>
-      <Link
-        to={
-          bookingInputs.checkInDate !== '' &&
-          bookingInputs.checkOutDate !== '' &&
-          err === null &&
-          '/booking/create'
-        }
-        state={{ bookingInputs, numberOfPets, houseId }}
-      >
-        <button className="btn mt-5">Continue</button>
-      </Link>
+      {user ? (
+        <Link
+          to={
+            bookingInputs.checkInDate !== '' ||
+            bookingInputs.checkOutDate !== ''
+              ? setErr('Required')
+              : '/booking/create'
+          }
+          state={{ bookingInputs, numberOfPets, houseId }}
+        >
+          <button className="btn">Continue</button>
+        </Link>
+      ) : (
+        <LoginForm
+          className="bg-orange-500 rounded-2xl p-3 text-white flex gap-1 justify-center items-center"
+          title="Sign In To Book"
+        />
+      )}
       <div className="card-body items-center text-center p-0 py-5">
         <div className="w-full flex justify-between items-end">
           <p className="text-start text-base text-gray-500">
-            {price.toLocaleString('en-US')} x {nights} nights
+            {price.toLocaleString('en-US')} x {nights} nights x {numberOfPets}{' '}
+            pets
           </p>
           <p className="text-end text-base text-gray-500">
             {(price * nights).toFixed(2).toLocaleString('en-US')}
