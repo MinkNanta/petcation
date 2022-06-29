@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 export default function InputWithSuffix({
   label,
   onChange,
-  placeholder,
   errMsg,
   error,
   value,
@@ -11,21 +10,34 @@ export default function InputWithSuffix({
   option,
   suffix,
   name,
+  disabled,
+  placeholder,
 }) {
   return (
     <div className="form-control w-full ">
       <label className="space-x-1">
-        <span className="label-text">{label}</span>
-        <span className="label-text text-gray-500">{option}</span>
+        <span className={`label-text ${disabled && 'text-gray-400'}`}>
+          {label}
+        </span>
+        <span
+          className={`label-text ${disabled && 'text-gray-400'}text-gray-500`}
+        >
+          {option}
+        </span>
       </label>
       <div className="relative">
         <input
           name={name}
-          defaultValue={value}
+          // defaultValue={value}
+          value={value}
           type={type}
-          placeholder={placeholder}
           className="input"
           onChange={onChange}
+          placeholder={
+            placeholder
+              ? placeholder
+              : `Please Enter Your ${name ? name : 'This Input'}`
+          }
         />
         <p className="absolute right-3 bottom-3 label-text text-gray-400">
           {suffix}

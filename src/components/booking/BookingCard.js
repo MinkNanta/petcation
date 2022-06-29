@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Counter from '../../common/Counter';
 import cat from '../../assets/img/cat.png';
 import dog from '../../assets/img/dog.png';
@@ -18,7 +18,10 @@ export default function BookingCard({
   const [checked, setChecked] = useState(false);
   const [thisLimit, setThisLimit] = useState(1000);
   const [err, setErr] = useState(null);
-  limit && setThisLimit(limit);
+  
+  useEffect(() => {
+    limit && setThisLimit(limit);
+  }, []);
 
   // need to calculate nights from date inputs
   const [nights, setNights] = useState(0);
@@ -161,7 +164,12 @@ export default function BookingCard({
         )}
       </div>
       <Link
-        to="/booking/create"
+        to={
+          bookingInputs.checkInDate !== '' &&
+          bookingInputs.checkOutDate !== '' &&
+          err === null &&
+          '/booking/create'
+        }
         state={{ bookingInputs, numberOfPets, houseId }}
       >
         <button className="btn mt-5">Continue</button>
