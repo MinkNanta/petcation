@@ -20,7 +20,6 @@ export default function CreateBooking() {
   const [address, setAddress] = useState(null);
 
   const { user } = useContext(AuthContext);
-  console.log(user);
 
   const { state } = useLocation();
 

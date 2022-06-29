@@ -85,7 +85,7 @@ export default function BookingDetail() {
                     : null
                 }
                 location={
-                  houseById?.User.province ? houseById?.User.province : null
+                  houseById?.User?.province ? houseById?.User?.province : null
                 }
               />
               <div className="w-full border-t-2 border-gray-200 my-10"></div>
@@ -118,13 +118,13 @@ export default function BookingDetail() {
                   <div>
                     <HouseHighlight
                       isTrue={
-                        houseById?.isPetFood ? houseById?.isPetFood : null
+                        houseById?.isPetFood ? houseById?.isPetFood : false
                       }
                       highlight="Pet Food"
                     />
                     <HouseHighlight
                       isTrue={
-                        houseById?.isGrooming ? houseById?.isGrooming : null
+                        houseById?.isGrooming ? houseById?.isGrooming : false
                       }
                       highlight="Grooming"
                     />
@@ -132,13 +132,13 @@ export default function BookingDetail() {
                       isTrue={
                         houseById?.isAirCondition
                           ? houseById?.isAirCondition
-                          : null
+                          : false
                       }
                       highlight="Air Conditioning"
                     />
                     <HouseHighlight
                       isTrue={
-                        houseById?.isPetStaff ? houseById?.isPetStaff : null
+                        houseById?.isPetStaff ? houseById?.isPetStaff : false
                       }
                       highlight="Pet Staff"
                     />
@@ -148,7 +148,7 @@ export default function BookingDetail() {
                       isTrue={
                         houseById?.isPetTraining
                           ? houseById?.isPetTraining
-                          : null
+                          : false
                       }
                       highlight="Pet Training"
                     />
@@ -156,7 +156,7 @@ export default function BookingDetail() {
                       isTrue={
                         houseById?.isPickupDropOff
                           ? houseById?.isPickupDropOff
-                          : null
+                          : false
                       }
                       highlight="Pick up-Drop off"
                     />
@@ -164,13 +164,13 @@ export default function BookingDetail() {
                       isTrue={
                         houseById?.isLitterChangedDaily
                           ? houseById?.isLitterChangedDaily
-                          : null
+                          : false
                       }
                       highlight="Litter changed daily"
                     />
                     <HouseHighlight
                       isTrue={
-                        houseById?.isAirFilter ? houseById?.isAirFilter : null
+                        houseById?.isAirFilter ? houseById?.isAirFilter : false
                       }
                       highlight="Air filter"
                     />
@@ -202,18 +202,18 @@ export default function BookingDetail() {
                 <img
                   className="rounded-full w-20 h-20"
                   src={
-                    houseById?.User.userPic
-                      ? houseById.User.userPic
+                    houseById.User?.userPic
+                      ? houseById.User?.userPic
                       : defaultProtoPic
                   }
                 ></img>
                 <div className="grid content-center">
                   <h6>
-                    Hosted by {houseById?.User?.firstName}{' '}
-                    {houseById?.User?.lastName}
+                    Hosted by {houseById.User?.firstName}{' '}
+                    {houseById.User?.lastName}
                   </h6>
                   <p className="text-gray-500">
-                    Joined in {getMonthAndYear(houseById?.User?.createdAt)}
+                    Joined in {getMonthAndYear(houseById.User?.createdAt)}
                   </p>
                 </div>
               </div>

@@ -45,10 +45,10 @@ export default function Router() {
               <Route path="/house/setting" element={<HouseSetting />} />
             </Route>
 
-            <Route path="/booking/:id" element={<BookingDetail />} />
             <Route path="/booking/create" element={<CreateBooking />} />
           </>
         )}
+        <Route path="/booking/:id" element={<BookingDetail />} />
         <Route path="/house/main" element={<HouseMain />} />
         <Route path="/createHouse" element={<CreateHouse />} />
       </Route>
