@@ -4,87 +4,137 @@ import validator from 'validator';
 import { updateUser } from '../../api/user';
 import Input from '../../common/Input';
 import TitleHeder from '../../common/TitleHeder';
+import { getAccessToken } from '../../services/localStorage';
+import axios from '../../config/axios';
+import Spinner from '../../common/Spinner';
+import { useError } from '../../contexts/ErrorContext';
 
 export default function ProfileDetails() {
-  const { user, userPic } = useAuth();
-  const [firstName, setFirstNamne] = useState('');
-  const [lastName, setLastNamne] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('');
   const [change, setChange] = useState(false);
+  const [oldValue, setOldValue] = useState({});
+  const [fetch, setFetch] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [newUserInfo, setNewUserInfo] = useState({});
+  const { setError } = useError();
+
+  console.log('newUserInfo', newUserInfo);
+  console.log('oldValue', oldValue);
 
   useEffect(() => {
-    if (user) {
-      setFirstNamne(user?.firstName);
-      setLastNamne(user?.lastName);
-      setPhoneNumber(user?.phoneNumber);
-      setEmail(user?.email);
-    }
-  }, [user]);
+    const fetchMe = async () => {
+      try {
+        const token = getAccessToken();
+        if (token) {
+          const res = await axios.get('/users');
+          setNewUserInfo(res.data.user);
+          setOldValue(res.data.user);
+        }
+      } catch (err) {}
+    };
+    fetchMe();
+  }, [fetch]);
+
+  const handleChangeInput = (event) => {
+    console.log(event.target.name);
+    console.log(event.target.value);
+    setChange(true);
+    const values = { ...newUserInfo };
+    values[event.target.name] = event.target.value;
+    setNewUserInfo(values);
+  };
+
+  const [validate, setValidate] = useState({});
 
   const handleSubmit = async (e) => {
-    if (!firstName) {
-      return;
-    }
-    if (!lastName) {
-      return;
-    }
-    if (!phoneNumber) {
-      return;
-    }
+    try {
+      const newValidate = {};
 
-    const formData = new FormData();
-    formData.append('firstName', firstName);
-    formData.append('lastName', lastName);
-    formData.append('phoneNumber', phoneNumber);
-    formData.append('userPic', userPic);
-    const res = await updateUser(formData);
-    setChange(false);
+      if (
+        validator.isEmpty(newUserInfo?.firstName, {
+          ignore_whitespace: true,
+        })
+      ) {
+        newValidate.firstName = 'FirstName is require';
+        setValidate(newValidate);
+        return;
+      }
+      if (
+        validator.isEmpty(newUserInfo?.lastName, {
+          ignore_whitespace: true,
+        })
+      ) {
+        newValidate.lastName = 'FirstName is require';
+        setValidate(newValidate);
+        return;
+      }
+      if (
+        validator.isEmpty(newUserInfo?.phoneNumber, {
+          ignore_whitespace: true,
+        })
+      ) {
+        newValidate.phoneNumber = 'FirstName is require';
+        setValidate(newValidate);
+        return;
+      }
+      setValidate({});
+      setLoading(true);
+      const formData = new FormData();
+      formData.append('firstName', newUserInfo.firstName);
+      formData.append('lastName', newUserInfo.lastName);
+      formData.append('phoneNumber', newUserInfo.phoneNumber);
+      // formData.append('userPic', userPic);
+      const res = await updateUser(formData);
+      setChange(false);
+      setFetch((p) => !p);
+      setLoading(false);
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
     <>
       <div>
-        <h4>Hi, Welcome back {user?.firstName}</h4>
-        <p className="text-gray-500">{user?.email}</p>
+        {loading && <Spinner />}
+        <h4>Hi, Welcome back {oldValue?.firstName}</h4>
+        <p className="text-gray-500">{oldValue?.email}</p>
 
         <TitleHeder title="Information"></TitleHeder>
 
         <Input
-          value={firstName}
-          label="First name"
+          name="firstName"
+          value={newUserInfo?.firstName}
+          label="First Name"
           onChange={(e) => {
-            setFirstNamne(e.target.value);
-            setChange(true);
+            handleChangeInput(e);
           }}
           placeholder="Enter your first name"
-          errMsg="Firstname is require"
-          error={validator.isEmpty(firstName, { ignore_whitespace: true })}
+          errMsg={validate.firstName}
+          error={validate.firstName}
         />
         <Input
-          value={lastName}
+          name="lastName"
+          value={newUserInfo?.lastName}
           label="Last Name"
           onChange={(e) => {
-            setLastNamne(e.target.value);
-            setChange(true);
+            handleChangeInput(e);
           }}
           placeholder="Enter your last name"
-          errMsg="LastName is require"
-          error={validator.isEmpty(lastName, { ignore_whitespace: true })}
+          errMsg={validate.lastName}
+          error={validate.lastName}
         />
 
         <Input
-          value={phoneNumber}
+          name="phoneNumber"
+          value={newUserInfo?.phoneNumber}
           label="Phone Number"
           onChange={(e) => {
-            setPhoneNumber(e.target.value);
-            setChange(true);
+            handleChangeInput(e);
           }}
           placeholder="Enter your phone number"
-          errMsg="phoneNumber is require"
-          error={validator.isEmpty(phoneNumber, {
-            ignore_whitespace: true,
-          })}
+          errMsg={validate.phoneNumber}
+          error={validate.phoneNumber}
         />
 
         {change && (
@@ -96,10 +146,9 @@ export default function ProfileDetails() {
             <button
               className="btn btn-outline flex-shrink "
               onClick={() => {
-                setFirstNamne(user?.firstName);
-                setLastNamne(user?.lastName);
-                setPhoneNumber(user?.phoneNumber);
-                setEmail(user?.email);
+                setNewUserInfo(oldValue);
+                setChange(false);
+                setValidate({});
               }}
             >
               Cancel

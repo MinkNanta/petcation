@@ -13,6 +13,7 @@ export default function ProfilePage() {
   return (
     <>
       <ProfileDetails />
+      <div className="divider"></div>
       <UserAddress title="Address" />
     </>
   );

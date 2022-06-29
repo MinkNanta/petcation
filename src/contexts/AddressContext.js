@@ -17,6 +17,7 @@ function AddressContextProvider({ children }) {
 
   const [provincesId, setProvincesID] = useState('');
   const [districtsId, setDistrictsID] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const [userAddress, setUserAddress] = useState({});
 
@@ -136,10 +137,13 @@ function AddressContextProvider({ children }) {
 
   const handleUpdateAddress = async () => {
     try {
+      setLoading(true);
       await updateUser(userAddress);
       setChangeAddress((p) => !p);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -154,6 +158,7 @@ function AddressContextProvider({ children }) {
         changedAddress,
         setChangeAddress,
         handleUpdateAddress,
+        loading,
       }}
     >
       {children}
