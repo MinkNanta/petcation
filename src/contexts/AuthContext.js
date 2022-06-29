@@ -10,12 +10,16 @@ import {
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
   const [fetch, setFetch] = useState(false);
+<<<<<<< HEAD
   const [userPic, setUserPic] = useState(false);
 
   console.log('user', user);
+=======
+  const [userOldAddress, setUserOldAddress] = useState({});
+>>>>>>> 71bd0b553e0b54defa40e1e51d24c7335ce0da6c
 
   useEffect(() => {
     const fetchMe = async () => {
@@ -24,6 +28,14 @@ function AuthContextProvider({ children }) {
         if (token) {
           const res = await axios.get('/users');
           setUser(res.data.user);
+
+          setUserOldAddress({
+            address: res.data.user?.address ?? '',
+            provinces: res.data.user?.province ?? '',
+            districts: res.data.user?.district ?? '',
+            subDistricts: res.data.user?.subDistrict ?? '',
+            zipCodes: res.data.user?.zipCode ?? '',
+          });
         }
       } catch (err) {
         removeAccessToken();
@@ -51,7 +63,11 @@ function AuthContextProvider({ children }) {
   };
   return (
     <AuthContext.Provider
+<<<<<<< HEAD
       value={{ signUp, login, logout, user, userPic, setUserPic }}
+=======
+      value={{ signUp, login, logout, user, userOldAddress }}
+>>>>>>> 71bd0b553e0b54defa40e1e51d24c7335ce0da6c
     >
       {children}
     </AuthContext.Provider>
