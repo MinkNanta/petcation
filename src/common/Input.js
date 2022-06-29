@@ -10,11 +10,7 @@ export default function Input({
   type,
   option,
   name,
-<<<<<<< HEAD
-  ...prop
-=======
   disabled,
->>>>>>> 71bd0b553e0b54defa40e1e51d24c7335ce0da6c
 }) {
   return (
     <div className="form-control w-full mb-1">
@@ -30,13 +26,9 @@ export default function Input({
       </label>
       <input
         name={name}
-<<<<<<< HEAD
-        defaultValue={value}
-=======
         disabled={disabled}
         // defaultValue={value}
         value={value}
->>>>>>> 71bd0b553e0b54defa40e1e51d24c7335ce0da6c
         type={type}
         placeholder={
           placeholder
