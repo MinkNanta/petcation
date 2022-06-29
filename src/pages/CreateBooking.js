@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import HouseCard from '../common/HouseCard';
 import BackNavigation from '../components/booking/BackNavigation';
 import BookingSummary from '../components/booking/BookingSummary';
@@ -7,6 +7,7 @@ import AddPetModal from '../components/booking/AddPetModal';
 import SelectPetModal from '../components/booking/SelectPetModal';
 import PaymentModal from '../components/payment/PaymentModal';
 import { useLocation } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 
 export default function CreateBooking() {
   const [firstName, setFirstName] = useState(null);
@@ -17,8 +18,11 @@ export default function CreateBooking() {
   const [subdistrict, setSubdistrict] = useState(null);
   const [zipCode, setZipCode] = useState(null);
   const [address, setAddress] = useState(null);
-  
-  const {state} = useLocation();
+
+  const { user } = useContext(AuthContext);
+  console.log(user);
+
+  const { state } = useLocation();
 
   return (
     <div className="my-10 mx-20">

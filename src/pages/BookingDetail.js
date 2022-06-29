@@ -61,50 +61,54 @@ export default function BookingDetail() {
     <div className="my-10 mx-20">
       {Object.keys(houseById).length !== 0 ? (
         <>
-          {/* need to map images */}
-          {houseById.image && <Carousel images={JSON.parse(houseById.image)} />}
+          {houseById?.image && (
+            <Carousel images={JSON.parse(houseById?.image)} />
+          )}
           <div className="mt-10 mb-20 flex">
             <div className="mr-10 w-full">
               <HouseTitle
                 name="Room name Cat Capsule by Minkminks"
                 petType={
-                  houseById.petType
-                    ? houseById.petType[0] +
-                      houseById.petType.slice(1).toLowerCase() +
+                  houseById?.petType
+                    ? houseById?.petType[0] +
+                      houseById?.petType.slice(1).toLowerCase() +
                       's'
                     : null
                 }
-                price={houseById.price ? houseById.price : null}
+                price={houseById?.price ? houseById?.price : null}
                 // need to get room size
-                sqft={houseById.size ? houseById.size : null}
+                sqft={houseById?.size ? houseById?.size : null}
                 roomType={
-                  houseById.type
-                    ? houseById.type[0] + houseById.type.slice(1).toLowerCase()
+                  houseById?.type
+                    ? houseById?.type[0] +
+                      houseById?.type.slice(1).toLowerCase()
                     : null
                 }
                 location={
-                  houseById.User.province ? houseById.User.province : null
+                  houseById?.User.province ? houseById?.User.province : null
                 }
               />
               <div className="w-full border-t-2 border-gray-200 my-10"></div>
               <HouseDetailsWithIcon
                 title="Check in"
-                details={houseById.checkInTime ? houseById.checkInTime : 'N/A'}
+                details={
+                  houseById?.checkInTime ? houseById?.checkInTime : 'N/A'
+                }
               />
               <HouseDetailsWithIcon
                 title="Check out"
                 details={
-                  houseById.checkOutTime ? houseById.checkOutTime : 'N/A'
+                  houseById?.checkOutTime ? houseById?.checkOutTime : 'N/A'
                 }
               />
               <HouseDetailsWithIcon
                 title="Food for Pet"
-                details={houseById.petFood ? houseById.petFood : 'N/A'}
+                details={houseById?.petFood ? houseById?.petFood : 'N/A'}
               />
               <HouseDetailsWithIcon
                 title="Daily schedule"
                 details={
-                  houseById.dailySchedule ? houseById.dailySchedule : 'N/A'
+                  houseById?.dailySchedule ? houseById?.dailySchedule : 'N/A'
                 }
               />
               <div className="w-full border-t-2 border-gray-200 my-10"></div>
@@ -113,26 +117,28 @@ export default function BookingDetail() {
                 <div className="mt-5 grid grid-cols-2 text-gray-500">
                   <div>
                     <HouseHighlight
-                      isTrue={houseById.isPetFood ? houseById.isPetFood : null}
+                      isTrue={
+                        houseById?.isPetFood ? houseById?.isPetFood : null
+                      }
                       highlight="Pet Food"
                     />
                     <HouseHighlight
                       isTrue={
-                        houseById.isGrooming ? houseById.isGrooming : null
+                        houseById?.isGrooming ? houseById?.isGrooming : null
                       }
                       highlight="Grooming"
                     />
                     <HouseHighlight
                       isTrue={
-                        houseById.isAirCondition
-                          ? houseById.isAirCondition
+                        houseById?.isAirCondition
+                          ? houseById?.isAirCondition
                           : null
                       }
                       highlight="Air Conditioning"
                     />
                     <HouseHighlight
                       isTrue={
-                        houseById.isPetStaff ? houseById.isPetStaff : null
+                        houseById?.isPetStaff ? houseById?.isPetStaff : null
                       }
                       highlight="Pet Staff"
                     />
@@ -140,29 +146,31 @@ export default function BookingDetail() {
                   <div>
                     <HouseHighlight
                       isTrue={
-                        houseById.isPetTraining ? houseById.isPetTraining : null
+                        houseById?.isPetTraining
+                          ? houseById?.isPetTraining
+                          : null
                       }
                       highlight="Pet Training"
                     />
                     <HouseHighlight
                       isTrue={
-                        houseById.isPickupDropOff
-                          ? houseById.isPickupDropOff
+                        houseById?.isPickupDropOff
+                          ? houseById?.isPickupDropOff
                           : null
                       }
                       highlight="Pick up-Drop off"
                     />
                     <HouseHighlight
                       isTrue={
-                        houseById.isLitterChangedDaily
-                          ? houseById.isLitterChangedDaily
+                        houseById?.isLitterChangedDaily
+                          ? houseById?.isLitterChangedDaily
                           : null
                       }
                       highlight="Litter changed daily"
                     />
                     <HouseHighlight
                       isTrue={
-                        houseById.isAirFilter ? houseById.isAirFilter : null
+                        houseById?.isAirFilter ? houseById?.isAirFilter : null
                       }
                       highlight="Air filter"
                     />
@@ -194,18 +202,18 @@ export default function BookingDetail() {
                 <img
                   className="rounded-full w-20 h-20"
                   src={
-                    houseById.User.userPic
+                    houseById?.User.userPic
                       ? houseById.User.userPic
                       : defaultProtoPic
                   }
                 ></img>
                 <div className="grid content-center">
                   <h6>
-                    Hosted by {houseById.User.firstName}{' '}
-                    {houseById.User.lastName}
+                    Hosted by {houseById?.User?.firstName}{' '}
+                    {houseById?.User?.lastName}
                   </h6>
                   <p className="text-gray-500">
-                    Joined in {getMonthAndYear(houseById.User.createdAt)}
+                    Joined in {getMonthAndYear(houseById?.User?.createdAt)}
                   </p>
                 </div>
               </div>
@@ -238,16 +246,16 @@ export default function BookingDetail() {
             </div>
             <div>
               <BookingCard
-                price={houseById.price ? houseById.price : 'N/A'}
+                price={houseById?.price ? houseById?.price : 'N/A'}
                 petType={
-                  houseById.petType
-                    ? houseById.petType[0] +
-                      houseById.petType.slice(1).toLowerCase() +
+                  houseById?.petType
+                    ? houseById?.petType[0] +
+                      houseById?.petType.slice(1).toLowerCase() +
                       's'
                     : 'N/A'
                 }
-                limit={houseById.limit ? houseById.limit : null}
-                foodPrice={houseById.foodPrice ? houseById.foodPrice : null}
+                limit={houseById?.limit ? houseById?.limit : null}
+                foodPrice={houseById?.foodPrice ? houseById?.foodPrice : null}
                 setBookingInputs={setBookingInputs}
                 bookingInputs={bookingInputs}
                 setNumberOfPets={setNumberOfPets}

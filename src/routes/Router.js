@@ -30,7 +30,6 @@ export default function Router() {
       <Route path="/" element={<MainHeaderOutlet />}>
         <Route path="" element={<Main />} />
         <Route path="/house/:id" element={<Details />} />
-        <Route path="/booking/create" element={<CreateBooking />} />
         {user && (
           <>
             <Route path="/" element={<ProfileOutlet />}>
@@ -47,6 +46,7 @@ export default function Router() {
             </Route>
 
             <Route path="/booking/:id" element={<BookingDetail />} />
+            <Route path="/booking/create" element={<CreateBooking />} />
           </>
         )}
         <Route path="/house/main" element={<HouseMain />} />
