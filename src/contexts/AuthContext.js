@@ -26,9 +26,9 @@ function AuthContextProvider({ children }) {
           setUserOldAddress({
             address: res.data.user?.address ?? '',
             provinces: res.data.user?.province ?? '',
-            districts: res.data.user?.districts ?? '',
-            subDistricts: res.data.user?.subDistricts ?? '',
-            zipCodes: res.data.user?.zipCodes ?? '',
+            districts: res.data.user?.district ?? '',
+            subDistricts: res.data.user?.subDistrict ?? '',
+            zipCodes: res.data.user?.zipCode ?? '',
           });
         }
       } catch (err) {

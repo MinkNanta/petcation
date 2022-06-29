@@ -14,7 +14,6 @@ export default function Modal({ children, title, icon, setClose, onClick }) {
           onClick={() => {
             setIsOpen(!isOpen);
           }}
-          setClose={setClose}
         >
           {icon}
 

@@ -11,7 +11,6 @@ export default function InputDropdown({
   name,
   disabled,
 }) {
-  console.log(value);
   return (
     <div className="form-control w-full">
       <label className="label">

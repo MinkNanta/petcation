@@ -4,18 +4,33 @@ import TitleHeder from '../../../common/TitleHeder';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useHouse } from '../../../contexts/HouseContext';
 import Textarea from '../../../common/Textarea';
+import Alert from '../../../common/Alert';
 import Checkbox from '../../../common/Checkbox';
+import { useError } from '../../../contexts/ErrorContext';
 
 export default function HouseInfoFrom() {
-  const { houseDetail, handleChangeInput, handleCheckBox } = useHouse();
+  const {
+    houseDetail,
+    handleChangeInput,
+    changedHouseInfo,
+    houseByUserID,
+    getHouseByUser,
+    setChangeHouseDetail,
+    setHouseDetail,
+    fetch,
+    setFetch,
+    handleCheckBox,
+    setChangeHouseInfo,
+    handleUpdateHouseDetail,
+  } = useHouse();
+  const { error, setError } = useError();
 
   return (
     <div>
-      <TitleHeder title="House information">
-        <button className="btn-text">Cancel</button>
-        <button className="btn-small">Save</button>
-      </TitleHeder>
-      <div className="gap-y-5">
+      <TitleHeder title="House information" />
+      <div>
+        {error && <Alert />}
+
         <Input
           value={houseDetail?.checkInTime}
           name="checkInTime"
@@ -136,6 +151,27 @@ export default function HouseInfoFrom() {
             error={false}
           />
         </div>
+        {changedHouseInfo && (
+          <div div className="flex gap-4 w-[40%] mt-4">
+            <button
+              className="btn flex-shrink"
+              onClick={handleUpdateHouseDetail}
+            >
+              Save
+            </button>
+
+            <button
+              className="btn btn-outline flex-shrink "
+              onClick={() => {
+                setFetch((p) => !p);
+                setChangeHouseInfo(false);
+                setHouseDetail(houseByUserID);
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

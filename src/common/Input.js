@@ -13,7 +13,7 @@ export default function Input({
   disabled,
 }) {
   return (
-    <div className="form-control w-full mb-3">
+    <div className="form-control w-full mb-1">
       <label className="space-x-1">
         <span className={`label-text ${disabled && 'text-gray-400'}`}>
           {label}
@@ -27,7 +27,8 @@ export default function Input({
       <input
         name={name}
         disabled={disabled}
-        defaultValue={value}
+        // defaultValue={value}
+        value={value}
         type={type}
         placeholder={
           placeholder
