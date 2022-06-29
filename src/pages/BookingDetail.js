@@ -61,9 +61,9 @@ export default function BookingDetail() {
     <div className="my-10 mx-20">
       {Object.keys(houseById).length !== 0 ? (
         <>
-          {houseById?.image && (
+          {/* {houseById?.image && (
             <Carousel images={JSON.parse(houseById?.image)} />
-          )}
+          )} */}
           <div className="mt-10 mb-20 flex">
             <div className="mr-10 w-full">
               <HouseTitle
