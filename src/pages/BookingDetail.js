@@ -25,6 +25,8 @@ export default function BookingDetail() {
   const [numberOfPets, setNumberOfPets] = useState(1);
   const { id } = useParams();
 
+  console.log(houseById);
+
   useEffect(() => {
     setParamsId(id);
   }, []);

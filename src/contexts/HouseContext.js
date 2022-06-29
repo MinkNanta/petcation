@@ -30,7 +30,7 @@ function HouseContextProvider({ children }) {
 
   const [houseDetail, setHouseDetail] = useState({});
 
-  // const { id } = useParams();
+  const { id } = useParams();
 
   console.log('houseByUserID', houseDetail);
 
@@ -40,13 +40,13 @@ function HouseContextProvider({ children }) {
         const res = await getAllHouse();
         setHouse(res.data);
 
-        // const houseById = await getHouseByUserId();
-        // setHouseByUserID(houseById.data);
+        const houseById = await getHouseByUserId();
+        setHouseByUserID(houseById.data);
 
-        // if (paramsId) {
-        //   const houseById = await getHouseById(paramsId);
-        //   setHouseById(houseById.data);
-        // }
+        if (paramsId) {
+          const houseById = await getHouseById(paramsId);
+          setHouseById(houseById.data);
+        }
       } catch (err) {
         setError(err.message);
         console.log(err);
@@ -144,6 +144,7 @@ function HouseContextProvider({ children }) {
         changedHouseInfo,
         setChangeHouseInfo,
         loading,
+        setParamsId,
       }}
     >
       {children}
