@@ -62,7 +62,7 @@ export default function BookingDetail() {
       {Object.keys(houseById).length !== 0 ? (
         <>
           {/* need to map images */}
-          {houseById.image && <Carousel images={JSON.parse(houseById.image)} />}
+          {/* {houseById.image && <Carousel images={JSON.parse(houseById.image)} />} */}
           <div className="mt-10 mb-20 flex">
             <div className="mr-10 w-full">
               <HouseTitle
