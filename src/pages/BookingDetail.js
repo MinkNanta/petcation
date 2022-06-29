@@ -20,16 +20,9 @@ import { useError } from '../contexts/ErrorContext';
 export default function BookingDetail() {
   // const { houseById, setParamsId } = useContext(HouseContext);
   const [houseById, setHouseById] = useState({});
-  const [bookingInputs, setBookingInputs] = useState({
-    checkInDate: '',
-    checkOutDate: '',
-    isIncludeFood: false,
-  });
   const [numberOfPets, setNumberOfPets] = useState(1);
   const { id } = useParams();
   const { setError } = useError();
-
-  console.log(houseById);
 
   // useEffect(() => {
   //   setParamsId(id);
@@ -256,8 +249,6 @@ export default function BookingDetail() {
                 }
                 limit={houseById?.limit ? houseById?.limit : null}
                 foodPrice={houseById?.foodPrice ? houseById?.foodPrice : null}
-                setBookingInputs={setBookingInputs}
-                bookingInputs={bookingInputs}
                 setNumberOfPets={setNumberOfPets}
                 numberOfPets={numberOfPets}
                 houseId={id}

@@ -11,8 +11,6 @@ export default function BookingCard({
   petType,
   limit,
   foodPrice,
-  setBookingInputs,
-  bookingInputs,
   setNumberOfPets,
   numberOfPets,
   houseId,
@@ -20,6 +18,15 @@ export default function BookingCard({
   const [checked, setChecked] = useState(false);
   const [thisLimit, setThisLimit] = useState(1000);
   const [err, setErr] = useState(null);
+  const [bookingInputs, setBookingInputs] = useState({
+    checkInDate: '',
+    checkOutDate: '',
+    isIncludeFood: false,
+  });
+
+  const [checkInDate, setCheckInDate] = useState('');
+  const [checkOutDate, setCheckOutDate] = useState('');
+  const [isIncludeFood, setIsIncludeFood] = useState(false);
 
   const { user } = useContext(AuthContext);
 
@@ -30,6 +37,32 @@ export default function BookingCard({
   // need to calculate nights from date inputs
   const [nights, setNights] = useState(0);
 
+  const onCheckInChange = (e) => {
+    const curDate = new Date();
+    const selectedDate = new Date(e.target.value);
+
+    if (selectedDate - curDate > 0) {
+      setCheckInDate(e.target.value);
+      setErr(null);
+    } else {
+      setErr('Please select a day after today');
+    }
+  };
+
+  const onCheckOutChange = (e) => {
+    const selectedDate = new Date(e.target.value);
+    const checkIn = new Date(checkInDate);
+
+    if (selectedDate - checkIn > 0) {
+      setCheckOutDate(e.target.value);
+      const diff = Math.floor((selectedDate - checkIn) / (1000 * 60 * 60 * 24));
+      setNights(diff);
+      setErr(null);
+    } else {
+      setErr('Please select a day after your check in date');
+    }
+  };
+
   const onDateChange = (e) => {
     const curDate = new Date();
     const selectedDate = new Date(e.target.value);
@@ -37,11 +70,9 @@ export default function BookingCard({
     if (e.target.id === 'checkInDate') {
       if (selectedDate - curDate > 0) {
         const newValue = { [e.target.id]: e.target.value };
-        setBookingInputs((bookingInputs) => {
-          return {
-            ...bookingInputs,
-            ...newValue,
-          };
+        setBookingInputs({
+          ...bookingInputs,
+          ...newValue,
         });
       } else {
         setErr('Please select a day after today');
@@ -71,15 +102,8 @@ export default function BookingCard({
 
   const handleCheck = () => {
     setChecked((checked) => !checked);
-    setBookingInputs((bookingInputs) => {
-      return {
-        ...bookingInputs,
-        isIncludeFood: !bookingInputs.isIncludeFood,
-      };
-    });
+    setIsIncludeFood(!isIncludeFood);
   };
-
-  const handelContinue = () => {};
 
   return (
     <div className="card w-96 bg-gray-100 p-5 inline-block">
@@ -103,8 +127,8 @@ export default function BookingCard({
             type="date"
             id="checkInDate"
             className="text-gray-500 w-11/12"
-            value={bookingInputs.checkInDate}
-            onChange={(e) => onDateChange(e)}
+            value={checkInDate}
+            onChange={onCheckInChange}
           />
         </div>
         <div className=" border-l-2 border-gray-300 pl-4">
@@ -113,11 +137,11 @@ export default function BookingCard({
             type="date"
             id="checkOutDate"
             className={`text-gray-500 w-full ${
-              bookingInputs.checkInDate === '' ? 'bg-gray-200 rounded-md' : null
+              checkInDate === '' ? 'bg-gray-200 rounded-md' : null
             }`}
-            onChange={(e) => onDateChange(e)}
-            disabled={bookingInputs.checkInDate === '' ? true : false}
-            value={bookingInputs.checkOutDate}
+            onChange={onCheckOutChange}
+            disabled={checkInDate === '' ? true : false}
+            value={checkOutDate}
           />
         </div>
         {err && (
@@ -158,7 +182,7 @@ export default function BookingCard({
                 name="radio-1"
                 className="radio"
                 onClick={handleCheck}
-                checked={bookingInputs.isIncludeFood ? true : false}
+                checked={isIncludeFood ? true : false}
               />
               <p className="text-gray-500">
                 Include pet food {foodPrice.toLocaleString('en-US')} per night
@@ -172,8 +196,8 @@ export default function BookingCard({
       {user ? (
         <Link
           to={
-            bookingInputs.checkInDate !== '' ||
-            bookingInputs.checkOutDate !== ''
+            bookingInputs?.checkInDate !== '' ||
+            bookingInputs?.checkOutDate !== ''
               ? setErr('Required')
               : '/booking/create'
           }
@@ -194,30 +218,46 @@ export default function BookingCard({
             pets
           </p>
           <p className="text-end text-base text-gray-500">
-            {(price * nights).toFixed(2).toLocaleString('en-US')}
+            {(price * nights * numberOfPets).toLocaleString('en-US', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           </p>
         </div>
         <div className="w-full flex justify-between items-end">
           <p className="text-start text-base text-gray-500">Food Service</p>
           <p className="text-end text-base text-gray-500">
-            {(foodPrice * nights).toFixed(2).toLocaleString('en-US')}
+            {(foodPrice * nights * numberOfPets).toLocaleString('en-US', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           </p>
         </div>
         <div className="w-full flex justify-between items-end">
           <p className="text-start text-base text-gray-500">Service Fee (5%)</p>
           <p className="text-end text-base text-gray-500">
-            {((price * nights + foodPrice * nights) * 0.05)
-              .toFixed(2)
-              .toLocaleString('en-US')}
+            {(
+              (price * nights + foodPrice * nights) *
+              numberOfPets *
+              0.05
+            ).toLocaleString('en-US', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           </p>
         </div>
         <div className="w-full border-t-2 border-gray-200 my-5"></div>
         <div className="w-full flex justify-between items-end">
           <p className="text-start text-base text-gray-900">Total</p>
           <p className="text-end text-base text-gray-900">
-            {((price * nights + foodPrice * nights) * 1.05)
-              .toFixed(2)
-              .toLocaleString('en-US')}
+            {(
+              (price * nights + foodPrice * nights) *
+              numberOfPets *
+              1.05
+            ).toLocaleString('en-US', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           </p>
         </div>
       </div>

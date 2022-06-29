@@ -22,6 +22,7 @@ export default function CreateBooking() {
   const { user } = useContext(AuthContext);
 
   const { state } = useLocation();
+  console.log(state);
 
   return (
     <div className="my-10 mx-20">
