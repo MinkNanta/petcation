@@ -12,7 +12,8 @@ import {
 } from '@heroicons/react/outline';
 import Alert from '../../../common/Alert';
 import Logingoogle from './Logingoogle';
-function LoginForm() {
+
+function LoginForm({ className, title }) {
   const [uId, setUId] = useState('');
   const [apiError, setApiError] = useState('');
   const [password, setPassword] = useState('');
