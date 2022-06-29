@@ -6,6 +6,8 @@ import { useAuth } from './AuthContext';
 const AddressContext = createContext();
 
 function AddressContextProvider({ children }) {
+  const [changedAddress, setChangeAddress] = useState(false);
+  const { userOldAddress } = useAuth();
   const [dropdownAddress, setDropdownAddress] = useState({
     provinces: [],
     districts: [],
@@ -13,10 +15,14 @@ function AddressContextProvider({ children }) {
     zipCodes: '',
   });
 
-  const { userOldAddress } = useAuth();
-  const [userAddress, setUserAddress] = useState(userOldAddress);
+  const [provincesId, setProvincesID] = useState('');
+  const [districtsId, setDistrictsID] = useState('');
 
-  const [changedAddress, setChangeAddress] = useState(false);
+  const [userAddress, setUserAddress] = useState({});
+
+  useEffect(() => {
+    setUserAddress(userOldAddress);
+  }, [userOldAddress]);
 
   useEffect(() => {
     const fetchProvinces = async () => {
@@ -32,42 +38,62 @@ function AddressContextProvider({ children }) {
     };
     fetchProvinces();
   }, []);
-  console.log(dropdownAddress);
 
-  const getDstricts = async (provinceId) => {
+  useEffect(() => {
     try {
-      const res = await axios.get(`/address/districts/${provinceId}`);
-      setDropdownAddress((dropdownAddress) => ({
-        ...dropdownAddress,
-        districts: res.data.districts,
-      }));
+      if (userOldAddress.provinces) {
+        const res = dropdownAddress.provinces.find(
+          (el) => el.nameEn === userOldAddress.provinces,
+        );
+        setProvincesID(res.id);
+      }
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [userOldAddress.provinces, dropdownAddress.provinces]);
 
-  const getSubDstricts = async (districtId) => {
+  useEffect(() => {
     try {
-      const res = await axios.get(`/address/subdistricts/${districtId}`);
-      setDropdownAddress((dropdownAddress) => ({
-        ...dropdownAddress,
-        subDistricts: res.data.subDistricts,
-      }));
+      if (userOldAddress.districts) {
+        const res = dropdownAddress.districts.find(
+          (el) => el.nameEn === userOldAddress.districts,
+        );
+        setDistrictsID(res?.id);
+      }
     } catch (error) {
       console.log(error);
     }
-  };
-  const getZip = async (districtId) => {
-    try {
-      const res = await axios.get(`/address/subdistricts/${districtId}`);
-      setDropdownAddress((dropdownAddress) => ({
-        ...dropdownAddress,
-        subDistricts: res.data.subDistricts,
-      }));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  }, [userOldAddress.districts, dropdownAddress.districts]);
+
+  useEffect(() => {
+    const getDstricts = async () => {
+      try {
+        const res = await axios.get(`/address/districts/${provincesId}`);
+        setDropdownAddress((dropdownAddress) => ({
+          ...dropdownAddress,
+          districts: res.data.districts,
+        }));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getDstricts();
+  }, [userAddress?.provinces]);
+
+  useEffect(() => {
+    const getSubDstricts = async () => {
+      try {
+        const res = await axios.get(`/address/subdistricts/${districtsId}`);
+        setDropdownAddress((dropdownAddress) => ({
+          ...dropdownAddress,
+          subDistricts: res.data.subDistricts,
+        }));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getSubDstricts();
+  }, [userAddress?.districts, districtsId]);
 
   const handleChangeAddress = (event) => {
     setChangeAddress(true);
@@ -79,14 +105,25 @@ function AddressContextProvider({ children }) {
       const matchObj = dropdownAddress.provinces.find(
         (el) => el.nameEn == event.target.value,
       );
-      getDstricts(matchObj.id);
+      setProvincesID(matchObj.id);
+      setUserAddress((p) => ({
+        ...p,
+        districts: '',
+        subDistricts: '',
+        zipCodes: '',
+      }));
     }
 
     if (event.target.name === 'districts') {
       const matchObj = dropdownAddress.districts.find(
         (el) => el.nameEn == event.target.value,
       );
-      getSubDstricts(matchObj.id);
+      setDistrictsID(matchObj.id);
+      setUserAddress((p) => ({
+        ...p,
+        subDistricts: '',
+        zipCodes: '',
+      }));
     }
 
     if (event.target.name === 'subDistricts') {
@@ -99,7 +136,8 @@ function AddressContextProvider({ children }) {
 
   const handleUpdateAddress = async () => {
     try {
-      const res = await updateUser(userAddress);
+      await updateUser(userAddress);
+      setChangeAddress((p) => !p);
     } catch (error) {
       console.log(error);
     }
@@ -108,8 +146,6 @@ function AddressContextProvider({ children }) {
   return (
     <AddressContext.Provider
       value={{
-        getSubDstricts,
-        getDstricts,
         dropdownAddress,
         setDropdownAddress,
         handleChangeAddress,

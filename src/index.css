@@ -30,6 +30,53 @@
   }
 }
 
+.spinner {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #ffffff 94%, #0000) top/6.4px 6.4px
+      no-repeat,
+    conic-gradient(#0000 30%, #ffffff);
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    #0000 calc(100% - 6.4px),
+    #000 0
+  );
+  animation: spinner-c7wet2 1s infinite linear;
+}
+
+@keyframes spinner-c7wet2 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+.dots {
+  width: 56px;
+  height: 13.4px;
+  background: radial-gradient(
+      circle closest-side at left 6.7px top 50%,
+      #ea580c 90%,
+      #0000
+    ),
+    radial-gradient(circle closest-side, #ea580c 90%, #0000),
+    radial-gradient(
+      circle closest-side at right 6.7px top 50%,
+      #ea580c 90%,
+      #0000
+    );
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  animation: dots-xm0185md 1s infinite alternate;
+}
+
+@keyframes dots-xm0185md {
+  to {
+    width: 22.4px;
+    height: 26.9px;
+  }
+}
+
 /* -------- container ------ */
 @layer base {
   h1 {
@@ -69,14 +116,21 @@
     @apply w-full text-gray-50 text-[16px] normal-case font-normal bg-orange-500 border-0 hover:bg-orange-600 rounded-2xl p-4;
   }
   .btn-outline {
-    @apply text-gray-700 text-[16px] normal-case font-normal bg-orange-500/0 hover:bg-gray-50 hover:text-gray-800 border rounded-2xl p-4 border-gray-700;
+    @apply w-full text-gray-700 text-[16px] normal-case font-normal bg-orange-500/0 hover:bg-gray-50 hover:text-gray-800 border rounded-2xl p-4 border-gray-700;
   }
   .btn-small {
-    @apply text-orange-400 bg-orange-100/80 text-[14px] font-normal 
+    @apply text-gray-400 bg-gray-100/80 text-[14px] font-normal 
     
     disabled:bg-gray-200 disabled:text-gray-500 
 
     hover:bg-orange-200/50 hover:text-orange-500  rounded-2xl px-4 py-3 border-0;
+  }
+  .btn-small-orange {
+    @apply text-white bg-orange-500 text-[14px] font-normal 
+    
+    disabled:bg-orange-200 disabled:text-orange-500 
+
+    hover:bg-orange-200/50 hover:text-orange-500  rounded-2xl px-4 py-3 border-0 gap-3 my-auto;
   }
   .btn-text {
     @apply text-gray-500 text-[14px] font-normal   hover:text-gray-700  rounded-2xl px-4 py-3 border-0;
@@ -102,5 +156,5 @@ body {
   font-family: poppins, Prompt;
   background-color: var(--background-color);
   box-sizing: border-box;
-  color: #111827;
+  /* color: #111827; */
 }

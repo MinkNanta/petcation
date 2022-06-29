@@ -16,7 +16,8 @@ export default function Input({
       </label>
       <textarea
         name={name}
-        defaultValue={value}
+        // defaultValue={value}
+        value={value}
         className="textarea bg-gray-100 text-gray-500 rounded-2xl "
         placeholder={placeholder}
         onChange={onChange}

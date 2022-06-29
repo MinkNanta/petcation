@@ -28,7 +28,8 @@ export default function InputWithSuffix({
       <div className="relative">
         <input
           name={name}
-          defaultValue={value}
+          // defaultValue={value}
+          value={value}
           type={type}
           className="input"
           onChange={onChange}
