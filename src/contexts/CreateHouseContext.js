@@ -4,12 +4,14 @@ import CreateHouseReducer, { initial } from '../reducer/CreateHouseReducer';
 const CreateHouseContext = createContext();
 
 function CreateHouseContextProvider({ children }) {
-  const [{ stagePage, createHouse }, dispatch] = useReducer(
+  const [{ stagePage, createHouse, data }, dispatch] = useReducer(
     CreateHouseReducer,
     initial,
   );
   return (
-    <CreateHouseContext.Provider value={{ dispatch, stagePage, createHouse }}>
+    <CreateHouseContext.Provider
+      value={{ dispatch, stagePage, createHouse, data }}
+    >
       {children}
     </CreateHouseContext.Provider>
   );

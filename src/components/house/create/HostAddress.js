@@ -1,15 +1,32 @@
+import { useEffect, useState } from 'react';
 import {
   backStagePage,
   nextStagePage,
 } from '../../../actions/CreateHouseAction';
 import Input from '../../../common/Input';
 import InputDropdown from '../../../common/InputDropdown';
+import { useAuth } from '../../../contexts/AuthContext';
+import { useAddress } from '../../../contexts/AddressContext';
 import { useCreateHouse } from '../../../contexts/CreateHouseContext';
 
 function HostAddress() {
   const { dispatch } = useCreateHouse();
+  const { user, userOldAddress } = useAuth();
+  const {
+    changedAddress,
+    dropdownAddress,
+    userAddress,
+    handleChangeAddress,
+    handleUpdateAddress,
+    setUserAddress,
+    setChangeAddress,
+  } = useAddress();
+
+  const [address, setAddress] = useState(user?.address);
+  const [zipCode, setZipCode] = useState(user?.zipCode);
 
   const handleClickNext = () => {
+    handleUpdateAddress();
     dispatch(nextStagePage());
   };
   const handleClickBack = () => {
@@ -20,56 +37,83 @@ function HostAddress() {
       <div className="text-2xl">Host Address</div>
 
       <div className="mt-6 ">
-        <InputDropdown label="Province" errMsg="Error Massage" error={false}>
-          <option value="option1">Star Wars</option>
-          <option value="option2">Harry Potter</option>
-          <option value="option3">Lord of the Rings</option>
-          <option value="option4">Planet of the Apes</option>
-          <option value="option5">Star Trek</option>
-        </InputDropdown>
-      </div>
-
-      <div className="mt-1 ">
-        <InputDropdown label="District" errMsg="Error Massage" error={false}>
-          <option value="option1">Star Wars</option>
-          <option value="option2">Harry Potter</option>
-          <option value="option3">Lord of the Rings</option>
-          <option value="option4">Planet of the Apes</option>
-          <option value="option5">Star Trek</option>
-        </InputDropdown>
-      </div>
-
-      <div className="mt-1 ">
-        <InputDropdown label="SubDistrict" errMsg="Error Massage" error={false}>
-          <option value="option1">Star Wars</option>
-          <option value="option2">Harry Potter</option>
-          <option value="option3">Lord of the Rings</option>
-          <option value="option4">Planet of the Apes</option>
-          <option value="option5">Star Trek</option>
-        </InputDropdown>
-      </div>
-
-      <div className="mt-2 ">
-        <Input
-          //   value="Address"
-          // type="text"
-          // option="option"
-          label="Address"
-          onChange={() => {}}
-          placeholder="Enter your input"
+        <InputDropdown
+          name="provinces"
+          label="Province"
+          value={userAddress?.provinces}
+          onChange={(event) => handleChangeAddress(event)}
           errMsg="Error Massage"
           error={false}
-        />
+        >
+          <option value="">Select your option</option>
+          {dropdownAddress.provinces?.map((el) => (
+            <option key={el.id} value={el.nameEn}>
+              {el.nameEn}
+            </option>
+          ))}
+        </InputDropdown>
+      </div>
+
+      <div className="mt-1 ">
+        <InputDropdown
+          disabled={dropdownAddress?.districts.length < 1}
+          name="districts"
+          label="District"
+          value={userAddress?.districts}
+          onChange={(event) => handleChangeAddress(event)}
+          errMsg="Error Massage"
+          error={false}
+        >
+          <option value="">Select your option</option>
+          {dropdownAddress.districts?.map((el) => (
+            <option key={el.id} value={el.nameEn}>
+              {el.nameEn}
+            </option>
+          ))}
+        </InputDropdown>
+      </div>
+
+      <div className="mt-1 ">
+        <InputDropdown
+          disabled={dropdownAddress?.subDistricts.length < 1}
+          name="subDistricts"
+          label="Subdistrict"
+          value={userAddress?.subDistricts}
+          onChange={(event) => handleChangeAddress(event)}
+          errMsg="Error Massage"
+          error={false}
+        >
+          <option value="">Select your option</option>
+          {dropdownAddress.subDistricts?.map((el) => (
+            <option key={el.id} value={el.nameEn}>
+              {el.nameEn}
+            </option>
+          ))}
+        </InputDropdown>
       </div>
 
       <div className="mt-2">
         <Input
-          // value=""
-          // type="text"
-          option="(Optional)"
+          disabled={userAddress?.zipCodes === ''}
+          name="zipCodes"
+          value={userAddress?.zipCodes}
           label="Postal/Zip Code"
-          onChange={() => {}}
-          placeholder=""
+          onChange={(event) => {
+            handleChangeAddress(event);
+          }}
+          placeholder="Enter your zipcode"
+          errMsg="Error Massage"
+          error={false}
+        ></Input>
+      </div>
+
+      <div className="mt-2 ">
+        <Input
+          value={userAddress?.address}
+          label="Address"
+          name="address"
+          onChange={(event) => handleChangeAddress(event)}
+          placeholder="Enter your address"
           errMsg="Error Massage"
           error={false}
         />

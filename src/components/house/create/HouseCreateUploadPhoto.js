@@ -5,19 +5,34 @@ import {
 import { useCreateHouse } from '../../../contexts/CreateHouseContext';
 import uploadImage from '../../../assets/img/uploadImage.png';
 import UploadPhotoItem from './UploadPhotoItem';
+import Spinner from '../../../common/Spinner';
+import { useState } from 'react';
+import { postHouse } from '../../../api/house';
+import { useNavigate } from 'react-router-dom';
 
 function HouseCreateUploadPhoto() {
-  const { dispatch, createHouse } = useCreateHouse();
+  const { dispatch, data } = useCreateHouse();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleClickNext = () => {
-    console.log(createHouse);
-    dispatch(createHouseAction());
+  const handleClickNext = async () => {
+    try {
+      setLoading(true);
+      await dispatch(createHouseAction());
+      await postHouse(data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+      navigate('/');
+    }
   };
   const handleClickBack = () => {
     dispatch(backStagePage());
   };
   return (
     <div className="relative">
+      {loading && <Spinner />}
       <div className="text-2xl">Upload photo</div>
       <div className="grid grid-cols-4 gap-4 mb-24">
         <UploadPhotoItem id="0" src={uploadImage} title="Cover" />

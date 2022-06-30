@@ -14,6 +14,7 @@ import { postHouse } from '../api/house';
 
 export const initial = {
   stagePage: 0,
+  data: null,
   createHouse: {
     name: null,
     type: null,
@@ -221,9 +222,9 @@ export default function CreateHouseReducer(state, action) {
       formData.append('cover', state.createHouse.image.picture5);
       formData.append('cover', state.createHouse.image.picture6);
 
-      axiosHouse(formData);
+      state.data = formData;
 
-      return state;
+      return { ...state };
     }
 
     default: {

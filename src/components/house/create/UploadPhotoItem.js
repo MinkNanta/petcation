@@ -35,7 +35,6 @@ function UploadPhotoItem({ src, title, id }) {
     dispatch(saveUploadImage({ id, housePic }));
   }, [housePic]);
 
-  console.log(createHouse);
   return (
     <div className="relative">
       <img
