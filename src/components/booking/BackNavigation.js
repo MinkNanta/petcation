@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 export default function BackNavigation({ title }) {
   return (
     <div>
-      <Link>
+      <a href='/'>
         <p className="text-4xl font-semibold">
           <ChevronLeftIcon className="w-6 h-6 inline-block mr-5" />
           {title}
         </p>
-      </Link>
+      </a>
     </div>
   );
 }

@@ -10,14 +10,14 @@ import { useLocation } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 
 export default function CreateBooking() {
-  const [firstName, setFirstName] = useState(null);
-  const [lastName, setLastName] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState(null);
-  const [province, setProvince] = useState(null);
-  const [district, setDistrict] = useState(null);
-  const [subdistrict, setSubdistrict] = useState(null);
-  const [zipCode, setZipCode] = useState(null);
-  const [address, setAddress] = useState(null);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [province, setProvince] = useState('');
+  const [district, setDistrict] = useState('');
+  const [subdistrict, setSubdistrict] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [address, setAddress] = useState('');
 
   const { user } = useContext(AuthContext);
 

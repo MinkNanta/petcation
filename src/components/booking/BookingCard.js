@@ -63,43 +63,6 @@ export default function BookingCard({
     }
   };
 
-  const onDateChange = (e) => {
-    const curDate = new Date();
-    const selectedDate = new Date(e.target.value);
-
-    if (e.target.id === 'checkInDate') {
-      if (selectedDate - curDate > 0) {
-        const newValue = { [e.target.id]: e.target.value };
-        setBookingInputs({
-          ...bookingInputs,
-          ...newValue,
-        });
-      } else {
-        setErr('Please select a day after today');
-      }
-    }
-
-    if (e.target.id === 'checkOutDate') {
-      const checkIn = new Date(bookingInputs.checkInDate);
-      if (selectedDate - checkIn > 0) {
-        const newValue = { [e.target.id]: e.target.value };
-        setBookingInputs((bookingInputs) => {
-          return {
-            ...bookingInputs,
-            ...newValue,
-          };
-        });
-        const diff = Math.floor(
-          (selectedDate - checkIn) / (1000 * 60 * 60 * 24),
-        );
-        setNights(diff);
-        setErr(null);
-      } else {
-        setErr('Please select a day after your check in date');
-      }
-    }
-  };
-
   const handleCheck = () => {
     setChecked((checked) => !checked);
     setIsIncludeFood(!isIncludeFood);
@@ -227,37 +190,49 @@ export default function BookingCard({
         <div className="w-full flex justify-between items-end">
           <p className="text-start text-base text-gray-500">Food Service</p>
           <p className="text-end text-base text-gray-500">
-            {(foodPrice * nights * numberOfPets).toLocaleString('en-US', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}
+            {isIncludeFood
+              ? (foodPrice * nights * numberOfPets).toLocaleString('en-US', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })
+              : '0.00'}
           </p>
         </div>
         <div className="w-full flex justify-between items-end">
           <p className="text-start text-base text-gray-500">Service Fee (5%)</p>
           <p className="text-end text-base text-gray-500">
-            {(
-              (price * nights + foodPrice * nights) *
-              numberOfPets *
-              0.05
-            ).toLocaleString('en-US', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}
+            {isIncludeFood
+              ? (
+                  (price * nights + foodPrice * nights) *
+                  numberOfPets *
+                  0.05
+                ).toLocaleString('en-US', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })
+              : (price * nights * numberOfPets * 0.05).toLocaleString('en-US', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
           </p>
         </div>
         <div className="w-full border-t-2 border-gray-200 my-5"></div>
         <div className="w-full flex justify-between items-end">
           <p className="text-start text-base text-gray-900">Total</p>
           <p className="text-end text-base text-gray-900">
-            {(
-              (price * nights + foodPrice * nights) *
-              numberOfPets *
-              1.05
-            ).toLocaleString('en-US', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}
+            {isIncludeFood
+              ? (
+                  (price * nights + foodPrice * nights) *
+                  numberOfPets *
+                  1.05
+                ).toLocaleString('en-US', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })
+              : (price * nights * numberOfPets * 1.05).toLocaleString('en-US', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
           </p>
         </div>
       </div>
