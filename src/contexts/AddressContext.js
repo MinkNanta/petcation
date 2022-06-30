@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { updateUser } from '../api/user';
 import axios from '../config/axios';
 import { useAuth } from './AuthContext';
+import { useError } from './ErrorContext';
 
 const AddressContext = createContext();
 
@@ -17,8 +18,10 @@ function AddressContextProvider({ children }) {
 
   const [provincesId, setProvincesID] = useState('');
   const [districtsId, setDistrictsID] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const [userAddress, setUserAddress] = useState({});
+  const { setError, setFeedback } = useError();
 
   useEffect(() => {
     setUserAddress(userOldAddress);
@@ -136,10 +139,15 @@ function AddressContextProvider({ children }) {
 
   const handleUpdateAddress = async () => {
     try {
+      setLoading(true);
       await updateUser(userAddress);
       setChangeAddress((p) => !p);
+      setLoading(false);
+      setFeedback('Your Address Updated');
     } catch (error) {
       console.log(error);
+      setLoading(false);
+      setError(error.message);
     }
   };
 
@@ -154,6 +162,7 @@ function AddressContextProvider({ children }) {
         changedAddress,
         setChangeAddress,
         handleUpdateAddress,
+        loading,
       }}
     >
       {children}

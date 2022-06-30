@@ -33,14 +33,14 @@ function Register() {
   };
 
   const handleChangEmail = (e) => {
-    if(e.target.name === "email"){
+    if (e.target.name === 'email') {
       setUId(e.target.value);
-      setEmail(e.target.value)
+      setEmail(e.target.value);
     }
-  }
+  };
 
-  console.log(uId)
-  console.log(email)
+  // console.log(uId)
+  // console.log(email)
 
   const handleSubmitSignUp = async (e) => {
     try {
@@ -92,7 +92,7 @@ function Register() {
               {error && <Alert />}
 
               <Input
-              name ="email"
+                name="email"
                 label="Email"
                 placeholder="Your email"
                 errMsg={validate.uId}
@@ -110,7 +110,7 @@ function Register() {
             <div className="divider">Or</div>
             <div className="flex justify-center mt-4">
               {/* <button className="btn btn-outline">Sign in with Google</button> */}
-              <Logingoogle />
+              <Logingoogle title="Resister" />
             </div>
             <div className="flex justify-center mt-4">
               <button className="btn btn-outline">Sign in with Facebook</button>

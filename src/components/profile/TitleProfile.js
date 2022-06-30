@@ -1,15 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function TitleProfile() {
   return (
     <div className="text-sm breadcrumbs">
       <ul>
         <li>
-          <Link to={"#"}>Home</Link>
+          <Link to={'/'}>Home</Link>
         </li>
         <li>
-          <Link to={"#"}>my account</Link>
+          <Link to={'/profile'}>my account</Link>
         </li>
       </ul>
     </div>

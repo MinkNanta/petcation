@@ -1,15 +1,27 @@
+import { useEffect, useState } from 'react';
 import {
   backStagePage,
   nextStagePage,
 } from '../../../actions/CreateHouseAction';
 import Input from '../../../common/Input';
 import InputDropdown from '../../../common/InputDropdown';
+import { useAuth } from '../../../contexts/AuthContext';
+import { useAddress } from '../../../contexts/AddressContext';
 import { useCreateHouse } from '../../../contexts/CreateHouseContext';
+import { updateUser } from '../../../api/user';
 
 function HostAddress() {
   const { dispatch } = useCreateHouse();
+  const {
+    dropdownAddress,
+    userAddress,
+    handleChangeAddress,
+    setChangeAddress,
+  } = useAddress();
 
-  const handleClickNext = () => {
+  const handleClickNext = async () => {
+    await updateUser(userAddress);
+    setChangeAddress((p) => !p);
     dispatch(nextStagePage());
   };
   const handleClickBack = () => {
@@ -17,68 +29,96 @@ function HostAddress() {
   };
   return (
     <div className="w-[508px] h-[640px] relative">
-      <div className="text-2xl">Host Information</div>
+      <div className="text-2xl">Host Address</div>
+
       <div className="mt-6 ">
-        <Input
-          //   value="Address"
-          // type="text"
-          // option="option"
-          label="Address"
-          onChange={() => {}}
-          placeholder="Enter your input"
+        <InputDropdown
+          name="provinces"
+          label="Province"
+          value={userAddress?.provinces}
+          onChange={(event) => handleChangeAddress(event)}
           errMsg="Error Massage"
           error={false}
-        />
+        >
+          <option value="">Select your option</option>
+          {dropdownAddress.provinces?.map((el) => (
+            <option key={el.id} value={el.nameEn}>
+              {el.nameEn}
+            </option>
+          ))}
+        </InputDropdown>
       </div>
-      <div className="mt-2">
-        <Input
-          //   value="Doe"
-          // type="text"
-          // option="option"
-          label="City"
-          onChange={() => {}}
-          placeholder="Enter your input"
+
+      <div className="mt-1 ">
+        <InputDropdown
+          disabled={dropdownAddress?.districts.length < 1}
+          name="districts"
+          label="District"
+          value={userAddress?.districts}
+          onChange={(event) => handleChangeAddress(event)}
           errMsg="Error Massage"
           error={false}
-        />
+        >
+          <option value="">Select your option</option>
+          {dropdownAddress.districts?.map((el) => (
+            <option key={el.id} value={el.nameEn}>
+              {el.nameEn}
+            </option>
+          ))}
+        </InputDropdown>
       </div>
-      <div className="mt-2">
-        <Input
-          //   value="084-622-9466"
-          // type="text"
-          option="(Optional)"
-          label="State/Province/Region"
-          onChange={() => {}}
-          placeholder="Enter your input"
+
+      <div className="mt-1 ">
+        <InputDropdown
+          disabled={dropdownAddress?.subDistricts.length < 1}
+          name="subDistricts"
+          label="Subdistrict"
+          value={userAddress?.subDistricts}
+          onChange={(event) => handleChangeAddress(event)}
           errMsg="Error Massage"
           error={false}
-        />
+        >
+          <option value="">Select your option</option>
+          {dropdownAddress.subDistricts?.map((el) => (
+            <option key={el.id} value={el.nameEn}>
+              {el.nameEn}
+            </option>
+          ))}
+        </InputDropdown>
       </div>
+
       <div className="mt-2">
         <Input
-          // value=""
-          // type="text"
-          option="(Optional)"
+          disabled={userAddress?.zipCodes === ''}
+          name="zipCodes"
+          value={userAddress?.zipCodes}
           label="Postal/Zip Code"
-          onChange={() => {}}
-          placeholder=""
+          onChange={(event) => {
+            handleChangeAddress(event);
+          }}
+          placeholder="Enter your zipcode"
+          errMsg="Error Massage"
+          error={false}
+        ></Input>
+      </div>
+
+      <div className="mt-2 ">
+        <Input
+          value={userAddress?.address}
+          label="Address"
+          name="address"
+          onChange={(event) => handleChangeAddress(event)}
+          placeholder="Enter your address"
           errMsg="Error Massage"
           error={false}
         />
       </div>
-      <InputDropdown label="Country" errMsg="Error Massage" error={false}>
-        <option value="option1">Star Wars</option>
-        <option value="option2">Harry Potter</option>
-        <option value="option3">Lord of the Rings</option>
-        <option value="option4">Planet of the Apes</option>
-        <option value="option5">Star Trek</option>
-      </InputDropdown>
 
       <div className="absolute bottom-0 left-0" onClick={handleClickBack}>
-        <div className="btn  w-[91px]">Back</div>
+        <div className="btn-small  w-[91px]">Back</div>
       </div>
       <div className="absolute bottom-0 right-0" onClick={handleClickNext}>
-        <div className="btn  w-[91px]">Next</div>
+        <div className="btn-small  w-[91px]">Next</div>
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ function HouseContextProvider({ children }) {
   const [changedHouseInfo, setChangeHouseInfo] = useState(false);
   const [fetch, setFetch] = useState(false);
 
-  const { error, setError } = useError();
+  const { error, setError, setFeedback } = useError();
   const [house, setHouse] = useState([]);
   const [houseById, setHouseById] = useState({});
   const [paramsId, setParamsId] = useState(null);
@@ -32,7 +32,7 @@ function HouseContextProvider({ children }) {
 
   const { id } = useParams();
 
-  console.log('houseByUserID', houseDetail);
+  console.log('houseByUserID', houseByUserID);
 
   useEffect(() => {
     const fetchAllHouse = async () => {
@@ -115,6 +115,8 @@ function HouseContextProvider({ children }) {
       setLoading(true);
       const res = await updateHouseByUserId(houseDetail);
       setLoading(false);
+      setFeedback('You house information updated');
+      setFetch((p) => !p);
 
       setChangeHouseInfo(false);
       setChangeHouseDetail(false);

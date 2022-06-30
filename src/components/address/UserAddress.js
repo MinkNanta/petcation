@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from '../../common/Input';
 import InputDropdown from '../../common/InputDropdown';
+import Spinner from '../../common/Spinner';
 import TitleHeder from '../../common/TitleHeder';
 import { useAddress } from '../../contexts/AddressContext';
 import { useAuth } from '../../contexts/AuthContext';
 
-export default function UserAddress({ onClickCancel, onClickSave }) {
+export default function UserAddress({ title }) {
   const {
     changedAddress,
     dropdownAddress,
@@ -14,12 +15,15 @@ export default function UserAddress({ onClickCancel, onClickSave }) {
     handleUpdateAddress,
     setUserAddress,
     setChangeAddress,
+    loading,
   } = useAddress();
   const { userOldAddress } = useAuth();
 
   return (
     <div>
-      <TitleHeder title="House address" />
+      {loading && <Spinner />}
+
+      <TitleHeder title={title ? title : 'House address'} />
       <div>
         <InputDropdown
           name="provinces"
@@ -75,7 +79,9 @@ export default function UserAddress({ onClickCancel, onClickSave }) {
           name="zipCodes"
           value={userAddress?.zipCodes}
           label="Postal/Zip Code"
-          onChange={(event) => handleChangeAddress(event)}
+          onChange={(event) => {
+            handleChangeAddress(event);
+          }}
           placeholder="Enter your zipcode"
           errMsg="Error Massage"
           error={false}
@@ -94,7 +100,9 @@ export default function UserAddress({ onClickCancel, onClickSave }) {
           <div div className="flex gap-4 w-[40%] mt-4">
             <button
               className="btn flex-shrink"
-              onClick={() => handleUpdateAddress()}
+              onClick={() => {
+                handleUpdateAddress();
+              }}
             >
               Save
             </button>
@@ -110,7 +118,6 @@ export default function UserAddress({ onClickCancel, onClickSave }) {
             </button>
           </div>
         )}
-        <div className="divider"></div>
       </div>
     </div>
   );
