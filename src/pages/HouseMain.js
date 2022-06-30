@@ -3,9 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import hostCover from '../assets/img/hostCover.png';
 import hostFooter from '../assets/img/hostFooter.png';
 import ReviewCard from '../components/host/ReviewCard';
+import LoginForm from '../components/layout/auth/LoginForm';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function HouseMain() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  console.log(user);
 
   return (
     <>
@@ -17,12 +21,19 @@ export default function HouseMain() {
             <br />
             doing what you love.
           </h1>
-          <button
-            className="btn-outline w-44"
-            onClick={() => navigate('/createHouse')}
-          >
-            Set up new host
-          </button>
+          {user ? (
+            <button
+              className="btn-outline w-44"
+              onClick={() => navigate('/createHouse')}
+            >
+              Set up new host
+            </button>
+          ) : (
+            <LoginForm
+              className="bg-white rounded-2xl p-3 text-black border border-black w-fit flex gap-1 justify-center items-center"
+              title="Sign In To Set up new host"
+            />
+          )}
         </div>
       </div>
       <img src={hostCover}></img>
@@ -47,12 +58,20 @@ export default function HouseMain() {
               <br />
               Join us. We’ll help you every step of the way.
             </p>
-            <button
-              className="btn-outline w-44"
-              onClick={() => navigate('/createHouse')}
-            >
-              Set up new host
-            </button>
+
+            {user ? (
+              <button
+                className="btn-outline w-44"
+                onClick={() => navigate('/createHouse')}
+              >
+                Set up new host
+              </button>
+            ) : (
+              <LoginForm
+                className="bg-white rounded-2xl p-3 text-black border border-black w-fit flex gap-1 justify-center items-center"
+                title="Sign In To Set up new host"
+              />
+            )}
           </div>
         </div>
       </div>
