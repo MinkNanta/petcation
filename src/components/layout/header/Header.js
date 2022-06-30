@@ -21,7 +21,7 @@ function Header() {
     <>
       {location.pathname === '/' ? (
         offset < 80 ? (
-          <div className="fixed w-full">
+          <div className="fixed w-full z-50">
             <div className="mt-4 flex justify-between items-center mx-4 ">
               <Link to="/">
                 <img src={logo} alt="logo" to="/" />

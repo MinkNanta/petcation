@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import AlertGreen from '../common/AlertGreen';
 import detail from '../assets/mockup/MOCK_DATA_HOUSE_DETAIL.json';
 import UserAddress from '../components/address/UserAddress';
 import HouseDetailForm from '../components/myhouse/myHouseDetail/HouseDetailForm';
@@ -12,6 +12,7 @@ import { useHouse } from '../contexts/HouseContext';
 
 export default function HouseDetail() {
   const { user } = useAuth();
+  const { feedback } = useError();
 
   const { houseByUserID, getHouseByUser } = useHouse();
   useEffect(() => {
@@ -30,6 +31,7 @@ export default function HouseDetail() {
         </EmptyState>
       ) : (
         <>
+          {feedback && <AlertGreen />}
           <div className="space-y-2">
             <div className="grid grid-cols-3 gap-4 ">
               {detail.map((el) => (
