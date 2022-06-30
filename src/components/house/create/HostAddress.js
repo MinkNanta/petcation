@@ -8,25 +8,20 @@ import InputDropdown from '../../../common/InputDropdown';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useAddress } from '../../../contexts/AddressContext';
 import { useCreateHouse } from '../../../contexts/CreateHouseContext';
+import { updateUser } from '../../../api/user';
 
 function HostAddress() {
   const { dispatch } = useCreateHouse();
-  const { user, userOldAddress } = useAuth();
   const {
-    changedAddress,
     dropdownAddress,
     userAddress,
     handleChangeAddress,
-    handleUpdateAddress,
-    setUserAddress,
     setChangeAddress,
   } = useAddress();
 
-  const [address, setAddress] = useState(user?.address);
-  const [zipCode, setZipCode] = useState(user?.zipCode);
-
-  const handleClickNext = () => {
-    handleUpdateAddress();
+  const handleClickNext = async () => {
+    await updateUser(userAddress);
+    setChangeAddress((p) => !p);
     dispatch(nextStagePage());
   };
   const handleClickBack = () => {
