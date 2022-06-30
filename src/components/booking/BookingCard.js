@@ -13,7 +13,7 @@ export default function BookingCard({
   foodPrice,
   setNumberOfPets,
   numberOfPets,
-  houseId,
+  houseById,
 }) {
   const [checked, setChecked] = useState(false);
   const [thisLimit, setThisLimit] = useState(1000);
@@ -157,17 +157,18 @@ export default function BookingCard({
         )}
       </div>
       {user ? (
-        <Link
-          to={
-            bookingInputs?.checkInDate !== '' ||
-            bookingInputs?.checkOutDate !== ''
-              ? setErr('Required')
-              : '/booking/create'
-          }
-          state={{ bookingInputs, numberOfPets, houseId }}
-        >
-          <button className="btn">Continue</button>
-        </Link>
+        checkInDate === '' || checkOutDate === '' 
+        // || err === null 
+        ? (
+          <button className="btn" onClick={() => setErr('Required')}>Continue</button>
+        ) : (
+          <Link
+            to='/booking/create'
+            state={{ checkInDate, checkOutDate, isIncludeFood, numberOfPets, houseById, nights }}
+          >
+            <button className="btn">Continue</button>
+          </Link>
+        )
       ) : (
         <LoginForm
           className="bg-orange-500 rounded-2xl p-3 text-white flex gap-1 justify-center items-center"
