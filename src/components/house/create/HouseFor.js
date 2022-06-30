@@ -1,16 +1,23 @@
 import {
   backStagePage,
   nextStagePage,
+  saveHouseFor,
 } from '../../../actions/CreateHouseAction';
 import { useCreateHouse } from '../../../contexts/CreateHouseContext';
 import dogIcon from '../../../assets/img/dogIcon.png';
 import catIcon from '../../../assets/img/catIcon.png';
+import { useState } from 'react';
 
 function HouseFor() {
-  const { dispatch } = useCreateHouse();
+  const { dispatch, createHouse } = useCreateHouse();
+  const [checkError, setCheckError] = useState(false);
 
   const handleClickNext = () => {
-    dispatch(nextStagePage());
+    if (createHouse.petType) {
+      dispatch(nextStagePage());
+    } else {
+      setCheckError(true);
+    }
   };
   const handleClickBack = () => {
     dispatch(backStagePage());
@@ -25,11 +32,26 @@ function HouseFor() {
             <img src={dogIcon} />
             <span className="text-base font-medium ">Dogs</span>
           </span>
-          <input
-            type="radio"
-            name="radio-7"
-            className="radio checked:bg-orange-500"
-          />
+          {createHouse.petType === 'DOG' ? (
+            <input
+              type="radio"
+              name="radio-7"
+              className="radio checked:bg-orange-500"
+              onChange={() => {
+                dispatch(saveHouseFor('DOG'));
+              }}
+              checked
+            />
+          ) : (
+            <input
+              type="radio"
+              name="radio-7"
+              className="radio checked:bg-orange-500"
+              onChange={() => {
+                dispatch(saveHouseFor('DOG'));
+              }}
+            />
+          )}
         </label>
       </label>
 
@@ -39,13 +61,34 @@ function HouseFor() {
             <img src={catIcon} />
             <span className="text-base font-medium ">Cats</span>
           </span>
-          <input
-            type="radio"
-            name="radio-7"
-            className="radio checked:bg-orange-500"
-          />
+          {createHouse.petType === 'CAT' ? (
+            <input
+              type="radio"
+              name="radio-7"
+              className="radio checked:bg-orange-500"
+              onChange={() => {
+                dispatch(saveHouseFor('CAT'));
+              }}
+              checked
+            />
+          ) : (
+            <input
+              type="radio"
+              name="radio-7"
+              className="radio checked:bg-orange-500"
+              onChange={() => {
+                dispatch(saveHouseFor('CAT'));
+              }}
+            />
+          )}
         </label>
       </label>
+
+      {checkError && (
+        <span className="label-text-alt text-red-400">
+          You have to choose one
+        </span>
+      )}
 
       <div className="absolute bottom-0 left-0" onClick={handleClickBack}>
         <div className="btn-small  w-[91px]">Back</div>

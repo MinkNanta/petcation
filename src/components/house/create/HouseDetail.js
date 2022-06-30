@@ -1,15 +1,41 @@
+import { useState } from 'react';
 import {
   backStagePage,
   nextStagePage,
+  saveHouseDetail,
 } from '../../../actions/CreateHouseAction';
 import Input from '../../../common/Input';
 import InputWithSuffix from '../../../common/InputWithSuffix';
 import { useCreateHouse } from '../../../contexts/CreateHouseContext';
 
 function HouseDetail() {
-  const { dispatch } = useCreateHouse();
+  const { dispatch, createHouse } = useCreateHouse();
+  const [checkError, setCheckError] = useState(false);
+
+  const allError = {};
 
   const handleClickNext = () => {
+    if (!createHouse.name) {
+      allError.name = 'Enter your input';
+      setCheckError(allError);
+    }
+    if (!createHouse.price) {
+      allError.price = 'Enter your input';
+      setCheckError(allError);
+    }
+    if (!createHouse.size) {
+      allError.size = 'Enter your input';
+      setCheckError(allError);
+    }
+    if (!createHouse.limit) {
+      allError.limit = 'Enter your input';
+      setCheckError(allError);
+    }
+    if (allError.name) return;
+    if (allError.price) return;
+    if (allError.size) return;
+    if (allError.limit) return;
+
     dispatch(nextStagePage());
   };
   const handleClickBack = () => {
@@ -20,51 +46,61 @@ function HouseDetail() {
       <div className="text-2xl">House Detail</div>
       <div className="mt-6 ">
         <Input
-          //   value="Address"
           // type="text"
           // option="option"
           label="Name"
-          onChange={() => {}}
+          value={createHouse.name}
+          onChange={(e) => {
+            dispatch(saveHouseDetail({ name: e.target.value, id: 'name' }));
+          }}
           placeholder="Enter your input"
-          errMsg="Error Massage"
-          error={false}
+          errMsg={checkError.name}
+          error={checkError.name}
         />
       </div>
 
       <div className="mt-2">
         <Input
-          //   value="Address"
-          // type="text"
+          type="number"
           // option="option"
           label="Price per night"
-          onChange={() => {}}
+          value={createHouse.price}
+          onChange={(e) => {
+            dispatch(saveHouseDetail({ price: e.target.value, id: 'price' }));
+          }}
           placeholder="Enter your input"
-          errMsg="Error Massage"
-          error={false}
+          errMsg={checkError.price}
+          error={checkError.price}
         />
       </div>
 
       <div className="mt-2">
         <InputWithSuffix
+          type="number"
           label="Size"
-          onChange={() => {}}
+          value={createHouse.size}
+          onChange={(e) => {
+            dispatch(saveHouseDetail({ size: e.target.value, id: 'size' }));
+          }}
           placeholder="Enter your input"
-          errMsg="Error Massage"
-          error={false}
+          errMsg={checkError.size}
+          error={checkError.size}
           suffix="sqm"
         />
       </div>
 
       <div className="mt-2">
         <Input
-          //   value="Address"
-          // type="text"
+          type="number"
           // option="option"
           label="Limit per room"
-          onChange={() => {}}
+          value={createHouse.limit}
+          onChange={(e) => {
+            dispatch(saveHouseDetail({ limit: e.target.value, id: 'limit' }));
+          }}
           placeholder="Enter your input"
-          errMsg="Error Massage"
-          error={false}
+          errMsg={checkError.limit}
+          error={checkError.limit}
         />
       </div>
 
