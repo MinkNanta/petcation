@@ -31,10 +31,11 @@ function UploadPhotoItem({ src, title, id }) {
     savePic = createHouse.image.picture6;
   }
 
-  useEffect(() => {
-    dispatch(saveUploadImage({ id, housePic }));
-  }, [housePic]);
+  // useEffect(() => {
+  //   dispatch(saveUploadImage({ id, housePic }));
+  // }, [housePic]);
 
+  console.log(createHouse);
   return (
     <div className="relative">
       <img
@@ -45,7 +46,10 @@ function UploadPhotoItem({ src, title, id }) {
       {savePic && (
         <div
           className="absolute top-8 right-2 cursor-pointer"
-          onClick={() => setHousePic(null)}
+          onClick={() => {
+            // setHousePic(null);
+            dispatch(saveUploadImage({ id, housePic: '' }));
+          }}
         >
           <BtnIcon icon={<XIcon />} htmlFor="" />
         </div>
@@ -57,7 +61,9 @@ function UploadPhotoItem({ src, title, id }) {
         ref={housePicInputEl}
         onChange={(e) => {
           if (e.target.files[0]) {
-            setHousePic(e.target.files[0]);
+            dispatch(saveUploadImage({ id, housePic: e.target.files[0] }));
+
+            // setHousePic(e.target.files[0]);
           }
         }}
       />
