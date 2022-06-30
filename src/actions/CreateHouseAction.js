@@ -16,6 +16,10 @@ export const HOUSE_INFORMATION = 'house_information';
 
 export const MORE_INFORMATION = 'more_information';
 
+export const UPLOAD_IMAGE = 'upload_image';
+
+export const CREATE_HOUSE = 'create_house';
+
 export const nextStagePage = () => ({
   type: NEXTSTAGEPAGE,
 });
@@ -56,5 +60,15 @@ export const saveHouseInformation = (payload) => ({
 
 export const saveMoreInformation = (payload) => ({
   type: MORE_INFORMATION,
+  payload,
+});
+
+export const saveUploadImage = (payload) => ({
+  type: UPLOAD_IMAGE,
+  payload,
+});
+
+export const createHouseAction = (payload) => ({
+  type: CREATE_HOUSE,
   payload,
 });

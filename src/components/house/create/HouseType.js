@@ -1,6 +1,7 @@
 import {
   backStagePage,
   nextStagePage,
+  saveHouseType,
 } from '../../../actions/CreateHouseAction';
 import { useCreateHouse } from '../../../contexts/CreateHouseContext';
 import dogIcon from '../../../assets/img/dogIcon.png';
@@ -8,12 +9,15 @@ import cageIcon from '../../../assets/img/cageIcon.png';
 import { useState } from 'react';
 
 function HouseType() {
-  const { dispatch } = useCreateHouse();
-  const [houseType, setHouseType] = useState(null);
+  const { dispatch, createHouse } = useCreateHouse();
+  const [checkError, setCheckError] = useState(false);
 
-  console.log(houseType);
   const handleClickNext = () => {
-    dispatch(nextStagePage());
+    if (createHouse.type) {
+      dispatch(nextStagePage());
+    } else {
+      setCheckError(true);
+    }
   };
   const handleClickBack = () => {
     dispatch(backStagePage());
@@ -28,12 +32,22 @@ function HouseType() {
             <img src={dogIcon} />
             <span className="text-base font-medium ">Single room</span>
           </span>
-          <input
-            type="radio"
-            name="radio-3"
-            className="radio checked:bg-orange-500"
-            onChange={() => setHouseType('SINGLE_ROOM')}
-          />
+          {createHouse.type === 'SINGLE_ROOM' ? (
+            <input
+              type="radio"
+              name="radio-3"
+              className="radio checked:bg-orange-500"
+              onChange={() => dispatch(saveHouseType('SINGLE_ROOM'))}
+              checked
+            />
+          ) : (
+            <input
+              type="radio"
+              name="radio-3"
+              className="radio checked:bg-orange-500"
+              onChange={() => dispatch(saveHouseType('SINGLE_ROOM'))}
+            />
+          )}
         </label>
       </label>
 
@@ -43,11 +57,22 @@ function HouseType() {
             <img src={dogIcon} />
             <span className="text-base font-medium ">Capsule</span>
           </span>
-          <input
-            type="radio"
-            name="radio-3"
-            className="radio checked:bg-orange-500"
-          />
+          {createHouse.type === 'CAPSULE' ? (
+            <input
+              type="radio"
+              name="radio-3"
+              className="radio checked:bg-orange-500"
+              onChange={() => dispatch(saveHouseType('CAPSULE'))}
+              checked
+            />
+          ) : (
+            <input
+              type="radio"
+              name="radio-3"
+              className="radio checked:bg-orange-500"
+              onChange={() => dispatch(saveHouseType('CAPSULE'))}
+            />
+          )}
         </label>
       </label>
 
@@ -57,13 +82,30 @@ function HouseType() {
             <img src={cageIcon} />
             <span className="text-base font-medium ">Cage</span>
           </span>
-          <input
-            type="radio"
-            name="radio-3"
-            className="radio checked:bg-orange-500"
-          />
+          {createHouse.type === 'CAGE' ? (
+            <input
+              type="radio"
+              name="radio-3"
+              className="radio checked:bg-orange-500"
+              onChange={() => dispatch(saveHouseType('CAGE'))}
+              checked
+            />
+          ) : (
+            <input
+              type="radio"
+              name="radio-3"
+              className="radio checked:bg-orange-500"
+              onChange={() => dispatch(saveHouseType('CAGE'))}
+            />
+          )}
         </label>
       </label>
+
+      {checkError && (
+        <span className="label-text-alt text-red-400">
+          You have to choose one
+        </span>
+      )}
 
       <div className="absolute bottom-0 left-0" onClick={handleClickBack}>
         <div className="btn-small  w-[91px]">Back</div>

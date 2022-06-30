@@ -18,7 +18,38 @@ function HostAddress() {
   return (
     <div className="w-[508px] h-[640px] relative">
       <div className="text-2xl">Host Address</div>
+
       <div className="mt-6 ">
+        <InputDropdown label="Province" errMsg="Error Massage" error={false}>
+          <option value="option1">Star Wars</option>
+          <option value="option2">Harry Potter</option>
+          <option value="option3">Lord of the Rings</option>
+          <option value="option4">Planet of the Apes</option>
+          <option value="option5">Star Trek</option>
+        </InputDropdown>
+      </div>
+
+      <div className="mt-1 ">
+        <InputDropdown label="District" errMsg="Error Massage" error={false}>
+          <option value="option1">Star Wars</option>
+          <option value="option2">Harry Potter</option>
+          <option value="option3">Lord of the Rings</option>
+          <option value="option4">Planet of the Apes</option>
+          <option value="option5">Star Trek</option>
+        </InputDropdown>
+      </div>
+
+      <div className="mt-1 ">
+        <InputDropdown label="SubDistrict" errMsg="Error Massage" error={false}>
+          <option value="option1">Star Wars</option>
+          <option value="option2">Harry Potter</option>
+          <option value="option3">Lord of the Rings</option>
+          <option value="option4">Planet of the Apes</option>
+          <option value="option5">Star Trek</option>
+        </InputDropdown>
+      </div>
+
+      <div className="mt-2 ">
         <Input
           //   value="Address"
           // type="text"
@@ -30,30 +61,7 @@ function HostAddress() {
           error={false}
         />
       </div>
-      <div className="mt-2">
-        <Input
-          //   value="Doe"
-          // type="text"
-          // option="option"
-          label="City"
-          onChange={() => {}}
-          placeholder="Enter your input"
-          errMsg="Error Massage"
-          error={false}
-        />
-      </div>
-      <div className="mt-2">
-        <Input
-          //   value="084-622-9466"
-          // type="text"
-          option="(Optional)"
-          label="State/Province/Region"
-          onChange={() => {}}
-          placeholder="Enter your input"
-          errMsg="Error Massage"
-          error={false}
-        />
-      </div>
+
       <div className="mt-2">
         <Input
           // value=""
@@ -66,13 +74,6 @@ function HostAddress() {
           error={false}
         />
       </div>
-      <InputDropdown label="Country" errMsg="Error Massage" error={false}>
-        <option value="option1">Star Wars</option>
-        <option value="option2">Harry Potter</option>
-        <option value="option3">Lord of the Rings</option>
-        <option value="option4">Planet of the Apes</option>
-        <option value="option5">Star Trek</option>
-      </InputDropdown>
 
       <div className="absolute bottom-0 left-0" onClick={handleClickBack}>
         <div className="btn-small  w-[91px]">Back</div>
