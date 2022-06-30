@@ -21,7 +21,7 @@ export default function HeaderMenu() {
   // const user = false;
   const [active, setActive] = useState(false);
   return (
-    <div className="flex gap-4  items-center text-gray-600">
+    <div className="flex gap-4  items-center text-gray-600 ">
       {user ? (
         <>
           <div

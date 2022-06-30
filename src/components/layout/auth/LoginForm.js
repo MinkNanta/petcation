@@ -85,7 +85,7 @@ function LoginForm({ className, title }) {
         </div>
         <div className="divider">Or</div>
         <div className="flex justify-center mt-4">
-          <Logingoogle />
+          <Logingoogle title="Sign in" />
         </div>
         <div className="flex justify-center mt-4">
           <button className="btn btn-outline">Sign in with Facebook</button>
