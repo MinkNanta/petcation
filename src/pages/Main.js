@@ -11,7 +11,6 @@ export default function Main() {
       <Hero />
       <div className="mainContainer">
         <TapFilter />
-        <CardContainer />
       </div>
     </div>
   );
