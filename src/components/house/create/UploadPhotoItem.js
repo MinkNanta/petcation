@@ -6,7 +6,6 @@ import { useCreateHouse } from '../../../contexts/CreateHouseContext';
 
 function UploadPhotoItem({ src, title, id }) {
   const { dispatch, createHouse } = useCreateHouse();
-  const [housePic, setHousePic] = useState(null);
   const housePicInputEl = useRef();
   let savePic;
   if (id === '0') {
@@ -31,10 +30,6 @@ function UploadPhotoItem({ src, title, id }) {
     savePic = createHouse.image.picture6;
   }
 
-  // useEffect(() => {
-  //   dispatch(saveUploadImage({ id, housePic }));
-  // }, [housePic]);
-
   console.log(createHouse);
   return (
     <div className="relative">
@@ -47,7 +42,6 @@ function UploadPhotoItem({ src, title, id }) {
         <div
           className="absolute top-8 right-2 cursor-pointer"
           onClick={() => {
-            // setHousePic(null);
             dispatch(saveUploadImage({ id, housePic: '' }));
           }}
         >
@@ -62,8 +56,6 @@ function UploadPhotoItem({ src, title, id }) {
         onChange={(e) => {
           if (e.target.files[0]) {
             dispatch(saveUploadImage({ id, housePic: e.target.files[0] }));
-
-            // setHousePic(e.target.files[0]);
           }
         }}
       />

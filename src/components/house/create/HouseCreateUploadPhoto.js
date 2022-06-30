@@ -24,7 +24,7 @@ function HouseCreateUploadPhoto() {
       console.log(err);
     } finally {
       setLoading(false);
-      // navigate('/');
+      navigate('/');
     }
   };
   const handleClickBack = () => {
