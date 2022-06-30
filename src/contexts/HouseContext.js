@@ -32,7 +32,7 @@ function HouseContextProvider({ children }) {
 
   const { id } = useParams();
 
-  console.log('houseByUserID', houseDetail);
+  console.log('houseByUserID', houseByUserID);
 
   useEffect(() => {
     const fetchAllHouse = async () => {

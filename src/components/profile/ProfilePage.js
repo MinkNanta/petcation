@@ -8,10 +8,15 @@ import { updateUser } from '../../api/user';
 import validator from 'validator';
 import UserAddress from '../address/UserAddress';
 import ProfileDetails from './ProfileDetails';
+import AlertGreen from '../../common/AlertGreen';
+import { useError } from '../../contexts/ErrorContext';
 
 export default function ProfilePage() {
+  const { error } = useError;
   return (
     <>
+      {/* <h1>dkjkjlk</h1> */}
+      {true && <AlertGreen />}
       <ProfileDetails />
       <div className="divider"></div>
       <UserAddress title="Address" />

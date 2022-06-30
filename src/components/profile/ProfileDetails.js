@@ -16,7 +16,7 @@ export default function ProfileDetails() {
   const [loading, setLoading] = useState(false);
 
   const [newUserInfo, setNewUserInfo] = useState({});
-  const { setError } = useError();
+  const { setError, setFeedback } = useError();
 
   console.log('newUserInfo', newUserInfo);
   console.log('oldValue', oldValue);
@@ -88,6 +88,7 @@ export default function ProfileDetails() {
       setChange(false);
       setFetch((p) => !p);
       setLoading(false);
+      setFeedback('Your Profile Updated');
     } catch (error) {
       setError(error.message);
     }
@@ -97,11 +98,10 @@ export default function ProfileDetails() {
     <>
       <div>
         {loading && <Spinner />}
-        <h4>Hi, Welcome back {oldValue?.firstName}</h4>
-        <p className="text-gray-500">{oldValue?.email}</p>
-
-        <TitleHeder title="Information"></TitleHeder>
-
+        <div className="mb-4">
+          <h4>Hi, Welcome back {oldValue?.firstName}</h4>
+          <p className="text-gray-500">{oldValue?.email}</p>
+        </div>
         <Input
           name="firstName"
           value={newUserInfo?.firstName}
