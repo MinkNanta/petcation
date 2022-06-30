@@ -11,7 +11,9 @@ import {
   QuestionMarkCircleIcon,
 } from '@heroicons/react/outline';
 import Alert from '../../../common/Alert';
-function LoginForm() {
+import Logingoogle from './Logingoogle';
+
+function LoginForm({ className, title }) {
   const [uId, setUId] = useState('');
   const [apiError, setApiError] = useState('');
   const [password, setPassword] = useState('');
@@ -43,7 +45,7 @@ function LoginForm() {
   return (
     <div>
       <Modal
-        title="Sign in"
+        title={title ? title : 'Sign in'}
         icon={<ArrowCircleRightIcon className="w-5 h-5" />}
         onClick={() => {
           setUId('');
@@ -51,6 +53,7 @@ function LoginForm() {
           setValidate('');
           setApiError('');
         }}
+        className={className}
       >
         <div>
           {/* modal body */}
@@ -82,10 +85,10 @@ function LoginForm() {
         </div>
         <div className="divider">Or</div>
         <div className="flex justify-center mt-4">
-          <button className="btn btn-outline">Signup with Google</button>
+          <Logingoogle />
         </div>
         <div className="flex justify-center mt-4">
-          <button className="btn btn-outline">Signup with Facebook</button>
+          <button className="btn btn-outline">Sign in with Facebook</button>
         </div>
       </Modal>
     </div>

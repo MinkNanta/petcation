@@ -10,7 +10,7 @@ import House from '../pages/House';
 import Search from '../pages/Search';
 import HouseMain from '../pages/HouseMain';
 import Main from '../pages/Main';
-import Profile from '../pages/Profile';
+
 import BookingList from '../pages/BookingList';
 import DesignSystemDoc from '../pages/DesignSystemDoc';
 import HouseSetting from '../pages/HouseSetting';
@@ -20,36 +20,36 @@ import HouseOutlet from '../components/myhouse/HouseOutlet';
 import ProfileOutlet from '../components/profile/ProfileOutlet';
 import ProfilePage from '../components/profile/ProfilePage';
 import ProfilePet from '../components/profile/ProfilePet';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function Router() {
-  const user = true;
+  const { user } = useAuth();
   return (
     <Routes>
-      <Route path="/warp" element={<Warp />} />
-      <Route path="/ui" element={<DesignSystemDoc />} />
       <Route path="/" element={<MainHeaderOutlet />}>
         <Route path="" element={<Main />} />
         <Route path="/house/:id" element={<Details />} />
-        <Route path="/booking/create" element={<CreateBooking />} />
-        {user && (
+        {user ? (
           <>
             <Route path="/" element={<ProfileOutlet />}>
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/profile/information" element={<ProfilePage />} />
-              <Route path="/profile/profilepet" element={<ProfilePet />} />
-              <Route path="/booking/list" element={<BookingList />} />
+              <Route path="profile" element={<ProfilePage />} />
+              <Route path="profile/profilepet" element={<ProfilePet />} />
+              <Route path="booking/list" element={<BookingList />} />
             </Route>
 
             <Route path="/" element={<HouseOutlet />}>
-              <Route path="/house" element={<House />} />
-              <Route path="/house/reserve" element={<HouseReserve />} />
-              <Route path="/house/detail" element={<HouseDetail />} />
-              <Route path="/house/setting" element={<HouseSetting />} />
+              <Route path="house" element={<House />} />
+              <Route path="house/reserve" element={<HouseReserve />} />
+              <Route path="house/detail" element={<HouseDetail />} />
+              <Route path="house/setting" element={<HouseSetting />} />
             </Route>
 
-            <Route path="/booking/:id" element={<BookingDetail />} />
+            <Route path="/booking/create" element={<CreateBooking />} />
           </>
+        ) : (
+          <Route path="*" element={<Navigate to="/" />} />
         )}
+        <Route path="/booking/:id" element={<BookingDetail />} />
         <Route path="/house/main" element={<HouseMain />} />
         <Route path="/createHouse" element={<CreateHouse />} />
       </Route>

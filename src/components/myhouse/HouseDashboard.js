@@ -7,27 +7,32 @@ import DashboardMenu from './components/DashboardMenu';
 import { useError } from '../../contexts/ErrorContext';
 import { useHouse } from '../../contexts/HouseContext';
 import { useAuth } from '../../contexts/AuthContext';
+import TitleHeder from '../../common/TitleHeder';
 
 export default function HouseDashboard() {
   const [empty, SetEmpty] = useState(true);
-  const { houseByUserID, getHouseByUser } = useHouse();
   const { user } = useAuth();
 
+  const { houseByUserID, getHouseByUser } = useHouse();
   useEffect(() => {
     getHouseByUser();
-  }, []);
+  }, [user]);
 
-  console.log(houseByUserID);
+  console.log(!{});
 
   return (
     <div className="w-full space-y-6 min-h-[60vh]">
       <div>
-        <h4>Hi, Welcome back {user?.firstName}</h4>
-        {houseByUserID.length > 0 ? (
+        <TitleHeder title={`Hi, Welcome back ${user?.firstName}`} />
+        {houseByUserID.length < 1 ? (
           <EmptyState
             title="Become a host"
-            description="You don’t have any guests checking out today or tomorrow."
-          />
+            description="Easy step to become a host."
+          >
+            <Link className="btn-text-line" to="/house/main">
+              Become a host
+            </Link>
+          </EmptyState>
         ) : (
           <>
             <div className="flex gap-8 mt-4">
