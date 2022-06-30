@@ -5,7 +5,6 @@ import {
 } from '../../../actions/CreateHouseAction';
 import Input from '../../../common/Input';
 import InputDropdown from '../../../common/InputDropdown';
-import { useAuth } from '../../../contexts/AuthContext';
 import { useAddress } from '../../../contexts/AddressContext';
 import { useCreateHouse } from '../../../contexts/CreateHouseContext';
 import { updateUser } from '../../../api/user';

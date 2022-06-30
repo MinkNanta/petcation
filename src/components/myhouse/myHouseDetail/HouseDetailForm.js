@@ -12,8 +12,7 @@ import { useError } from '../../../contexts/ErrorContext';
 import Spinner from '../../../common/Spinner';
 
 export default function HouseDetailForm({ onClickCancel, onClickSave }) {
-  const { error, setError } = useError();
-  let clicked;
+  const { error } = useError();
 
   const {
     houseDetail,
@@ -29,8 +28,6 @@ export default function HouseDetailForm({ onClickCancel, onClickSave }) {
     loading,
   } = useHouse();
 
-  // const [fetch, setFetch] = useState(false);
-
   useEffect(() => {
     getHouseByUser();
   }, [fetch]);
@@ -38,7 +35,6 @@ export default function HouseDetailForm({ onClickCancel, onClickSave }) {
   useEffect(() => {
     setHouseDetail(houseByUserID);
   }, [houseByUserID, fetch]);
-  console.log(error);
 
   return (
     <div>

@@ -28,13 +28,13 @@ export const initial = {
     petFood: null,
     dailySchedule: null,
     image: {
-      cover: null,
-      picture1: null,
-      picture2: null,
-      picture3: null,
-      picture4: null,
-      picture5: null,
-      picture6: null,
+      cover: '',
+      picture1: '',
+      picture2: '',
+      picture3: '',
+      picture4: '',
+      picture5: '',
+      picture6: '',
     },
     other: null,
     isPetFood: false,
@@ -163,25 +163,46 @@ export default function CreateHouseReducer(state, action) {
     }
 
     case UPLOAD_IMAGE: {
-      if (action.payload.id === '0' && action.payload.housePic) {
+      if (
+        (action.payload.id === '0' && action.payload.housePic) ||
+        (action.payload.id === '0' && action.payload.housePic === '')
+      ) {
         state.createHouse.image.cover = action.payload.housePic;
       }
-      if (action.payload.id === '1' && action.payload.housePic) {
+      if (
+        (action.payload.id === '1' && action.payload.housePic) ||
+        (action.payload.id === '1' && action.payload.housePic === '')
+      ) {
         state.createHouse.image.picture1 = action.payload.housePic;
       }
-      if (action.payload.id === '2' && action.payload.housePic) {
+      if (
+        (action.payload.id === '2' && action.payload.housePic) ||
+        (action.payload.id === '2' && action.payload.housePic === '')
+      ) {
         state.createHouse.image.picture2 = action.payload.housePic;
       }
-      if (action.payload.id === '3' && action.payload.housePic) {
+      if (
+        (action.payload.id === '3' && action.payload.housePic) ||
+        (action.payload.id === '3' && action.payload.housePic === '')
+      ) {
         state.createHouse.image.picture3 = action.payload.housePic;
       }
-      if (action.payload.id === '4' && action.payload.housePic) {
+      if (
+        (action.payload.id === '4' && action.payload.housePic) ||
+        (action.payload.id === '4' && action.payload.housePic === '')
+      ) {
         state.createHouse.image.picture4 = action.payload.housePic;
       }
-      if (action.payload.id === '5' && action.payload.housePic) {
+      if (
+        (action.payload.id === '5' && action.payload.housePic) ||
+        (action.payload.id === '5' && action.payload.housePic === '')
+      ) {
         state.createHouse.image.picture5 = action.payload.housePic;
       }
-      if (action.payload.id === '6' && action.payload.housePic) {
+      if (
+        (action.payload.id === '6' && action.payload.housePic) ||
+        (action.payload.id === '6' && action.payload.housePic === '')
+      ) {
         state.createHouse.image.picture6 = action.payload.housePic;
       }
       return { ...state };
