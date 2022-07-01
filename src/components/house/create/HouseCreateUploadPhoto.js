@@ -11,9 +11,11 @@ import { postHouse } from '../../../api/house';
 import { useNavigate } from 'react-router-dom';
 
 function HouseCreateUploadPhoto() {
-  const { dispatch, data } = useCreateHouse();
+  const { dispatch, data, createHouse } = useCreateHouse();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  console.log(data);
 
   const handleClickNext = async () => {
     try {
@@ -24,7 +26,7 @@ function HouseCreateUploadPhoto() {
       console.log(err);
     } finally {
       setLoading(false);
-      navigate('/');
+      // navigate('/');
     }
   };
   const handleClickBack = () => {

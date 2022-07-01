@@ -1,6 +1,9 @@
 import { XIcon } from '@heroicons/react/solid';
 import { useEffect, useRef, useState } from 'react';
-import { saveUploadImage } from '../../../actions/CreateHouseAction';
+import {
+  createHouseAction,
+  saveUploadImage,
+} from '../../../actions/CreateHouseAction';
 import BtnIcon from '../../../common/BtnIcon';
 import { useCreateHouse } from '../../../contexts/CreateHouseContext';
 
@@ -29,6 +32,28 @@ function UploadPhotoItem({ src, title, id }) {
   if (id === '6') {
     savePic = createHouse.image.picture6;
   }
+
+  useEffect(() => {
+    dispatch(createHouseAction());
+  }, [createHouse.image.cover]);
+  useEffect(() => {
+    dispatch(createHouseAction());
+  }, [createHouse.image.picture1]);
+  useEffect(() => {
+    dispatch(createHouseAction());
+  }, [createHouse.image.picture2]);
+  useEffect(() => {
+    dispatch(createHouseAction());
+  }, [createHouse.image.picture3]);
+  useEffect(() => {
+    dispatch(createHouseAction());
+  }, [createHouse.image.picture4]);
+  useEffect(() => {
+    dispatch(createHouseAction());
+  }, [createHouse.image.picture5]);
+  useEffect(() => {
+    dispatch(createHouseAction());
+  }, [createHouse.image.picture6]);
 
   console.log(createHouse);
   return (

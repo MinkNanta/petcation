@@ -10,7 +10,6 @@ import {
   NEXTSTAGEPAGE,
   UPLOAD_IMAGE,
 } from '../actions/CreateHouseAction';
-import { postHouse } from '../api/house';
 
 export const initial = {
   stagePage: 0,
@@ -47,14 +46,6 @@ export const initial = {
     isAirFilter: false,
     status: null,
   },
-};
-
-const axiosHouse = async (input) => {
-  try {
-    await postHouse(input);
-  } catch (err) {
-    console.log(err);
-  }
 };
 
 export default function CreateHouseReducer(state, action) {
