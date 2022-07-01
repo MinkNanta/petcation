@@ -30,3 +30,11 @@ export function getDate7DaysFromNow() {
     myFutureDate.getFullYear()
   );
 }
+
+export function dashesToSlashes(dateStr) {
+  // 2022-03-03
+  let date = String(+dateStr.slice(8));
+  let month = String(+dateStr.slice(5, 7));
+  let year = String(+dateStr.slice(0, 4));
+  return date + '/' + month + '/' + year;
+}

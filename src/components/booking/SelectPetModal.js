@@ -5,12 +5,11 @@ import InputDropdown from '../../common/InputDropdown';
 import InputWithSuffix from '../../common/InputWithSuffix';
 import Modal from '../../common/Modal';
 
-export default function SelectPetModal() {
-
+export default function SelectPetModal({ className }) {
   return (
-    <Modal title='Select from existing pets'>
+    <Modal title="Select from existing pets" className={className}>
       <div>
-        <p className='text-gray-500'>No pets found</p>
+        <p className="text-gray-500">No pets found</p>
       </div>
     </Modal>
   );
