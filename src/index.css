@@ -177,7 +177,7 @@
     @apply w-full bg-gray-100 text-gray-500 rounded-2xl block outline-none focus:outline-1 focus:outline-offset-0 mt-1 disabled:text-gray-400 disabled:bg-gray-100 disabled:border-0;
   }
   .inputWhite {
-    @apply text-gray-500 outline-none focus:outline-1 focus:outline-offset-0 disabled:text-gray-400 disabled:bg-gray-100 disabled:border-0 w-24;
+    @apply text-gray-500 outline-none focus:outline-1 focus:outline-offset-0 disabled:text-gray-400 block disabled:bg-gray-100 disabled:border-0;
   }
 
   .centerAll {

@@ -19,12 +19,13 @@ function HouseCreateUploadPhoto() {
     try {
       setLoading(true);
       await dispatch(createHouseAction());
+      console.log(data);
       await postHouse(data);
     } catch (err) {
       console.log(err);
     } finally {
       setLoading(false);
-      navigate('/');
+      // navigate('/');
     }
   };
   const handleClickBack = () => {
