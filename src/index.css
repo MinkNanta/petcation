@@ -7,6 +7,11 @@
 :root {
   --background-color: #ffffff;
 }
+.backgroundHero {
+  background-image: url('/Users/nantanitlertwittayarat/Documents/CodeCamp11/petcation/src/assets/img/hero.png');
+  background-position: center;
+}
+
 #tabItem {
   color: #ea580c;
   border-color: #ea580c;
@@ -170,6 +175,17 @@
 
   .input {
     @apply w-full bg-gray-100 text-gray-500 rounded-2xl block outline-none focus:outline-1 focus:outline-offset-0 mt-1 disabled:text-gray-400 disabled:bg-gray-100 disabled:border-0;
+  }
+  .inputWhite {
+    @apply text-gray-500 outline-none focus:outline-1 focus:outline-offset-0 disabled:text-gray-400 disabled:bg-gray-100 disabled:border-0 w-24;
+  }
+
+  .centerAll {
+    @apply flex justify-center items-center;
+  }
+
+  .line {
+    @apply bg-gray-300 w-[1px] h-full;
   }
 
   /* .checkbox {
