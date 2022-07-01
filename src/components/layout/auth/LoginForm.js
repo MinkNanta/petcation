@@ -87,9 +87,7 @@ function LoginForm({ className, title }) {
         <div className="flex justify-center mt-4">
           <Logingoogle title="Sign in" />
         </div>
-        <div className="flex justify-center mt-4">
-          <button className="btn btn-outline">Sign in with Facebook</button>
-        </div>
+       
       </Modal>
     </div>
   );
