@@ -112,9 +112,7 @@ function Register() {
               {/* <button className="btn btn-outline">Sign in with Google</button> */}
               <Logingoogle title="Resister" />
             </div>
-            <div className="flex justify-center mt-4">
-              <button className="btn btn-outline">Sign in with Facebook</button>
-            </div>
+            
             <div className="flex justify-center mt-4">
               <p className="text-gray-500">Already have an account? </p>
               <Link to="/" className="text-orange-500">

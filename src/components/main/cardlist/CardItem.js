@@ -2,7 +2,7 @@ import React from 'react';
 import card from '../../../assets/img/card.png';
 
 export default function CardItem({
-  value: { name, description, price, image },
+  value: { name, description, price, image ,petType},
   onClick,
 }) {
   return (
@@ -13,7 +13,7 @@ export default function CardItem({
       <div className="space-y-2">
         <div>
           <p className="text-gray-900 font-semibold ">{name}</p>
-          <p className="text-gray-500">3,082 kilometers away</p>
+          <p className="text-gray-500">For Cat</p>
         </div>
         <p>
           <span>฿ {price} </span>

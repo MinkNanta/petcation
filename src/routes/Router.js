@@ -21,6 +21,7 @@ import ProfileOutlet from '../components/profile/ProfileOutlet';
 import ProfilePage from '../components/profile/ProfilePage';
 import ProfilePet from '../components/profile/ProfilePet';
 import { useAuth } from '../contexts/AuthContext';
+import SearchResult from '../pages/SearchResult';
 
 export default function Router() {
   const { user } = useAuth();
@@ -53,7 +54,7 @@ export default function Router() {
         <Route path="/house/main" element={<HouseMain />} />
         <Route path="/createHouse" element={<CreateHouse />} />
       </Route>
-      <Route path="/search" element={<Search />} />
+      <Route path="/search" element={<SearchResult />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
