@@ -5,7 +5,7 @@ import InputDropdown from '../../common/InputDropdown';
 import InputWithSuffix from '../../common/InputWithSuffix';
 import Modal from '../../common/Modal';
 
-export default function AddPetModal() {
+export default function AddPetModal({ className }) {
   const [year, setYear] = useState(1);
   const [month, setMonth] = useState(0);
 
@@ -31,7 +31,7 @@ export default function AddPetModal() {
   // };
 
   return (
-    <Modal title="+">
+    <Modal title="+" className={className}>
       <div className="form-control w-full mt-5">
         <input
           type="file"
@@ -58,17 +58,17 @@ export default function AddPetModal() {
             errMsg="Error Massage"
             error={false}
           />
-          <InputDropdown
-            label="Type"
-            onChange={(e) => {
-              // setValueDropDown(e.target.value);
-            }}
-            errMsg="Error Massage"
-            error={false}
-          >
-            <option value="option1"></option>
-          </InputDropdown>
         </div>
+        <InputDropdown
+          label="Type"
+          onChange={(e) => {
+            // setValueDropDown(e.target.value);
+          }}
+          errMsg="Error Massage"
+          error={false}
+        >
+          <option value="option1"></option>
+        </InputDropdown>
         <InputDropdown
           label="Weight"
           onChange={(e) => {
@@ -104,14 +104,14 @@ export default function AddPetModal() {
               value={month}
             />
           </div>
-          <Input
-            label="Species"
-            onChange={() => {}}
-            placeholder=""
-            errMsg="Error Massage"
-            error={false}
-          />
         </div>
+        <Input
+          label="Species"
+          onChange={() => {}}
+          placeholder=""
+          errMsg="Error Massage"
+          error={false}
+        />
         <Input
           label="Note"
           onChange={() => {}}

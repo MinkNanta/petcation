@@ -3,8 +3,22 @@ import Input from '../../common/Input';
 import omiseLogo from '../../assets/img/omise.png';
 import axios from '../../config/axios';
 import { useState } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
-export default function PaymentModal() {
+export default function PaymentModal({
+  className,
+  checkInDate,
+  checkOutDate,
+  houseId,
+  price,
+  isIncludeFood,
+  serviceFee,
+  foodPrice,
+  petIds,
+}) {
+  const navigate = useNavigate();
+
   const { Omise } = window;
   const [paymentInputs, setPaymentInputs] = useState({
     expiration_date: '',
@@ -28,7 +42,6 @@ export default function PaymentModal() {
         ...newVal,
       };
     });
-    console.log(paymentInputs);
   };
 
   const handleSubmitPayment = async () => {
@@ -78,19 +91,18 @@ export default function PaymentModal() {
       Omise.setPublicKey('pkey_test_5s9r39lbskdowhcd41t');
 
       const tokenParameters = {
-        expiration_month: 2,
-        expiration_year: 2032,
-        name: 'Somchai Prasert',
-        number: '4242424242424242',
-        security_code: 123,
+        expiration_month: +paymentInputs.expiration_date.slice(5),
+        expiration_year: +paymentInputs.expiration_date.slice(0, 4),
+        name: paymentInputs.name,
+        number: paymentInputs.number,
+        security_code: paymentInputs.security_code,
       };
 
       await Omise.createToken(
         'card',
         tokenParameters,
-        function (statusCode, response) {
+        async function (statusCode, response) {
           const statusStr = String(statusCode);
-          console.log(statusStr);
           if (statusStr.startsWith('4')) {
             setErrMsg((errMsg) => ({
               ...errMsg,
@@ -103,7 +115,27 @@ export default function PaymentModal() {
             }));
           } else {
             // response["id"] is token identifier
-            axios.post('/bookings', { token: response.id });
+
+            try {
+              await axios.post('/bookings', {
+                token: response.id,
+                checkInDate,
+                checkOutDate,
+                houseId,
+                price,
+                includeFood: isIncludeFood,
+                serviceFee,
+                foodPrice,
+                petIds: [1],
+              });
+
+              navigate('/booking/list');
+            } catch (err) {
+              setErrMsg((errMsg) => ({
+                ...errMsg,
+                submit: err.response.data.message,
+              }));
+            }
           }
         },
       );
@@ -115,6 +147,7 @@ export default function PaymentModal() {
       title="Booking"
       name="payment"
       onOpen={<p className="btn w-32">Booking</p>}
+      className={className}
     >
       <div className="flex flex-col">
         <h2 className="my-4">Credit Card Information</h2>

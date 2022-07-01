@@ -39,22 +39,6 @@ export default function Carousel({ images }) {
           </ResponsiveCarousel>
         )}
       </div>
-      {/* <div className="flex justify-center w-full py-2 gap-2 relative">
-        <div className="absolute bottom-8 flex flex-row">
-          {images.map((el, idx) => (
-            <>
-              <a
-                // href={`#${idx}`}
-                className={`w-3 h-3 rounded-full ${
-                  activePic === idx ? 'bg-orange-500' : 'bg-white'
-                }`}
-                onClick={() => setActivePic(idx)}
-              ></a>
-              <div className="w-3"></div>
-            </>
-          ))}
-        </div>
-      </div> */}
     </>
   );
 }

@@ -1,14 +1,11 @@
-import signature from "../../assets/img/signature.png";
+import signature from '../../assets/img/signature.png';
+import cat from '.././../assets/img/cat1.png';
 
 export default function ReviewCard() {
   return (
     <div className="card w-80 inline-block">
       <figure>
-        <img
-          src="https://api.lorem.space/image/shoes?w=400&h=500"
-          alt="Shoes"
-          className="rounded-xl"
-        />
+        <img src={cat} alt="cat" className="rounded-xl" />
       </figure>
       <div className="card-body p-0 py-5">
         <p className="text-base text-gray-500">
