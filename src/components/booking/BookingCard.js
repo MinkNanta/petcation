@@ -5,6 +5,7 @@ import dog from '../../assets/img/dog.png';
 import { Link } from 'react-router-dom';
 import LoginForm from '../layout/auth/LoginForm';
 import { AuthContext } from '../../contexts/AuthContext';
+import axios from '../../config/axios';
 
 export default function BookingCard({
   price,
@@ -18,15 +19,12 @@ export default function BookingCard({
   const [checked, setChecked] = useState(false);
   const [thisLimit, setThisLimit] = useState(1000);
   const [err, setErr] = useState(null);
-  const [bookingInputs, setBookingInputs] = useState({
-    checkInDate: '',
-    checkOutDate: '',
-    isIncludeFood: false,
-  });
 
   const [checkInDate, setCheckInDate] = useState('');
   const [checkOutDate, setCheckOutDate] = useState('');
   const [isIncludeFood, setIsIncludeFood] = useState(false);
+
+  const [dateLimit, setDateLimit] = useState(null);
 
   const { user } = useContext(AuthContext);
 
@@ -34,8 +32,14 @@ export default function BookingCard({
     limit && setThisLimit(limit);
   }, []);
 
-  // need to calculate nights from date inputs
   const [nights, setNights] = useState(0);
+
+  const checkMaxAmount = async (houseId, startDate, endDate) => {
+    const res = await axios.get(
+      `/filterdate/${houseId}/${startDate}/${endDate}`,
+    );
+    return res.data.max;
+  };
 
   const onCheckInChange = (e) => {
     const curDate = new Date();
@@ -49,15 +53,23 @@ export default function BookingCard({
     }
   };
 
-  const onCheckOutChange = (e) => {
+  const onCheckOutChange = async (e) => {
     const selectedDate = new Date(e.target.value);
     const checkIn = new Date(checkInDate);
 
     if (selectedDate - checkIn > 0) {
+      setErr(null);
       setCheckOutDate(e.target.value);
       const diff = Math.floor((selectedDate - checkIn) / (1000 * 60 * 60 * 24));
       setNights(diff);
-      setErr(null);
+
+      // set limit for date range using checkMaxAmount
+      const maxAmount = await checkMaxAmount(
+        houseById.id,
+        checkInDate,
+        e.target.value,
+      );
+      setThisLimit(limit - maxAmount);
     } else {
       setErr('Please select a day after your check in date');
     }
@@ -124,7 +136,7 @@ export default function BookingCard({
             {limit ? (
               <>
                 <br />
-                <span className="text-gray-500">Limit {limit} pets</span>
+                <span className="text-gray-500">Limit {thisLimit} pets</span>
               </>
             ) : (
               <></>
@@ -157,14 +169,22 @@ export default function BookingCard({
         )}
       </div>
       {user ? (
-        checkInDate === '' || checkOutDate === '' 
-        // || err === null 
-        ? (
-          <button className="btn" onClick={() => setErr('Required')}>Continue</button>
+        checkInDate === '' || checkOutDate === '' ? (
+          // || err === null
+          <button className="btn" onClick={() => setErr('Required')}>
+            Continue
+          </button>
         ) : (
           <Link
-            to='/booking/create'
-            state={{ checkInDate, checkOutDate, isIncludeFood, numberOfPets, houseById, nights }}
+            to="/booking/create"
+            state={{
+              checkInDate,
+              checkOutDate,
+              isIncludeFood,
+              numberOfPets,
+              houseById,
+              nights,
+            }}
           >
             <button className="btn">Continue</button>
           </Link>

@@ -4,7 +4,7 @@ export default function Counter({ setNumber, number, limit }) {
       setNumber((number) => number + 1);
     } else if (e.target.value === 'minus' && number > 1) {
       setNumber((number) => number - 1);
-    } else if (e.target.id === 'freetype' && e.target.value < limit) {
+    } else if (e.target.id === 'freetype' && e.target.value <= limit) {
       if (+e.target.value > 0) {
         setNumber(e.target.value);
       } else {

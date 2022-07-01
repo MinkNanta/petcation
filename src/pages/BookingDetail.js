@@ -60,7 +60,7 @@ export default function BookingDetail() {
           <div className="mt-10 mb-20 flex">
             <div className="mr-10 w-full">
               <HouseTitle
-                name="Room name Cat Capsule by Minkminks"
+                name={houseById.name}
                 petType={
                   houseById?.petType
                     ? houseById?.petType[0] +

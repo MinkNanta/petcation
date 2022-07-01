@@ -5,6 +5,7 @@ import axios from '../../config/axios';
 import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import Spinner from '../../common/Spinner';
 
 export default function PaymentModal({
   className,
@@ -18,6 +19,7 @@ export default function PaymentModal({
   petIds,
 }) {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState();
 
   const { Omise } = window;
   const [paymentInputs, setPaymentInputs] = useState({
@@ -117,6 +119,7 @@ export default function PaymentModal({
             // response["id"] is token identifier
 
             try {
+              setLoading(true);
               await axios.post('/bookings', {
                 token: response.id,
                 checkInDate,
@@ -133,8 +136,11 @@ export default function PaymentModal({
             } catch (err) {
               setErrMsg((errMsg) => ({
                 ...errMsg,
-                submit: err.response.data.message,
+                submit: err?.response?.data?.message,
               }));
+              console.log(err);
+            } finally {
+              setLoading(false);
             }
           }
         },
@@ -143,75 +149,78 @@ export default function PaymentModal({
   };
 
   return (
-    <Modal
-      title="Booking"
-      name="payment"
-      onOpen={<p className="btn w-32">Booking</p>}
-      className={className}
-    >
-      <div className="flex flex-col">
-        <h2 className="my-4">Credit Card Information</h2>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmitPayment();
-          }}
-        >
-          <Input
-            label="Name"
-            placeholder="Enter Your Name"
-            errMsg={errMsg.name}
-            error={true}
-            value={paymentInputs.name}
-            onChange={(e) => {
-              handleChange(e, 'name');
+    <>
+      {loading && <Spinner />}
+      <Modal
+        title="Booking"
+        name="payment"
+        onOpen={<p className="btn w-32">Booking</p>}
+        className={className}
+      >
+        <div className="flex flex-col">
+          <h2 className="my-4">Credit Card Information</h2>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmitPayment();
             }}
-          />
-          <Input
-            label="Number"
-            placeholder="Enter Your Card Number"
-            errMsg={errMsg.number}
-            error={true}
-            value={paymentInputs.number}
-            onChange={(e) => {
-              handleChange(e, 'number');
-            }}
-          />
-          <Input
-            label="Expiry Date"
-            placeholder="Enter Your Card Number"
-            type="month"
-            errMsg={errMsg.expiration_date}
-            error={true}
-            onChange={(e) => {
-              handleChange(e, 'expiration_date');
-            }}
-          />
-          <Input
-            label="CVC"
-            placeholder="Enter Your CVC Number"
-            errMsg={errMsg.security_code}
-            error={true}
-            onChange={(e) => {
-              handleChange(e, 'security_code');
-            }}
-          />
-          <button type="submit" className="btn w-1/4 place-self-center">
-            Submit
-          </button>
-          <label className="label mt-2">
-            {errMsg.submit !== '' && (
-              <span className="label-text-alt text-red-400">
-                {errMsg.submit}
-              </span>
-            )}
-          </label>
-        </form>
-        <div className="mt-2 mx-auto flex justify-center gap-2 items-center">
-          <p className="text-gray-400 font-light text-xs">Powered By </p>
-          <img src={omiseLogo} className="w-1/5"></img>
+          >
+            <Input
+              label="Name"
+              placeholder="Enter Your Name"
+              errMsg={errMsg.name}
+              error={true}
+              value={paymentInputs.name}
+              onChange={(e) => {
+                handleChange(e, 'name');
+              }}
+            />
+            <Input
+              label="Number"
+              placeholder="Enter Your Card Number"
+              errMsg={errMsg.number}
+              error={true}
+              value={paymentInputs.number}
+              onChange={(e) => {
+                handleChange(e, 'number');
+              }}
+            />
+            <Input
+              label="Expiry Date"
+              placeholder="Enter Your Card Number"
+              type="month"
+              errMsg={errMsg.expiration_date}
+              error={true}
+              onChange={(e) => {
+                handleChange(e, 'expiration_date');
+              }}
+            />
+            <Input
+              label="CVC"
+              placeholder="Enter Your CVC Number"
+              errMsg={errMsg.security_code}
+              error={true}
+              onChange={(e) => {
+                handleChange(e, 'security_code');
+              }}
+            />
+            <button type="submit" className="btn w-1/4 place-self-center">
+              Submit
+            </button>
+            <label className="label mt-2">
+              {errMsg.submit !== '' && (
+                <span className="label-text-alt text-red-400">
+                  {errMsg.submit}
+                </span>
+              )}
+            </label>
+          </form>
+          <div className="mt-2 mx-auto flex justify-center gap-2 items-center">
+            <p className="text-gray-400 font-light text-xs">Powered By </p>
+            <img src={omiseLogo} className="w-1/5"></img>
+          </div>
         </div>
-      </div>
-    </Modal>
+      </Modal>
+    </>
   );
 }
