@@ -2,85 +2,49 @@ import { XIcon } from '@heroicons/react/solid';
 import { useEffect, useRef, useState } from 'react';
 import {
   createHouseAction,
+  saveDeleteImage,
   saveUploadImage,
 } from '../../../actions/CreateHouseAction';
 import BtnIcon from '../../../common/BtnIcon';
 import { useCreateHouse } from '../../../contexts/CreateHouseContext';
 
-function UploadPhotoItem({ src, title, id }) {
+function UploadPhotoItem({ src, srcHouse, idx }) {
   const { dispatch, createHouse } = useCreateHouse();
   const housePicInputEl = useRef();
-  let savePic;
-  if (id === '0') {
-    savePic = createHouse.image.cover;
-  }
-  if (id === '1') {
-    savePic = createHouse.image.picture1;
-  }
-  if (id === '2') {
-    savePic = createHouse.image.picture2;
-  }
-  if (id === '3') {
-    savePic = createHouse.image.picture3;
-  }
-  if (id === '4') {
-    savePic = createHouse.image.picture4;
-  }
-  if (id === '5') {
-    savePic = createHouse.image.picture5;
-  }
-  if (id === '6') {
-    savePic = createHouse.image.picture6;
-  }
 
   useEffect(() => {
     dispatch(createHouseAction());
-  }, [createHouse.image.cover]);
-  useEffect(() => {
-    dispatch(createHouseAction());
-  }, [createHouse.image.picture1]);
-  useEffect(() => {
-    dispatch(createHouseAction());
-  }, [createHouse.image.picture2]);
-  useEffect(() => {
-    dispatch(createHouseAction());
-  }, [createHouse.image.picture3]);
-  useEffect(() => {
-    dispatch(createHouseAction());
-  }, [createHouse.image.picture4]);
-  useEffect(() => {
-    dispatch(createHouseAction());
-  }, [createHouse.image.picture5]);
-  useEffect(() => {
-    dispatch(createHouseAction());
-  }, [createHouse.image.picture6]);
+  }, [createHouse.image.length]);
 
   console.log(createHouse);
   return (
     <div className="relative">
       <img
         className="h-[224px] w-[224px] rounded-3xl mt-6"
-        src={savePic ? URL.createObjectURL(savePic) : src}
+        src={srcHouse ? URL.createObjectURL(srcHouse) : src}
         onClick={() => housePicInputEl.current.click()}
       />
-      {savePic && (
+      {srcHouse && (
         <div
           className="absolute top-8 right-2 cursor-pointer"
           onClick={() => {
-            dispatch(saveUploadImage({ id, housePic: '' }));
+            dispatch(saveDeleteImage({ idx }));
           }}
         >
           <BtnIcon icon={<XIcon />} htmlFor="" />
         </div>
       )}
-      <div className="text-[18px] mt-4">{title}</div>
+
       <input
         type="file"
         className="hidden"
         ref={housePicInputEl}
         onChange={(e) => {
           if (e.target.files[0]) {
-            dispatch(saveUploadImage({ id, housePic: e.target.files[0] }));
+            if (!idx) {
+              dispatch(saveUploadImage({ housePic: e.target.files[0] }));
+              housePicInputEl.current.value = '';
+            }
           }
         }}
       />

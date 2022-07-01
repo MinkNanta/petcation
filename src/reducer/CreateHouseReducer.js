@@ -1,6 +1,7 @@
 import {
   BACKSTAGEPAGE,
   CREATE_HOUSE,
+  DELETE_IMAGE,
   HOST_INFORMATION,
   HOUSE_DETAIL,
   HOUSE_FOR,
@@ -26,15 +27,7 @@ export const initial = {
     checkOutTime: null,
     petFood: null,
     dailySchedule: null,
-    image: {
-      cover: '',
-      picture1: '',
-      picture2: '',
-      picture3: '',
-      picture4: '',
-      picture5: '',
-      picture6: '',
-    },
+    image: [],
     other: null,
     isPetFood: false,
     isGrooming: false,
@@ -154,48 +147,60 @@ export default function CreateHouseReducer(state, action) {
     }
 
     case UPLOAD_IMAGE: {
-      if (
-        (action.payload.id === '0' && action.payload.housePic) ||
-        (action.payload.id === '0' && action.payload.housePic === '')
-      ) {
-        state.createHouse.image.cover = action.payload.housePic;
+      // if (
+      //   (action.payload.id === '0' && action.payload.housePic) ||
+      //   (action.payload.id === '0' && action.payload.housePic === '')
+      // ) {
+      //   state.createHouse.image.cover = action.payload.housePic;
+      // }
+      // if (
+      //   (action.payload.id === '1' && action.payload.housePic) ||
+      //   (action.payload.id === '1' && action.payload.housePic === '')
+      // ) {
+      //   state.createHouse.image.picture1 = action.payload.housePic;
+      // }
+      // if (
+      //   (action.payload.id === '2' && action.payload.housePic) ||
+      //   (action.payload.id === '2' && action.payload.housePic === '')
+      // ) {
+      //   state.createHouse.image.picture2 = action.payload.housePic;
+      // }
+      // if (
+      //   (action.payload.id === '3' && action.payload.housePic) ||
+      //   (action.payload.id === '3' && action.payload.housePic === '')
+      // ) {
+      //   state.createHouse.image.picture3 = action.payload.housePic;
+      // }
+      // if (
+      //   (action.payload.id === '4' && action.payload.housePic) ||
+      //   (action.payload.id === '4' && action.payload.housePic === '')
+      // ) {
+      //   state.createHouse.image.picture4 = action.payload.housePic;
+      // }
+      // if (
+      //   (action.payload.id === '5' && action.payload.housePic) ||
+      //   (action.payload.id === '5' && action.payload.housePic === '')
+      // ) {
+      //   state.createHouse.image.picture5 = action.payload.housePic;
+      // }
+      // if (
+      //   (action.payload.id === '6' && action.payload.housePic) ||
+      //   (action.payload.id === '6' && action.payload.housePic === '')
+      // ) {
+      //   state.createHouse.image.picture6 = action.payload.housePic;
+      // }
+
+      state.createHouse.image.push(action.payload.housePic);
+
+      if (action.payload.idx) {
+        state.createHouse.image[action.payload.idx] = action.payload.housePic;
       }
-      if (
-        (action.payload.id === '1' && action.payload.housePic) ||
-        (action.payload.id === '1' && action.payload.housePic === '')
-      ) {
-        state.createHouse.image.picture1 = action.payload.housePic;
-      }
-      if (
-        (action.payload.id === '2' && action.payload.housePic) ||
-        (action.payload.id === '2' && action.payload.housePic === '')
-      ) {
-        state.createHouse.image.picture2 = action.payload.housePic;
-      }
-      if (
-        (action.payload.id === '3' && action.payload.housePic) ||
-        (action.payload.id === '3' && action.payload.housePic === '')
-      ) {
-        state.createHouse.image.picture3 = action.payload.housePic;
-      }
-      if (
-        (action.payload.id === '4' && action.payload.housePic) ||
-        (action.payload.id === '4' && action.payload.housePic === '')
-      ) {
-        state.createHouse.image.picture4 = action.payload.housePic;
-      }
-      if (
-        (action.payload.id === '5' && action.payload.housePic) ||
-        (action.payload.id === '5' && action.payload.housePic === '')
-      ) {
-        state.createHouse.image.picture5 = action.payload.housePic;
-      }
-      if (
-        (action.payload.id === '6' && action.payload.housePic) ||
-        (action.payload.id === '6' && action.payload.housePic === '')
-      ) {
-        state.createHouse.image.picture6 = action.payload.housePic;
-      }
+
+      return { ...state };
+    }
+
+    case DELETE_IMAGE: {
+      state.createHouse.image.splice(action.payload.idx, 1);
       return { ...state };
     }
 
@@ -226,13 +231,17 @@ export default function CreateHouseReducer(state, action) {
       formData.append('isAirFilter', state.createHouse.isAirFilter);
       formData.append('status', state.createHouse.status);
 
-      formData.append('cover', state.createHouse.image.cover);
-      formData.append('cover', state.createHouse.image.picture1);
-      formData.append('cover', state.createHouse.image.picture2);
-      formData.append('cover', state.createHouse.image.picture3);
-      formData.append('cover', state.createHouse.image.picture4);
-      formData.append('cover', state.createHouse.image.picture5);
-      formData.append('cover', state.createHouse.image.picture6);
+      state.createHouse.image.map((el) => {
+        formData.append('cover', el);
+      });
+
+      // formData.append('cover', state.createHouse.image.cover);
+      // formData.append('cover', state.createHouse.image.picture1);
+      // formData.append('cover', state.createHouse.image.picture2);
+      // formData.append('cover', state.createHouse.image.picture3);
+      // formData.append('cover', state.createHouse.image.picture4);
+      // formData.append('cover', state.createHouse.image.picture5);
+      // formData.append('cover', state.createHouse.image.picture6);
 
       state.data = formData;
 
