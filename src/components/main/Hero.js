@@ -11,8 +11,8 @@ export default function Hero() {
       <div className="top-0 absolute w-screen h-[90vh]">
         <div className="mainContainer h-full flex flex-col mt-40 content-center">
           <h1 className="text-6xl text-white">
-            Find <span className="text-orange-500">Perfect</span> <br />
-            Place for Your Pet.
+            Find the <span className="text-orange-500">Perfect</span> <br />
+            Stay for Your Pet.
           </h1>
           <Input />
         </div>

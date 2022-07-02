@@ -18,7 +18,8 @@ export default function BookingCard({
 }) {
   const [checked, setChecked] = useState(false);
   const [thisLimit, setThisLimit] = useState(1000);
-  const [err, setErr] = useState(null);
+  const [dateErr, setDateErr] = useState(null);
+  const [limitErr, setLimitErr] = useState(null);
 
   const [checkInDate, setCheckInDate] = useState('');
   const [checkOutDate, setCheckOutDate] = useState('');
@@ -47,9 +48,10 @@ export default function BookingCard({
 
     if (selectedDate - curDate > 0) {
       setCheckInDate(e.target.value);
-      setErr(null);
+      setDateErr(null);
+      setLimitErr(null);
     } else {
-      setErr('Please select a day after today');
+      setDateErr('Please select a day after today');
     }
   };
 
@@ -58,7 +60,8 @@ export default function BookingCard({
     const checkIn = new Date(checkInDate);
 
     if (selectedDate - checkIn > 0) {
-      setErr(null);
+      setDateErr(null);
+      setLimitErr(null);
       setCheckOutDate(e.target.value);
       const diff = Math.floor((selectedDate - checkIn) / (1000 * 60 * 60 * 24));
       setNights(diff);
@@ -69,9 +72,16 @@ export default function BookingCard({
         checkInDate,
         e.target.value,
       );
+
       setThisLimit(limit - maxAmount);
+      if (limit - maxAmount <= 0) {
+        setThisLimit(null);
+        setLimitErr('No availability for your dates');
+      } else if (numberOfPets > limit - maxAmount) {
+        setLimitErr('Not enough available rooms');
+      }
     } else {
-      setErr('Please select a day after your check in date');
+      setDateErr('Please select a day after your check in date');
     }
   };
 
@@ -119,9 +129,9 @@ export default function BookingCard({
             value={checkOutDate}
           />
         </div>
-        {err && (
+        {dateErr && (
           <span className="label-text-alt text-red-400 col-span-2 mt-2">
-            {err}
+            {dateErr}
           </span>
         )}
       </div>
@@ -130,23 +140,30 @@ export default function BookingCard({
         <p>{petType}</p>
       </div>
       <div className="bg-white p-5 my-5 rounded-2xl">
-        <div className="flex justify-between items-center">
-          <p>
-            Number
-            {limit ? (
-              <>
-                <br />
-                <span className="text-gray-500">Limit {thisLimit} pets</span>
-              </>
-            ) : (
-              <></>
-            )}
-          </p>
-          <Counter
-            setNumber={setNumberOfPets}
-            number={numberOfPets}
-            limit={thisLimit}
-          />
+        <div>
+          <div className="flex justify-between items-center">
+            <p>
+              Number
+              {thisLimit ? (
+                <>
+                  <br />
+                  <span className="text-gray-500">Limit {thisLimit} pets</span>
+                </>
+              ) : (
+                <></>
+              )}
+            </p>
+            <Counter
+              setNumber={setNumberOfPets}
+              number={numberOfPets}
+              limit={thisLimit}
+            />
+          </div>
+          {limitErr && (
+            <span className="label-text-alt text-red-400 col-span-2 mt-2">
+              {limitErr}
+            </span>
+          )}
         </div>
         {foodPrice ? (
           <>
@@ -170,10 +187,12 @@ export default function BookingCard({
       </div>
       {user ? (
         checkInDate === '' || checkOutDate === '' ? (
-          // || err === null
-          <button className="btn" onClick={() => setErr('Required')}>
+          // || dateErr === null
+          <button className="btn" onClick={() => setDateErr('Required')}>
             Continue
           </button>
+        ) : limitErr ? (
+          <button className="btn">Continue</button>
         ) : (
           <Link
             to="/booking/create"

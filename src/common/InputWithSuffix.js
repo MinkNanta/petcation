@@ -36,7 +36,7 @@ export default function InputWithSuffix({
           placeholder={
             placeholder
               ? placeholder
-              : `Please Enter Your ${name ? name : 'This Input'}`
+              : `Please Enter Your ${name ? name : 'Input'}`
           }
         />
         <p className="absolute right-3 bottom-3 label-text text-gray-400">

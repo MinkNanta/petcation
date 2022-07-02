@@ -28,7 +28,7 @@ export default function TapFilter() {
             setCage(false);
           }}>
             <img className="w-6 h-6 mx-auto" src={allPlaceIcon} />
-            <p className={allHouse ? 'text-orange-500' : 'text-gray-500'}>All Place</p>
+            <p className={allHouse ? 'text-orange-500' : 'text-gray-500'}>All Places</p>
           </div>
 
           {/* Near Me */}
@@ -47,7 +47,7 @@ export default function TapFilter() {
              setCage(false);
            }}>
           <img className="w-6 h-6 mx-auto" src={singleRoomIcon} />
-            <p className={singleRoom ? 'text-orange-500' : 'text-gray-500'}>Single room</p>
+            <p className={singleRoom ? 'text-orange-500' : 'text-gray-500'}>Single Room</p>
           </div>
           
           
@@ -87,7 +87,7 @@ export default function TapFilter() {
 
         <button className="flex gap-2 bg-gray-100 text-gray-600 justify-center items-center px-4 rounded-full">
           <MapIcon className="w-6 h-6 mx-auto inline-block" />
-          <p>Show map</p>
+          <p>Show Map</p>
         </button>
       </div>
       {allHouse && <CardContainer />}

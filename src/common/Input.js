@@ -33,7 +33,7 @@ export default function Input({
         placeholder={
           placeholder
             ? placeholder
-            : `Please Enter Your ${name ? name : 'This Input'}`
+            : `Please Enter Your ${name ? name : 'Input'}`
         }
         className="input"
         onChange={onChange}

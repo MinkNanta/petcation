@@ -17,7 +17,7 @@ export default function CardItem({
         </div>
         <p>
           <span>฿ {price} </span>
-          <span>night</span>
+          <span>/ night</span>
         </p>
       </div>
     </div>

@@ -26,7 +26,7 @@ export default function HouseMain() {
               className="btn-outline w-44"
               onClick={() => navigate('/createHouse')}
             >
-              Set up new host
+              Set up new house
             </button>
           ) : (
             <LoginForm
@@ -40,15 +40,25 @@ export default function HouseMain() {
       <div className="my-10 mx-20">
         <div className="flex justify-center mt-20">
           <h1 className="text-center">
-            You can host
+            You can become a host
             <br />
-            anything, anywhere
+            anytime, anywhere
           </h1>
         </div>
         <div className="mt-10 flex justify-between">
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
+          <ReviewCard
+            desc="Opening my home to Petcation guests allowed me to become an entrepreneur and laid down a
+          path to financial freedom."
+            title="Entrepreneur"
+          />
+          <ReviewCard
+            desc="Great customer service! The Petcation support team was very helpful in helping me set up my house."
+            title="Retiree"
+          />
+          <ReviewCard
+            desc="Hosting on Petcation is a dream job for a someone like me. I get to spend my time taking care of dogs and get paid for my time!"
+            title="Dog Lover"
+          />
         </div>
         <div className="mt-20">
           <img className="w-full" src={hostFooter}></img>
@@ -64,7 +74,7 @@ export default function HouseMain() {
                 className="btn-outline w-44"
                 onClick={() => navigate('/createHouse')}
               >
-                Set up new host
+                Set up new house
               </button>
             ) : (
               <LoginForm
