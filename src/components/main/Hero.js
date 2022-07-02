@@ -3,10 +3,14 @@ import { SearchIcon } from '@heroicons/react/solid';
 import { useState } from 'react';
 import hero from '../../assets/img/hero.png';
 import Input from '../../common/Input';
+import LineH from '../../common/LineH';
+import InputHero from '../../common/InputHero';
+import Demo from '../../common/Demo';
 
 export default function Hero() {
   const [where, setWhere] = useState('');
-  const [when, setWhen] = useState('');
+  const [checkInDate, setCheckInDate] = useState('');
+  const [checkOutDate, setCheckOutDate] = useState('');
   const [pet, setPet] = useState('');
   const [change, setChange] = useState(false);
 
@@ -22,48 +26,38 @@ export default function Hero() {
           Place for Your Pet.
         </h1>
 
-        <div className="">
-          <div
-            className={`bg-white rounded-full px-6  py-4 flex ${
-              change || 'w-[90%]'
-            } 
-            `}
-          >
-            <div className="flex gap-4">
-              <div>
-                {change && <label>Location</label>}
-                <input
-                  className={change ? 'bg-red-900' : 'inputWhite'}
-                  placeholder={change ? 'Enter a location or type' : 'Where'}
-                  value={where}
-                  // onChange={(e) => setWhere(e.target.value)}
-                  onChange={(e) => {
-                    setWhere(e.target.value);
-                    setChange(true);
-                  }}
-                />
-              </div>
-              <div className="line"></div>
+        <div className="bg-white rounded-full pl-10 pr-2  py-4 flex w-[80%] justify-between ">
+          <InputHero
+            label="Location"
+            placeholder="Enter a location"
+            value={where}
+            onClick={() => setChange(true)}
+            onChange={(e) => {
+              setWhere(e.target.value);
+              setChange(true);
+            }}
+          />
 
-              <input
-                placeholder="When"
-                className="inputWhite"
-                value={when}
-                onChange={(e) => setWhen(e.target.value)}
-              />
+          {/* <LineH /> */}
+          <Demo />
 
-              <div className="line"></div>
-              <input
-                placeholder="With"
-                className="inputWhite"
-                value={pet}
-                onChange={(e) => setPet(e.target.value)}
-              />
-            </div>
+          {/* <LineH /> */}
 
-            <div className="bg-orange-500 w-9 h-9 rounded-full centerAll">
-              <SearchIcon className="w-6 h-6 m-auto text-white" />
-            </div>
+          {/* <LineH /> */}
+          <InputHero
+            active={change}
+            label="Pet"
+            placeholder="Check in"
+            value={where}
+            onClick={() => setChange(true)}
+            onChange={(e) => {
+              setCheckInDate(e.target.value);
+              setChange(true);
+            }}
+          />
+
+          <div className="bg-orange-500 p-2 rounded-full centerAll">
+            <SearchIcon className="w-7 h-7 m-auto text-white" />
           </div>
         </div>
       </div>

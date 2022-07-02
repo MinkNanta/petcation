@@ -10,7 +10,6 @@ export default function TapFilter() {
   const [cage, setCage] = useState(false);
   return (
     <>
-      {' '}
       <div className="py-10 flex justify-between">
         <div className="flex  gap-6">
           <div className="text-center">
