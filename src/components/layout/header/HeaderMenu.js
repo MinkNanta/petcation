@@ -15,13 +15,13 @@ import LoginForm from '../auth/LoginForm';
 import Logout from '../auth/Logout';
 import Register from '../auth/Register';
 
-export default function HeaderMenu() {
+export default function HeaderMenu({ className }) {
   const { user, logout } = useAuth();
   // const user = true;
   // const user = false;
   const [active, setActive] = useState(false);
   return (
-    <div className="flex gap-4  items-center text-gray-600 ">
+    <div>
       {user ? (
         <>
           <div
@@ -48,7 +48,7 @@ export default function HeaderMenu() {
             {active && (
               <div
                 tabIndex="0"
-                className="dropdown-content menu shadow rounded-box w-52 bg-white p-4 text-gray-500"
+                className="dropdown-content menu shadow-2xl rounded-3xl w-52 bg-white p-4 text-gray-500 mt-2"
               >
                 <MenuIcon icon={<UserIcon />} to="/profile" title="Profile" />
                 <MenuIcon
@@ -66,15 +66,25 @@ export default function HeaderMenu() {
           </div>
         </>
       ) : (
-        <div className="flex justify-center items-center gap-6 bg-white/50 px-6 rounded-3xl">
+        <div
+          className={
+            className
+              ? className
+              : 'flex justify-center items-center gap-2 rounded-3xl text-white w-full'
+          }
+        >
           <Link
             to="/house/main"
-            className=" text-gray-600 hover:bg-gray-200/50 py-3 rounded-2xl"
+            className="  hover:bg-gray-50/20 px-4  py-2 rounded-3xl"
           >
             Become a Host
           </Link>
-          <Register />
-          <LoginForm />
+          <div className="  hover:bg-gray-50/20 px-4  py-2 rounded-3xl ">
+            <Register />
+          </div>
+          <div className="  hover:bg-gray-50/20 px-4  py-2 rounded-3xl ">
+            <LoginForm />
+          </div>
         </div>
       )}
     </div>

@@ -1,9 +1,8 @@
-// import React from 'react';
-import hero from '../../assets/img/hero.png';
-import Input from '../../common/Input';
+import SearchInput from './SearchInput';
 
 export default function Hero() {
   return (
+<<<<<<< HEAD
     <div className="relative h-[90vh] overflow-hidden z-0">
       <div className="w-screen top-0">
         <img src={hero} alt="hero" className="w-full" />
@@ -15,6 +14,17 @@ export default function Hero() {
             Stay for Your Pet.
           </h1>
           <Input />
+=======
+    <div className="backgroundHero h-[60vh]">
+      <div className="mainContainer h-full pt-48 space-y-2">
+        <h2 className=" text-white text-center m-auto">
+          Find Perfect Place for Your Pet.
+        </h2>
+        <div className="flex justify-between items-center  ">
+          <div className="w-[80%] mx-auto">
+            <SearchInput />
+          </div>
+>>>>>>> common_ui
         </div>
       </div>
     </div>

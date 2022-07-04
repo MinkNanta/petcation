@@ -19,14 +19,17 @@ function UploadPhotoItem({ src, srcHouse, idx }) {
   console.log(createHouse);
   return (
     <div className="relative">
-      <img
-        className="h-[224px] w-[224px] rounded-3xl mt-6"
-        src={srcHouse ? URL.createObjectURL(srcHouse) : src}
-        onClick={() => housePicInputEl.current.click()}
-      />
+      <div className="h-[224px] w-[224px] overflow-hidden rounded-3xl">
+        <img
+          className=" w-full h-full object-cover"
+          alt="house"
+          src={srcHouse ? URL.createObjectURL(srcHouse) : src}
+          onClick={() => housePicInputEl.current.click()}
+        />
+      </div>
       {srcHouse && (
         <div
-          className="absolute top-8 right-2 cursor-pointer"
+          className="absolute top-3 right-3 cursor-pointer"
           onClick={() => {
             dispatch(saveDeleteImage({ idx }));
           }}

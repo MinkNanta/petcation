@@ -20,22 +20,24 @@ function HouseCreateUploadPhoto() {
   const handleClickNext = async () => {
     try {
       setLoading(true);
+      await dispatch(createHouseAction());
+      console.log(data);
       // await dispatch(createHouseAction());
       await postHouse(data);
     } catch (err) {
       console.log(err);
     } finally {
       setLoading(false);
-      // navigate('/');
+      navigate('/?created=true');
     }
   };
   const handleClickBack = () => {
     dispatch(backStagePage());
   };
   return (
-    <div className="relative">
+    <div className="relative h-[80vh]">
       {loading && <Spinner />}
-      <div className="text-2xl">Upload photo</div>
+      <h4 className="my-4">Upload photo</h4>
       <div className="grid grid-cols-4 gap-4 mb-24">
         {createHouse.image.length === 0 ? (
           <UploadPhotoItem src={uploadImage} />
@@ -61,10 +63,10 @@ function HouseCreateUploadPhoto() {
       </div>
 
       <div className="absolute bottom-0 left-0" onClick={handleClickBack}>
-        <div className="btn-small  w-[91px]">Back</div>
+        <div className="btn-small ">Back</div>
       </div>
       <div className="absolute bottom-0 right-0" onClick={handleClickNext}>
-        <div className="btn-small  w-[91px]">Next</div>
+        <div className="btn-small ">Next</div>
       </div>
     </div>
   );
