@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import HouseCard from '../common/HouseCard';
 import BackNavigation from '../components/booking/BackNavigation';
 import BookingSummary from '../components/booking/BookingSummary';
@@ -7,62 +7,82 @@ import AddPetModal from '../components/booking/AddPetModal';
 import SelectPetModal from '../components/booking/SelectPetModal';
 import PaymentModal from '../components/payment/PaymentModal';
 import { useLocation } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthContext';
+import UserAddress from '../components/address/UserAddress';
 
 export default function CreateBooking() {
-  const [firstName, setFirstName] = useState(null);
-  const [lastName, setLastName] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState(null);
-  const [province, setProvince] = useState(null);
-  const [district, setDistrict] = useState(null);
-  const [subdistrict, setSubdistrict] = useState(null);
-  const [zipCode, setZipCode] = useState(null);
-  const [address, setAddress] = useState(null);
-
-  const { user } = useContext(AuthContext);
-
   const { state } = useLocation();
+  const {
+    checkInDate,
+    checkOutDate,
+    isIncludeFood,
+    numberOfPets,
+    houseById,
+    nights,
+  } = state;
+
+  const [petIds, setPetIds] = useState([]);
 
   return (
     <div className="my-10 mx-20">
-      <BackNavigation title="Booking & Payment" />
+      <BackNavigation title="Booking & Payment" houseId={houseById?.id} />
       <div className="mt-10 flex">
         <div>
           <HouseCard
-            houseName="Room name Cat Capsule by Minkminks"
-            img="https://api.lorem.space/image/shoes?w=400&h=225"
+            houseName={houseById?.name}
+            img={JSON.parse(houseById?.image)[0]}
             reviews="4"
-            price={10000}
-            nights={2}
-            foodPrice={20000}
-            serviceFee={20000}
+            price={houseById?.price}
+            nights={nights}
+            foodPrice={houseById?.foodPrice}
+            serviceFee={houseById?.serviceFee}
+            numberOfPets={numberOfPets}
+            isIncludeFood={isIncludeFood}
           />
         </div>
         <div className="ml-10 w-full">
-          <BookingSummary />
-          <div className="w-full border-t-2 border-gray-200 my-10"></div>
-          <p className="text-2xl font-medium">Pet Owner</p>
-          <ProfileDetails
-            setFirstName={setFirstName}
-            setLastName={setLastName}
-            setPhoneNumber={setPhoneNumber}
-            setProvince={setProvince}
-            setDistrict={setDistrict}
-            setSubdistrict={setSubdistrict}
-            setZipCode={setZipCode}
-            setAddress={setAddress}
+          <BookingSummary
+            checkInDate={checkInDate}
+            checkOutDate={checkOutDate}
+            numberOfPets={numberOfPets}
+            isIncludeFood={isIncludeFood}
+            petType={houseById?.petType}
           />
+          <div className="w-full border-t-2 border-gray-200 my-10"></div>
+          <ProfileDetails title="Pet Owner" />
+          <UserAddress />
           <div className="w-full border-t-2 border-gray-200 my-10"></div>
           <div className="flex justify-between items-end">
             <p className="text-2xl font-medium">Pet Information</p>
             <div className="flex gap-5 items-end">
-              <SelectPetModal />
-              <AddPetModal />
+              <SelectPetModal className="bg-orange-500 p-3 text-white rounded-2xl" />
+              <AddPetModal className="bg-orange-500 p-3 px-5 text-white rounded-2xl" />
             </div>
           </div>
           <p className="mt-5 text-gray-500">Select or add a pet</p>
           <div className="w-full border-t-2 border-gray-200 my-10"></div>
-          <PaymentModal />
+          <PaymentModal
+            className="bg-orange-500 p-3 text-white rounded-2xl w-1/5"
+            checkInDate={checkInDate}
+            checkOutDate={checkOutDate}
+            houseId={houseById?.id}
+            price={
+              isIncludeFood
+                ? (houseById?.price * nights + houseById?.foodPrice * nights) *
+                  numberOfPets *
+                  1.05
+                : houseById?.price * nights * numberOfPets * 1.05
+            }
+            isIncludeFood={isIncludeFood}
+            serviceFee={
+              isIncludeFood
+                ? (houseById?.price * nights + houseById?.foodPrice * nights) *
+                  numberOfPets *
+                  0.05
+                : houseById?.price * nights * numberOfPets * 0.05
+            }
+            foodPrice={houseById?.foodPrice}
+            petIds={petIds}
+          />
         </div>
       </div>
     </div>

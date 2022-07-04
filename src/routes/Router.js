@@ -2,17 +2,14 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import { MainHeaderOutlet } from '../components/layout/MainHeaderOutlet';
 import CreateBooking from '../pages/CreateBooking';
 import CreateHouse from '../pages/CreateHouse';
-import Warp from '../pages/Warp';
 import Details from '../pages/Details';
 import BookingDetail from '../pages/BookingDetail';
 import HouseReserve from '../pages/HouseReserve';
 import House from '../pages/House';
-import Search from '../pages/Search';
 import HouseMain from '../pages/HouseMain';
 import Main from '../pages/Main';
 
 import BookingList from '../pages/BookingList';
-import DesignSystemDoc from '../pages/DesignSystemDoc';
 import HouseSetting from '../pages/HouseSetting';
 import HouseDetail from '../pages/HouseDetail';
 
@@ -21,6 +18,7 @@ import ProfileOutlet from '../components/profile/ProfileOutlet';
 import ProfilePage from '../components/profile/ProfilePage';
 import ProfilePet from '../components/profile/ProfilePet';
 import { useAuth } from '../contexts/AuthContext';
+import SearchResult from '../pages/SearchResult';
 
 export default function Router() {
   const { user } = useAuth();
@@ -53,7 +51,7 @@ export default function Router() {
         <Route path="/house/main" element={<HouseMain />} />
         <Route path="/createHouse" element={<CreateHouse />} />
       </Route>
-      <Route path="/search" element={<Search />} />
+      <Route path="/search" element={<SearchResult />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

@@ -324,6 +324,7 @@
 
 .backgroundHero {
   background-image: url('/Users/nantanitlertwittayarat/Documents/CodeCamp11/petcation/src/assets/img/hero.png');
+
   background-position: center;
 }
 
@@ -491,9 +492,6 @@
   .input {
     @apply w-full bg-gray-100 text-gray-500 rounded-2xl block outline-none focus:outline-1 focus:outline-offset-0 mt-1 disabled:text-gray-400 disabled:bg-gray-100 disabled:border-0;
   }
-  .inputWhite {
-    @apply text-gray-500 outline-none focus:outline-1 focus:outline-offset-0 disabled:text-gray-400 block disabled:bg-gray-100 disabled:border-0 h-full w-full;
-  }
 
   .centerAll {
     @apply flex justify-center items-center;
@@ -503,9 +501,9 @@
     @apply bg-gray-300 w-[1px] h-full;
   }
 
-  /* .checkbox {
-    @apply active:bg-orange-200 focus:bg-orange-200 before:bg-orange-200;
-  } */
+  .btn-action {
+    @apply text-gray-400  bg-gray-100 rounded-full p-3 hover:bg-gray-200 hover:text-gray-900 active:bg-gray-300;
+  }
 }
 
 body {

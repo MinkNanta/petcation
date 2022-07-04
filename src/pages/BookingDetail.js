@@ -17,19 +17,14 @@ import { getMonthAndYear, getDate7DaysFromNow } from '../utils/convertDate';
 import { getHouseById } from '../api/house';
 import { useError } from '../contexts/ErrorContext';
 
+import axios from 'axios';
+
 export default function BookingDetail() {
   // const { houseById, setParamsId } = useContext(HouseContext);
   const [houseById, setHouseById] = useState({});
-  const [bookingInputs, setBookingInputs] = useState({
-    checkInDate: '',
-    checkOutDate: '',
-    isIncludeFood: false,
-  });
   const [numberOfPets, setNumberOfPets] = useState(1);
   const { id } = useParams();
   const { setError } = useError();
-
-  console.log(houseById);
 
   // useEffect(() => {
   //   setParamsId(id);
@@ -38,13 +33,11 @@ export default function BookingDetail() {
   useEffect(() => {
     const fetchHouseId = async () => {
       try {
-        console.log(id);
         const res = await getHouseById(id);
         console.log(res.data);
         setHouseById(res.data);
       } catch (err) {
         setError(err.message);
-        console.log(err);
       }
     };
     fetchHouseId();
@@ -61,13 +54,13 @@ export default function BookingDetail() {
     <div className="my-10 mx-20">
       {Object.keys(houseById).length !== 0 ? (
         <>
-          {/* {houseById?.image && (
+          {houseById?.image && (
             <Carousel images={JSON.parse(houseById?.image)} />
-          )} */}
+          )}
           <div className="mt-10 mb-20 flex">
             <div className="mr-10 w-full">
               <HouseTitle
-                name="Room name Cat Capsule by Minkminks"
+                name={houseById.name}
                 petType={
                   houseById?.petType
                     ? houseById?.petType[0] +
@@ -256,11 +249,9 @@ export default function BookingDetail() {
                 }
                 limit={houseById?.limit ? houseById?.limit : null}
                 foodPrice={houseById?.foodPrice ? houseById?.foodPrice : null}
-                setBookingInputs={setBookingInputs}
-                bookingInputs={bookingInputs}
                 setNumberOfPets={setNumberOfPets}
                 numberOfPets={numberOfPets}
-                houseId={id}
+                houseById={houseById}
               />
             </div>
           </div>

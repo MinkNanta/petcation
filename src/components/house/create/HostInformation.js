@@ -122,7 +122,7 @@ function HostInformation() {
         />
       </div>
       <div className="absolute bottom-0 right-0" onClick={handleClickNext}>
-        <div className="btn-small  w-[91px]">Next</div>
+        <div className="btn-small">Next</div>
       </div>
     </div>
   );

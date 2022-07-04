@@ -1,63 +1,53 @@
 import { XIcon } from '@heroicons/react/solid';
 import { useEffect, useRef, useState } from 'react';
-import { saveUploadImage } from '../../../actions/CreateHouseAction';
+import {
+  createHouseAction,
+  saveDeleteImage,
+  saveUploadImage,
+} from '../../../actions/CreateHouseAction';
 import BtnIcon from '../../../common/BtnIcon';
 import { useCreateHouse } from '../../../contexts/CreateHouseContext';
 
-function UploadPhotoItem({ src, title, id }) {
+function UploadPhotoItem({ src, srcHouse, idx }) {
   const { dispatch, createHouse } = useCreateHouse();
-  const [housePic, setHousePic] = useState(null);
   const housePicInputEl = useRef();
-  let savePic;
-  if (id === '0') {
-    savePic = createHouse.image.cover;
-  }
-  if (id === '1') {
-    savePic = createHouse.image.picture1;
-  }
-  if (id === '2') {
-    savePic = createHouse.image.picture2;
-  }
-  if (id === '3') {
-    savePic = createHouse.image.picture3;
-  }
-  if (id === '4') {
-    savePic = createHouse.image.picture4;
-  }
-  if (id === '5') {
-    savePic = createHouse.image.picture5;
-  }
-  if (id === '6') {
-    savePic = createHouse.image.picture6;
-  }
 
   useEffect(() => {
-    dispatch(saveUploadImage({ id, housePic }));
-  }, [housePic]);
+    dispatch(createHouseAction());
+  }, [createHouse.image.length]);
 
+  console.log(createHouse);
   return (
     <div className="relative">
-      <img
-        className="h-[224px] w-[224px] rounded-3xl mt-6"
-        src={savePic ? URL.createObjectURL(savePic) : src}
-        onClick={() => housePicInputEl.current.click()}
-      />
-      {savePic && (
+      <div className="h-[224px] w-[224px] overflow-hidden rounded-3xl">
+        <img
+          className=" w-full h-full object-cover"
+          alt="house"
+          src={srcHouse ? URL.createObjectURL(srcHouse) : src}
+          onClick={() => housePicInputEl.current.click()}
+        />
+      </div>
+      {srcHouse && (
         <div
-          className="absolute top-8 right-2 cursor-pointer"
-          onClick={() => setHousePic(null)}
+          className="absolute top-3 right-3 cursor-pointer"
+          onClick={() => {
+            dispatch(saveDeleteImage({ idx }));
+          }}
         >
           <BtnIcon icon={<XIcon />} htmlFor="" />
         </div>
       )}
-      <div className="text-[18px] mt-4">{title}</div>
+
       <input
         type="file"
         className="hidden"
         ref={housePicInputEl}
         onChange={(e) => {
           if (e.target.files[0]) {
-            setHousePic(e.target.files[0]);
+            if (!idx) {
+              dispatch(saveUploadImage({ housePic: e.target.files[0] }));
+              housePicInputEl.current.value = '';
+            }
           }
         }}
       />

@@ -18,6 +18,8 @@ export const MORE_INFORMATION = 'more_information';
 
 export const UPLOAD_IMAGE = 'upload_image';
 
+export const DELETE_IMAGE = 'delete_image';
+
 export const CREATE_HOUSE = 'create_house';
 
 export const nextStagePage = () => ({
@@ -65,6 +67,11 @@ export const saveMoreInformation = (payload) => ({
 
 export const saveUploadImage = (payload) => ({
   type: UPLOAD_IMAGE,
+  payload,
+});
+
+export const saveDeleteImage = (payload) => ({
+  type: DELETE_IMAGE,
   payload,
 });
 

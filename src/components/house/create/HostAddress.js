@@ -5,7 +5,6 @@ import {
 } from '../../../actions/CreateHouseAction';
 import Input from '../../../common/Input';
 import InputDropdown from '../../../common/InputDropdown';
-import { useAuth } from '../../../contexts/AuthContext';
 import { useAddress } from '../../../contexts/AddressContext';
 import { useCreateHouse } from '../../../contexts/CreateHouseContext';
 import { updateUser } from '../../../api/user';
@@ -115,10 +114,10 @@ function HostAddress() {
       </div>
 
       <div className="absolute bottom-0 left-0" onClick={handleClickBack}>
-        <div className="btn-small  w-[91px]">Back</div>
+        <div className="btn-small ">Back</div>
       </div>
       <div className="absolute bottom-0 right-0" onClick={handleClickNext}>
-        <div className="btn-small  w-[91px]">Next</div>
+        <div className="btn-small ">Next</div>
       </div>
     </div>
   );
