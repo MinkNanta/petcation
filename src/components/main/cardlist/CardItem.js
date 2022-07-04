@@ -19,13 +19,8 @@ export default function CardItem({
           </p>
         </div>
         <p>
-<<<<<<< HEAD
-          <span>฿ {price} </span>
-          <span>/ night</span>
-=======
           <span>฿ {price.toLocaleString('en-EN')} </span>
           <span>night</span>
->>>>>>> common_ui
         </p>
       </div>
     </div>
