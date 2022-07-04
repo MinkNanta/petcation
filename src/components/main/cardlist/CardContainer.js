@@ -7,7 +7,7 @@ import SkeletonCard from '../../../common/SkeletonCard';
 export default function CardContainer() {
   const { house } = useHouse();
   const navigate = useNavigate();
-  console.log(house.length);
+  // console.log(house.length);
 
   return (
     <div className="grid sm:grid-cols-4 gap-8">

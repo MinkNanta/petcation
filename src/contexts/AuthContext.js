@@ -15,7 +15,6 @@ function AuthContextProvider({ children }) {
   const [fetch, setFetch] = useState(false);
   const [userPic, setUserPic] = useState(false);
 
-  console.log('user', user);
   const [userOldAddress, setUserOldAddress] = useState({});
 
   useEffect(() => {

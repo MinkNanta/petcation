@@ -87,7 +87,6 @@ function LoginForm({ className, title }) {
         <div className="flex justify-center mt-4">
           <Logingoogle title="Sign in" />
         </div>
-       
       </Modal>
     </div>
   );

@@ -19,7 +19,7 @@ export default function CardItem({
           </p>
         </div>
         <p>
-          <span>฿ {price} </span>
+          <span>฿ {price.toLocaleString('en-EN')} </span>
           <span>night</span>
         </p>
       </div>

@@ -12,7 +12,7 @@ function Logingoogle({ title }) {
       //   const token=jwtDecode(res.credential)
       //   console.log(token)
       const login = await axios.post('/auth/googleLogin', obj);
-      console.log(login.data);
+      // console.log(login.data);
       const token = login.data.token;
       setAccessToken(token);
       document.getElementById('signInDiv').hidden = true;

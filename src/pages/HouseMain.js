@@ -9,7 +9,6 @@ import { useAuth } from '../contexts/AuthContext';
 export default function HouseMain() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  console.log(user);
 
   return (
     <>

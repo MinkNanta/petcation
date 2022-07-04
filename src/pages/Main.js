@@ -7,8 +7,6 @@ export default function Main() {
   const search = useLocation().search;
   const created = new URLSearchParams(search).get('created');
 
-  console.log(created);
-
   return (
     <div>
       {created && <CreatedModal />}

@@ -10,6 +10,14 @@ import singleRoomIcon from '../../assets/img/singleRoom.png';
 import capsuleIcon from '../../assets/img/capsule.png';
 import cageIcon from '../../assets/img/cage.png';
 import SearchCardContainer from './cardlist/SearchCardContainer';
+import { useHouse } from '../../contexts/HouseContext';
+
+// const menu = [
+//   { name: 'allHouse', active: true, icon: 'allPlaceIcon' },
+//   { name: 'singleRoom', active: false, icon: 'singleRoomIcon' },
+//   { name: 'capsule', active: false, icon: 'capsuleIcon' },
+//   { name: 'nearMe', active: false, icon: 'cageIcon' },
+// ];
 
 export default function SearchContainer({ searchHouse }) {
   const [allHouse, setAllHouse] = useState(true);
@@ -17,6 +25,7 @@ export default function SearchContainer({ searchHouse }) {
   const [capsule, setCapsule] = useState(false);
   const [cage, setCage] = useState(false);
   const [nearMe, setNearMe] = useState(false);
+
   return (
     <>
       <div className="py-6 flex justify-between bg-white">
@@ -153,7 +162,7 @@ export default function SearchContainer({ searchHouse }) {
         </button>
       </div>
       {/* <p>{title}</p> */}
-      {allHouse && <SearchCardContainer searchHouse={searchHouse} />}
+      {allHouse && <SearchCardContainer />}
       {capsule && <CardContainerCapsule />}
       {singleRoom && <CardContainerSingleRoom />}
       {cage && <CardContainerCage />}
