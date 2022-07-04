@@ -19,45 +19,35 @@ import CardSelect from '../../common/CardSelect';
 import { Navigate, useNavigate } from 'react-router-dom';
 import axios from '../../config/axios';
 import { useError } from '../../contexts/ErrorContext';
+import { useHouse } from '../../contexts/HouseContext';
+import { useSearchInput } from '../../contexts/SearchInputContext';
 
-export default function SearchInput({ setSearchHouse }) {
-  const [body, setBody] = useState({
-    province: '',
-    petType: '',
-    amountPet: 1,
-    checkInDate: '',
-    checkOutDate: '',
-  });
+export default function SearchInput() {
+  // const [body, setBody] = useState({
+  //   province: '',
+  //   petType: '',
+  //   amountPet: 1,
+  //   checkInDate: '',
+  //   checkOutDate: '',
+  // });
 
+  const { body, setBody } = useSearchInput();
   const navigate = useNavigate();
+  const { setSearchHouse } = useHouse();
 
-  // const [province, setProvince] = useState(body.province);
-  // const [petType, setPetType] = useState(body.petType);
-  // const [amountPet, setAmountPet] = useState(body.amountPet);
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
 
-  // ("/:houseId/:startDate/:endDate"
-  // const [range, setRange] = useState({});
-
-  console.log(checkIn);
-  console.log(checkOut);
-
-  // if (checkOut !== '' || checkIn !== '') {
-  //   const value = { ...body };
-  //   value.checkIn = checkIn;
-  //   value.checkOut = checkOut;
-  //   setBody(value);
-  // }
-  // { checkInDate, checkOutDate, amountPet, province, petType } =
-  // req.body;
   const { error, setError } = useError();
   const handelSubmit = async () => {
     try {
       body.checkInDate = checkIn;
       body.checkOutDate = checkOut;
       console.log('body', body);
-      const res = await axios.get('/allHouses/search', body);
+      const res = await axios.get(
+        `/allHouses/search?province=${body.province}&petType=${body.petType}&amountPet=${body.amountPet}&checkInDate=${body.checkInDate}&checkOutDate=${body.checkOutDate}`,
+      );
+      console.log(res.data);
       setSearchHouse(res.data);
       navigate('/search');
     } catch (error) {
@@ -115,9 +105,13 @@ export default function SearchInput({ setSearchHouse }) {
   return (
     <div
       className="bg-gray-100 rounded-full 
-             mx-auto relative flex w-full"
+             mx-auto relative grid grid-cols-12 w-full"
     >
-      <div className="w-full">
+      {/* <div
+      className="bg-gray-100 rounded-full 
+             mx-auto relative flex w-full"
+    > */}
+      <div className="w-full col-span-3">
         <InputHero
           name="province"
           className="pl-6"
@@ -128,7 +122,7 @@ export default function SearchInput({ setSearchHouse }) {
         />
       </div>
 
-      <div className="w-full">
+      <div className="w-full col-span-6 ">
         <DatePicker
           handelChange={handelChange}
           setCheckIn={setCheckIn}
@@ -137,7 +131,7 @@ export default function SearchInput({ setSearchHouse }) {
         />
       </div>
 
-      <Popover className="relative w-full">
+      <Popover className="relative w-full col-span-3">
         <Popover.Button
           className=" focus:outline-none
           focus:outline-offset-0 w-full"

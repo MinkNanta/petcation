@@ -29,10 +29,9 @@ function HouseContextProvider({ children }) {
   const [houseByUserID, setHouseByUserID] = useState([]);
 
   const [houseDetail, setHouseDetail] = useState({});
+  const [searchHouse, setSearchHouse] = useState([]);
 
   const { id } = useParams();
-
-  console.log('houseByUserID', houseByUserID);
 
   useEffect(() => {
     const fetchAllHouse = async () => {
@@ -147,6 +146,8 @@ function HouseContextProvider({ children }) {
         setChangeHouseInfo,
         loading,
         setParamsId,
+        searchHouse,
+        setSearchHouse,
       }}
     >
       {children}

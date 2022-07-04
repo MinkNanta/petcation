@@ -25,13 +25,16 @@ export default function InputWithSuffix({
           {option}
         </span>
       </label>
-      <div className="relative">
+      <div className="input centerAll gap-4">
+        <p className="right-3 bottom-3 label-text text-gray-400 inline-flex">
+          {suffix}
+        </p>
         <input
           name={name}
           // defaultValue={value}
           value={value}
           type={type}
-          className="input"
+          className=" w-full bg-gray-100/0 text-gray-500  outline-none focus:outline-1 focus:outline-offset-0 disabled:text-gray-400 disabled:bg-gray-100 disabled:border-0 "
           onChange={onChange}
           placeholder={
             placeholder
@@ -39,9 +42,6 @@ export default function InputWithSuffix({
               : `Please Enter Your ${name ? name : 'Input'}`
           }
         />
-        <p className="absolute right-3 bottom-3 label-text text-gray-400">
-          {suffix}
-        </p>
       </div>
       <label className="label">
         {error && <span className="label-text-alt text-red-400">{errMsg}</span>}

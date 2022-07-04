@@ -11,7 +11,6 @@ import SearchContainer from '../components/main/SearchContainer';
 function SearchResult() {
   const { error, setError } = useError();
 
-  const [searchHouse, setSearchHouse] = useState({});
   return (
     <>
       {error && Alert}
@@ -21,13 +20,13 @@ function SearchResult() {
             <img src={logoColor} alt="logo" to="/" />
           </a>
           <div className="w-[60%]">
-            <SearchInput setSearchHouse={setSearchHouse} />
+            <SearchInput />
           </div>
           <HeaderMenu className="flex justify-center items-center gap-2 rounded-3xl text-gray-900 w-full" />
         </div>
       </div>
       <div className="mainContainer">
-        <SearchContainer searchHouse={searchHouse} />
+        <SearchContainer />
       </div>
     </>
   );

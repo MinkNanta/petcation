@@ -123,7 +123,7 @@ function MoreInformation() {
               }),
             );
           }}
-          placeholder="Enter your input"
+          placeholder={`You can detail you daily schedule \nex. Breakfast: 10.30am Snack: 2pm Dinner: 6pm \nPlaytime: 11.30am till 5.30pm`}
           errMsg={checkError.dailySchedule}
           error={checkError.dailySchedule}
         />
@@ -138,7 +138,7 @@ function MoreInformation() {
               saveMoreInformation({ other: e.target.value, id: 'other' }),
             );
           }}
-          placeholder="Enter your input"
+          placeholder={`ex. Pool services Spa services`}
           errMsg={checkError.other}
           error={checkError.other}
         />

@@ -8,7 +8,7 @@ export default function Hero() {
           Find Perfect Place for Your Pet.
         </h2>
         <div className="flex justify-between items-center  ">
-          <div className="w-[80%] mx-auto">
+          <div className="w-[60%] mx-auto">
             <SearchInput />
           </div>
         </div>
