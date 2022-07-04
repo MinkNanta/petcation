@@ -323,7 +323,7 @@
 }
 
 .backgroundHero {
-  background-image: url('/Users/nantanitlertwittayarat/Documents/CodeCamp11/petcation/src/assets/img/hero.png');
+  background-image: url('./assets/img/hero.png');
 
   background-position: center;
 }
