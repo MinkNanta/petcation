@@ -32,9 +32,6 @@ export default function TapFilter({ title }) {
             }}
           >
             <img className="w-6 h-6 mx-auto" src={allPlaceIcon} />
-<<<<<<< HEAD
-            <p className={allHouse ? 'text-orange-500' : 'text-gray-500'}>All Places</p>
-=======
             <p
               className={
                 allHouse
@@ -44,7 +41,6 @@ export default function TapFilter({ title }) {
             >
               All Place
             </p>
->>>>>>> common_ui
           </div>
 
           {/* Near Me */}
@@ -71,18 +67,6 @@ export default function TapFilter({ title }) {
           </div>
 
           {/* Single room */}
-<<<<<<< HEAD
-          <div className="text-center"
-          
-           onClick={() => {
-             setAllHouse(false);
-             setSingleRoome(true);
-             setCapsule(false);
-             setCage(false);
-           }}>
-          <img className="w-6 h-6 mx-auto" src={singleRoomIcon} />
-            <p className={singleRoom ? 'text-orange-500' : 'text-gray-500'}>Single Room</p>
-=======
           <div
             className="text-center cursor-pointer space-y-1"
             onClick={() => {
@@ -103,7 +87,6 @@ export default function TapFilter({ title }) {
             >
               Single room
             </p>
->>>>>>> common_ui
           </div>
 
           {/* Capsule */}
