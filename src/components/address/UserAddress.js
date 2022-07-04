@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Input from '../../common/Input';
 import InputDropdown from '../../common/InputDropdown';
 import Spinner from '../../common/Spinner';
 import TitleHeder from '../../common/TitleHeder';
 import { useAddress } from '../../contexts/AddressContext';
-import { useAuth } from '../../contexts/AuthContext';
+import { AuthContext, useAuth } from '../../contexts/AuthContext';
 
 export default function UserAddress({ title }) {
   const {

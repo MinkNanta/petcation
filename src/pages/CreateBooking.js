@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import HouseCard from '../common/HouseCard';
 import BackNavigation from '../components/booking/BackNavigation';
 import BookingSummary from '../components/booking/BookingSummary';
@@ -20,7 +20,7 @@ export default function CreateBooking() {
     nights,
   } = state;
 
-  const [petIds, setPetIds] = useState([])
+  const [petIds, setPetIds] = useState([]);
 
   return (
     <div className="my-10 mx-20">
