@@ -5,6 +5,7 @@ import {
   saveHouseInformation,
 } from '../../../actions/CreateHouseAction';
 import Input from '../../../common/Input';
+import Textarea from '../../../common/Textarea';
 import { useCreateHouse } from '../../../contexts/CreateHouseContext';
 
 function HouseInformation() {
@@ -43,7 +44,8 @@ function HouseInformation() {
     <div className="w-[508px] h-[640px] relative">
       <div className="text-2xl">House Information</div>
       <div className="mt-6 ">
-        <Input
+        <Textarea
+          rows="2"
           type="text"
           // option="option"
           label="Check in"
@@ -56,14 +58,15 @@ function HouseInformation() {
               }),
             );
           }}
-          placeholder="Enter your input"
+          placeholder="i.e Check-in time 10am to 5pm."
           errMsg={checkError.checkInTime}
           error={checkError.checkInTime}
         />
       </div>
 
       <div className="mt-2">
-        <Input
+        <Textarea
+          rows="2"
           type="text"
           // option="option"
           label="Check out"
@@ -76,7 +79,7 @@ function HouseInformation() {
               }),
             );
           }}
-          placeholder="Enter your input"
+          placeholder="i.e Check-Out time 10am to 5pm."
           errMsg={checkError.checkOutTime}
           error={checkError.checkOutTime}
         />
@@ -86,14 +89,14 @@ function HouseInformation() {
         <Input
           type="text"
           // option="option"
-          label="Food for pet"
+          label="Pet food services"
           value={createHouse.petFood}
           onChange={(e) => {
             dispatch(
               saveHouseInformation({ petFood: e.target.value, id: 'petFood' }),
             );
           }}
-          placeholder="Enter your input"
+          placeholder="Name of pet food or food grade"
           errMsg={checkError.petFood}
           error={checkError.petFood}
         />
@@ -103,7 +106,7 @@ function HouseInformation() {
         <Input
           type="number"
           // option="option"
-          label="Food price per night"
+          label="Price food per night"
           value={createHouse.foodPrice}
           onChange={(e) => {
             dispatch(
@@ -113,7 +116,7 @@ function HouseInformation() {
               }),
             );
           }}
-          placeholder="Enter your input"
+          placeholder="Enter price"
           errMsg={checkError.foodPrice}
           error={checkError.foodPrice}
         />

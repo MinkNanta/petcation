@@ -8,6 +8,7 @@ export default function Input({
   error,
   name,
   value,
+  rows,
 }) {
   return (
     <div className="form-control w-full">
@@ -18,6 +19,8 @@ export default function Input({
         name={name}
         // defaultValue={value}
         value={value}
+        // cols="0"
+        rows={rows ? rows : '3'}
         className="textarea bg-gray-100 text-gray-500 rounded-2xl "
         placeholder={placeholder}
         onChange={onChange}

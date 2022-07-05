@@ -149,7 +149,6 @@ export default function PaymentModal({
                 ...errMsg,
                 submit: err?.response?.data?.message,
               }));
-              console.log(err);
             } finally {
               setLoading(false);
             }

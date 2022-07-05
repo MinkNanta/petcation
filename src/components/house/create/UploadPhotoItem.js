@@ -16,7 +16,7 @@ function UploadPhotoItem({ src, srcHouse, idx }) {
     dispatch(createHouseAction());
   }, [createHouse.image.length]);
 
-  console.log(createHouse);
+  // console.log(createHouse);
   return (
     <div className="relative">
       <div className="h-[224px] w-[224px] overflow-hidden rounded-3xl">

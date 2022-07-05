@@ -39,7 +39,6 @@ export default function ProfileInfo() {
       // setAddress(user.address);
       setEmail(user.email);
     }
-    console.log(user);
   }, [user]);
 
   const handleSubmit = async (e) => {

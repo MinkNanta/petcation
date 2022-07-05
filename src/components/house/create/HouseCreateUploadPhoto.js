@@ -15,13 +15,13 @@ function HouseCreateUploadPhoto() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  console.log(data);
+  // console.log(data);
 
   const handleClickNext = async () => {
     try {
       setLoading(true);
       await dispatch(createHouseAction());
-      console.log(data);
+      // console.log(data);
       // await dispatch(createHouseAction());
       await postHouse(data);
     } catch (err) {

@@ -1,20 +1,42 @@
-import { Link } from "react-router-dom";
-import PetInformation from "./PetInformation";
+import axios from '../../config/axios';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import AddPetModal from '../booking/AddPetModal';
+import SelectPetModal from '../booking/SelectPetModal';
+import PetInformation from './PetInformation';
 
 export default function ProfilePet() {
+  const [allPet, setAllPet] = useState([]);
+
+  const fetchPet = async () => {
+    try {
+      const res = await axios.get('/pets');
+
+      setAllPet(res.data.pet);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchPet();
+  }, []);
+
+  // fetchPet();
+
+  console.log(allPet);
+
   return (
     <div className=" col-span-8">
-      <div className="flex justify-between items-center ">
-        <h4 className="text-2xl font-medium">Pet Information</h4>
-        <div className="flex gap-4">
-          <button className="btn-text">Delete</button>
-          <button className="btn-text">Cancel</button>
-          <button className="btn-small ">Save</button>
-        </div>
+      <div className="flex gap-5 items-end">
+        <AddPetModal
+          className="bg-orange-500 p-3 px-5 text-white rounded-2xl"
+          fetch={fetchPet}
+        />
       </div>
-      <div className="border-b-2">
-        <PetInformation />
-      </div>
+      {allPet.map((el) => {
+        return <PetInformation fetch={fetchPet} el={el} />;
+      })}
     </div>
   );
 }

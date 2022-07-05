@@ -18,9 +18,6 @@ export default function ProfileDetails({ title }) {
   const [newUserInfo, setNewUserInfo] = useState({});
   const { setError, setFeedback } = useError();
 
-  console.log('newUserInfo', newUserInfo);
-  console.log('oldValue', oldValue);
-
   useEffect(() => {
     const fetchMe = async () => {
       try {
@@ -36,8 +33,6 @@ export default function ProfileDetails({ title }) {
   }, [fetch]);
 
   const handleChangeInput = (event) => {
-    console.log(event.target.name);
-    console.log(event.target.value);
     setChange(true);
     const values = { ...newUserInfo };
     values[event.target.name] = event.target.value;
