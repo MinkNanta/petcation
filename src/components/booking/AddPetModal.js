@@ -21,6 +21,7 @@ export default function AddPetModal({
   fetch,
   setAddedPets,
   addedPets,
+  setPetIds
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -96,8 +97,8 @@ export default function AddPetModal({
       formData?.append('weight', weight);
       formData?.append('species', species);
       formData?.append('note', note);
-      await axios.post('/pets', formData);
-      const res = await axios.get('/pets');
+      const res = await axios.post('/pets', formData);
+      await axios.get('/pets');
       setIsOpen(false);
       setGetPet(!getpet);
       setChanged(false);
@@ -111,7 +112,8 @@ export default function AddPetModal({
       setWeight('');
       setType('');
       setPetPic('');
-      setAddedPets((addedPets) => [...addedPets, res.data.pets.id]);
+      setPetIds(petIds => [...petIds, res.data.pets])
+      setAddedPets((addedPets) => [...addedPets, res.data.pets]);
     } catch (err) {
       console.log(err);
     } finally {

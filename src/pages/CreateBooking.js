@@ -22,7 +22,7 @@ export default function CreateBooking() {
     houseById,
     nights,
   } = state;
-  const fetch = () => {};
+  const setGetPet = () => {};
 
   const [petIds, setPetIds] = useState([]);
   const [addedPets, setAddedPets] = useState([]);
@@ -77,6 +77,9 @@ export default function CreateBooking() {
                 addedPets={addedPets}
                 fetch={fetch}
                 petType={houseById?.petType}
+                setPetIds={setPetIds}
+                petIds={petIds}
+                setGetPet={setGetPet}
               />
             </div>
           </div>

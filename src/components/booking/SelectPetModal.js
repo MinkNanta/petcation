@@ -29,6 +29,9 @@ export default function SelectPetModal({
     fetchPets();
   }, [addedPets]);
 
+  console.log('existing pets', existingPets);
+  console.log('pet ids', petIds);
+
   const onSelect = (e, id) => {
     e.preventDefault();
     const select = existingPets.filter((el) => +el.id === +id)[0];
@@ -82,14 +85,17 @@ export default function SelectPetModal({
               </div>
               <button
                 className={
-                  petIds.includes(el)
+                  // petIds.includes(el)
+                  petIds.filter((pet) => pet.id === el.id).length > 0
                     ? 'btn-outline mt-2 text-gray-300 border-gray-300'
                     : 'btn-outline mt-2'
                 }
                 onClick={(e) => onSelect(e, el.id)}
                 disabled={petIds.includes(el) ? true : false}
               >
-                {petIds.includes(el) ? 'Selected' : 'Select'}
+                {petIds.filter((pet) => pet.id === el.id).length > 0
+                  ? 'Selected'
+                  : 'Select'}
               </button>
             </div>
           ))
