@@ -129,7 +129,7 @@ export default function PaymentModal({
                 includeFood: isIncludeFood,
                 serviceFee,
                 foodPrice,
-                petIds: [1],
+                petIds,
               });
               await axios.post('/bookings', {
                 token: response.id,

@@ -8,7 +8,13 @@ import Modal from '../../common/Modal';
 import uploadImage from '../../assets/img/uploadImage.png';
 import Spinner from '../../common/Spinner';
 
-export default function AddPetModal({ className, fetch }) {
+export default function AddPetModal({
+  className,
+  fetch,
+  setAddedPets,
+  addedPets,
+  petType,
+}) {
   const [year, setYear] = useState(1);
   const [month, setMonth] = useState(0);
   const profileRef = useRef(null);
@@ -62,14 +68,15 @@ export default function AddPetModal({ className, fetch }) {
       const formData = new FormData();
       formData?.append('age', year + '.' + month);
       formData?.append('name', name);
-      formData?.append('type', type);
+      formData?.append('type', 'type');
       formData?.append('petPic', petPic);
       formData?.append('weight', weight);
       formData?.append('species', species);
       formData?.append('note', note);
-      await axios.post('/pets', formData);
+      const res = await axios.post('/pets', formData);
       fetch();
       setChanged(false);
+      setAddedPets((addedPets) => [...addedPets, res.data.pets.id]);
     } catch (err) {
       console.log(err);
     } finally {
@@ -137,7 +144,9 @@ export default function AddPetModal({ className, fetch }) {
             <option
               value="CAT"
               selected={
-                type === ''
+                petType
+                  ? petType === 'CAT'
+                  : type === ''
                   ? type === 'CAT'
                     ? true
                     : false
@@ -145,13 +154,16 @@ export default function AddPetModal({ className, fetch }) {
                   ? true
                   : false
               }
+              disabled={petType ? (petType === 'CAT' ? false : true) : false}
             >
               CAT
             </option>
             <option
               value="DOG"
               selected={
-                type === ''
+                petType
+                  ? petType === 'DOG'
+                  : type === ''
                   ? type === 'DOG'
                     ? true
                     : false
@@ -159,6 +171,7 @@ export default function AddPetModal({ className, fetch }) {
                   ? true
                   : false
               }
+              disabled={petType ? (petType === 'DOG' ? false : true) : false}
             >
               DOG
             </option>

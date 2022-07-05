@@ -7,29 +7,37 @@ import Modal from '../../common/Modal';
 import axios from '../../config/axios';
 import defaultProtoPic from '../../assets/img/defaultProtoPic.png';
 
-export default function SelectPetModal({ className, setPetIds, petIds }) {
+export default function SelectPetModal({
+  className,
+  setPetIds,
+  petIds,
+  addedPets,
+  petType,
+}) {
   const [existingPets, setExistingPets] = useState([]);
 
   useEffect(() => {
     const fetchPets = async () => {
       try {
         const res = await axios.get('/pets');
-        setExistingPets(res.data.pet);
+        const filtered = res.data.pet.filter((el) => el.type === petType);
+        setExistingPets(filtered);
       } catch (err) {
         console.log(err);
       }
     };
     fetchPets();
-  }, []);
+  }, [addedPets]);
 
-  const onSelect = (e, petId) => {
+  const onSelect = (e, id) => {
     e.preventDefault();
-    setPetIds((petIds) => [...petIds, petId]);
+    const select = existingPets.filter((el) => +el.id === +id)[0];
+    setPetIds((petIds) => [...petIds, select]);
   };
 
   return (
     <Modal title="Select from existing pets" className={className}>
-      <div>
+      <div className="flex flex-col gap-8">
         {existingPets.length > 0 ? (
           existingPets.map((el) => (
             <div className="grid grid-cols-4">
@@ -74,14 +82,14 @@ export default function SelectPetModal({ className, setPetIds, petIds }) {
               </div>
               <button
                 className={
-                  petIds.includes(el.id)
+                  petIds.includes(el)
                     ? 'btn-outline mt-2 text-gray-300 border-gray-300'
                     : 'btn-outline mt-2'
                 }
                 onClick={(e) => onSelect(e, el.id)}
-                disabled={petIds.includes(el.id) ? true : false}
+                disabled={petIds.includes(el) ? true : false}
               >
-                {petIds.includes(el.id) ? 'Selected' : 'Select'}
+                {petIds.includes(el) ? 'Selected' : 'Select'}
               </button>
             </div>
           ))
