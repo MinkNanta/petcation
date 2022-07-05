@@ -38,3 +38,11 @@ export function dashesToSlashes(dateStr) {
   let year = String(+dateStr.slice(0, 4));
   return date + '/' + month + '/' + year;
 }
+
+export function getDiff(startDate, endDate) {
+  const date1 = new Date(startDate);
+  const date2 = new Date(endDate);
+  const diffTime = Math.abs(date2 - date1);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays;
+}
