@@ -21,6 +21,7 @@ export default function CreateBooking() {
   } = state;
 
   const [petIds, setPetIds] = useState([]);
+  console.log(petIds);
 
   return (
     <div className="my-10 mx-20">
@@ -48,14 +49,17 @@ export default function CreateBooking() {
             petType={houseById?.petType}
           />
           <div className="w-full border-t-2 border-gray-200 my-10"></div>
-          <p className="text-2xl font-medium">Pet Owner</p>
-          <ProfileDetails />
+          <ProfileDetails title="Pet Owner" />
           <UserAddress />
           <div className="w-full border-t-2 border-gray-200 my-10"></div>
           <div className="flex justify-between items-end">
             <p className="text-2xl font-medium">Pet Information</p>
             <div className="flex gap-5 items-end">
-              <SelectPetModal className="bg-orange-500 p-3 text-white rounded-2xl" />
+              <SelectPetModal
+                className="bg-orange-500 p-3 text-white rounded-2xl"
+                setPetIds={setPetIds}
+                petIds={petIds}
+              />
               <AddPetModal className="bg-orange-500 p-3 px-5 text-white rounded-2xl" />
             </div>
           </div>

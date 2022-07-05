@@ -120,6 +120,17 @@ export default function PaymentModal({
 
             try {
               setLoading(true);
+              console.log({
+                token: response.id,
+                checkInDate,
+                checkOutDate,
+                houseId,
+                price,
+                includeFood: isIncludeFood,
+                serviceFee,
+                foodPrice,
+                petIds: [1],
+              });
               await axios.post('/bookings', {
                 token: response.id,
                 checkInDate,

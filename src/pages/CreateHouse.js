@@ -17,9 +17,9 @@ export default function CreateHouse() {
       {stagePage === 7 ? (
         false
       ) : (
-        <div className="abosulute">
+        <div className="h-[620px] w-[40%] rounded-3xl overflow-hidden">
           <video
-            className="object-cover h-[640px] w-[500px] rounded-3xl"
+            className="object-cover  w-full h-full"
             src={petCreateHouse}
             autoPlay
             loop
