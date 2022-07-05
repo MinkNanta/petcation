@@ -13,7 +13,7 @@ export default function InputDropdown({
 }) {
   return (
     <div className="form-control w-full">
-      <label className="label">
+      <label className="mb-1">
         <span className={`label-text ${disabled && 'text-gray-400'}`}>
           {label}
         </span>
