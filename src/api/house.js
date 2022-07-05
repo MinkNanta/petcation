@@ -7,3 +7,5 @@ export const getHouseById = (id) => axios.get(`/allHouses/${id}`);
 export const getHouseByUserId = () => axios.get(`/houses/user`);
 export const updateHouseByUserId = (body) =>
   axios.patch(`/houses/update`, body);
+export const updateHouseImageByUserId = (input) =>
+  axios.patch('/houses/update/image', input);
