@@ -1,7 +1,4 @@
-import {
-  CheckCircleIcon,
-  QuestionMarkCircleIcon,
-} from '@heroicons/react/outline';
+import { CheckCircleIcon } from '@heroicons/react/outline';
 import React, { useState, useRef, useEffect } from 'react';
 import { useError } from '../contexts/ErrorContext';
 

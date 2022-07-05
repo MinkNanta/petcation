@@ -7,6 +7,7 @@ import AuthContextProvider from './contexts/AuthContext';
 import ErrorContextProvider from './contexts/ErrorContext';
 import AddressContextProvider from './contexts/AddressContext';
 import HouseContextProvider from './contexts/HouseContext';
+import SearchInputContextProvider from './contexts/SearchInputContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,7 +16,9 @@ root.render(
       <AuthContextProvider>
         <AddressContextProvider>
           <HouseContextProvider>
-            <App />
+            <SearchInputContextProvider>
+              <App />
+            </SearchInputContextProvider>
           </HouseContextProvider>
         </AddressContextProvider>
       </AuthContextProvider>

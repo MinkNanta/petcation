@@ -18,8 +18,6 @@ export default function HouseDashboard() {
     getHouseByUser();
   }, [user]);
 
-  console.log(!{});
-
   return (
     <div className="w-full space-y-6 min-h-[60vh]">
       <div>

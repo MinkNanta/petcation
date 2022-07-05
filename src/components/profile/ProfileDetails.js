@@ -9,7 +9,7 @@ import axios from '../../config/axios';
 import Spinner from '../../common/Spinner';
 import { useError } from '../../contexts/ErrorContext';
 
-export default function ProfileDetails() {
+export default function ProfileDetails({ title }) {
   const [change, setChange] = useState(false);
   const [oldValue, setOldValue] = useState({});
   const [fetch, setFetch] = useState(false);
@@ -94,7 +94,7 @@ export default function ProfileDetails() {
       <div>
         {loading && <Spinner />}
         <div className="mb-4">
-          <h4>Hi, Welcome back {oldValue?.firstName}</h4>
+          <h4>{title ? title : 'Hi, Welcome back ' + oldValue?.firstName}</h4>
           <p className="text-gray-500">{oldValue?.email}</p>
         </div>
         <Input

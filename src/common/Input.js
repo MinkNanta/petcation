@@ -11,6 +11,7 @@ export default function Input({
   option,
   name,
   disabled,
+  ...props
 }) {
   return (
     <div className="form-control w-full mb-1">
@@ -33,10 +34,11 @@ export default function Input({
         placeholder={
           placeholder
             ? placeholder
-            : `Please Enter Your ${name ? name : 'This Input'}`
+            : `Please Enter Your ${name ? name : 'Input'}`
         }
         className="input"
         onChange={onChange}
+        {...props}
       />
       <label className="label">
         {error && <span className="label-text-alt text-red-400">{errMsg}</span>}

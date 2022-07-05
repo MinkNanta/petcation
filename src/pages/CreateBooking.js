@@ -20,7 +20,7 @@ export default function CreateBooking() {
     nights,
   } = state;
 
-  const [petIds, setPetIds] = useState([])
+  const [petIds, setPetIds] = useState([]);
 
   return (
     <div className="my-10 mx-20">
@@ -48,8 +48,7 @@ export default function CreateBooking() {
             petType={houseById?.petType}
           />
           <div className="w-full border-t-2 border-gray-200 my-10"></div>
-          <p className="text-2xl font-medium">Pet Owner</p>
-          <ProfileDetails />
+          <ProfileDetails title="Pet Owner" />
           <UserAddress />
           <div className="w-full border-t-2 border-gray-200 my-10"></div>
           <div className="flex justify-between items-end">

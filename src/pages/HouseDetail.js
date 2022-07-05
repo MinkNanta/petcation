@@ -18,6 +18,7 @@ export default function HouseDetail() {
   useEffect(() => {
     getHouseByUser();
   }, [user]);
+
   return (
     <div className="space-y-6">
       {houseByUserID.length < 1 ? (

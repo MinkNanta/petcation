@@ -53,7 +53,7 @@ function HouseDetail() {
           onChange={(e) => {
             dispatch(saveHouseDetail({ name: e.target.value, id: 'name' }));
           }}
-          placeholder="Enter your input"
+          placeholder="House name ex. Urban Pets Hotel"
           errMsg={checkError.name}
           error={checkError.name}
         />
@@ -63,12 +63,12 @@ function HouseDetail() {
         <Input
           type="number"
           // option="option"
-          label="Price per night"
+          label="Price Room"
           value={createHouse.price}
           onChange={(e) => {
             dispatch(saveHouseDetail({ price: e.target.value, id: 'price' }));
           }}
-          placeholder="Enter your input"
+          placeholder="Price per night"
           errMsg={checkError.price}
           error={checkError.price}
         />
@@ -77,12 +77,12 @@ function HouseDetail() {
       <div className="mt-2">
         <InputWithSuffix
           type="number"
-          label="Size"
+          label="Size Room or Unit"
           value={createHouse.size}
           onChange={(e) => {
             dispatch(saveHouseDetail({ size: e.target.value, id: 'size' }));
           }}
-          placeholder="Enter your input"
+          placeholder="Room size"
           errMsg={checkError.size}
           error={checkError.size}
           suffix="sqm"
@@ -90,25 +90,36 @@ function HouseDetail() {
       </div>
 
       <div className="mt-2">
-        <Input
-          type="number"
-          // option="option"
-          label="Limit per room"
-          value={createHouse.limit}
-          onChange={(e) => {
-            dispatch(saveHouseDetail({ limit: e.target.value, id: 'limit' }));
-          }}
-          placeholder="Enter your input"
-          errMsg={checkError.limit}
-          error={checkError.limit}
-        />
+        <div className="-mb-3">
+          <Input
+            type="number"
+            // option=""
+            min="0"
+            max="20"
+            label="Max pets"
+            value={createHouse.limit}
+            onChange={(e) => {
+              dispatch(saveHouseDetail({ limit: e.target.value, id: 'limit' }));
+            }}
+            placeholder="Acceptable amount per room"
+            errMsg={checkError.limit}
+            error={checkError.limit}
+          />
+        </div>
+        {createHouse.limit < 0 || createHouse.limit > 20 ? (
+          <p className="text-xs text-red-400 ">
+            Max pet must be values ​​between 0 - 20
+          </p>
+        ) : (
+          <></>
+        )}
       </div>
 
       <div className="absolute bottom-0 left-0" onClick={handleClickBack}>
-        <div className="btn-small  w-[91px]">Back</div>
+        <div className="btn-small">Back</div>
       </div>
       <div className="absolute bottom-0 right-0" onClick={handleClickNext}>
-        <div className="btn-small  w-[91px]">Next</div>
+        <div className="btn-small ">Next</div>
       </div>
     </div>
   );

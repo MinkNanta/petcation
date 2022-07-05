@@ -177,16 +177,16 @@ export default function BookingDetail() {
                   Swimming Pool **BY APPOINTMENT ONLY**
                   <br />
                   <br />
-                  Swimming your dog is a perfect activity for the young or old.
-                  Swimming is a non-weight bearing activity that avoids all the
-                  stresses and strains of exercising on hard ground.
+                  Swimming is the perfect activity for dogs of all ages and
+                  breeds. Swimming is a non-weight bearing activity that avoids
+                  all the stresses and strains of exercising on hard ground.
                   <br />
-                  <br />A rinse and dry off area is available which can be used
-                  before or after swimming. Entrance fee of RM50 per dog per
-                  entry includes free access to indoor park.
+                  <br />A rinse and dry off area is available and can be used
+                  after a swimming session. An entrance fee of THB 50 per dog
+                  per entry includes free access to the indoor park.
                   <br />
                   <br />
-                  Our pool water is generated in salt water chlorination
+                  Our pool water is disinfected via the salt water chlorination
                   process.
                 </p>
               </div>
@@ -224,8 +224,8 @@ export default function BookingDetail() {
               <div className="bg-gray-100 p-5 mt-5 rounded-2xl flex text-gray-500">
                 <ShieldExclamationIcon className="w-8 h-8 inline-block mr-5" />
                 <p>
-                  To protect your payment, never transfer money or communicate
-                  outside of the Petcation website or app.
+                  For security reasons, never transfer money or communicate
+                  outside of the Petcation website.
                 </p>
               </div>
               <div className="mt-5">
@@ -233,7 +233,7 @@ export default function BookingDetail() {
                 <p className="text-gray-500 mt-5">
                   Free cancellation before {getDate7DaysFromNow()}. Review the
                   Host’s full cancellation policy which applies even if you
-                  cancel for illness or disruptions caused by COVID-19.
+                  cancel due to an illness or disruptions caused by COVID-19.
                 </p>
               </div>
             </div>
