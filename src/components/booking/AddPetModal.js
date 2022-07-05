@@ -12,9 +12,19 @@ import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 import BtnIcon from '../../common/BtnIcon';
 
-export default function AddPetModal({ className, setGetPet, getpet, onClick }) {
+export default function AddPetModal({
+  className,
+  setGetPet,
+  getpet,
+  onClick,
+  petType,
+  fetch,
+  setAddedPets,
+  addedPets,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+
   const [year, setYear] = useState(1);
   const [month, setMonth] = useState(0);
   const profileRef = useRef(null);
@@ -77,19 +87,20 @@ export default function AddPetModal({ className, setGetPet, getpet, onClick }) {
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('ttt');
       setLoading(true);
       const formData = new FormData();
       formData?.append('age', year + '.' + month);
       formData?.append('name', name);
-      formData?.append('type', type);
+      formData?.append('type', petType ? petType : type);
       formData?.append('petPic', petPic);
       formData?.append('weight', weight);
       formData?.append('species', species);
       formData?.append('note', note);
       await axios.post('/pets', formData);
-      await axios.get('/pets');
+      const res = await axios.get('/pets');
+      setIsOpen(false);
       setGetPet(!getpet);
+      setChanged(false);
 
       setName('');
       setAge('');
@@ -100,8 +111,7 @@ export default function AddPetModal({ className, setGetPet, getpet, onClick }) {
       setWeight('');
       setType('');
       setPetPic('');
-      setIsOpen(false);
-      setChanged(false);
+      setAddedPets((addedPets) => [...addedPets, res.data.pets.id]);
     } catch (err) {
       console.log(err);
     } finally {
@@ -206,7 +216,9 @@ export default function AddPetModal({ className, setGetPet, getpet, onClick }) {
                       <option
                         value="CAT"
                         selected={
-                          type === ''
+                          petType
+                            ? petType === 'CAT'
+                            : type === ''
                             ? type === 'CAT'
                               ? true
                               : false
@@ -214,19 +226,27 @@ export default function AddPetModal({ className, setGetPet, getpet, onClick }) {
                             ? true
                             : false
                         }
+                        disabled={
+                          petType ? (petType === 'CAT' ? false : true) : false
+                        }
                       >
                         CAT
                       </option>
                       <option
                         value="DOG"
                         selected={
-                          type === ''
+                          petType
+                            ? petType === 'DOG'
+                            : type === ''
                             ? type === 'DOG'
                               ? true
                               : false
                             : type === 'DOG'
                             ? true
                             : false
+                        }
+                        disabled={
+                          petType ? (petType === 'DOG' ? false : true) : false
                         }
                       >
                         DOG

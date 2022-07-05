@@ -170,27 +170,18 @@ export default function BookingDetail() {
                   </div>
                 </div>
               </div>
-              <div className="mt-5">
-                <h2>Other</h2>
-                {/* need to add other notes */}
-                <p className="text-gray-500 mt-5">
-                  Swimming Pool **BY APPOINTMENT ONLY**
-                  <br />
-                  <br />
-                  Swimming is the perfect activity for dogs of all ages and
-                  breeds. Swimming is a non-weight bearing activity that avoids
-                  all the stresses and strains of exercising on hard ground.
-                  <br />
-                  <br />A rinse and dry off area is available and can be used
-                  after a swimming session. An entrance fee of THB 50 per dog
-                  per entry includes free access to the indoor park.
-                  <br />
-                  <br />
-                  Our pool water is disinfected via the salt water chlorination
-                  process.
-                </p>
-              </div>
-              <div className="w-full border-t-2 border-gray-200 my-10"></div>
+              {houseById?.other ? (
+                <>
+                  <div className="mt-5">
+                    <h2>Other</h2>
+                    {/* need to add other notes */}
+                    <p className="text-gray-500 mt-5">{houseById?.other}</p>
+                  </div>
+                  <div className="w-full border-t-2 border-gray-200 my-10"></div>
+                </>
+              ) : (
+                <></>
+              )}
               <div className="flex flex-row gap-5">
                 <img
                   className="rounded-full w-20 h-20"

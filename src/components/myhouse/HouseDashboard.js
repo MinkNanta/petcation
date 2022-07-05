@@ -59,6 +59,7 @@ export default function HouseDashboard() {
                   description="You don’t have any guests checking out today or tomorrow."
                 />
               )}
+              
             </div>
           </>
         )}

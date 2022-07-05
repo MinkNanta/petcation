@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import HouseCard from '../common/HouseCard';
 import BackNavigation from '../components/booking/BackNavigation';
 import BookingSummary from '../components/booking/BookingSummary';
@@ -8,6 +8,9 @@ import SelectPetModal from '../components/booking/SelectPetModal';
 import PaymentModal from '../components/payment/PaymentModal';
 import { useLocation } from 'react-router-dom';
 import UserAddress from '../components/address/UserAddress';
+import defaultProtoPic from '../assets/img/defaultProtoPic.png';
+import BtnIcon from '../common/BtnIcon';
+import { XIcon } from '@heroicons/react/outline';
 
 export default function CreateBooking() {
   const { state } = useLocation();
@@ -19,8 +22,15 @@ export default function CreateBooking() {
     houseById,
     nights,
   } = state;
+  const fetch = () => {};
 
   const [petIds, setPetIds] = useState([]);
+  const [addedPets, setAddedPets] = useState([]);
+
+  const handleRemove = (e, id) => {
+    const remainingArr = petIds.filter((el) => el.id != id);
+    setPetIds(remainingArr);
+  };
 
   return (
     <div className="my-10 mx-20">
@@ -54,11 +64,79 @@ export default function CreateBooking() {
           <div className="flex justify-between items-end">
             <p className="text-2xl font-medium">Pet Information</p>
             <div className="flex gap-5 items-end">
-              <SelectPetModal className="bg-orange-500 p-3 text-white rounded-2xl" />
-              <AddPetModal className="bg-orange-500 p-3 px-5 text-white rounded-2xl" />
+              <SelectPetModal
+                className="bg-orange-500 p-3 text-white rounded-2xl"
+                setPetIds={setPetIds}
+                petIds={petIds}
+                addedPets={addedPets}
+                petType={houseById?.petType}
+              />
+              <AddPetModal
+                className="bg-orange-500 p-3 px-5 text-white rounded-2xl"
+                setAddedPets={setAddedPets}
+                addedPets={addedPets}
+                fetch={fetch}
+                petType={houseById?.petType}
+              />
             </div>
           </div>
-          <p className="mt-5 text-gray-500">Select or add a pet</p>
+          <div className="flex flex-col gap-8 mt-8">
+            {petIds.length > 0 ? (
+              petIds.map((el) => (
+                <div className="grid grid-cols-4">
+                  <div className="col-span-1">
+                    <img
+                      className="rounded-full w-20 h-20"
+                      src={el.petPic || defaultProtoPic}
+                    ></img>
+                  </div>
+                  <div className="col-span-3">
+                    <h4>{el.name}</h4>
+                    <table className="mt-2">
+                      <tr className="items">
+                        <td>Type</td>
+                        <td className="text-gray-500 pl-2 flex items-end">
+                          {el.type || 'N/A'}
+                        </td>
+                      </tr>
+                      <tr className="items">
+                        <td>Age</td>
+                        <td className="text-gray-500 pl-2 flex items-end">
+                          {el.age
+                            ? `${el.age?.split('.')[0]} Year ${
+                                el.age?.split('.')[1]
+                              } Month`
+                            : 'N/A'}
+                        </td>
+                      </tr>
+                      <tr className="items">
+                        <td>Species</td>
+                        <td className="text-gray-500 pl-2 flex items-end">
+                          {el.species || 'N/A'}
+                        </td>
+                      </tr>
+                      <tr className="items">
+                        <td>Note</td>
+                        <td className="text-gray-500 pl-2 flex items-end">
+                          {el.note || 'N/A'}
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div className="col-span-4">
+                    <button
+                      className="btn-outline mt-2 w-1/5"
+                      onClick={(e) => handleRemove(e, el.id)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="mt-5 text-gray-500">Select or add a pet</p>
+            )}
+          </div>
           <div className="w-full border-t-2 border-gray-200 my-10"></div>
           <PaymentModal
             className="bg-orange-500 p-3 text-white rounded-2xl w-1/5"
