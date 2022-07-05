@@ -1,16 +1,41 @@
-import { PlusIcon } from '@heroicons/react/outline';
-import { useState } from 'react';
+import { PlusIcon, TrashIcon } from '@heroicons/react/outline';
+import uploadImage from '../../assets/img/uploadImage.png';
+import axios from '../../config/axios';
+import { useRef, useState } from 'react';
 import Input from '../../common/Input';
 import InputDropdown from '../../common/InputDropdown';
 import InputWithSuffix from '../../common/InputWithSuffix';
 import Spinner from '../../common/Spinner';
 import TitleHeder from '../../common/TitleHeder';
 
-export default function PetInformation({ allPet }) {
+const weightPet = [
+  '<2kg',
+  '2kg-4kg',
+  '5kg-8kg',
+  '9kg-12kg',
+  '13kg-16kg',
+  '17kg-20kg',
+  '>20',
+];
+
+export default function PetInformation({ el, fetch }) {
+  const profileRef = useRef(null);
   const [year, setYear] = useState(1);
   const [month, setMonth] = useState(0);
+  const [petPic, setPetPic] = useState(null);
+  const [loading, setLoading] = useState(false);
+  // const [valueDropDown, setValueDropDown] = useState({});
   const [name, setName] = useState('');
+  const [weight, setWeight] = useState('');
+  const [species, setSpecies] = useState('');
+  const [note, setNote] = useState('');
+  const [type, setType] = useState('');
+  const [age, setAge] = useState('');
   const [change, setChanged] = useState(false);
+  const [oldValue, setOldValue] = useState({});
+
+  const yearString = 'year';
+  const monthString = 'month';
 
   // need to validate years and month
   const handleChange = (e, yearOrMonth) => {
@@ -25,30 +50,108 @@ export default function PetInformation({ allPet }) {
     }
   };
 
+  const handleChangePhoto = (e) => {
+    setChanged((p) => !p);
+    setPetPic(e.target.files[0]);
+  };
+
+  const handleDeletePet = async () => {
+    try {
+      const res = await axios.delete('/pets/' + el.id);
+      fetch();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handlesubmit = async (e, id) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      age && formData?.append('age', year + '.' + month);
+      name && formData?.append('name', name);
+      type && formData?.append('type', type);
+      petPic && formData?.append('petPic', petPic);
+      weight && formData?.append('weight', weight);
+      species && formData?.append('species', species);
+      note && formData?.append('note', note);
+      await axios.patch('/pets/update/' + id, formData);
+      setChanged(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const onCancel = () => {
+    setChanged(false);
+    setName('');
+    setAge('');
+    setNote('');
+    setYear('');
+    setMonth('');
+    setSpecies('');
+    setWeight('');
+    setType('');
+  };
+
+  console.log(petPic);
+
   return (
     <div>
-      {false && <Spinner />}
+      {loading && <Spinner />}
 
-      {allPet?.map((el) => (
+      <form onSubmit={(e) => handlesubmit(e, el.id)}>
         <div className="form-control w-full mt-5">
-          <TitleHeder title={el.name} />
-          <input
+          <div className="flex  items-center justify-between">
+            <TitleHeder title={el.name} />
+
+            <button
+              className="btn-small h-[42px] flex items-center justify-between gap-2"
+              onClick={handleDeletePet}
+            >
+              <TrashIcon className="w-6 h-6" />
+              delete
+            </button>
+          </div>
+          {/* <input
             type="file"
             name="fileUpload"
             ref={(input) => {
               // assigns a reference so we can trigger it later
-              // setInputFile(input);
+              setInputFile(input);
             }}
+            onChange={() => setPetPic()}
             className="hidden"
-          />
-          <a
-            // href="#"
-            // onClick={uploadClick}
+          /> */}
+
+          {/* <a
+            href="#"
+            onClick={uploadClick}
             className="bg-gray-100 text-gray-300 font-light rounded-2xl w-48 h-48 flex flex-row justify-center items-center mb-5"
+            src={}
           >
             <PlusIcon className="w-4 h-4 inline-block" />
             Upload Photo
-          </a>
+          </a> */}
+
+          <div className="bg-gray-100 text-gray-300 font-light rounded-2xl w-48 h-48 flex flex-row justify-center items-center mb-5">
+            <img
+              onClick={() => profileRef.current.click()}
+              className="w-full h-full object-cover rounded-2xl"
+              src={
+                petPic ? URL.createObjectURL(petPic) : el.petPic || uploadImage
+              }
+              alt="userPhoto"
+            />
+            {/* <PlusIcon className="w-4 h-4 inline-block" /> */}
+          </div>
+          <input
+            ref={profileRef}
+            className="hidden"
+            onChange={(e) => handleChangePhoto(e)}
+            type="file"
+          />
+
           <div className="flex gap-x-5">
             <Input
               label="Name"
@@ -57,59 +160,120 @@ export default function PetInformation({ allPet }) {
                 setName(e.target.value);
                 setChanged(true);
               }}
-              placeholder=""
+              // placeholder=""
               errMsg="Error Massage"
               error={false}
             />
             <InputDropdown
               label="Type"
               onChange={(e) => {
-                // setValueDropDown(e.target.value);
+                setType(e.target.value);
+                setChanged(true);
               }}
               errMsg="Error Massage"
               error={false}
             >
-              <option value="option1"></option>
+              <option value="" selected readOnly>
+                Select your option
+              </option>
+              <option
+                value="CAT"
+                selected={
+                  type === ''
+                    ? el.type === 'CAT'
+                      ? true
+                      : false
+                    : type === 'CAT'
+                    ? true
+                    : false
+                }
+              >
+                CAT
+              </option>
+              <option
+                value="DOG"
+                selected={
+                  type === ''
+                    ? el.type === 'DOG'
+                      ? true
+                      : false
+                    : type === 'DOG'
+                    ? true
+                    : false
+                }
+              >
+                DOG
+              </option>
             </InputDropdown>
           </div>
           <InputDropdown
             label="Weight"
             onChange={(e) => {
-              // setValueDropDown(e.target.value);
+              setWeight(e.target.value);
+              setChanged(true);
             }}
             errMsg="Error Massage"
             error={false}
           >
-            <option value="option1"></option>
+            <option value="" selected readOnly>
+              Select your option
+            </option>
+            {weightPet.map((w) => {
+              return (
+                // selected={type === ''? el.type === 'DOG'? true: false: type === 'DOG'? true: false}
+                <option
+                  value={w}
+                  selected={
+                    weight === ''
+                      ? el.weight === w
+                        ? true
+                        : false
+                      : weight === w
+                      ? true
+                      : false
+                  }
+                >
+                  {w}
+                </option>
+              );
+            })}
           </InputDropdown>
           <div className="flex gap-x-5">
             <div className="flex gap-x-5 items-end">
               <InputWithSuffix
-                label="Name"
+                label="Age"
+                value={year}
+                name="year"
                 onChange={(e) => {
-                  handleChange(e, 'year');
+                  setYear(e.target.value);
+                  setChanged(true);
                 }}
                 placeholder=""
                 errMsg="Error Massage"
                 error={false}
                 suffix="Year"
-                value={year}
               />
               <InputWithSuffix
                 label=""
+                name="month"
+                value={month}
                 onChange={(e) => {
-                  handleChange(e, 'month');
+                  setMonth(e.target.value);
+                  setChanged(true);
                 }}
                 placeholder=""
                 errMsg="Error Massage"
                 error={false}
                 suffix="Month"
-                value={month}
               />
             </div>
             <Input
               label="Species"
-              onChange={() => {}}
+              value={species ? species : el.species}
+              onChange={(e) => {
+                setSpecies(e.target.value);
+                setChanged(true);
+              }}
               placeholder=""
               errMsg="Error Massage"
               error={false}
@@ -117,7 +281,11 @@ export default function PetInformation({ allPet }) {
           </div>
           <Input
             label="Note"
-            onChange={() => {}}
+            value={note ? note : el.note}
+            onChange={(e) => {
+              setNote(e.target.value);
+              setChanged(true);
+            }}
             placeholder=""
             errMsg="Error Massage"
             error={false}
@@ -125,20 +293,27 @@ export default function PetInformation({ allPet }) {
 
           {change && (
             <div div className="flex gap-4 w-[40%] mt-4">
-              <button className="btn flex-shrink" onClick={() => {}}>
+              <button
+                className="btn flex-shrink"
+                // onClick={() => handlesubmit()}
+                type="submit"
+              >
                 Save
               </button>
 
               <button
                 className="btn btn-outline flex-shrink "
-                onClick={() => {}}
+                onClick={() => {
+                  setChanged(false);
+                  onCancel();
+                }}
               >
                 Cancel
               </button>
             </div>
           )}
         </div>
-      ))}
+      </form>
     </div>
   );
 }

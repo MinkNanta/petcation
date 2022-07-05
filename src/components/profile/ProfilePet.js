@@ -6,7 +6,7 @@ import SelectPetModal from '../booking/SelectPetModal';
 import PetInformation from './PetInformation';
 
 export default function ProfilePet() {
-  const [allPet, setAllPet] = useState('');
+  const [allPet, setAllPet] = useState([]);
 
   const fetchPet = async () => {
     try {
@@ -29,10 +29,14 @@ export default function ProfilePet() {
   return (
     <div className=" col-span-8">
       <div className="flex gap-5 items-end">
-        <SelectPetModal className="bg-orange-500 p-3 text-white rounded-2xl" />
-        <AddPetModal className="bg-orange-500 p-3 px-5 text-white rounded-2xl" />
+        <AddPetModal
+          className="bg-orange-500 p-3 px-5 text-white rounded-2xl"
+          fetch={fetchPet}
+        />
       </div>
-      <PetInformation allPet={allPet} />
+      {allPet.map((el) => {
+        return <PetInformation fetch={fetchPet} el={el} />;
+      })}
     </div>
   );
 }
