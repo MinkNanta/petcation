@@ -15,6 +15,10 @@ import { useParams } from 'react-router-dom';
 import { getMonthAndYear, getDate7DaysFromNow } from '../utils/convertDate';
 import { getHouseById } from '../api/house';
 import { useError } from '../contexts/ErrorContext';
+import calendar from "../assets/img/002-calendar-1.png"
+import petFood from "../assets/img/003-bowl.png"
+import checkIn from "../assets/img/006-enter.png"
+import checkOut from "../assets/img/009-logout.png"
 
 export default function BookingDetail() {
   // const { houseById, setParamsId } = useContext(HouseContext);
@@ -79,28 +83,85 @@ export default function BookingDetail() {
                 }
               />
               <div className="w-full border-t-2 border-gray-200 my-10"></div>
-              <HouseDetailsWithIcon
+              {/* <HouseDetailsWithIcon
                 title="Check in"
                 details={
                   houseById?.checkInTime ? houseById?.checkInTime : 'N/A'
                 }
-              />
-              <HouseDetailsWithIcon
+              /> */}
+
+<div className="flex mb-5">
+<img src={checkIn}
+             className="w-10 h-10 inline-block mr-5 self-center"  />
+      <p className="w-fit">
+      Check In
+        <br />
+        <span className="text-gray-500">
+        {houseById?.checkInTime ? houseById?.checkInTime : 'N/A'}
+        </span>
+      </p>
+    </div>
+
+              {/* <HouseDetailsWithIcon
                 title="Check out"
                 details={
                   houseById?.checkOutTime ? houseById?.checkOutTime : 'N/A'
                 }
-              />
-              <HouseDetailsWithIcon
+              /> */}
+
+
+
+<div className="flex mb-5">
+<img src={checkOut}
+             className="w-10 h-10 inline-block mr-5 self-center"  />
+      <p className="w-fit">
+      Check out
+        <br />
+        <span className="text-gray-500">
+        {houseById?.checkOutTime ? houseById?.checkOutTime : 'N/A'}
+        </span>
+      </p>
+    </div>
+
+              {/* <HouseDetailsWithIcon
                 title="Food for Pet"
                 details={houseById?.petFood ? houseById?.petFood : 'N/A'}
-              />
-              <HouseDetailsWithIcon
+              /> */}
+
+
+<div className="flex mb-5">
+<img src={petFood}
+             className="w-10 h-10 inline-block mr-5 self-center"  />
+      <p className="w-fit">
+      Food for Pet
+        <br />
+        <span className="text-gray-500">
+        {houseById?.petFood ? houseById?.petFood : 'N/A'}
+        </span>
+      </p>
+    </div>
+
+
+              {/* <img src={calendar}
                 title="Daily schedule"
                 details={
                   houseById?.dailySchedule ? houseById?.dailySchedule : 'N/A'
                 }
-              />
+              /> */}
+
+
+<div className="flex mb-5">
+<img src={calendar}
+             className="w-10 h-10 inline-block mr-5 self-center"  />
+      <p className="w-fit">
+      Daily schedule
+        <br />
+        <span className="text-gray-500">
+        {houseById?.dailySchedule ? houseById?.dailySchedule : 'N/A'}
+        </span>
+      </p>
+    </div>
+
               <div className="w-full border-t-2 border-gray-200 my-10"></div>
               <div>
                 <h2>Highlights</h2>
