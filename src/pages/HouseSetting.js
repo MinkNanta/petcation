@@ -1,6 +1,4 @@
-import { CalendarIcon } from '@heroicons/react/outline';
-import React, { useEffect, useState } from 'react';
-import Input from '../common/Input';
+import React, { useEffect } from 'react';
 import vacationIcon from '../assets/img/vacation.png';
 import openHouse from '../assets/img/openHouse.png';
 import { useAuth } from '../contexts/AuthContext';
@@ -28,7 +26,6 @@ export default function HouseSetting() {
     fetch,
     setFetch,
     handleUpdateHouseDetail,
-    loading,
   } = useHouse();
   const { feedback } = useError();
 
@@ -45,7 +42,6 @@ export default function HouseSetting() {
   // const handelSubmit = () => {
   //   validateInput();
   // };
-  const { user } = useAuth();
 
   useEffect(() => {
     getHouseByUser();

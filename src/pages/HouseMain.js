@@ -35,7 +35,7 @@ export default function HouseMain() {
           )}
         </div>
       </div>
-      <img src={hostCover}></img>
+      <img src={hostCover} alt="host"></img>
       <div className="my-10 mx-20">
         <div className="flex justify-center mt-20">
           <h1 className="text-center">

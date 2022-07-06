@@ -21,8 +21,19 @@ export default function SearchCardContainer() {
               onClick={() => navigate('/booking/' + el.id)}
             />
           ))
-        ) : (
+        ) : searchHouse.length === 0 ? (
           <EmtpyStateSearch />
+        ) : (
+          <>
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </>
         )}
       </div>
     </>

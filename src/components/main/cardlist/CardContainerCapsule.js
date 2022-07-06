@@ -6,11 +6,11 @@ import SkeletonCard from '../../../common/SkeletonCard';
 import EmtpyStateSearch from '../../../common/EmtpyStateSearch';
 
 export default function CardContainerCapsule() {
-  // const { house } = useHouse();
-  const { searchHouse } = useHouse();
+  const { house } = useHouse();
+  // const { searchHouse } = useHouse();
   const navigate = useNavigate();
 
-  const houseFilter = searchHouse?.filter((el) => el.type === 'CAPSULE');
+  const houseFilter = house?.filter((el) => el.type === 'CAPSULE');
 
   return (
     <div className="grid sm:grid-cols-4 gap-8">
@@ -24,7 +24,14 @@ export default function CardContainerCapsule() {
         ))
       ) : (
         <>
-          <EmtpyStateSearch />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
         </>
       )}
     </div>

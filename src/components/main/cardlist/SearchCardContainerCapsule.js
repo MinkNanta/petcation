@@ -3,22 +3,27 @@ import CardItem from './CardItem';
 import { useNavigate } from 'react-router-dom';
 import { useHouse } from '../../../contexts/HouseContext';
 import SkeletonCard from '../../../common/SkeletonCard';
+import EmtpyStateSearch from '../../../common/EmtpyStateSearch';
 
-export default function CardContainer() {
-  const { house } = useHouse();
+export default function SearchCardContainerCapsule() {
+  // const { house } = useHouse();
+  const { searchHouse } = useHouse();
   const navigate = useNavigate();
-  // console.log(house.length);
+
+  const houseFilter = searchHouse?.filter((el) => el.type === 'CAPSULE');
 
   return (
     <div className="grid sm:grid-cols-4 gap-8">
-      {house.length > 0 ? (
-        house?.map((el) => (
+      {houseFilter.length > 0 ? (
+        houseFilter?.map((el) => (
           <CardItem
             key={el.id}
             value={el}
             onClick={() => navigate('/booking/' + el.id)}
           />
         ))
+      ) : searchHouse.length === 0 ? (
+        <EmtpyStateSearch />
       ) : (
         <>
           <SkeletonCard />

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ShieldCheckIcon,
   ShieldExclamationIcon,
@@ -11,13 +11,10 @@ import HouseHighlight from '../components/home/HouseHighlight';
 import BookingCard from '../components/booking/BookingCard';
 import defaultProtoPic from '../assets/img/defaultProtoPic.png';
 
-import { HouseContext } from '../contexts/HouseContext';
 import { useParams } from 'react-router-dom';
 import { getMonthAndYear, getDate7DaysFromNow } from '../utils/convertDate';
 import { getHouseById } from '../api/house';
 import { useError } from '../contexts/ErrorContext';
-
-import axios from 'axios';
 
 export default function BookingDetail() {
   // const { houseById, setParamsId } = useContext(HouseContext);
@@ -190,6 +187,7 @@ export default function BookingDetail() {
                       ? houseById.User?.userPic
                       : defaultProtoPic
                   }
+                  alt="user"
                 ></img>
                 <div className="grid content-center">
                   <h6>
