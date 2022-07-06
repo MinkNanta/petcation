@@ -18,6 +18,7 @@ export default function BookingListDetails() {
         // setLoading(true);
         const res = await axios.get('/bookings/single/' + bookingId);
         console.log(res.data.booking);
+
         setBooking(res.data.booking);
       } catch (err) {
         console.log(err);
@@ -27,6 +28,18 @@ export default function BookingListDetails() {
     };
     fetch();
   }, []);
+
+  // set address
+  let addressArr = [];
+  booking?.Bookingcustomer?.address &&
+    addressArr.push(booking.Bookingcustomer.address);
+  booking?.Bookingcustomer?.subDistrict &&
+    addressArr.push(booking.Bookingcustomer.subDistrict);
+  booking?.Bookingcustomer?.district &&
+    addressArr.push(booking.Bookingcustomer.district);
+  booking?.Bookingcustomer?.province &&
+    addressArr.push(booking.Bookingcustomer.province);
+  console.log(addressArr);
 
   return (
     <>
@@ -55,17 +68,63 @@ export default function BookingListDetails() {
             <div className="justify-between flex">
               <p>Total Pet</p>
               <p className="text-gray-400">
-                {booking?.Bookingpets.length}{' '}
-                {booking?.House.petType[0] +
-                  booking?.House?.petType?.slice(1).toLowerCase() +
+                {booking?.Bookingpets?.length}{' '}
+                {booking?.Bookinghouse?.petType[0] +
+                  booking?.Bookinghouse?.petType?.slice(1).toLowerCase() +
                   (booking?.Bookingpets?.length > 1 ? 's' : '')}
               </p>
             </div>
             <div className="justify-between flex">
               <p>Pet Food</p>
               <p className="text-gray-400">
-                {booking?.isIncludeFood ? booking?.House?.food : 'Owner food'}
+                {booking?.isIncludeFood
+                  ? booking?.Bookinghouse?.food
+                  : 'Owner food'}
               </p>
+            </div>
+          </div>
+          <div className="w-full border-t-2 border-gray-200 my-5"></div>
+          <div className="grid grid-cols-4">
+            <div className="col-span-1">
+              <img
+                className="rounded-full w-28 h-28"
+                src={booking?.Bookingcustomer?.profilePic || defaultProtoPic}
+              ></img>
+            </div>
+            <div className="col-span-3">
+              <h4>
+                {booking?.Bookingcustomer?.firstName}{' '}
+                {booking?.Bookingcustomer?.lastName}
+              </h4>
+              <table className="mt-2">
+                <tr className="items">
+                  <td>Phone</td>
+                  <td className="text-gray-500 pl-2 flex items-end">
+                    {booking?.Bookingcustomer?.phoneNumber}
+                  </td>
+                </tr>
+                <tr className="items">
+                  <td>Email</td>
+                  <td className="text-gray-500 pl-2 flex items-end">
+                    {booking?.Bookingcustomer?.email}
+                  </td>
+                </tr>
+                <tr className="items">
+                  <td className="align-top">
+                    <p>Address</p>
+                  </td>
+                  <td className="text-gray-500 pl-2 flex items-end">
+                    {addressArr?.length > 0 ? (
+                      <>
+                        {addressArr.join(', ')}{' '}
+                        {booking.Bookingcustomer?.zipCode}
+                      </>
+                    ) : (
+                      'N/A'
+                    )}
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
           <div className="w-full border-t-2 border-gray-200 my-5"></div>
@@ -74,24 +133,24 @@ export default function BookingListDetails() {
               <div className="col-span-1">
                 <img
                   className="rounded-full w-28 h-28"
-                  src={el.petPic || defaultProtoPic}
+                  src={el?.petPic || defaultProtoPic}
                 ></img>
               </div>
               <div className="col-span-3">
-                <h4>{el.name}</h4>
+                <h4>{el?.name}</h4>
                 <table className="mt-2">
                   <tr className="items">
                     <td>Type</td>
                     <td className="text-gray-500 pl-2 flex items-end">
-                      {el.type || 'N/A'}
+                      {el?.type || 'N/A'}
                     </td>
                   </tr>
                   <tr className="items">
                     <td>Age</td>
                     <td className="text-gray-500 pl-2 flex items-end">
-                      {el.age
-                        ? `${el.age?.split('.')[0]} Year ${
-                            el.age?.split('.')[1]
+                      {el?.age
+                        ? `${el?.age?.split('.')[0]} Year ${
+                            el?.age?.split('.')[1]
                           } Month`
                         : 'N/A'}
                     </td>
@@ -99,13 +158,13 @@ export default function BookingListDetails() {
                   <tr className="items">
                     <td>Species</td>
                     <td className="text-gray-500 pl-2 flex items-end">
-                      {el.species || 'N/A'}
+                      {el?.species || 'N/A'}
                     </td>
                   </tr>
                   <tr className="items">
                     <td>Note</td>
                     <td className="text-gray-500 pl-2 flex items-end">
-                      {el.note || 'N/A'}
+                      {el?.note || 'N/A'}
                     </td>
                   </tr>
                 </table>

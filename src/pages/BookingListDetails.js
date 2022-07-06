@@ -26,6 +26,17 @@ export default function BookingListDetails() {
     fetch();
   }, []);
 
+  // set address
+  let addressArr = [];
+  booking.Bookinghouse.Host.address &&
+    addressArr.push(booking.Bookinghouse.Host.address);
+  booking.Bookinghouse.Host.subDistrict &&
+    addressArr.push(booking.Bookinghouse.Host.subDistrict);
+  booking.Bookinghouse.Host.district &&
+    addressArr.push(booking.Bookinghouse.Host.district);
+  booking.Bookinghouse.Host.province &&
+    addressArr.push(booking.Bookinghouse.Host.province);
+
   return (
     <>
       {loading ? (
@@ -53,8 +64,8 @@ export default function BookingListDetails() {
             <div className="justify-between flex">
               <p>Total Pet</p>
               <p className="text-gray-400">
-                {booking?.Bookingpets.length}{' '}
-                {booking?.House.petType[0] +
+                {booking?.Bookingpets?.length}{' '}
+                {booking?.House?.petType[0] +
                   booking?.House?.petType?.slice(1).toLowerCase() +
                   (booking?.Bookingpets?.length > 1 ? 's' : '')}
               </p>
@@ -64,6 +75,48 @@ export default function BookingListDetails() {
               <p className="text-gray-400">
                 {booking?.isIncludeFood ? booking?.House?.food : 'Owner food'}
               </p>
+            </div>
+          </div>
+          <div className="w-full border-t-2 border-gray-200 my-5"></div>
+          <div className="grid grid-cols-4">
+            <div className="col-span-1">
+              <img
+                className="rounded-full w-28 h-28"
+                src={booking?.Bookinghouse?.Host?.profilePic || defaultProtoPic}
+              ></img>
+            </div>
+            <div className="col-span-3">
+              <h4>
+                {booking?.Bookinghouse?.Host?.firstName}{' '}
+                {booking?.Bookinghouse?.Host?.lastName}
+              </h4>
+              <table className="mt-2">
+                <tr className="items">
+                  <td>Phone</td>
+                  <td className="text-gray-500 pl-2 flex items-end">
+                    {booking?.Bookinghouse?.Host?.phoneNumber}
+                  </td>
+                </tr>
+                <tr className="items">
+                  <td>Email</td>
+                  <td className="text-gray-500 pl-2 flex items-end">
+                    {booking?.Bookinghouse?.Host?.email}
+                  </td>
+                </tr>
+                <tr className="items">
+                  <td className='align-top'><p>Address</p></td>
+                  <td className="text-gray-500 pl-2 flex items-end">
+                    {addressArr.length > 0 ? (
+                      <>
+                        {addressArr.join(', ')}{' '}
+                        {booking?.Bookinghouse?.Host?.zipCode}
+                      </>
+                    ) : (
+                      'N/A'
+                    )}
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
           <div className="w-full border-t-2 border-gray-200 my-5"></div>

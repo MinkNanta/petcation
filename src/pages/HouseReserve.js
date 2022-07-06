@@ -106,28 +106,27 @@ export default function HouseReserve() {
                 <div className="h-44 overflow-hidden rounded-2xl">
                   <img
                     className="w-full h-full object-cover"
-                    src={
-                      el?.House?.image
-                        ? JSON.parse(el?.House?.image)[0]
-                        : defaultProtoPic
-                    }
+                    src={el?.Bookingcustomer?.profilePic || defaultProtoPic}
                   ></img>
                 </div>
               </div>
               <div className="col-span-3">
-                <h4>{el.House.name}</h4>
+                <h4>
+                  {el?.Bookingcustomer?.firstName}{' '}
+                  {el?.Bookingcustomer?.lastName}
+                </h4>
                 <div className="mt-2 text-gray-400">
                   <p>
-                    {dashesToSlashes(el.checkInDate)} -{' '}
-                    {dashesToSlashes(el.checkOutDate)}
+                    {dashesToSlashes(el?.checkInDate)} -{' '}
+                    {dashesToSlashes(el?.checkOutDate)}
                   </p>
                   <p>
-                    {el.Bookingpets.length}{' '}
-                    {el.House.petType[0] +
-                      el.House.petType.slice(1).toLowerCase() +
-                      (el.Bookingpets.length > 1 ? 's' : '')}
+                    {el?.Bookingpets?.length}{' '}
+                    {el?.Bookinghouse?.petType[0] +
+                      el?.Bookinghouse?.petType?.slice(1).toLowerCase() +
+                      (el?.Bookingpets?.length > 1 ? 's' : '')}
                     &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                    {el.isIncludeFood ? el.House.food : 'Owner food'}
+                    {el?.isIncludeFood ? el?.Bookinghouse?.food : 'Owner food'}
                   </p>
                   <div className="mt-16">
                     <a href={`/house/reserve/${el.id}`} className="underline">
