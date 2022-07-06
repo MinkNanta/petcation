@@ -8,15 +8,41 @@ import { useError } from '../../contexts/ErrorContext';
 import { useHouse } from '../../contexts/HouseContext';
 import { useAuth } from '../../contexts/AuthContext';
 import TitleHeder from '../../common/TitleHeder';
+import axios from 'axios';
+import { useSearchInput } from '../../contexts/SearchInputContext';
 
 export default function HouseDashboard() {
   const [empty, SetEmpty] = useState(true);
   const { user } = useAuth();
+  const { houseLimit, setHouseLimit } = useSearchInput();
 
-  const { houseByUserID, getHouseByUser } = useHouse();
+  const { houseByUserID, getHouseByUser, bookingHouse, setBookingHouse } =
+    useHouse();
+  const [active, setActive] = useState(0);
+  const [available, setAvailable] = useState(0);
+
   useEffect(() => {
     getHouseByUser();
   }, [user]);
+
+  useEffect(() => {
+    const fetchLimit = async () => {
+      const res = await axios.get(`/houses/limitHouse/${houseByUserID.id}`);
+      const booking = await axios.get(`/bookings/host/${houseByUserID.id}`);
+
+      console.log(res.data);
+      setHouseLimit(res.data);
+      const sum = res.data;
+      const sumActive = sum.reduce((acc, el) => {
+        return +el.amount + acc;
+      }, 0);
+      setActive(sumActive);
+      setAvailable(1 * houseByUserID.limit - sumActive);
+      console.log('booking', booking.date);
+      setBookingHouse(booking.date);
+    };
+    fetchLimit();
+  }, []);
 
   return (
     <div className="w-full space-y-6 min-h-[60vh]">
@@ -37,14 +63,14 @@ export default function HouseDashboard() {
               <HouseCard
                 icon={<HomeIcon className="w-6 h-6" />}
                 title="Available"
-                number={houseByUserID?.price}
-                describe="Room Unit"
+                number={available}
+                describe={`Max limit ${houseByUserID?.limit} pet`}
                 color="bg-[#D0E9FD]"
               />
               <HouseCard
                 icon={<KeyIcon className="w-6 h-6" />}
                 title="Active"
-                number={houseByUserID?.price}
+                number={active}
                 describe="Room Unit"
                 color="bg-[#FFF8CE]"
               />

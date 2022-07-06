@@ -1,5 +1,3 @@
-import React, { Children } from 'react';
-
 export default function TitleHeder({ title, children }) {
   return (
     <div className="flex justify-between items-center mb-3 mt-6">

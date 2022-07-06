@@ -29,7 +29,8 @@ function HouseContextProvider({ children }) {
   const [houseByUserID, setHouseByUserID] = useState([]);
 
   const [houseDetail, setHouseDetail] = useState({});
-  const [searchHouse, setSearchHouse] = useState([]);
+  const [searchHouse, setSearchHouse] = useState({});
+  const [bookingHouse, setBookingHouse] = useState([]);
 
   const { id } = useParams();
 
@@ -148,6 +149,8 @@ function HouseContextProvider({ children }) {
         setParamsId,
         searchHouse,
         setSearchHouse,
+        bookingHouse,
+        setBookingHouse,
       }}
     >
       {children}

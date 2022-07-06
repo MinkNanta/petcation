@@ -3,7 +3,7 @@ import EmtpyState from './EmtpyState';
 import { useSearchInput } from '../contexts/SearchInputContext.js';
 
 export default function EmtpyStateSearch() {
-  const { body, setBody, range, setRange } = useSearchInput();
+  const { setBody, setRange } = useSearchInput();
 
   return (
     <div className="w-full col-span-4 ">
