@@ -6,11 +6,11 @@ import SkeletonCard from '../../../common/SkeletonCard';
 import EmtpyStateSearch from '../../../common/EmtpyStateSearch';
 
 export default function CardContainerCage() {
-  const { searchHouse } = useHouse();
+  const { house } = useHouse();
   const navigate = useNavigate();
   // console.log(house.length);
 
-  const houseFilter = searchHouse?.filter((el) => el.type === 'CAGE');
+  const houseFilter = house?.filter((el) => el.type === 'CAGE');
 
   // console.log(houseFilter);
 
@@ -26,7 +26,14 @@ export default function CardContainerCage() {
         ))
       ) : (
         <>
-          <EmtpyStateSearch />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
         </>
       )}
     </div>

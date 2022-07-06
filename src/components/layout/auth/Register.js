@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../../../common/Input';
 import Modal from '../../../common/Modal';
@@ -89,7 +89,7 @@ function Register() {
             <div className="space-y-2">
               {/* modal body */}
               <h2 className="mb-8">Register</h2>
-              {error && <Alert />}
+              {/* {error && <Alert />} */}
 
               <Input
                 name="email"
@@ -112,7 +112,7 @@ function Register() {
               {/* <button className="btn btn-outline">Sign in with Google</button> */}
               <Logingoogle title="Resister" />
             </div>
-            
+
             <div className="flex justify-center mt-4">
               <p className="text-gray-500">Already have an account? </p>
               <Link to="/" className="text-orange-500">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MapIcon } from '@heroicons/react/outline';
 import CardContainer from './cardlist/CardContainer';
-import CardContainerCapsule from './cardlist/CardContainerCapsule';
+import SearchCardContainerCapsule from './cardlist/SearchCardContainerCapsule';
 import CardContainerSingleRoom from './cardlist/CardContainerSingleRoom';
 import CardContainerCage from './cardlist/CardContainerCage';
 import allPlaceIcon from '../../assets/img/allPlace.png';
@@ -163,7 +163,7 @@ export default function SearchContainer({ searchHouse }) {
       </div>
       {/* <p>{title}</p> */}
       {allHouse && <SearchCardContainer />}
-      {capsule && <CardContainerCapsule />}
+      {capsule && <SearchCardContainerCapsule />}
       {singleRoom && <CardContainerSingleRoom />}
       {cage && <CardContainerCage />}
     </>

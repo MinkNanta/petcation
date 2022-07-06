@@ -31,7 +31,7 @@ export default function TapFilter({ title }) {
               setNearMe(false);
             }}
           >
-            <img className="w-6 h-6 mx-auto" src={allPlaceIcon} />
+            <img className="w-6 h-6 mx-auto" src={allPlaceIcon} alt=" " />
             <p
               className={
                 allHouse
@@ -54,7 +54,7 @@ export default function TapFilter({ title }) {
               setNearMe(true);
             }}
           >
-            <img className="w-6 h-6 mx-auto" src={nearMeIcon} />
+            <img className="w-6 h-6 mx-auto" src={nearMeIcon} alt=" " />
             <p
               className={
                 nearMe
@@ -77,7 +77,7 @@ export default function TapFilter({ title }) {
               setNearMe(false);
             }}
           >
-            <img className="w-6 h-6 mx-auto" src={singleRoomIcon} />
+            <img className="w-6 h-6 mx-auto" src={singleRoomIcon} alt=" " />
             <p
               className={
                 singleRoom
@@ -101,7 +101,7 @@ export default function TapFilter({ title }) {
               setNearMe(false);
             }}
           >
-            <img className="w-6 h-6 mx-auto" src={capsuleIcon} />
+            <img className="w-6 h-6 mx-auto" src={capsuleIcon} alt=" " />
 
             <p
               className={
@@ -125,7 +125,7 @@ export default function TapFilter({ title }) {
               setNearMe(false);
             }}
           >
-            <img className="w-6 h-6 mx-auto" src={cageIcon} />
+            <img className="w-6 h-6 mx-auto" src={cageIcon} alt=" " />
             <p
               className={
                 cage

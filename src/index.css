@@ -324,7 +324,7 @@
 
 .backgroundHero {
   background-image: url('./assets/img/hero.png');
-
+  background-size: cover;
   background-position: center;
 }
 
