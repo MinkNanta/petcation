@@ -118,8 +118,21 @@ export default function PaymentModal({
           } else {
             // response["id"] is token identifier
 
+
+
             try {
               setLoading(true);
+              console.log({
+                token: response.id,
+                checkInDate,
+                checkOutDate,
+                houseId,
+                price,
+                includeFood: isIncludeFood,
+                serviceFee,
+                foodPrice,
+                petIds,
+              });
               await axios.post('/bookings', {
                 token: response.id,
                 checkInDate,
@@ -129,7 +142,7 @@ export default function PaymentModal({
                 includeFood: isIncludeFood,
                 serviceFee,
                 foodPrice,
-                petIds: [1],
+                petIds: petIds.map((el) => el.id),
               });
 
               navigate('/booking/list');
