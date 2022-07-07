@@ -11,9 +11,22 @@ function SearchInputContextProvider({ children }) {
     checkOutDate: '',
   });
   const [range, setRange] = useState({});
+  const [houseLimit, setHouseLimit] = useState([]);
+  const [activeDate, setActiveDate] = useState(false);
 
   return (
-    <SearchInputContext.Provider value={{ body, setBody, range, setRange }}>
+    <SearchInputContext.Provider
+      value={{
+        body,
+        setBody,
+        range,
+        setRange,
+        houseLimit,
+        setHouseLimit,
+        activeDate,
+        setActiveDate,
+      }}
+    >
       {children}
     </SearchInputContext.Provider>
   );

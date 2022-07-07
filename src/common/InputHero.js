@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-
-export default function InputHero({ placeholder, className, label, ...props }) {
-  const [active, setActive] = useState(false);
+export default function InputHero({
+  placeholder,
+  className,
+  label,
+  active,
+  ...props
+}) {
   return (
     <div
       className={`
@@ -9,8 +12,9 @@ export default function InputHero({ placeholder, className, label, ...props }) {
     outline-none  
     block  
     h-full
-    bg-white/0
+     ${active ? 'bg-white' : 'bg-white/0'}
     w-full
+    bg-white
 
     hover:bg-white
     hover:shadow-lg
@@ -28,7 +32,7 @@ export default function InputHero({ placeholder, className, label, ...props }) {
       {/* <p className="text-[14px] text-gray-600  text-left block">{label}</p> */}
       <input
         className="bg-white/0 w-full  focus:outline-none
-        focus:outline-offset-0"
+        focus:outline-offset-0 focus:bg-white/0"
         placeholder={placeholder}
         {...props}
       />

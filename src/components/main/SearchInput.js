@@ -8,7 +8,7 @@ import {
 import { useState } from 'react';
 import hero from '../../assets/img/hero.png';
 import Input from '../../common/Input';
-import LineH from '../../common/LineH';
+import BtnIcon from '../../common/BtnIcon';
 import InputHero from '../../common/InputHero';
 import DatePicker from '../../common/DatePicker';
 import { Popover, Combobox } from '@headlessui/react';
@@ -21,6 +21,8 @@ import axios from '../../config/axios';
 import { useError } from '../../contexts/ErrorContext';
 import { useHouse } from '../../contexts/HouseContext';
 import { useSearchInput } from '../../contexts/SearchInputContext';
+import { XIcon } from '@heroicons/react/outline';
+import Spinner from '../../common/Spinner';
 
 export default function SearchInput() {
   // const [body, setBody] = useState({
@@ -31,16 +33,26 @@ export default function SearchInput() {
   //   checkOutDate: '',
   // });
 
-  const { body, setBody } = useSearchInput();
+  // let = queryString = ""
+  // for (let k in filtterObj){
+  //   if(filtterObj[key] !== ""){
+  //     queryString += `${key}=${filterObj[key]}&}`
+  //   }
+  // }
+
+  const { body, setBody, range, setRange, activeDate, setActiveDate } =
+    useSearchInput();
   const navigate = useNavigate();
   const { setSearchHouse } = useHouse();
 
+  const [loading, setLoading] = useState(false);
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
 
   const { error, setError } = useError();
   const handelSubmit = async () => {
     try {
+      setLoading(!loading);
       body.checkInDate = checkIn;
       body.checkOutDate = checkOut;
       console.log('body', body);
@@ -50,7 +62,10 @@ export default function SearchInput() {
       console.log(res.data);
       setSearchHouse(res.data);
       navigate('/search');
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
+
       console.log(error);
       setError(error.message);
     }
@@ -105,13 +120,14 @@ export default function SearchInput() {
   return (
     <div
       className="bg-gray-100 rounded-full 
-             mx-auto relative grid grid-cols-12 w-full"
+             mx-auto relative flex w-full border border-gray-100"
     >
+      {loading && <Spinner />}
       {/* <div
       className="bg-gray-100 rounded-full 
              mx-auto relative flex w-full"
     > */}
-      <div className="w-full col-span-3">
+      <div className="w-2/5 relative">
         <InputHero
           name="province"
           className="pl-6"
@@ -119,29 +135,65 @@ export default function SearchInput() {
           placeholder="Enter a location"
           value={body.province}
           onChange={(e) => handelChange(e)}
+          active={body.province}
         />
+        {body.province && (
+          <div className="absolute top-4 right-4">
+            <BtnIcon
+              icon={<XIcon />}
+              className="w-6 h-6 bg-gray-100 rounded-full text-gray-400 p-1"
+              onClick={() => setBody((p) => ({ ...p, province: '' }))}
+            />
+          </div>
+        )}
       </div>
 
-      <div className="w-full col-span-6 ">
+      <div className="w-3/5 relative">
         <DatePicker
           handelChange={handelChange}
           setCheckIn={setCheckIn}
           setCheckOut={setCheckOut}
           setBody={setBody}
         />
+        {activeDate && (
+          <div className="absolute top-4 right-4">
+            <BtnIcon
+              icon={<XIcon />}
+              className="w-6 h-6 bg-gray-100 rounded-full text-gray-400 p-1"
+              onClick={() => {
+                setRange({});
+                setActiveDate(false);
+              }}
+            />
+          </div>
+        )}
       </div>
 
-      <Popover className="relative w-full col-span-3">
+      <Popover className="relative w-2/5">
         <Popover.Button
           className=" focus:outline-none
-          focus:outline-offset-0 w-full"
+          focus:outline-offset-0 w-full relative"
         >
           <InputHero
+            active={petValue}
             label="Pet"
-            placeholder="With pet"
+            placeholder="Pet type"
             value={petValue}
             onChange={(e) => {}}
           />
+          {petValue && (
+            <div className="absolute top-4 right-16">
+              <BtnIcon
+                icon={<XIcon />}
+                className="w-6 h-6 bg-gray-100 rounded-full text-gray-400 p-1"
+                onClick={() => {
+                  setPetValue('');
+                  setDog(false);
+                  setCat(false);
+                }}
+              />
+            </div>
+          )}
         </Popover.Button>
         <TransitionCommon>
           <Popover.Panel className="absolute z-10 mt-2 right-0 ">

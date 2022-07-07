@@ -1,19 +1,11 @@
-import { Fragment, useState } from 'react';
 import InputHero from './InputHero';
-import { Menu, Popover } from '@headlessui/react';
+import { Popover } from '@headlessui/react';
 import { DayPicker } from 'react-day-picker';
 import TransitionCommon from './TransitionCommon';
 import { useSearchInput } from '../contexts/SearchInputContext';
 
-// const body = {
-//   province: 'bangkok',
-//   date: ['2022-07-26', '2022-07-27', '2022-07-28'],
-//   petType: 'DOG',
-//   amountPet: '4',
-// };
-
 export default function DatePicker({ setCheckOut, setCheckIn, handelChange }) {
-  const { range, setRange } = useSearchInput();
+  const { range, setRange, activeDate, setActiveDate } = useSearchInput();
   const checkOut = range.to + '';
 
   const checkInValue =
@@ -27,6 +19,7 @@ export default function DatePicker({ setCheckOut, setCheckIn, handelChange }) {
   const value = checkInValue + checkOutValue;
 
   const handelDate = (date) => {
+    setActiveDate(true);
     setRange(date);
 
     const dateFrom = date.from?.toLocaleString() ?? ' ';
@@ -62,10 +55,12 @@ export default function DatePicker({ setCheckOut, setCheckIn, handelChange }) {
         >
           <InputHero
             // className="w-[310px]"
+            active={activeDate}
             placeholder="Please pick the first day"
             label="Check in"
             type="text"
             value={value}
+            onChange={() => {}}
           />
         </Popover.Button>
         <TransitionCommon>

@@ -5,8 +5,8 @@ import { useTab } from "../../../contexts/TabContext";
 
 // const menus = ["upcoming", "completed", "canceled", "all"];
 
-export default function DashboardMenu() {
-  const { active, setActive, menus } = useTab();
+export default function DashboardMenu({ active, setActive, menus }) {
+  // const { active, setActive, menus } = useTab();
 
   return (
     <Tab>

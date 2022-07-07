@@ -118,6 +118,8 @@ export default function PaymentModal({
           } else {
             // response["id"] is token identifier
 
+
+
             try {
               setLoading(true);
               console.log({
@@ -140,7 +142,7 @@ export default function PaymentModal({
                 includeFood: isIncludeFood,
                 serviceFee,
                 foodPrice,
-                petIds: [1],
+                petIds: petIds.map((el) => el.id),
               });
 
               navigate('/booking/list');

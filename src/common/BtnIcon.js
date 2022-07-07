@@ -1,9 +1,11 @@
-import React, { Children } from 'react';
-
-export default function BtnIcon({ icon, onClick }) {
+export default function BtnIcon({ icon, onClick, className }) {
   return (
     <div
-      className="w-7 h-7 bg-gray-100 rounded-full text-gray-500 p-1"
+      className={
+        className
+          ? className
+          : 'w-7 h-7 bg-gray-100 rounded-full text-gray-500 p-1'
+      }
       onClick={onClick}
     >
       {icon}

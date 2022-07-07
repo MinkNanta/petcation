@@ -6,10 +6,10 @@ import SkeletonCard from '../../../common/SkeletonCard';
 import EmtpyStateSearch from '../../../common/EmtpyStateSearch';
 
 export default function CardContainerSingleRoom() {
-  const { searchHouse } = useHouse();
+  const { house } = useHouse();
   const navigate = useNavigate();
 
-  const houseFilter = searchHouse?.filter((el) => el.type === 'SINGLE_ROOM');
+  const houseFilter = house?.filter((el) => el.type === 'SINGLE_ROOM');
 
   return (
     <div className="grid sm:grid-cols-4 gap-8">
@@ -23,7 +23,14 @@ export default function CardContainerSingleRoom() {
         ))
       ) : (
         <>
-          <EmtpyStateSearch />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
         </>
       )}
     </div>
