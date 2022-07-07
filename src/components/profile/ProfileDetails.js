@@ -14,7 +14,6 @@ export default function ProfileDetails({ title }) {
   const [oldValue, setOldValue] = useState({});
   const [fetch, setFetch] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const [newUserInfo, setNewUserInfo] = useState({});
   const { setError, setFeedback } = useError();
 
