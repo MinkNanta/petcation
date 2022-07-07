@@ -65,8 +65,8 @@ function GoogleMapContainer({ house }) {
             >
               {house.map((el, idx) => (
                 <div
-                  lat={JSON.parse(el.location).lat}
-                  lng={JSON.parse(el.location).lng}
+                  lat={JSON.parse(el.location)?.lat}
+                  lng={JSON.parse(el.location)?.lng}
                   onClick={() => navigate('/booking/' + el.id)}
                   className="cursor-pointer"
                 >
@@ -74,7 +74,7 @@ function GoogleMapContainer({ house }) {
                 </div>
               ))}
 
-              <div lat={userLocation.lat} lng={userLocation.lng}>
+              <div lat={userLocation?.lat} lng={userLocation?.lng}>
                 <LocationMarkerIcon className="w-[30px] text-red-500" />
               </div>
             </GoogleMapReact>

@@ -3,7 +3,7 @@ import { useState } from 'react';
 function HouseItem({ el }) {
   const [showPic, setShowPic] = useState(false);
 
-  console.log(JSON.parse(el.location).lng);
+  // console.log(JSON.parse(el.location)?.lng);
 
   return (
     <div
