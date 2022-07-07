@@ -28,14 +28,14 @@ export default function BookingListDetails() {
 
   // set address
   let addressArr = [];
-  booking.Bookinghouse.Host.address &&
-    addressArr.push(booking.Bookinghouse.Host.address);
-  booking.Bookinghouse.Host.subDistrict &&
-    addressArr.push(booking.Bookinghouse.Host.subDistrict);
-  booking.Bookinghouse.Host.district &&
-    addressArr.push(booking.Bookinghouse.Host.district);
-  booking.Bookinghouse.Host.province &&
-    addressArr.push(booking.Bookinghouse.Host.province);
+  booking.Bookinghouse?.Host?.address &&
+    addressArr.push(booking.Bookinghouse?.Host?.address);
+  booking.Bookinghouse?.Host?.subDistrict &&
+    addressArr.push(booking.Bookinghouse?.Host?.subDistrict);
+  booking.Bookinghouse?.Host?.district &&
+    addressArr.push(booking.Bookinghouse?.Host?.district);
+  booking.Bookinghouse?.Host?.province &&
+    addressArr.push(booking.Bookinghouse?.Host?.province);
 
   return (
     <>
@@ -104,7 +104,9 @@ export default function BookingListDetails() {
                   </td>
                 </tr>
                 <tr className="items">
-                  <td className='align-top'><p>Address</p></td>
+                  <td className="align-top">
+                    <p>Address</p>
+                  </td>
                   <td className="text-gray-500 pl-2 flex items-end">
                     {addressArr.length > 0 ? (
                       <>

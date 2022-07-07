@@ -1,5 +1,8 @@
 import { MapIcon } from '@heroicons/react/outline';
 import { dashesToSlashes } from '../../utils/convertDate';
+import checkIn from '../../assets/img/002-calendar-1.png';
+import dog from '../../assets/img/dog.png';
+import cat from '../../assets/img/cat.png';
 
 export default function BookingSummary({
   checkInDate,
@@ -11,7 +14,7 @@ export default function BookingSummary({
   return (
     <>
       <div className="flex mb-5">
-        <MapIcon className="w-10 h-10 inline-block mr-5 self-center" />
+        <img src={checkIn} alt="checkin" className="w-10 h-10 mr-5" />
         <p>
           Date
           <br />
@@ -20,8 +23,13 @@ export default function BookingSummary({
           </span>
         </p>
       </div>
-      <div className="flex mb-5">
-        <MapIcon className="w-10 h-10 inline-block mr-5 self-center" />
+      <div className="flex">
+        <img
+          src={petType === 'DOG' ? dog : cat}
+          alt="checkin"
+          className="w-10 h-10 mr-5 mt-1"
+        />
+
         <p>
           Pet
           <br />

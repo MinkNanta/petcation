@@ -18,7 +18,7 @@ export default function HouseReserve() {
   const [empty, SetEmpty] = useState(true);
   const { user } = useAuth();
 
-  const menus = ['upcoming', 'completed', 'canceled', 'all'];
+  const menus = ['upcoming', 'completed', 'all'];
   const [active, setActive] = useState(menus[0]);
   const [loading, setLoading] = useState(false);
 
@@ -95,16 +95,27 @@ export default function HouseReserve() {
   return (
     <div className="space-y-6">
       <TitleHeder title="Your reservations" />
-      <DashboardMenu active={active} setActive={setActive} menus={menus} />
-      {loading ? (
+
+      {houseByUserID.length < 1 ? (
+        <EmptyState
+          title="Become a host"
+          description="Easy step to become a host."
+        >
+          <Link className="btn-text-line" to="/house/main">
+            Become a host
+          </Link>
+        </EmptyState>
+      ) : loading ? (
         <Spinner />
       ) : filteredBookings.length > 0 ? (
         <>
+          <DashboardMenu active={active} setActive={setActive} menus={menus} />
           {filteredBookings.map((el) => (
             <div className="grid grid-cols-4 gap-4">
               <div className="col-span-1">
                 <div className="h-44 overflow-hidden rounded-2xl">
                   <img
+                    alt="filter"
                     className="w-full h-full object-cover"
                     src={el?.Bookingcustomer?.profilePic || defaultProtoPic}
                   ></img>
@@ -139,14 +150,18 @@ export default function HouseReserve() {
           ))}
         </>
       ) : (
-        <EmptyState
-          title={
-            active === 'all'
-              ? 'You have no reservations'
-              : 'You have no ' + active + ' reservations'
-          }
-          description=""
-        />
+        <>
+          <DashboardMenu active={active} setActive={setActive} menus={menus} />
+
+          <EmptyState
+            title={
+              active === 'all'
+                ? 'You have no reservations'
+                : 'You have no ' + active + ' reservations'
+            }
+            description=""
+          />
+        </>
       )}
     </div>
   );

@@ -1,13 +1,13 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import TabContextProvider from "../../contexts/TabContext";
-import SideMenu from "./SideMenu";
-import TitleHeader from "./TitleHeader";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import TabContextProvider from '../../contexts/TabContext';
+import SideMenu from './SideMenu';
+import TitleHeader from './TitleHeader';
 
 export default function HouseOutlet() {
   return (
     <TabContextProvider>
-      <div className="max-w-7xl px-8 pb-20">
+      <div className="max-w-7xl px-8 pb-20 mainContainer">
         <TitleHeader />
         <h2>House Dashboard</h2>
         <div className="grid grid-cols-12 gap-8 mt-9">

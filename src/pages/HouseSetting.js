@@ -9,6 +9,7 @@ import TitleHeder from '../common/TitleHeder';
 import InputDropdown from '../common/InputDropdown';
 import AlertGreen from '../common/AlertGreen';
 import { useError } from '../contexts/ErrorContext';
+import Spinner from '../common/Spinner';
 
 export default function HouseSetting() {
   // const [checked, setChecked] = useState(false);
@@ -26,6 +27,7 @@ export default function HouseSetting() {
     fetch,
     setFetch,
     handleUpdateHouseDetail,
+    loading,
   } = useHouse();
   const { feedback } = useError();
 
@@ -49,7 +51,7 @@ export default function HouseSetting() {
 
   useEffect(() => {
     setHouseDetail(houseByUserID);
-  }, [houseByUserID, fetch]);
+  }, [houseByUserID]);
 
   return (
     <div className="h-[50vh]">
@@ -68,7 +70,21 @@ export default function HouseSetting() {
         <div className="flex gap-10 mt-10 ">
           {feedback && <AlertGreen />}
           <div className="w-[240px]">
-            {houseDetail?.status === 'OPEN' ? (
+            {loading ? (
+              houseDetail?.status === 'OPEN' ? (
+                <img
+                  src={openHouse}
+                  alt="openHouse"
+                  className="w-full opacity-80 "
+                />
+              ) : (
+                <img
+                  src={vacationIcon}
+                  alt="vacationIcon"
+                  className="w-full opacity-80 scale-95"
+                />
+              )
+            ) : houseDetail?.status === 'OPEN' ? (
               <img
                 src={openHouse}
                 alt="openHouse"

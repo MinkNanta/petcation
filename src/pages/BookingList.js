@@ -7,12 +7,13 @@ import defaultHouse from '../assets/img/defaultHouse.png';
 import { dashesToSlashes } from '../utils/convertDate';
 import Spinner from '../common/Spinner';
 import EmptyState from '../common/EmtpyState';
+import { Link } from 'react-router-dom';
 
 export default function BookingList() {
   const [bookings, setBookings] = useState([]);
   const [filteredBookings, setFilteredBookings] = useState([]);
 
-  const menus = ['upcoming', 'completed', 'canceled', 'all'];
+  const menus = ['upcoming', 'completed', 'all'];
   const [active, setActive] = useState(menus[0]);
   const [loading, setLoading] = useState(true);
 
@@ -88,13 +89,14 @@ export default function BookingList() {
         {loading ? (
           <Spinner />
         ) : filteredBookings.length > 0 ? (
-          <>
+          <div className="space-y-10">
             {filteredBookings.map((el) => (
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-4 gap-4 ">
                 <div className="col-span-1">
                   <div className="h-44 overflow-hidden rounded-2xl">
                     <img
                       className="w-full h-full object-cover"
+                      alt="house"
                       src={
                         el?.Bookinghouse?.image
                           ? JSON.parse(el?.Bookinghouse?.image)[0]
@@ -103,8 +105,8 @@ export default function BookingList() {
                     ></img>
                   </div>
                 </div>
-                <div className="col-span-3">
-                  <h4>{el.Bookinghouse?.name}</h4>
+                <div className="col-span-3 py-2">
+                  <h5>{el.Bookinghouse?.name}</h5>
                   <div className="mt-2 text-gray-400">
                     <p>
                       {dashesToSlashes(el?.checkInDate)} -{' '}
@@ -118,25 +120,19 @@ export default function BookingList() {
                       &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                       {el?.isIncludeFood ? el.Bookinghouse?.food : 'Owner food'}
                     </p>
-                    <div className="mt-16">
-                      <a href={`/booking/list/${el.id}`} className="underline">
-                        Details
-                      </a>
-                    </div>
                   </div>
+                  <Link to={`/booking/list/${el.id}`} className="btn-text-line">
+                    Details
+                  </Link>
                 </div>
               </div>
             ))}
-          </>
+          </div>
         ) : (
-          <EmptyState
-            title={
-              active === 'all'
-                ? 'You have no reservations'
-                : 'You have no ' + active + ' reservations'
-            }
-            description=""
-          />
+          <EmptyState>
+            <h4 className="text-gray-600">You don't have any bookings</h4>
+            <p className="text-gray-400">we'r waiting for your first booking</p>
+          </EmptyState>
         )}
       </div>
     </>

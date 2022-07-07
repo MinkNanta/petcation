@@ -11,10 +11,17 @@ export default function Carousel({ images }) {
 
   return (
     <>
-      <div id="main-carousel" className="carousel w-full h-full rounded-2xl">
+      <div
+        id="main-carousel"
+        className=" w-full h-full rounded-2xl overflow-hidden"
+      >
         {images.length === 1 ? (
-          <div className="carousel-item w-full h-96">
-            <img src={images[0]} className="w-full object-cover" />
+          <div className="carousel-item w-full ">
+            <img
+              src={images[0]}
+              className="w-full hfull object-cover"
+              alt="petcation"
+            />
           </div>
         ) : (
           <ResponsiveCarousel
@@ -23,7 +30,7 @@ export default function Carousel({ images }) {
             renderIndicator={(clickHandler, isSelected) => {
               return (
                 <div
-                  className={`w-3 h-3 rounded-full inline-block mx-2 ${
+                  className={`w-2 h-2 rounded-full inline-block mx-1 ${
                     isSelected ? 'bg-orange-500' : 'bg-white'
                   }`}
                   onClick={clickHandler}

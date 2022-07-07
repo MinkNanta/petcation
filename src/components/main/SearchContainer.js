@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MapIcon } from '@heroicons/react/outline';
 import CardContainer from './cardlist/CardContainer';
 import SearchCardContainerCapsule from './cardlist/SearchCardContainerCapsule';
-import CardContainerSingleRoom from './cardlist/CardContainerSingleRoom';
+import SearchCardContainerSingleRoom from './cardlist/SearchCardContainerSingleRoom';
 import CardContainerCage from './cardlist/CardContainerCage';
 import allPlaceIcon from '../../assets/img/allPlace.png';
 import nearMeIcon from '../../assets/img/nearMe.png';
@@ -54,29 +54,6 @@ export default function SearchContainer({ searchHouse }) {
               }
             >
               All Place
-            </p>
-          </div>
-
-          {/* Near Me */}
-          <div
-            className="text-center cursor-pointer space-y-1"
-            onClick={() => {
-              setAllHouse(false);
-              setSingleRoome(false);
-              setCapsule(false);
-              setCage(false);
-              setNearMe(true);
-            }}
-          >
-            <img className="w-6 h-6 mx-auto" src={nearMeIcon} alt="nerarMe" />
-            <p
-              className={
-                nearMe
-                  ? 'text-gray-900 border-b-2 border-gray-700'
-                  : 'text-gray-600'
-              }
-            >
-              Near Me
             </p>
           </div>
 
@@ -164,7 +141,7 @@ export default function SearchContainer({ searchHouse }) {
       {/* <p>{title}</p> */}
       {allHouse && <SearchCardContainer />}
       {capsule && <SearchCardContainerCapsule />}
-      {singleRoom && <CardContainerSingleRoom />}
+      {singleRoom && <SearchCardContainerSingleRoom />}
       {cage && <CardContainerCage />}
     </>
   );

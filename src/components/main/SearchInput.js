@@ -40,14 +40,28 @@ export default function SearchInput() {
   //   }
   // }
 
-  const { body, setBody, range, setRange, activeDate, setActiveDate } =
-    useSearchInput();
+  const {
+    body,
+    setBody,
+    range,
+    setRange,
+    activeDate,
+    setActiveDate,
+    petValue,
+    setPetValue,
+    dog,
+    setDog,
+    cat,
+    setCat,
+    checkIn,
+    setCheckIn,
+    checkOut,
+    setCheckOut,
+  } = useSearchInput();
   const navigate = useNavigate();
   const { setSearchHouse } = useHouse();
 
   const [loading, setLoading] = useState(false);
-  const [checkIn, setCheckIn] = useState('');
-  const [checkOut, setCheckOut] = useState('');
 
   const { error, setError } = useError();
   const handelSubmit = async () => {
@@ -65,15 +79,10 @@ export default function SearchInput() {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-
       console.log(error);
       setError(error.message);
     }
   };
-
-  const [petValue, setPetValue] = useState('');
-  const [dog, setDog] = useState(false);
-  const [cat, setCat] = useState(false);
 
   const handelChange = (e) => {
     const value = { ...body };

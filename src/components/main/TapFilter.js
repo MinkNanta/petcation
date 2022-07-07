@@ -9,6 +9,7 @@ import nearMeIcon from '../../assets/img/nearMe.png';
 import singleRoomIcon from '../../assets/img/singleRoom.png';
 import capsuleIcon from '../../assets/img/capsule.png';
 import cageIcon from '../../assets/img/cage.png';
+import { motion } from 'framer-motion';
 
 export default function TapFilter({ title }) {
   const [allHouse, setAllHouse] = useState(true);
@@ -16,10 +17,11 @@ export default function TapFilter({ title }) {
   const [capsule, setCapsule] = useState(false);
   const [cage, setCage] = useState(false);
   const [nearMe, setNearMe] = useState(false);
+
   return (
     <>
       <div className="py-6 flex justify-between bg-white">
-        <div className="flex  gap-12">
+        <div className="flex  gap-12 ">
           {/* All Place */}
           <div
             className="text-center cursor-pointer space-y-1"
@@ -43,7 +45,7 @@ export default function TapFilter({ title }) {
             </p>
           </div>
 
-          {/* Near Me */}
+          {/* Near Me
           <div
             className="text-center cursor-pointer space-y-1"
             onClick={() => {
@@ -64,7 +66,7 @@ export default function TapFilter({ title }) {
             >
               Near Me
             </p>
-          </div>
+          </div> */}
 
           {/* Single room */}
           <div
