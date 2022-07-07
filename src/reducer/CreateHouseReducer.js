@@ -9,6 +9,7 @@ import {
   HOUSE_TYPE,
   MORE_INFORMATION,
   NEXTSTAGEPAGE,
+  SAVE_PIN,
   UPLOAD_IMAGE,
 } from '../actions/CreateHouseAction';
 
@@ -38,6 +39,8 @@ export const initial = {
     isLitterChangedDaily: false,
     isAirFilter: false,
     status: null,
+    pinAddress: null,
+    location: null,
   },
 };
 
@@ -204,6 +207,12 @@ export default function CreateHouseReducer(state, action) {
       return { ...state };
     }
 
+    case SAVE_PIN: {
+      state.createHouse.pinAddress = action.payload.pinAddress;
+      state.createHouse.location = action.payload.location;
+      return { ...state };
+    }
+
     case CREATE_HOUSE: {
       const formData = new FormData();
       formData.append('name', state.createHouse.name);
@@ -230,6 +239,8 @@ export default function CreateHouseReducer(state, action) {
       );
       formData.append('isAirFilter', state.createHouse.isAirFilter);
       formData.append('status', state.createHouse.status);
+      formData.append('pinAddress', state.createHouse.pinAddress);
+      formData.append('location', JSON.stringify(state.createHouse.location));
 
       state.createHouse.image.map((el) => {
         formData.append('cover', el);

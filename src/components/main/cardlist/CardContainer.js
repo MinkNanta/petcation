@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useHouse } from '../../../contexts/HouseContext';
 import SkeletonCard from '../../../common/SkeletonCard';
 import { motion } from 'framer-motion';
+import GoogleMapContainer from './GoogleMapContainer';
 
 const container = {
   hidden: { opacity: 1, scale: 1 },
@@ -25,42 +26,46 @@ const item = {
   },
 };
 
-export default function CardContainer() {
+export default function CardContainer({ isGoogle }) {
   const { house } = useHouse();
   const navigate = useNavigate();
   // console.log(house.length);
 
-  return (
-    // <div className="grid sm:grid-cols-4 gap-8">
-    <motion.ul
-      className="grid sm:grid-cols-4 gap-8"
-      variants={container}
-      initial="hidden"
-      animate="visible"
-    >
-      {house.length > 0 ? (
-        house?.map((el) => (
-          <motion.li key={el.id} className="item" variants={item}>
-            <CardItem
-              key={el.id}
-              value={el}
-              onClick={() => navigate('/booking/' + el.id)}
-            />
-          </motion.li>
-        ))
-      ) : (
-        <>
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-        </>
-      )}
-    </motion.ul>
-    // </div>
-  );
+  if (isGoogle) {
+    return <GoogleMapContainer house={house} />;
+  } else {
+    return (
+      // <div className="grid sm:grid-cols-4 gap-8">
+      <motion.ul
+        className="grid sm:grid-cols-4 gap-8"
+        variants={container}
+        initial="hidden"
+        animate="visible"
+      >
+        {house.length > 0 ? (
+          house?.map((el) => (
+            <motion.li key={el.id} className="item" variants={item}>
+              <CardItem
+                key={el.id}
+                value={el}
+                onClick={() => navigate('/booking/' + el.id)}
+              />
+            </motion.li>
+          ))
+        ) : (
+          <>
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </>
+        )}
+      </motion.ul>
+      // </div>
+    );
+  }
 }

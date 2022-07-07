@@ -10,6 +10,7 @@ import singleRoomIcon from '../../assets/img/singleRoom.png';
 import capsuleIcon from '../../assets/img/capsule.png';
 import cageIcon from '../../assets/img/cage.png';
 import { motion } from 'framer-motion';
+import GoogleMapContainer from './cardlist/GoogleMapContainer';
 
 export default function TapFilter({ title }) {
   const [allHouse, setAllHouse] = useState(true);
@@ -17,6 +18,7 @@ export default function TapFilter({ title }) {
   const [capsule, setCapsule] = useState(false);
   const [cage, setCage] = useState(false);
   const [nearMe, setNearMe] = useState(false);
+  const [googleMap, setGoogleMap] = useState(false);
 
   return (
     <>
@@ -140,16 +142,21 @@ export default function TapFilter({ title }) {
           </div>
         </div>
 
-        <button className="flex gap-2 bg-gray-100 text-gray-600 justify-center items-center px-4 rounded-full">
+        <button
+          className="flex gap-2 bg-gray-100 text-gray-600 justify-center items-center px-4 rounded-full"
+          onClick={() => {
+            setGoogleMap((p) => !p);
+          }}
+        >
           <MapIcon className="w-6 h-6 mx-auto inline-block" />
-          <p>Show Map</p>
+          {!googleMap ? <p>Show Map</p> : <p>Show List</p>}
         </button>
       </div>
       <p>{title}</p>
-      {allHouse && <CardContainer />}
-      {capsule && <CardContainerCapsule />}
-      {singleRoom && <CardContainerSingleRoom />}
-      {cage && <CardContainerCage />}
+      {allHouse && <CardContainer isGoogle={googleMap} />}
+      {capsule && <CardContainerCapsule isGoogle={googleMap} />}
+      {singleRoom && <CardContainerSingleRoom isGoogle={googleMap} />}
+      {cage && <CardContainerCage isGoogle={googleMap} />}
     </>
   );
 }
