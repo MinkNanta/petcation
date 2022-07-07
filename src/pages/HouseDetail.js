@@ -14,6 +14,7 @@ import { XIcon } from '@heroicons/react/solid';
 import uploadImage from '../assets/img/uploadImage.png';
 import { updateHouseImageByUserId } from '../api/house';
 import Spinner from '../common/Spinner';
+import HouseLocation from '../components/myhouse/myHouseDetail/HouseLocation';
 
 export default function HouseDetail() {
   const { user } = useAuth();
@@ -203,6 +204,7 @@ export default function HouseDetail() {
             </div>
             <div className="w-[70%]">
               <UserAddress />
+              <HouseLocation />
               <HouseDetailForm />
               <HouseInfoFrom />
             </div>
