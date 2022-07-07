@@ -7,7 +7,7 @@ import defaultProtoPic from '../assets/img/defaultProtoPic.png';
 
 export default function BookingListDetails() {
   const { bookingId } = useParams();
-  const [booking, setBooking] = useState(null);
+  const [booking, setBooking] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
