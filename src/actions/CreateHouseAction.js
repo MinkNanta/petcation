@@ -22,6 +22,8 @@ export const DELETE_IMAGE = 'delete_image';
 
 export const CREATE_HOUSE = 'create_house';
 
+export const SAVE_PIN = 'save_pin';
+
 export const nextStagePage = () => ({
   type: NEXTSTAGEPAGE,
 });
@@ -77,5 +79,10 @@ export const saveDeleteImage = (payload) => ({
 
 export const createHouseAction = (payload) => ({
   type: CREATE_HOUSE,
+  payload,
+});
+
+export const savePin = (payload) => ({
+  type: SAVE_PIN,
   payload,
 });

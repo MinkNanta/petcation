@@ -8,13 +8,14 @@ import HouseInformation from '../components/house/create/HouseInformation';
 import MoreInformation from '../components/house/create/MoreInformation';
 import HouseCreateUploadPhoto from '../components/house/create/HouseCreateUploadPhoto';
 import petCreateHouse from '../assets/videos/petCreateHouse.mp4';
+import HousePin from '../components/house/create/HousePin';
 
 export default function CreateHouse() {
   const { stagePage } = useCreateHouse();
 
   return (
     <div className="my-6 flex justify-center gap-12 flex-wrap">
-      {stagePage === 7 ? (
+      {stagePage === 8 ? (
         false
       ) : (
         <div className="h-[620px] w-[40%] rounded-3xl overflow-hidden">
@@ -34,7 +35,8 @@ export default function CreateHouse() {
       {stagePage === 4 ? <HouseDetail /> : false}
       {stagePage === 5 ? <HouseInformation /> : false}
       {stagePage === 6 ? <MoreInformation /> : false}
-      {stagePage === 7 ? <HouseCreateUploadPhoto /> : false}
+      {stagePage === 7 ? <HousePin /> : false}
+      {stagePage === 8 ? <HouseCreateUploadPhoto /> : false}
     </div>
   );
 }

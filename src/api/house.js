@@ -9,3 +9,5 @@ export const updateHouseByUserId = (body) =>
   axios.patch(`/houses/update`, body);
 export const updateHouseImageByUserId = (input) =>
   axios.patch('/houses/update/image', input);
+export const updateHousePinByUserId = (input) =>
+  axios.patch('/houses/update/pin', input);

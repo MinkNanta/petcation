@@ -5,6 +5,7 @@ import { useHouse } from '../../../contexts/HouseContext';
 import SkeletonCard from '../../../common/SkeletonCard';
 import EmtpyStateSearch from '../../../common/EmtpyStateSearch';
 import { motion } from 'framer-motion';
+import GoogleMapContainer from './GoogleMapContainer';
 
 const container = {
   hidden: { opacity: 1, scale: 1 },
@@ -26,46 +27,51 @@ const item = {
   },
 };
 
-export default function CardContainerCage() {
+export default function CardContainerCage({ isGoogle }) {
   const { house } = useHouse();
   const navigate = useNavigate();
+
   // console.log(house.length);
 
   const houseFilter = house?.filter((el) => el.type === 'CAGE');
 
   // console.log(houseFilter);
 
-  return (
-    // <div className="grid sm:grid-cols-4 gap-8">
-    <motion.ul
-      className="grid sm:grid-cols-4 gap-8"
-      variants={container}
-      initial="hidden"
-      animate="visible"
-    >
-      {houseFilter.length > 0 ? (
-        houseFilter?.map((el) => (
-          <motion.li key={el.id} className="item" variants={item}>
-            <CardItem
-              key={el.id}
-              value={el}
-              onClick={() => navigate('/booking/' + el.id)}
-            />
-          </motion.li>
-        ))
-      ) : (
-        <>
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-        </>
-      )}
-    </motion.ul>
-    // </div>
-  );
+  if (isGoogle) {
+    return <GoogleMapContainer house={houseFilter} />;
+  } else {
+    return (
+      // <div className="grid sm:grid-cols-4 gap-8">
+      <motion.ul
+        className="grid sm:grid-cols-4 gap-8"
+        variants={container}
+        initial="hidden"
+        animate="visible"
+      >
+        {houseFilter.length > 0 ? (
+          houseFilter?.map((el) => (
+            <motion.li key={el.id} className="item" variants={item}>
+              <CardItem
+                key={el.id}
+                value={el}
+                onClick={() => navigate('/booking/' + el.id)}
+              />
+            </motion.li>
+          ))
+        ) : (
+          <>
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </>
+        )}
+      </motion.ul>
+      // </div>
+    );
+  }
 }
