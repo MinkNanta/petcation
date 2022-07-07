@@ -75,7 +75,7 @@ function GoogleMapContainer({ house }) {
               ))}
 
               <div lat={userLocation?.lat} lng={userLocation?.lng}>
-                <LocationMarkerIcon className="w-[30px] text-red-500" />
+                <LocationMarkerIcon className="w-[30px] text-red-500 z-0" />
               </div>
             </GoogleMapReact>
           </div>
