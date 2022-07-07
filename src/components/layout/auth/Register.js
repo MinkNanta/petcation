@@ -110,7 +110,7 @@ function Register() {
             <div className="divider">Or</div>
             <div className="flex justify-center mt-4">
               {/* <button className="btn btn-outline">Sign in with Google</button> */}
-              <Logingoogle title="Resister" />
+              <Logingoogle title="Register" />
             </div>
 
             <div className="flex justify-center mt-4">
