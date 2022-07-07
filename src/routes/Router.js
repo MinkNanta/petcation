@@ -44,8 +44,8 @@ export default function Router() {
             <Route path="/booking/create" element={<CreateBooking />} />
           </>
         ) : (
-          // <></>
-          <Route path="*" element={<Navigate to="/" />} />
+          <></>
+          // <Route path="*" element={<Navigate to="/" />} />
         )}
         {user ? (
           <>
@@ -63,8 +63,8 @@ export default function Router() {
             <Route path="/booking/create" element={<CreateBooking />} />
           </>
         ) : (
-          // <></>
-          <Route path="*" element={<Navigate to="/" />} />
+          <></>
+          // <Route path="*" element={<Navigate to="/" />} />
         )}
         <Route path="/booking/:id" element={<BookingDetail />} />
         <Route path="/house/main" element={<HouseMain />} />

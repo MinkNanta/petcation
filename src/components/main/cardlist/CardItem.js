@@ -40,21 +40,9 @@ export default function CardItem({
         // onMouseDown={() => setHover((p) => !p)}
         // onMouseOver={() => setHover(true)}
       >
-        <div className="rounded-2xl overflow-hidden h-[240px] w-full  ">
-          {!hover && (
-            <img
-              src={img[0]}
-              alt="card"
-              className="w-full h-full object-cover "
-            />
-          )}
-          {hover && (
-            <img
-              src={img[1]}
-              alt="card"
-              className="w-full h-full object-cover "
-            />
-          )}
+        <div className="rounded-2xl overflow-hidden h-[240px] w-full relative ">
+          <div className="absolute w-full h-full bg-black opacity-0 hover:opacity-20"></div>
+          <img src={img[0]} alt="card" className="w-full h-full object-cover" />
         </div>
         <div className="space-y-2 mt-2">
           <div>

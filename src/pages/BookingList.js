@@ -82,7 +82,7 @@ export default function BookingList() {
   return (
     <>
       <div className="space-y-6 mr-20">
-        <h4>Your reservations</h4>
+        <h4>Your Booking List</h4>
         <TabContextProvider>
           <DashboardMenu active={active} setActive={setActive} menus={menus} />
         </TabContextProvider>

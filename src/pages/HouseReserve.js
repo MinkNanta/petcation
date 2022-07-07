@@ -117,7 +117,7 @@ export default function HouseReserve() {
                   <img
                     alt="filter"
                     className="w-full h-full object-cover"
-                    src={el?.Bookingcustomer?.profilePic || defaultProtoPic}
+                    src={el?.Bookingcustomer?.userPic || defaultProtoPic}
                   ></img>
                 </div>
               </div>
@@ -139,11 +139,12 @@ export default function HouseReserve() {
                     &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                     {el?.isIncludeFood ? el?.Bookinghouse?.food : 'Owner food'}
                   </p>
-                  <div className="mt-16">
-                    <a href={`/house/reserve/${el.id}`} className="underline">
-                      Details
-                    </a>
-                  </div>
+                  <Link
+                    to={`/house/reserve/${el.id}`}
+                    className="btn-text-line"
+                  >
+                    Details
+                  </Link>
                 </div>
               </div>
             </div>

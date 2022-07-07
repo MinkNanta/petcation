@@ -6,7 +6,7 @@ export default function Hero() {
       <div className="h-2/5"></div>
       <div className="mainContainer h-full space-y-2">
         <h2 className=" text-white text-center m-auto">
-          Find Perfect Place for Your Pet.
+          Find the Perfect Stay for Your Pet.
         </h2>
         <div className="flex justify-between items-center  ">
           <div className="w-[80%] mx-auto">
