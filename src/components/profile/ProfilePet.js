@@ -5,6 +5,8 @@ import AddPetModal from '../booking/AddPetModal';
 import SelectPetModal from '../booking/SelectPetModal';
 import PetInformation from './PetInformation';
 import { getAccessToken } from '../../services/localStorage';
+import EmtpyState from '../../common/EmtpyState';
+import addpet from '../../assets/img/addpet.png';
 
 export default function ProfilePet({ title }) {
   const [allPet, setAllPet] = useState([]);
@@ -54,9 +56,21 @@ export default function ProfilePet({ title }) {
           />
         </div>
       </div>
-      {allPet.map((el) => {
-        return <PetInformation fetch={fetchPet} el={el} />;
-      })}
+      {allPet.length > 0 ? (
+        allPet.map((el) => {
+          return <PetInformation fetch={fetchPet} el={el} />;
+        })
+      ) : (
+        <EmtpyState>
+          <img
+            src={addpet}
+            alt="addpet"
+            className="w-24 h-24 opacity-50 mx-auto mb-2"
+          />
+          <p className="text-gray-500">For create booking.</p>
+          <p className="text-gray-500">Please select or add a pet</p>
+        </EmtpyState>
+      )}
     </div>
   );
 }

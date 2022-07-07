@@ -101,7 +101,6 @@ export default function PetInformation({ el, fetch }) {
   return (
     <div>
       {loading && <Spinner />}
-
       <form onSubmit={(e) => handlesubmit(e, el.id)}>
         <div className="flex  items-center justify-between">
           <div className="flex items-end ">

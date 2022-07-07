@@ -59,7 +59,7 @@ export default function Modal({
               >
                 <Dialog.Panel
                   className={`${
-                    size ? size : 'w-full'
+                    size ? size : 'w-[480px]'
                   } transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-3xl transition-all `}
                 >
                   <div className="flex justify-end">

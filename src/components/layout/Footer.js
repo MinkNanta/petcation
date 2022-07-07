@@ -4,7 +4,7 @@ import logo from '../../assets/logo.svg';
 
 export default function Footer() {
   return (
-    <div className="bg-gray-900 text-gray-50/70 h-24 mt-10">
+    <div className="bg-gray-900 text-gray-50/70 h-24 mt-20 ">
       <div className=" px-8 flex justify-between  h-full">
         <div className="my-auto">
           <Link to="/">
