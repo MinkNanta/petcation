@@ -118,8 +118,6 @@ export default function PaymentModal({
           } else {
             // response["id"] is token identifier
 
-
-
             try {
               setLoading(true);
               console.log({
@@ -168,6 +166,7 @@ export default function PaymentModal({
         name="payment"
         onOpen={<p className="btn w-32">Booking</p>}
         className={className}
+        size="w3/5"
       >
         <div className="flex flex-col">
           <h2 className="my-4">Credit Card Information</h2>
@@ -216,7 +215,8 @@ export default function PaymentModal({
                 handleChange(e, 'security_code');
               }}
             />
-            <button type="submit" className="btn w-1/4 place-self-center">
+
+            <button type="submit" className="btn w-1/4 ">
               Submit
             </button>
             <label className="label mt-2">

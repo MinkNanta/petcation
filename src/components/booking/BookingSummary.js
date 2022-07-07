@@ -23,11 +23,11 @@ export default function BookingSummary({
           </span>
         </p>
       </div>
-      <div className="flex mb-5">
+      <div className="flex">
         <img
           src={petType === 'DOG' ? dog : cat}
           alt="checkin"
-          className="w-10 h-10 mr-5"
+          className="w-10 h-10 mr-5 mt-1"
         />
 
         <p>

@@ -145,7 +145,11 @@ export default function BookingDetail() {
 
               <div className="flex mb-5">
                 {/* <CalendarIcon className="w-10 h-10 mr-4" /> */}
-                <img src={calendar} className="w-10 h-10 mr-5" alt="calendar" />
+                <img
+                  src={calendar}
+                  className="w-[38px] h-[38px] mr-5 ml-1"
+                  alt="calendar"
+                />
                 <p className="w-fit">
                   Daily schedule
                   <br />
@@ -158,10 +162,10 @@ export default function BookingDetail() {
               </div>
 
               <div className="w-full border-t-2 border-gray-200 my-10"></div>
-              <div>
+              <div className="mb-16">
                 <h2>Highlights</h2>
-                <div className="mt-5 grid grid-cols-2 text-gray-500">
-                  <div>
+                <div className="mt-5 grid grid-cols-2 text-gray-500 ">
+                  <div className="space-y-2">
                     <HouseHighlight
                       isTrue={
                         houseById?.isPetFood ? houseById?.isPetFood : false
@@ -189,7 +193,7 @@ export default function BookingDetail() {
                       highlight="Pet Staff"
                     />
                   </div>
-                  <div>
+                  <div className="space-y-2">
                     <HouseHighlight
                       isTrue={
                         houseById?.isPetTraining
@@ -274,7 +278,7 @@ export default function BookingDetail() {
                   outside of the Petcation website.
                 </p>
               </div>
-              <div className="mt-5">
+              <div className="mt-16">
                 <h2>Cancellation policy</h2>
                 <p className="text-gray-500 mt-5">
                   Free cancellation before {getDate7DaysFromNow()}. Review the
@@ -303,7 +307,27 @@ export default function BookingDetail() {
           </div>
         </>
       ) : (
-        <div className="h-screen text-gray-500">House not found</div>
+        <div className=" animate-pulse space-y-3 ">
+          <div className="rounded-2xl bg-gray-200 h-[420px]"></div>
+          <div className="space-y-3">
+            <div className="rounded-2xl bg-gray-200  h-6"></div>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="space-y-4 col-span-2">
+                <div className="rounded-2xl bg-gray-200  h-6"></div>
+                <div className="rounded-2xl bg-gray-200  h-6"></div>
+                <div className="rounded-2xl bg-gray-200  h-6"></div>
+                <div className="rounded-2xl bg-gray-200  h-6"></div>
+                <div className="rounded-2xl bg-gray-200  h-6"></div>
+                <div className="rounded-2xl bg-gray-200  h-6"></div>
+                <div className="rounded-2xl bg-gray-200  h-6"></div>
+              </div>
+
+              <div className="">
+                <div className="rounded-2xl bg-gray-200  h-[260px]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

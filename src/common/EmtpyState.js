@@ -3,8 +3,8 @@ import React from 'react';
 export default function EmtpyState({
   title,
   description,
-  children,
   className,
+  children,
 }) {
   return (
     <div

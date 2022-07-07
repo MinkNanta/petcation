@@ -44,10 +44,10 @@ export default function ProfilePet({ title }) {
   return (
     <div className=" col-span-8">
       <div className="mb-4 flex justify-between">
-        <h4>{title ? title : 'Hi, Welcome back ' + oldValue?.firstName}</h4>
+        <h4>Your Pets Information</h4>
         <div className="flex gap-5 items-end">
           <AddPetModal
-            className="bg-orange-500 p-3 px-5 text-white rounded-2xl"
+            className="btn-small"
             setGetPet={setGetPet}
             getpet={getpet}
             onClick={() => setGetPet(!getpet)}

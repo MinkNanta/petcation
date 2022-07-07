@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import DashboardMenu from '../components/myhouse/components/DashboardMenu';
 import TabContextProvider from '../contexts/TabContext';
 import { AuthContext } from '../contexts/AuthContext';
-import defaultProtoPic from '../assets/img/defaultProtoPic.png';
+import defaultHouse from '../assets/img/defaultHouse.png';
 import { dashesToSlashes } from '../utils/convertDate';
 import Spinner from '../common/Spinner';
 import EmptyState from '../common/EmtpyState';
@@ -14,7 +14,7 @@ export default function BookingList() {
 
   const menus = ['upcoming', 'completed', 'canceled', 'all'];
   const [active, setActive] = useState(menus[0]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -22,6 +22,7 @@ export default function BookingList() {
         setLoading(true);
         const res = await axios.get('/bookings/guest');
         setBookings(res.data.bookings);
+        console.log(res);
 
         // filter upcoming
         const curDate = new Date();
@@ -95,29 +96,27 @@ export default function BookingList() {
                     <img
                       className="w-full h-full object-cover"
                       src={
-                        el?.House?.image
-                          ? JSON.parse(el?.House?.image)[0]
-                          : defaultProtoPic
+                        el?.Bookinghouse?.image
+                          ? JSON.parse(el?.Bookinghouse?.image)[0]
+                          : defaultHouse
                       }
                     ></img>
                   </div>
                 </div>
                 <div className="col-span-3">
-                  <h4>
-                    {el.House.name}
-                  </h4>
+                  <h4>{el.Bookinghouse?.name}</h4>
                   <div className="mt-2 text-gray-400">
                     <p>
-                      {dashesToSlashes(el.checkInDate)} -{' '}
-                      {dashesToSlashes(el.checkOutDate)}
+                      {dashesToSlashes(el?.checkInDate)} -{' '}
+                      {dashesToSlashes(el?.checkOutDate)}
                     </p>
                     <p>
-                      {el.Bookingpets.length}{' '}
-                      {el.House.petType[0] +
-                        el.House.petType.slice(1).toLowerCase() +
-                        (el.Bookingpets.length > 1 ? 's' : '')}
+                      {el.Bookingpets?.length}{' '}
+                      {el.Bookinghouse?.petType[0] +
+                        el.Bookinghouse?.petType?.slice(1).toLowerCase() +
+                        (el.Bookingpets?.length > 1 ? 's' : '')}
                       &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                      {el.isIncludeFood ? el.House.food : 'Owner food'}
+                      {el?.isIncludeFood ? el.Bookinghouse?.food : 'Owner food'}
                     </p>
                     <div className="mt-16">
                       <a href={`/booking/list/${el.id}`} className="underline">
