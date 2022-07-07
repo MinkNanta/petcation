@@ -33,9 +33,9 @@ export default function CreateBooking() {
   };
 
   return (
-    <div className="my-10 mx-20">
+    <div className="mainContainer">
       <BackNavigation title="Booking & Payment" houseId={houseById?.id} />
-      <div className="mt-10 flex">
+      <div className="mt-10 flex w-[80%]">
         <div>
           <HouseCard
             houseName={houseById?.name}

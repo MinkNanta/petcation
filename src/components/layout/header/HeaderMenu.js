@@ -29,7 +29,7 @@ export default function HeaderMenu({ className }) {
             onClick={() => setActive(!active)}
           >
             <label tabIndex="0">
-              <div className="flex p-2 bg-gray-100 rounded-full gap-1">
+              <div className="flex px-3 py-2 bg-gray-100 rounded-full gap-1">
                 <img
                   src={user?.userPic || defaultPhotoPic}
                   alt="pic"

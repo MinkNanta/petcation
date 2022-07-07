@@ -14,6 +14,11 @@ function SearchInputContextProvider({ children }) {
   const [houseLimit, setHouseLimit] = useState([]);
   const [activeDate, setActiveDate] = useState(false);
 
+  const [petValue, setPetValue] = useState('');
+  const [dog, setDog] = useState(false);
+  const [cat, setCat] = useState(false);
+  const [checkIn, setCheckIn] = useState('');
+  const [checkOut, setCheckOut] = useState('');
   return (
     <SearchInputContext.Provider
       value={{
@@ -25,6 +30,16 @@ function SearchInputContextProvider({ children }) {
         setHouseLimit,
         activeDate,
         setActiveDate,
+        petValue,
+        setPetValue,
+        dog,
+        setDog,
+        cat,
+        setCat,
+        checkIn,
+        setCheckIn,
+        checkOut,
+        setCheckOut,
       }}
     >
       {children}

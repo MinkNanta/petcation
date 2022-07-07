@@ -8,7 +8,7 @@ import TitleProfile from './TitleProfile';
 function ProfileOutlet() {
   const { user } = useAuth();
   return (
-    <div className="max-w-7xl px-8 pb-20">
+    <div className="max-w-7xl px-8 pb-20 mainContainer">
       <TitleProfile />
       <h2>
         {user.firstName} {user.lastName}

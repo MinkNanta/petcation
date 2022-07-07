@@ -11,10 +11,10 @@ export default function DatePicker({ setCheckOut, setCheckIn, handelChange }) {
   const checkInValue =
     range.from?.toDateString() === undefined
       ? 'Please pick the first day'
-      : range.from?.toDateString() + '  -  ';
+      : 'Date ' + range.from?.toDateString().slice(4);
 
   const checkOutValue =
-    checkOut === 'undefined' ? '' : range.to?.toDateString();
+    checkOut === 'undefined' ? '' : '  -  ' + range.to?.toDateString().slice(4);
 
   const value = checkInValue + checkOutValue;
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  CalendarIcon,
   ShieldCheckIcon,
   ShieldExclamationIcon,
 } from '@heroicons/react/outline';
@@ -15,10 +16,10 @@ import { useParams } from 'react-router-dom';
 import { getMonthAndYear, getDate7DaysFromNow } from '../utils/convertDate';
 import { getHouseById } from '../api/house';
 import { useError } from '../contexts/ErrorContext';
-import calendar from "../assets/img/002-calendar-1.png"
-import petFood from "../assets/img/003-bowl.png"
-import checkIn from "../assets/img/006-enter.png"
-import checkOut from "../assets/img/009-logout.png"
+import calendar from '../assets/img/002-calendar-1.png';
+import petFood from '../assets/img/003-bowl.png';
+import checkIn from '../assets/img/006-enter.png';
+import checkOut from '../assets/img/009-logout.png';
 
 export default function BookingDetail() {
   // const { houseById, setParamsId } = useContext(HouseContext);
@@ -52,7 +53,7 @@ export default function BookingDetail() {
   // ];
 
   return (
-    <div className="my-10 mx-20">
+    <div className="mainContainer">
       {Object.keys(houseById).length !== 0 ? (
         <>
           {houseById?.image && (
@@ -90,17 +91,16 @@ export default function BookingDetail() {
                 }
               /> */}
 
-<div className="flex mb-5">
-<img src={checkIn}
-             className="w-10 h-10 inline-block mr-5 self-center"  />
-      <p className="w-fit">
-      Check In
-        <br />
-        <span className="text-gray-500">
-        {houseById?.checkInTime ? houseById?.checkInTime : 'N/A'}
-        </span>
-      </p>
-    </div>
+              <div className="flex mb-5">
+                <img src={checkIn} alt="checkin" className="w-10 h-10 mr-5" />
+                <p className="w-fit">
+                  Check In
+                  <br />
+                  <span className="text-gray-500">
+                    {houseById?.checkInTime ? houseById?.checkInTime : 'N/A'}
+                  </span>
+                </p>
+              </div>
 
               {/* <HouseDetailsWithIcon
                 title="Check out"
@@ -109,38 +109,32 @@ export default function BookingDetail() {
                 }
               /> */}
 
-
-
-<div className="flex mb-5">
-<img src={checkOut}
-             className="w-10 h-10 inline-block mr-5 self-center"  />
-      <p className="w-fit">
-      Check out
-        <br />
-        <span className="text-gray-500">
-        {houseById?.checkOutTime ? houseById?.checkOutTime : 'N/A'}
-        </span>
-      </p>
-    </div>
+              <div className="flex mb-5">
+                <img src={checkOut} className="w-10 h-10 mr-5" alt="checkout" />
+                <p className="w-fit">
+                  Check out
+                  <br />
+                  <span className="text-gray-500">
+                    {houseById?.checkOutTime ? houseById?.checkOutTime : 'N/A'}
+                  </span>
+                </p>
+              </div>
 
               {/* <HouseDetailsWithIcon
                 title="Food for Pet"
                 details={houseById?.petFood ? houseById?.petFood : 'N/A'}
               /> */}
 
-
-<div className="flex mb-5">
-<img src={petFood}
-             className="w-10 h-10 inline-block mr-5 self-center"  />
-      <p className="w-fit">
-      Food for Pet
-        <br />
-        <span className="text-gray-500">
-        {houseById?.petFood ? houseById?.petFood : 'N/A'}
-        </span>
-      </p>
-    </div>
-
+              <div className="flex mb-5">
+                <img src={petFood} className="w-10 h-10 mr-5" alt="petfood" />
+                <p className="w-fit">
+                  Food for Pet
+                  <br />
+                  <span className="text-gray-500">
+                    {houseById?.petFood ? houseById?.petFood : 'N/A'}
+                  </span>
+                </p>
+              </div>
 
               {/* <img src={calendar}
                 title="Daily schedule"
@@ -149,18 +143,19 @@ export default function BookingDetail() {
                 }
               /> */}
 
-
-<div className="flex mb-5">
-<img src={calendar}
-             className="w-10 h-10 inline-block mr-5 self-center"  />
-      <p className="w-fit">
-      Daily schedule
-        <br />
-        <span className="text-gray-500">
-        {houseById?.dailySchedule ? houseById?.dailySchedule : 'N/A'}
-        </span>
-      </p>
-    </div>
+              <div className="flex mb-5">
+                {/* <CalendarIcon className="w-10 h-10 mr-4" /> */}
+                <img src={calendar} className="w-10 h-10 mr-5" alt="calendar" />
+                <p className="w-fit">
+                  Daily schedule
+                  <br />
+                  <span className="text-gray-500">
+                    {houseById?.dailySchedule
+                      ? houseById?.dailySchedule
+                      : 'N/A'}
+                  </span>
+                </p>
+              </div>
 
               <div className="w-full border-t-2 border-gray-200 my-10"></div>
               <div>
@@ -255,15 +250,16 @@ export default function BookingDetail() {
                     Hosted by {houseById.User?.firstName}{' '}
                     {houseById.User?.lastName}
                   </h6>
-                  <p className="text-gray-500">
-                    Joined in {getMonthAndYear(houseById.User?.createdAt)}
-                  </p>
+                  <div className="flex gap-4">
+                    <p className="text-gray-500">
+                      Joined in {getMonthAndYear(houseById.User?.createdAt)}
+                    </p>
+                    <div className="flex text-gray-500">
+                      <ShieldCheckIcon className="w-5 h-5 inline-block mr-2 self-center" />
+                      <p>Identity verified</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              <div className="flex text-gray-500 mt-5">
-                <ShieldCheckIcon className="w-5 h-5 inline-block mr-5 self-center" />
-                <p>Identity verified</p>
               </div>
 
               <div className="text-gray-500 mt-5">

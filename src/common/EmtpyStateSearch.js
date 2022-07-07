@@ -3,7 +3,16 @@ import EmtpyState from './EmtpyState';
 import { useSearchInput } from '../contexts/SearchInputContext.js';
 
 export default function EmtpyStateSearch() {
-  const { setBody, setRange } = useSearchInput();
+  const {
+    setBody,
+    setRange,
+    setCheckIn,
+    setCheckOut,
+    setPetValue,
+    setDog,
+    setCat,
+    setActiveDate,
+  } = useSearchInput();
 
   return (
     <div className="w-full col-span-4 ">
@@ -23,7 +32,13 @@ export default function EmtpyStateSearch() {
                 checkInDate: '',
                 checkOutDate: '',
               });
+              setCheckIn('');
+              setCheckOut('');
               setRange({});
+              setPetValue('');
+              setDog(false);
+              setCat(false);
+              setActiveDate(false);
             }}
           >
             Remove filter

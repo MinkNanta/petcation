@@ -511,5 +511,6 @@ body {
   font-family: poppins, Prompt;
   background-color: var(--background-color);
   box-sizing: border-box;
+  scroll-behavior: smooth;
   /* color: #111827; */
 }
