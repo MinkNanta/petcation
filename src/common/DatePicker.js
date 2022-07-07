@@ -48,7 +48,7 @@ export default function DatePicker({ setCheckOut, setCheckIn, handelChange }) {
 
   return (
     <>
-      <Popover className="relative w-full">
+      <Popover className="relative w-full z-50">
         <Popover.Button
           className=" focus:outline-none
         focus:outline-offset-0 w-full"
@@ -64,7 +64,7 @@ export default function DatePicker({ setCheckOut, setCheckIn, handelChange }) {
           />
         </Popover.Button>
         <TransitionCommon>
-          <Popover.Panel className="absolute z-10 mt-2">
+          <Popover.Panel className="absolute z-50 mt-2">
             <div className="bg-white rounded-3xl p-1 shadow-2xl">
               <DayPicker
                 mode="range"
