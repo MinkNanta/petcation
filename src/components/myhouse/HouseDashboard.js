@@ -10,6 +10,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import TitleHeder from '../../common/TitleHeder';
 import axios from 'axios';
 import { useSearchInput } from '../../contexts/SearchInputContext';
+import HouseReserve from '../../pages/HouseReserve';
 
 export default function HouseDashboard() {
   const [empty, SetEmpty] = useState(true);
@@ -77,15 +78,15 @@ export default function HouseDashboard() {
             </div>
 
             <div className="space-y-6 mt-8">
-              <h4>Your reservations</h4>
-              <DashboardMenu />
-              {empty && (
+              {/* <h4>Your reservations</h4> */}
+              {/* <DashboardMenu /> */}
+              <HouseReserve />
+              {/* {empty && (
                 <EmptyState
                   title="You have no upcoming reservations"
                   description="You don’t have any guests checking out today or tomorrow."
                 />
-              )}
-              
+              )} */}
             </div>
           </>
         )}

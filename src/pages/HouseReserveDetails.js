@@ -86,10 +86,12 @@ export default function BookingListDetails() {
           <div className="w-full border-t-2 border-gray-200 my-5"></div>
           <div className="grid grid-cols-4">
             <div className="col-span-1">
-              <img
-                className="rounded-full w-28 h-28"
-                src={booking?.Bookingcustomer?.profilePic || defaultProtoPic}
-              ></img>
+              <div className="rounded-full w-28 h-28 overflow-hidden">
+                <img
+                  className="w-full h-full object-cover"
+                  src={booking?.Bookingcustomer?.user_pic || defaultProtoPic}
+                />
+              </div>
             </div>
             <div className="col-span-3">
               <h4>
@@ -131,10 +133,16 @@ export default function BookingListDetails() {
           {booking?.Bookingpets?.map((el) => (
             <div className="grid grid-cols-4">
               <div className="col-span-1">
-                <img
+                <div className="rounded-full w-28 h-28 overflow-hidden">
+                  <img
+                    className="w-full h-full object-cover"
+                    src={el?.petPic || defaultProtoPic}
+                  />
+                </div>
+                {/* <img
                   className="rounded-full w-28 h-28"
                   src={el?.petPic || defaultProtoPic}
-                ></img>
+                ></img> */}
               </div>
               <div className="col-span-3">
                 <h4>{el?.name}</h4>

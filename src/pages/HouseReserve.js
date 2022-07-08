@@ -30,6 +30,8 @@ export default function HouseReserve() {
     getHouseByUser();
   }, [user]);
 
+  console.log(filteredBookings);
+
   useEffect(() => {
     const fetchBookings = async () => {
       try {
@@ -117,7 +119,7 @@ export default function HouseReserve() {
                   <img
                     alt="filter"
                     className="w-full h-full object-cover"
-                    src={el?.Bookingcustomer?.userPic || defaultProtoPic}
+                    src={el?.Bookingcustomer?.user_pic || defaultProtoPic}
                   ></img>
                 </div>
               </div>
