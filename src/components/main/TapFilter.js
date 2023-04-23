@@ -14,6 +14,7 @@ import GoogleMapContainer from './cardlist/GoogleMapContainer';
 
 export default function TapFilter({ title }) {
   const [allHouse, setAllHouse] = useState(true);
+  const [filter, setFilter] = useState('All');
   const [singleRoom, setSingleRoome] = useState(false);
   const [capsule, setCapsule] = useState(false);
   const [cage, setCage] = useState(false);
@@ -28,6 +29,7 @@ export default function TapFilter({ title }) {
           <div
             className="text-center cursor-pointer space-y-1"
             onClick={() => {
+              setFilter('All');
               setAllHouse(true);
               setSingleRoome(false);
               setCapsule(false);
@@ -74,6 +76,7 @@ export default function TapFilter({ title }) {
           <div
             className="text-center cursor-pointer space-y-1"
             onClick={() => {
+              setFilter('SINGLE_ROOM');
               setAllHouse(false);
               setSingleRoome(true);
               setCapsule(false);
@@ -98,6 +101,7 @@ export default function TapFilter({ title }) {
           <div
             className="text-center cursor-pointer space-y-1"
             onClick={() => {
+              setFilter('CAPSULE');
               setAllHouse(false);
               setSingleRoome(false);
               setCapsule(true);
@@ -122,6 +126,7 @@ export default function TapFilter({ title }) {
           <div
             className="text-center cursor-pointer space-y-1"
             onClick={() => {
+              setFilter('CAGE');
               setAllHouse(false);
               setSingleRoome(false);
               setCapsule(false);
@@ -153,10 +158,13 @@ export default function TapFilter({ title }) {
         </button>
       </div>
       <p>{title}</p>
-      {allHouse && <CardContainer isGoogle={googleMap} />}
-      {capsule && <CardContainerCapsule isGoogle={googleMap} />}
-      {singleRoom && <CardContainerSingleRoom isGoogle={googleMap} />}
-      {cage && <CardContainerCage isGoogle={googleMap} />}
+      {/* <CardContainer filter={filter} isGoogle={googleMap} /> */}
+      {allHouse && <CardContainer filter={filter} isGoogle={googleMap} />}
+      {capsule && <CardContainerCapsule filter={filter} isGoogle={googleMap} />}
+      {singleRoom && (
+        <CardContainerSingleRoom filter={filter} isGoogle={googleMap} />
+      )}
+      {cage && <CardContainerCage filter={filter} isGoogle={googleMap} />}
     </>
   );
 }

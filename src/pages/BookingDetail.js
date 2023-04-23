@@ -20,10 +20,11 @@ import calendar from '../assets/img/002-calendar-1.png';
 import petFood from '../assets/img/003-bowl.png';
 import checkIn from '../assets/img/006-enter.png';
 import checkOut from '../assets/img/009-logout.png';
+import mockHouse from '../mockupdata/mockHouse.json';
 
 export default function BookingDetail() {
   // const { houseById, setParamsId } = useContext(HouseContext);
-  const [houseById, setHouseById] = useState({});
+  const [houseById, setHouseById] = useState({ mockHouse });
   const [numberOfPets, setNumberOfPets] = useState(1);
   const { id } = useParams();
   const { setError } = useError();
@@ -56,31 +57,27 @@ export default function BookingDetail() {
     <div className="mainContainer">
       {Object.keys(houseById).length !== 0 ? (
         <>
-          {houseById?.image && (
-            <Carousel images={JSON.parse(houseById?.image)} />
-          )}
+          <div className="rounded-2xl overflow-hidden h-[440px] w-full relative ">
+            <div className="absolute w-full h-full bg-black opacity-0 hover:opacity-20"></div>
+            <img
+              src={
+                'https://plus.unsplash.com/premium_photo-1664371207179-d4ea25479ac3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3087&q=80'
+              }
+              alt="card"
+              className="w-full h-full object-cover"
+            />
+          </div>
           <div className="mt-10 mb-20 flex">
             <div className="mr-10 w-full">
               <HouseTitle
-                name={houseById.name}
-                petType={
-                  houseById?.petType
-                    ? houseById?.petType[0] +
-                      houseById?.petType.slice(1).toLowerCase() +
-                      's'
-                    : null
-                }
-                price={houseById?.price ? houseById?.price : null}
+                name={'Wheeler Army Airfield'}
+                petType={'Cats'}
+                price={380}
                 // need to get room size
-                sqft={houseById?.size ? houseById?.size : null}
-                roomType={
-                  houseById?.type
-                    ? houseById?.type[0] +
-                      houseById?.type.slice(1).toLowerCase()
-                    : null
-                }
+                sqft={'4'}
+                roomType={'CAGE'}
                 location={
-                  houseById?.User?.province ? houseById?.User?.province : null
+                  'Tambon Khu Khot, Amphoe Lam Luk Ka, Chang Wat Pathum Thani 12130'
                 }
               />
               <div className="w-full border-t-2 border-gray-200 my-10"></div>
@@ -97,7 +94,7 @@ export default function BookingDetail() {
                   Check In
                   <br />
                   <span className="text-gray-500">
-                    {houseById?.checkInTime ? houseById?.checkInTime : 'N/A'}
+                    {houseById?.checkInTime ? houseById?.checkInTime : '11:00'}
                   </span>
                 </p>
               </div>
@@ -115,7 +112,9 @@ export default function BookingDetail() {
                   Check out
                   <br />
                   <span className="text-gray-500">
-                    {houseById?.checkOutTime ? houseById?.checkOutTime : 'N/A'}
+                    {houseById?.checkOutTime
+                      ? houseById?.checkOutTime
+                      : '12:00'}
                   </span>
                 </p>
               </div>
@@ -131,7 +130,7 @@ export default function BookingDetail() {
                   Food for Pet
                   <br />
                   <span className="text-gray-500">
-                    {houseById?.petFood ? houseById?.petFood : 'N/A'}
+                    {houseById?.petFood ? houseById?.petFood : '120Thb'}
                   </span>
                 </p>
               </div>
@@ -156,7 +155,7 @@ export default function BookingDetail() {
                   <span className="text-gray-500">
                     {houseById?.dailySchedule
                       ? houseById?.dailySchedule
-                      : 'N/A'}
+                      : '12 pm – 1 pm go out, exercise, or play.'}
                   </span>
                 </p>
               </div>
@@ -166,12 +165,7 @@ export default function BookingDetail() {
                 <h2>Highlights</h2>
                 <div className="mt-5 grid grid-cols-2 text-gray-500 ">
                   <div className="space-y-2">
-                    <HouseHighlight
-                      isTrue={
-                        houseById?.isPetFood ? houseById?.isPetFood : false
-                      }
-                      highlight="Pet Food"
-                    />
+                    <HouseHighlight isTrue={true} highlight="Pet Food" />
                     <HouseHighlight
                       isTrue={
                         houseById?.isGrooming ? houseById?.isGrooming : false
@@ -186,12 +180,7 @@ export default function BookingDetail() {
                       }
                       highlight="Air Conditioning"
                     />
-                    <HouseHighlight
-                      isTrue={
-                        houseById?.isPetStaff ? houseById?.isPetStaff : false
-                      }
-                      highlight="Pet Staff"
-                    />
+                    <HouseHighlight isTrue={true} highlight="Pet Staff" />
                   </div>
                   <div className="space-y-2">
                     <HouseHighlight
@@ -289,19 +278,13 @@ export default function BookingDetail() {
             </div>
             <div>
               <BookingCard
-                price={houseById?.price ? houseById?.price : 'N/A'}
-                petType={
-                  houseById?.petType
-                    ? houseById?.petType[0] +
-                      houseById?.petType.slice(1).toLowerCase() +
-                      's'
-                    : 'N/A'
-                }
-                limit={houseById?.limit ? houseById?.limit : null}
-                foodPrice={houseById?.foodPrice ? houseById?.foodPrice : null}
-                setNumberOfPets={setNumberOfPets}
-                numberOfPets={numberOfPets}
-                houseById={houseById}
+                price={'380'}
+                petType={'Cats'}
+                limit={2}
+                foodPrice={120}
+                setNumberOfPets={2}
+                numberOfPets={2}
+                houseById={1234}
               />
             </div>
           </div>

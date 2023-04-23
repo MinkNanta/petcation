@@ -5,6 +5,7 @@ import { useHouse } from '../../../contexts/HouseContext';
 import SkeletonCard from '../../../common/SkeletonCard';
 import { motion } from 'framer-motion';
 import GoogleMapContainer from './GoogleMapContainer';
+import mockHouse from '../../../mockupdata/mockHouse.json';
 
 const container = {
   hidden: { opacity: 1, scale: 1 },
@@ -26,7 +27,7 @@ const item = {
   },
 };
 
-export default function CardContainer({ isGoogle }) {
+export default function CardContainer({ isGoogle, filter }) {
   const { house } = useHouse();
   const navigate = useNavigate();
   // console.log(house.length);
@@ -54,14 +55,58 @@ export default function CardContainer({ isGoogle }) {
           ))
         ) : (
           <>
+            {mockHouse?.map(
+              ({ id, name, description, price, image, petType, type }) => (
+                <motion.li key={id} className="item" variants={item}>
+                  <div
+                    className="space-y-2 cursor-pointer"
+                    onClick={() => navigate('/booking/1234')}
+                  >
+                    <div className="rounded-2xl overflow-hidden h-[240px] w-full relative ">
+                      <div className="absolute w-full h-full bg-black opacity-0 hover:opacity-20"></div>
+                      <img
+                        src={
+                          image ||
+                          'https://plus.unsplash.com/premium_photo-1664371207179-d4ea25479ac3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3087&q=80'
+                        }
+                        alt="card"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="space-y-2 mt-2">
+                      <div>
+                        <p className="text-gray-900 font-semibold ">{name}</p>
+                        <p className="text-gray-500">
+                          {petType === 'CAT'
+                            ? type === 'SINGLE_ROOM'
+                              ? 'Single room for Cats'
+                              : type === 'CAPSULE'
+                              ? 'Capsule for Cats'
+                              : 'Cage for Cats'
+                            : type === 'SINGLE_ROOM'
+                            ? 'Single room for Dogs'
+                            : type === 'CAPSULE'
+                            ? 'Capsule for Dogs'
+                            : 'Cage for Dogs'}
+                        </p>
+                      </div>
+                      <p>
+                        <span>฿ {price.toLocaleString('en-EN')} </span>
+                        <span>night</span>
+                      </p>
+                    </div>
+                  </div>
+                </motion.li>
+              ),
+            )}
+            {/* <SkeletonCard />
             <SkeletonCard />
             <SkeletonCard />
             <SkeletonCard />
             <SkeletonCard />
             <SkeletonCard />
             <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
+            <SkeletonCard /> */}
           </>
         )}
       </motion.ul>

@@ -18,7 +18,9 @@ export default function Carousel({ images }) {
         {images.length === 1 ? (
           <div className="carousel-item w-full ">
             <img
-              src={images[0]}
+              src={
+                'https://plus.unsplash.com/premium_photo-1664371207179-d4ea25479ac3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3087&q=80'
+              }
               className="w-full hfull object-cover"
               alt="petcation"
             />
@@ -40,7 +42,12 @@ export default function Carousel({ images }) {
           >
             {images.map((el, idx) => (
               <div id={`${idx}`} className="carousel-item w-full h-96">
-                <img src={el} className="w-full object-cover" />
+                <img
+                  src={
+                    'https://plus.unsplash.com/premium_photo-1664371207179-d4ea25479ac3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3087&q=80'
+                  }
+                  className="w-full object-cover"
+                />
               </div>
             ))}
           </ResponsiveCarousel>
